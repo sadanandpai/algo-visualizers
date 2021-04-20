@@ -17,9 +17,8 @@ function delay(time) {
 
 export function MergeManager({ array, sortFunction, sortingAlgorithmName }) {
   const [swapIndices, setSwapIndices] = useState([-1, -1]);
-  const [bounds, setBounds] = useState([0, array.length-1]);
   const [hightlightedIndices, setHightlightedIndices] = useState([-1, -1]);
-  const sortedIndices = useRef([]);
+  const finalMerge = useRef(false);
 
   const swapCount = useRef(0);
   const comparisionCount = useRef(0);
@@ -28,7 +27,7 @@ export function MergeManager({ array, sortFunction, sortingAlgorithmName }) {
   useEffect(() => {
     async function runSort(){
       const startTime = performance.now();
-      await sortFunction(array, partition, 0, combine, highlight);
+      await sortFunction(array, combine, highlight, 0, true);
       const endTime = performance.now();
       timeTaken.current = endTime - startTime;
       
@@ -37,19 +36,16 @@ export function MergeManager({ array, sortFunction, sortingAlgorithmName }) {
     runSort();
   }, []);
 
-  async function partition(left, right) {
-    setBounds([left, right]);
-    await delay(swapTime);
-  }
-
-  async function combine(source, destination) {
-    comparisionCount.current += 1;
-    setSwapIndices([source, destination]);
-    await delay(swapTime);
-  }
-
   async function highlight(indices) {
+    comparisionCount.current += 1;
     setHightlightedIndices(indices);
+    await delay(compareTime);
+  }
+
+  async function combine(source, destination, fM) {
+    swapCount.current += 1;
+    finalMerge.current = fM;
+    setSwapIndices([source, destination]);
     await delay(swapTime);
   }
 
@@ -60,11 +56,10 @@ export function MergeManager({ array, sortFunction, sortingAlgorithmName }) {
       </div>
       <MergeContainer
         array={array}
-        left={bounds[0]}
-        right={bounds[1]}
         source={swapIndices[0]}
         destination={swapIndices[1]}
         hightlightedIndices={hightlightedIndices}
+        finalMerge={finalMerge.current}
       />
       <Info swapCount={swapCount.current} comparisionCount={comparisionCount.current} timeTaken={timeTaken.current} />
     </Container>

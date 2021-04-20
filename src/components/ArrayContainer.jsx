@@ -10,9 +10,10 @@ const Container = styled.div`
   background-color: aliceblue;
 `;
 
-const comparisionColor= 'pink';
-const swapColor = 'yellow';
-const sortedColor = 'springgreen';
+const comparisionColor = "pink";
+const swapColor = "yellow";
+const sortedColor = "springgreen";
+const pivotColor = "sandybrown";
 
 const sourceAnimation = (distance) => keyframes`
   0%{
@@ -91,9 +92,27 @@ export function ArrayContainer({
   array,
   source,
   destination,
+  pivot = -1,
   highlightIndices,
   sortedIndices,
 }) {
+
+  function getBackgroundColor(i) {
+    if (sortedIndices.includes(i)) {
+      return sortedColor;
+    }
+
+    if (i === pivot) {
+      return pivotColor;
+    }
+
+    if (highlightIndices.includes(i)) {
+      return comparisionColor;
+    }
+
+    return "";
+  }
+
   return (
     <Container>
       {array.map((value, i) => {
@@ -104,11 +123,7 @@ export function ArrayContainer({
               distance={destination - source}
               style={{
                 order: destination,
-                backgroundColor: highlightIndices.includes(i)
-                  ? comparisionColor
-                  : sortedIndices.includes(i)
-                  ? sortedColor
-                  : "",
+                backgroundColor: getBackgroundColor(i),
               }}
             >
               {value}
@@ -118,15 +133,11 @@ export function ArrayContainer({
         if (i === destination) {
           return (
             <Destination
-            key={i + ":" + destination + ":" + source + ":" + value}
-            distance={destination - source}
+              key={i + ":" + destination + ":" + source + ":" + value}
+              distance={destination - source}
               style={{
                 order: source,
-                backgroundColor: highlightIndices.includes(i)
-                  ? comparisionColor
-                  : sortedIndices.includes(i)
-                  ? sortedColor
-                  : "",
+                backgroundColor: getBackgroundColor(i),
               }}
             >
               {value}
@@ -135,14 +146,10 @@ export function ArrayContainer({
         }
         return (
           <Item
-            key={i + ":" + value}
+            key={i + ":" + destination + ":" + source + ":" + value}
             style={{
               order: i,
-              backgroundColor: highlightIndices.includes(i)
-                ? comparisionColor
-                : sortedIndices.includes(i)
-                ? sortedColor
-                : "",
+              backgroundColor: getBackgroundColor(i),
             }}
           >
             {value}

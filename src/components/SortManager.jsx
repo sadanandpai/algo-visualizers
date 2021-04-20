@@ -19,6 +19,7 @@ export function SortManager({ array, sortFunction, sortingAlgorithmName }) {
   const [swapIndices, setSwapIndices] = useState([-1, -1]);
   const [hightlightedIndices, setHightlightedIndices] = useState([-1, -1]);
   const sortedIndices = useRef([]);
+  const pivot = useRef(-1);
 
   const swapCount = useRef(0);
   const comparisionCount = useRef(0);
@@ -41,13 +42,17 @@ export function SortManager({ array, sortFunction, sortingAlgorithmName }) {
     array[i] = array[j];
     array[j] = tmp;
 
+    pivot.current = -1;
+
     swapCount.current += 1;
     setSwapIndices([i, j]);
     await delay(swapTime);
   }
 
-  async function highlight(indices, pivot) {
+  async function highlight(indices, p) {
+    setSwapIndices([-1, -1]);
     comparisionCount.current += 1;
+    pivot.current = p;
     setHightlightedIndices(indices);
     await delay(compareTime);
   }
@@ -65,6 +70,7 @@ export function SortManager({ array, sortFunction, sortingAlgorithmName }) {
         array={array}
         source={swapIndices[0]}
         destination={swapIndices[1]}
+        pivot={pivot.current}
         highlightIndices={hightlightedIndices}
         sortedIndices={sortedIndices.current}
       />

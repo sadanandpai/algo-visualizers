@@ -9,9 +9,9 @@ const InfoFlex = styled.div`
 export function Info({swapCount, comparisionCount, timeTaken}) {
   return (
     <InfoFlex>
-      <div>Total swaps: {swapCount}</div>
-      <div>Total comparisions: {comparisionCount}</div>
-      <div>Total time: {(timeTaken / 1000).toFixed(2)} seconds</div>
+      <div>Swaps: {swapCount}</div>
+      <div>Comparisions: {comparisionCount}</div>
+      <div>Time: {(timeTaken / 1000).toFixed(2)} s</div>
     </InfoFlex>
   );
 }

@@ -14,6 +14,41 @@ const comparisionColor = "pink";
 const swapColor = "yellow";
 const sortedColor = "springgreen";
 
+const swapAnimation = (distance, finalMerge) => keyframes`
+  0%{
+    background-color: ${swapColor};
+  }
+  10%{
+    transform: translate(0px, 0px);
+    background-color: ${swapColor};
+  }
+  30% {
+    transform: translate(0px, -50px);
+    background-color: ${swapColor};
+  }
+  70% {
+    transform: translate(-${distance * 50}px, -50px);
+    background-color: ${swapColor};
+  }
+  99% {
+    transform: translate(-${distance * 50}px, 0px);
+    background-color: ${swapColor};
+  }
+  100%{
+    transform: translate(-${distance * 50}px, 0px);
+    background-color: ${finalMerge ? sortedColor : ""};
+  }
+`;
+
+const moveAnimation = () => keyframes`
+  0%{
+    transform: translate(0px, 0px);
+  }
+  100%{
+    transform: translate(50px, 0px);
+  }
+`;
+
 const Item = styled.div`
   display: flex;
   justify-content: center;
@@ -23,85 +58,101 @@ const Item = styled.div`
   height: 50px;
   box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.15);
   border-radius: 5px;
-  transition: transform ${swapTime / 1000}s;
-
-  &[data-level="false"] {
-    transform: translate(${(props) => props.move * 50}px, 50px);
-  }
-
-  &[data-level="true"] {
-    transform: translate(${(props) => props.move * 50}px, 0px);
-  }
 `;
 
-const generateIndices = (length) => {
-  const array = [];
-  for (let i = 0; i < length; i++) {
-    array.push(i);
-  }
-  return array;
-};
+const AnimatedItem = styled(Item)`
+  animation: ${(props) => swapAnimation(props.distance, props.finalMerge)}
+    ${swapTime / 1000}s forwards;
+`;
 
-const generateLevels = (length) => {
-  const array = new Array(length);
-  array.fill(0, 0);
-  return array;
-};
+const MoveItem = styled(Item)`
+  animation: ${moveAnimation()} ${swapTime / 1000}s forwards;
+`;
 
-const generateHighlights = (length) => {
-  const array = new Array(length);
-  array.fill(false, 0);
-  return array;
+const generateItems = (setItems, source, destination) => {
+  setItems((items) => {
+    const newItems = [...items];
+
+    const temp = newItems[source];
+    for (let i = source; i > destination; i--) {
+      newItems[i] = newItems[i - 1];
+    }
+
+    newItems[destination] = temp;
+    return newItems;
+  });
 };
 
 export function MergeContainer({
   array,
-  left = 0,
-  right = array.length - 1,
   source,
   destination,
   hightlightedIndices,
+  finalMerge,
 }) {
-  const levels = useRef(generateLevels(array.length));
-  const positions = useRef(generateIndices(array.length));
-  const highlights = useRef(generateHighlights(array.length));
-
-  console.log(source, destination)
+  const [items, setItems] = useState([...array]);
 
   useEffect(() => {
-    for (let i = 0; i < array.length; i++) {
-      if (i >= left && i <= right) {
-        levels.current[i] = !levels.current[i];
-      }
+    if (source !== -1 && destination !== -1) {
+      generateItems(setItems, source, destination);
     }
-  }, [left, right]);
-
-  useEffect(() => {
-    levels.current[positions.current.indexOf(source)] = !levels.current[
-      positions.current.indexOf(source)
-    ];
-    positions.current[positions.current.indexOf(source)] = destination;
   }, [source, destination]);
 
-  // useEffect(() => {
-  //   highlights.current[positions.current.indexOf(hightlightedIndices[0])] = true;
-  //   highlights.current[positions.current.indexOf(hightlightedIndices[1])] = true;
-  // }, [hightlightedIndices]);
-
-  const items = [];
-  for (let i = 0; i <= array.length - 1; i++) {
-    items.push(
-      <Item
-        key={i + ":" + array[i]}
-        data-level={levels.current[i]}
-        data-pos={positions.current[i]}
-        move={positions.current[i] - i}
-        style={{ backgroundColor: [positions.current[positions.current.indexOf(hightlightedIndices[0])], positions.current[positions.current.indexOf(hightlightedIndices[1])]].includes(i) ? comparisionColor : "" }}
-      >
-        {array[i]}
-      </Item>
-    );
-  }
-
-  return <Container>{items}</Container>;
+  return (
+    <>
+      <Container>
+        {items.map((value, i) => {
+          if (i === destination) {
+            return (
+              <AnimatedItem
+                key={i + ":" + value}
+                style={{
+                  order: source + 1,
+                  backgroundColor: hightlightedIndices?.includes(i)
+                    ? comparisionColor
+                    : "",
+                }}
+                distance={source - destination}
+                finalMerge={finalMerge}
+              >
+                {value}
+              </AnimatedItem>
+            );
+          } else if (i > destination && i <= source) {
+            return (
+              <MoveItem
+                key={i + ":" + value}
+                style={{
+                  order: i,
+                  backgroundColor: hightlightedIndices?.includes(i)
+                    ? comparisionColor
+                    : "",
+                  transform: "translate(50px)",
+                }}
+              >
+                {value}
+              </MoveItem>
+            );
+          } else {
+            return (
+              <Item
+                key={i + ":" + value}
+                style={{
+                  order: i,
+                  backgroundColor:
+                    i < destination && finalMerge
+                      ? sortedColor
+                      : hightlightedIndices?.includes(i)
+                      ? comparisionColor
+                      : "",
+                }}
+              >
+                {value}
+              </Item>
+            );
+          }
+        })}
+      </Container>
+    </>
+  );
 }

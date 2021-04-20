@@ -1,9 +1,9 @@
 export async function MergeSort(
   array,
-  partition,
-  offSet = 0,
   combine,
-  highlight
+  highlight,
+  offSet = 0,
+  finalMerge = false
 ) {
   if (array.length === 1) {
     return array;
@@ -14,40 +14,46 @@ export async function MergeSort(
   const right = array.slice(middle);
 
   const arr = await merge(
-    await MergeSort(left, partition, offSet, combine, highlight),
-    await MergeSort(right, partition, offSet + middle, combine, highlight),
+    await MergeSort(left, combine, highlight, offSet),
+    await MergeSort(right, combine, highlight, offSet + middle),
     offSet,
-    offSet + middle
+    offSet + middle,
+    finalMerge
   );
   return arr;
 
-  async function merge(left, right, off1, off2) {
+  async function merge(left, right, off1, off2, finalMerge = false) {
     let result = [];
     let leftIndex = 0;
     let rightIndex = 0;
-    
+
     while (leftIndex < left.length && rightIndex < right.length) {
-      // await highlight([off1 + leftIndex, off2 + rightIndex]);
-      if (left[leftIndex] < right[rightIndex]) {
+      if (left[leftIndex] <= right[rightIndex]) {
+        await highlight([off1 + leftIndex + rightIndex, off2 + rightIndex]);
+        await combine(
+          off1 + leftIndex + rightIndex,
+          off1 + result.length,
+          finalMerge
+        );
         result.push(left[leftIndex]);
-        await combine(off1 + leftIndex, off1 + result.length - 1);
         leftIndex++;
       } else {
+        await highlight([off1 + leftIndex + rightIndex, off2 + rightIndex]);
+        await combine(off2 + rightIndex, off1 + result.length, finalMerge);
         result.push(right[rightIndex]);
-        await combine(off2 + rightIndex, off1 + result.length - 1);
         rightIndex++;
       }
     }
 
     while (leftIndex < left.length) {
+      await highlight([off1 + leftIndex + rightIndex], finalMerge);
       result.push(left[leftIndex]);
-      await combine(off1 + leftIndex, off1 + result.length - 1);
       leftIndex++;
     }
 
     while (rightIndex < right.length) {
+      await highlight([off1 + leftIndex + rightIndex], finalMerge);
       result.push(right[rightIndex]);
-      await combine(off2 + rightIndex, off1 + result.length - 1);
       rightIndex++;
     }
 

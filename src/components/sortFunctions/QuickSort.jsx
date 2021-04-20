@@ -20,14 +20,14 @@ export async function QuickSort(
 
     while (i < j) {
       while (i <= high) {
-        await highlight([pivot, i]);
+        await highlight([i], pivot);
         if (array[++i] > array[pivot]) {
           break;
         }
       }
 
       while (--j > low) {
-        await highlight([pivot, j]);
+        await highlight([i, j], pivot);
         if (array[j] < array[pivot]) {
           break;
         }

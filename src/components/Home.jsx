@@ -15,9 +15,9 @@ export function Home() {
     <>
       {/* <SortManager array={[...array]} sortFunction={BubbleSort} sortingAlgorithmName='BubbleSort' />
       <SortManager array={[...array]} sortFunction={SelectionSort} sortingAlgorithmName='SelectionSort' />
-      <SortManager array={[...array]} sortFunction={InsertionSort} sortingAlgorithmName='InsertionSort' />
+      <SortManager array={[...array]} sortFunction={InsertionSort} sortingAlgorithmName='InsertionSort' /> */}
       <SortManager array={[...array]} sortFunction={QuickSort} sortingAlgorithmName='QuickSort' />
-      <SortManager array={[...array]} sortFunction={HeapSort} sortingAlgorithmName='HeapSort' /> */}
+      <SortManager array={[...array]} sortFunction={HeapSort} sortingAlgorithmName='HeapSort' />
       <MergeManager array={[...array]} sortFunction={MergeSort} sortingAlgorithmName='MergeSort' />
     </>
   );
