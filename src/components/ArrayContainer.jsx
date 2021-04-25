@@ -28,15 +28,15 @@ const sourceAnimation = (distance) => keyframes`
     background-color: ${swapColor};
   }
   80% {
-    transform: translate(${distance * 50}px, 50px);
+    transform: translate(-${distance * 50}px, 50px);
     background-color: ${swapColor};
   }
   99% {
-    transform: translate(${distance * 50}px, 0px);
+    transform: translate(-${distance * 50}px, 0px);
     background-color: ${swapColor};
   }
   100%{
-    transform: translate(${distance * 50}px, 0px);
+    transform: translate(-${distance * 50}px, 0px);
     background-color: none;
   }
 `;
@@ -54,15 +54,15 @@ const destinationAnimation = (distance) => keyframes`
     background-color: ${swapColor};
   }
   80% {
-    transform: translate(-${distance * 50}px, -50px);
+    transform: translate(${distance * 50}px, -50px);
     background-color: ${swapColor};
   }
   99% {
-    transform: translate(-${distance * 50}px, 0px);
+    transform: translate(${distance * 50}px, 0px);
     background-color: ${swapColor};
   }
   100%{
-    transform: translate(-${distance * 50}px, 0px);
+    transform: translate(${distance * 50}px, 0px);
     background-color: none;
   }
 `;
@@ -80,11 +80,11 @@ const Item = styled.div`
 
 const Source = styled(Item)`
   animation: ${(props) => destinationAnimation(props.distance)}
-    ${swapTime / 1000}s forwards;
+    ${(props) => props.swapTime / 1000}s forwards;
 `;
 
 const Destination = styled(Item)`
-  animation: ${(props) => sourceAnimation(props.distance)} ${swapTime / 1000}s
+  animation: ${(props) => sourceAnimation(props.distance)} ${(props) => props.swapTime / 1000}s
     forwards;
 `;
 
@@ -121,8 +121,9 @@ export function ArrayContainer({
             <Source
               key={i + ":" + source + ":" + destination + ":" + value}
               distance={destination - source}
+              swapTime={swapTime}
               style={{
-                order: destination,
+                order: source,
                 backgroundColor: getBackgroundColor(i),
               }}
             >
@@ -135,8 +136,9 @@ export function ArrayContainer({
             <Destination
               key={i + ":" + destination + ":" + source + ":" + value}
               distance={destination - source}
+              swapTime={swapTime}
               style={{
-                order: source,
+                order: destination,
                 backgroundColor: getBackgroundColor(i),
               }}
             >

@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+import "./app.css";
 import { Header } from "./components/header";
+import { Controller } from "./components/Controller";
 import { Home } from "./components/Home";
+import { arrayForSorting } from "./components/config";
 
-function App() {
+
+export default function App() {
+
+  const [array, setArray] = useState(arrayForSorting);
+  const [progress, setProgress] = useState('reset')
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Header />
-      </header>
-      <Home />
+    <div>
+      <Header />
+      <Controller array={array} setArray={setArray} progress={progress} setProgress={setProgress} />
+      <Home progress={progress} />
     </div>
   );
 }
-
-export default App;

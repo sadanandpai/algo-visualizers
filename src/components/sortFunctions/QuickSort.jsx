@@ -1,4 +1,4 @@
-export async function QuickSort(
+export async function* QuickSort(
   array,
   swap,
   highlight,
@@ -8,41 +8,42 @@ export async function QuickSort(
 ) {
 
   if (low <= high) {
-    let pivot = await partition(array, low, high);
-    await QuickSort(array, swap, highlight, markSort, low, pivot - 1);
-    await QuickSort(array, swap, highlight, markSort, pivot + 1, high);
+    let pivot = yield* await partition(array, low, high);
+    yield* await QuickSort(array, swap, highlight, markSort, low, pivot - 1);
+    yield* await QuickSort(array, swap, highlight, markSort, pivot + 1, high);
   }
 
-  async function partition(array, low, high) {
+  async function* partition(array, low, high) {
     let pivot = low;
     let i = low;
     let j = high + 1;
 
     while (i < j) {
       while (i <= high) {
-        await highlight([i], pivot);
+        yield await highlight([i], pivot);
         if (array[++i] > array[pivot]) {
           break;
         }
       }
 
       while (--j > low) {
-        await highlight([i, j], pivot);
+        yield await highlight([i, j], pivot);
         if (array[j] < array[pivot]) {
           break;
         }
       }
 
       if (i < j) {
-        await swap(i, j);
+        yield await swap(i, j);
       }
     }
 
     if (pivot !== j) {
-      await swap(pivot, j);
+      yield await swap(pivot, j);
     }
 
     markSort(j);
+    yield;
     return j;
   }
 }
