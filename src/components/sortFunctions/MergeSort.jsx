@@ -2,6 +2,7 @@ export async function MergeSort(
   array,
   combine,
   highlight,
+  markSort,
   offSet = 0,
   finalMerge = false
 ) {
@@ -14,15 +15,16 @@ export async function MergeSort(
   const right = array.slice(middle);
 
   const arr = await merge(
-    await MergeSort(left, combine, highlight, offSet),
-    await MergeSort(right, combine, highlight, offSet + middle),
+    await MergeSort(left, combine, highlight, markSort, offSet),
+    await MergeSort(right, combine, highlight, markSort, offSet + middle),
     offSet,
     offSet + middle,
-    finalMerge
+    finalMerge,
+    markSort
   );
   return arr;
 
-  async function merge(left, right, off1, off2, finalMerge = false) {
+  async function merge(left, right, off1, off2, finalMerge = false, markSort) {
     let result = [];
     let leftIndex = 0;
     let rightIndex = 0;
@@ -33,26 +35,33 @@ export async function MergeSort(
         await combine(
           off1 + leftIndex + rightIndex,
           off1 + result.length,
-          finalMerge
         );
+        if(finalMerge)
+          await markSort(off1 + result.length);
         result.push(left[leftIndex]);
         leftIndex++;
       } else {
         await highlight([off1 + leftIndex + rightIndex, off2 + rightIndex]);
-        await combine(off2 + rightIndex, off1 + result.length, finalMerge);
+        await combine(off2 + rightIndex, off1 + result.length);
+        if(finalMerge)
+          await markSort(off1 + result.length);
         result.push(right[rightIndex]);
         rightIndex++;
       }
     }
 
     while (leftIndex < left.length) {
-      await highlight([off1 + leftIndex + rightIndex], finalMerge);
+      await highlight([off1 + leftIndex + rightIndex]);
+      if(finalMerge)
+          await markSort(off1 + leftIndex + rightIndex);
       result.push(left[leftIndex]);
       leftIndex++;
     }
 
     while (rightIndex < right.length) {
-      await highlight([off1 + leftIndex + rightIndex], finalMerge);
+      await highlight([off1 + leftIndex + rightIndex]);
+      if(finalMerge)
+          await markSort(off1 + leftIndex + rightIndex);
       result.push(right[rightIndex]);
       rightIndex++;
     }

@@ -14,7 +14,7 @@ const comparisionColor = "pink";
 const swapColor = "yellow";
 const sortedColor = "springgreen";
 
-const swapAnimation = (distance, finalMerge) => keyframes`
+const swapAnimation = (distance) => keyframes`
   0%{
     background-color: ${swapColor};
   }
@@ -36,7 +36,6 @@ const swapAnimation = (distance, finalMerge) => keyframes`
   }
   100%{
     transform: translate(-${distance * 50}px, 0px);
-    background-color: ${finalMerge ? sortedColor : ""};
   }
 `;
 
@@ -88,7 +87,7 @@ export function MergeContainer({
   source,
   destination,
   hightlightedIndices,
-  finalMerge,
+  sortedIndices
 }) {
   const [items, setItems] = useState([...array]);
 
@@ -97,6 +96,18 @@ export function MergeContainer({
       generateItems(setItems, source, destination);
     }
   }, [source, destination]);
+
+  function getBackgroundColor(i) {
+    if (sortedIndices.includes(i)) {
+      return sortedColor;
+    }
+
+    if (hightlightedIndices.includes(i)) {
+      return comparisionColor;
+    }
+
+    return "";
+  }
 
   return (
     <>
@@ -108,12 +119,9 @@ export function MergeContainer({
                 key={i + ":" + value}
                 style={{
                   order: source + 1,
-                  backgroundColor: hightlightedIndices?.includes(i)
-                    ? comparisionColor
-                    : "",
+                  backgroundColor: getBackgroundColor(i),
                 }}
                 distance={source - destination}
-                finalMerge={finalMerge}
               >
                 {value}
               </AnimatedItem>
@@ -124,9 +132,7 @@ export function MergeContainer({
                 key={i + ":" + value}
                 style={{
                   order: i,
-                  backgroundColor: hightlightedIndices?.includes(i)
-                    ? comparisionColor
-                    : "",
+                  backgroundColor: getBackgroundColor(i),
                   transform: "translate(50px)",
                 }}
               >
@@ -139,12 +145,7 @@ export function MergeContainer({
                 key={i + ":" + value}
                 style={{
                   order: i,
-                  backgroundColor:
-                    i < destination && finalMerge
-                      ? sortedColor
-                      : hightlightedIndices?.includes(i)
-                      ? comparisionColor
-                      : "",
+                  backgroundColor: getBackgroundColor(i),
                 }}
               >
                 {value}

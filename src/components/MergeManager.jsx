@@ -9,7 +9,7 @@ const Container = styled.div`
   padding: 10px;
   border: 2px solid black;
   margin: 10px 0;
-`
+`;
 
 function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
@@ -18,19 +18,19 @@ function delay(time) {
 export function MergeManager({ array, sortFunction, sortingAlgorithmName }) {
   const [swapIndices, setSwapIndices] = useState([-1, -1]);
   const [hightlightedIndices, setHightlightedIndices] = useState([-1, -1]);
-  const finalMerge = useRef(false);
-
+  
+  const sortedIndices = useRef([]);
   const swapCount = useRef(0);
   const comparisionCount = useRef(0);
   const timeTaken = useRef(0);
 
   useEffect(() => {
-    async function runSort(){
+    async function runSort() {
       const startTime = performance.now();
-      await sortFunction(array, combine, highlight, 0, true);
+      await sortFunction(array, combine, highlight, markSort, 0, true);
       const endTime = performance.now();
       timeTaken.current = endTime - startTime;
-      
+
       setHightlightedIndices([-1, -1]);
     }
     runSort();
@@ -42,26 +42,31 @@ export function MergeManager({ array, sortFunction, sortingAlgorithmName }) {
     await delay(compareTime);
   }
 
-  async function combine(source, destination, fM) {
+  async function combine(source, destination) {
     swapCount.current += 1;
-    finalMerge.current = fM;
     setSwapIndices([source, destination]);
     await delay(swapTime);
   }
 
+  async function markSort(...indices) {
+    sortedIndices.current.push(...indices);
+  }
+
   return (
     <Container>
-      <div>
-        {sortingAlgorithmName}
-      </div>
+      <div>{sortingAlgorithmName}</div>
       <MergeContainer
         array={array}
         source={swapIndices[0]}
         destination={swapIndices[1]}
         hightlightedIndices={hightlightedIndices}
-        finalMerge={finalMerge.current}
+        sortedIndices={sortedIndices.current}
       />
-      <Info swapCount={swapCount.current} comparisionCount={comparisionCount.current} timeTaken={timeTaken.current} />
+      <Info
+        swapCount={swapCount.current}
+        comparisionCount={comparisionCount.current}
+        timeTaken={timeTaken.current}
+      />
     </Container>
   );
 }
