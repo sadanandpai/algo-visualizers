@@ -1,8 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { swapTime, compareTime } from "./config";
 import { ArrayContainer } from "./ArrayContainer";
+import { MergeContainer } from "./MergeContainer";
 import { Info } from "./Info";
+import { Timer } from "./Timer";
+
+import {ProgressContext} from "../App"
 
 let progress = "";
 
@@ -10,14 +14,13 @@ const Container = styled.div`
   background-color: aqua;
   padding: 10px;
   border: 2px solid black;
-  margin: 10px 0;
 `;
 
 function delay(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-export function SortManager({
+export const SortManager = React.memo(function ({
   array,
   sortFunction,
   sortingAlgorithmName,
@@ -25,29 +28,38 @@ export function SortManager({
 }) {
   const [swapIndices, setSwapIndices] = useState([-1, -1]);
   const [hightlightedIndices, setHightlightedIndices] = useState([-1, -1]);
+
   const algoArray = useRef([]);
   const sortedIndices = useRef([]);
   const pivot = useRef(-1);
-
   const swapCount = useRef(0);
   const comparisionCount = useRef(0);
-  const timeTaken = useRef(0);
+  const isAlgoExecutionOver = useRef(false);
+
+  const context = useContext(ProgressContext);
 
   const sortProgressIterator = useRef(null);
 
   async function reset() {
     pivot.current = -1;
     sortedIndices.current = [];
+    swapCount.current = 0;
+    comparisionCount.current = 0;
     algoArray.current = [...array];
     setSwapIndices([-1, -1]);
     setHightlightedIndices([-1, -1]);
 
-    sortProgressIterator.current = await sortFunction(
-      algoArray.current,
-      swap,
-      highlight,
-      markSort
-    );
+    sortProgressIterator.current =
+      sortingAlgorithmName === "MergeSort"
+        ? await sortFunction(
+            algoArray.current,
+            combine,
+            highlight,
+            markSort,
+            0,
+            true
+          )
+        : await sortFunction(algoArray.current, swap, highlight, markSort);
   }
 
   useEffect(() => {
@@ -66,7 +78,10 @@ export function SortManager({
       completionStatus = await sortProgressIterator.current.next();
     }
     if (completionStatus.done) {
+      isAlgoExecutionOver.current = true;
+      setSwapIndices([-1, -1]);
       setHightlightedIndices([-1, -1]);
+      // context.setProgress('pause');
     }
   }
 
@@ -75,10 +90,19 @@ export function SortManager({
     let tmp = algoArray.current[i];
     algoArray.current[i] = algoArray.current[j];
     algoArray.current[j] = tmp;
-    
+
     pivot.current = -1;
     swapCount.current += 1;
     await delay(swapTime);
+  }
+
+  async function combine(source, destination) {
+    if (source !== destination) {
+      swapCount.current += 1;
+      setHightlightedIndices([-1, -1]);
+      setSwapIndices([source, destination]);
+      await delay(swapTime);
+    }
   }
 
   async function highlight(indices, p) {
@@ -96,19 +120,30 @@ export function SortManager({
   return (
     <Container>
       <div>{sortingAlgorithmName}</div>
-      <ArrayContainer
-        array={algoArray.current}
-        source={swapIndices[0]}
-        destination={swapIndices[1]}
-        pivot={pivot.current}
-        highlightIndices={hightlightedIndices}
-        sortedIndices={sortedIndices.current}
-      />
+      {sortingAlgorithmName === "MergeSort" ? (
+        <MergeContainer
+          array={algoArray.current}
+          source={swapIndices[0]}
+          destination={swapIndices[1]}
+          hightlightedIndices={hightlightedIndices}
+          sortedIndices={sortedIndices.current}
+        />
+      ) : (
+        <ArrayContainer
+          array={algoArray.current}
+          source={swapIndices[0]}
+          destination={swapIndices[1]}
+          pivot={pivot.current}
+          highlightIndices={hightlightedIndices}
+          sortedIndices={sortedIndices.current}
+        />
+      )}
       <Info
         swapCount={swapCount.current}
         comparisionCount={comparisionCount.current}
-        timeTaken={timeTaken.current}
-      />
+      >
+        <Timer progressStatus={progressStatus} isAlgoExecutionOver={isAlgoExecutionOver.current} />
+      </Info>
     </Container>
   );
-}
+});

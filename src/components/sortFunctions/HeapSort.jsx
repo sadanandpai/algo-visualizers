@@ -18,15 +18,15 @@ export async function* HeapSort(array, swap, highlight, markSort) {
     const right = 2 * i + 2;
     let max = i;
 
+    yield await highlight([left, right], i);
+
     if(left < arrLength){
-      yield await highlight([left, max]);
       if (array[left] > array[max]) {
         max = left;
       }
     }
 
     if(right < arrLength){
-      yield await highlight([right, max]);
       if (array[right] > array[max]) {
         max = right;
       }

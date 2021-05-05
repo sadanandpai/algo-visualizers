@@ -1,32 +1,50 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
-const SelectionDiv = styled.div`
-  display: flex;
-  gap: 20px;
 
-  a {
-    border: 1px solid black;
-    background-color: bisque;
-    text-align: center;
-    flex-grow: 1;
-    padding: 10px;
-  }
-`;
+function a11yProps(index) {
+  return {
+    id: `scrollable-auto-tab-${index}`,
+    "aria-controls": `scrollable-auto-tabpanel-${index}`,
+  };
+}
 
-export function Header() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+export function Header({value, handleChange} ) {
+  const classes = useStyles();
+  
   return (
-    <>
-      <h2>Sorting Algorithms Visualizer</h2>
-      <SelectionDiv>
-        <a href="#bubble">Bubble</a>
-        <a href="#selection">Selection</a>
-        <a href="#insertion">Insertion</a>
-        <a href="#heap">Heap</a>
-        <a href="#merge">Merge</a>
-        <a href="#quick">Quick</a>
-        <a href="#all">All</a>
-      </SelectionDiv>
-    </>
+    <div className={classes.root}>
+      <h3>Sorting Algorithms Visualizer</h3>
+      <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example"
+        >
+          <Tab label="Bubble" {...a11yProps(0)} />
+          <Tab label="Selection" {...a11yProps(1)} />
+          <Tab label="Insertion" {...a11yProps(2)} />
+          <Tab label="Heap" {...a11yProps(3)} />
+          <Tab label="Merge" {...a11yProps(4)} />
+          <Tab label="Quick" {...a11yProps(5)} />
+          <Tab label="All" {...a11yProps(6)} />
+        </Tabs>
+      </AppBar>
+    </div>
   );
 }

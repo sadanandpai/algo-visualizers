@@ -60,12 +60,11 @@ const Item = styled.div`
 `;
 
 const AnimatedItem = styled(Item)`
-  animation: ${(props) => swapAnimation(props.distance, props.finalMerge)}
-    ${swapTime / 1000}s forwards;
+  animation: ${(props) => swapAnimation(props.distance, props.finalMerge)} ${props => props.swapTime / 1000}s forwards;
 `;
 
 const MoveItem = styled(Item)`
-  animation: ${moveAnimation()} ${swapTime / 1000}s forwards;
+  animation: ${moveAnimation()} ${props => props.swapTime / 1000}s forwards;
 `;
 
 const generateItems = (setItems, source, destination) => {
@@ -87,7 +86,7 @@ export function MergeContainer({
   source,
   destination,
   hightlightedIndices,
-  sortedIndices
+  sortedIndices,
 }) {
   const [items, setItems] = useState([...array]);
 
@@ -96,6 +95,10 @@ export function MergeContainer({
       generateItems(setItems, source, destination);
     }
   }, [source, destination]);
+
+  useEffect(() => {
+    setItems([...array]);
+  }, [array]);
 
   function getBackgroundColor(i) {
     if (sortedIndices.includes(i)) {
@@ -122,6 +125,7 @@ export function MergeContainer({
                   backgroundColor: getBackgroundColor(i),
                 }}
                 distance={source - destination}
+                swapTime={swapTime}
               >
                 {value}
               </AnimatedItem>
@@ -135,6 +139,7 @@ export function MergeContainer({
                   backgroundColor: getBackgroundColor(i),
                   transform: "translate(50px)",
                 }}
+                swapTime={swapTime}
               >
                 {value}
               </MoveItem>
@@ -147,6 +152,7 @@ export function MergeContainer({
                   order: i,
                   backgroundColor: getBackgroundColor(i),
                 }}
+                swapTime={swapTime}
               >
                 {value}
               </Item>
