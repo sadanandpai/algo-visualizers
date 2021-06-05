@@ -1,19 +1,29 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { swapTime, compareTime } from "../core/config";
 import { ArrayContainer } from "./ArrayContainer";
 import { MergeContainer } from "./MergeContainer";
 import { InfoFooter } from "./InfoFooter";
 import { Timer } from "../core/Timer";
+import Card from "@material-ui/core/Card";
 
-import {ProgressContext} from "../App"
-import Card from '@material-ui/core/Card';
+import shallow from "zustand/shallow";
+import { useControls } from "../core/store";
 
-let progress = "";
-``
+let compareTime = useControls.getState().compareTime;
+let swapTime = useControls.getState().swapTime;
+
+useControls.subscribe(
+  ([cTime, sTime]) => {
+    compareTime = cTime;
+    swapTime = sTime;
+  },
+  (state) => [state.compareTime, state.swapTime],
+  shallow
+);
+
 const Container = styled(Card)`
   padding: 10px;
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
 `;
 
 function delay(time) {
@@ -24,7 +34,6 @@ export const SortManager = React.memo(function ({
   array,
   sortFunction,
   sortingAlgorithmName,
-  progressStatus,
 }) {
   const [swapIndices, setSwapIndices] = useState([-1, -1]);
   const [hightlightedIndices, setHightlightedIndices] = useState([-1, -1]);
@@ -36,7 +45,10 @@ export const SortManager = React.memo(function ({
   const comparisionCount = useRef(0);
   const isAlgoExecutionOver = useRef(false);
 
-  const progressContext = useContext(ProgressContext);
+  const markSortngDone = useControls((state) => state.markSortngDone);
+  const progress = useRef("");
+  progress.current = useControls((state) => state.progress);
+
   const sortProgressIterator = useRef(null);
 
   async function reset() {
@@ -66,21 +78,20 @@ export const SortManager = React.memo(function ({
   }, [array]);
 
   useEffect(() => {
-    progress = progressStatus;
-    if (progress === "start") runAlgo();
-    if (progress === "reset") reset();
-  }, [progressStatus]);
+    if (progress.current === "start") runAlgo();
+    if (progress.current === "reset") reset();
+  }, [progress.current]);
 
   async function runAlgo() {
     let completionStatus = { done: false };
-    while (!completionStatus.done && progress === "start") {
+    while (!completionStatus.done && progress.current === "start") {
       completionStatus = await sortProgressIterator.current.next();
     }
     if (completionStatus.done) {
       isAlgoExecutionOver.current = true;
       setSwapIndices([-1, -1]);
       setHightlightedIndices([-1, -1]);
-      progressContext.setProgress('done');
+      markSortngDone();
     }
   }
 
@@ -141,7 +152,10 @@ export const SortManager = React.memo(function ({
         swapCount={swapCount.current}
         comparisionCount={comparisionCount.current}
       >
-        <Timer progressStatus={progressStatus} isAlgoExecutionOver={isAlgoExecutionOver.current} />
+        <Timer
+          progressStatus={progress.current}
+          isAlgoExecutionOver={isAlgoExecutionOver.current}
+        />
       </InfoFooter>
     </Container>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 
-import { arrayForSorting } from "../core/config";
+import { sortingArray } from "../core/config";
 import { SortManager } from "./SortManager";
 import { BubbleSort } from "../sortFunctions/BubbleSort";
 import { SelectionSort } from "../sortFunctions/SelectionSort";
@@ -9,7 +9,9 @@ import { InsertionSort } from "../sortFunctions/InsertionSort";
 import { QuickSort } from "../sortFunctions/QuickSort";
 import { HeapSort } from "../sortFunctions/HeapSort.js";
 import { MergeSort } from "../sortFunctions/MergeSort";
-import { ProgressContext } from "../App";
+
+import shallow from 'zustand/shallow'
+import { useControls } from "../core/store";
 
 const sortingAlgorithms = [
   { component: BubbleSort, name: "BubbleSort" },
@@ -48,11 +50,13 @@ function TabPanel(props) {
   );
 }
 
-export function Home({ progress, value }) {
-  const context = useContext(ProgressContext);
+export function AlgoDisplay({ value }) {
+  const resetSorting = useControls(
+    (state) => state.resetSorting
+  );
 
   useEffect(() => {
-    context.setProgress("reset");
+    resetSorting();
   }, [value]);
 
   return (
@@ -60,8 +64,7 @@ export function Home({ progress, value }) {
       {sortingAlgorithms.map((algoInfo, idx) => (
         <TabPanel value={value} index={idx}>
           <SortManager
-            array={arrayForSorting}
-            progressStatus={progress}
+            array={sortingArray}
             sortFunction={algoInfo.component}
             sortingAlgorithmName={algoInfo.name}
           />
@@ -71,8 +74,7 @@ export function Home({ progress, value }) {
         <FlexWrap>
           {sortingAlgorithms.map((algoInfo) => (
             <SortManager
-              array={arrayForSorting}
-              progressStatus={progress}
+              array={sortingArray}
               sortFunction={algoInfo.component}
               sortingAlgorithmName={algoInfo.name}
             />

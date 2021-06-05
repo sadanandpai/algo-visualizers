@@ -9,13 +9,10 @@ export let swapTime = 1000;
 export let compareTime = 500;
 
 // init array
-export let arrayForSorting = [8,7,6,5,4,3,2,1];
+export let sortingArray = [8, 7, 6, 5, 4, 3, 2, 1];
 
 export function setArrayForSorting(array) {
-  arrayForSorting = array.filter((value) => value === "" ? false : true).map(v => +v);
-}
-
-export function setSpeed(speed) {
-  swapTime = 3000 / speed;
-  compareTime = swapTime / 2;
+  sortingArray = array
+    .filter((value) => (value === "" ? false : true))
+    .map((v) => +v);
 }

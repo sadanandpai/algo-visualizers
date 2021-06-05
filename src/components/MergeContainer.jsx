@@ -1,21 +1,26 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import {
-  swapTime,
   comparisionColor,
   swapColor,
   sortedColor,
 } from "../core/config";
 import { ArrayHolder, ArrayItem, swapAnimation, moveAnimation } from "../core/styles";
+import { useControls } from "../core/store";
 
+let swapTime = useControls.getState().swapTime;
+useControls.subscribe(
+  (time) => (swapTime = time),
+  (state) => state.swapTime
+);
 
 const AnimatedItem = styled(ArrayItem)`
   animation: ${(props) => swapAnimation(props.distance, swapColor)}
-    ${(props) => props.swapTime / 1000}s forwards;
+    ${swapTime / 1000}s forwards;
 `;
 
 const MoveItem = styled(ArrayItem)`
-  animation: ${moveAnimation()} ${(props) => props.swapTime / 1000}s forwards;
+  animation: ${moveAnimation()} ${swapTime / 1000}s forwards;
 `;
 
 const generateItems = (setItems, source, destination) => {
@@ -76,7 +81,6 @@ export function MergeContainer({
                   backgroundColor: getBackgroundColor(i),
                 }}
                 distance={source - destination}
-                swapTime={swapTime}
               >
                 {value}
               </AnimatedItem>
@@ -90,7 +94,6 @@ export function MergeContainer({
                   backgroundColor: getBackgroundColor(i),
                   transform: "translate(50px)",
                 }}
-                swapTime={swapTime}
               >
                 {value}
               </MoveItem>
@@ -103,7 +106,6 @@ export function MergeContainer({
                   order: i,
                   backgroundColor: getBackgroundColor(i),
                 }}
-                swapTime={swapTime}
               >
                 {value}
               </ArrayItem>

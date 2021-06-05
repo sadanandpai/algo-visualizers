@@ -1,13 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled, { keyframes } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import {
-  swapTime,
   comparisionColor,
   swapColor,
   sortedColor,
   pivotColor,
 } from "../core/config";
 import { useWindowSize } from "react-use";
+import shallow from "zustand/shallow";
+import { useControls } from "../core/store";
+
+let swapTime = useControls.getState().swapTime;
+useControls.subscribe(
+  (time) => (swapTime = time),
+  (state) => state.swapTime
+);
 
 import {
   ArrayHolder,
@@ -18,12 +25,12 @@ import {
 
 const Source = styled(ArrayItem)`
   animation: ${(props) => destinationAnimation(props.distance, swapColor)}
-    ${(props) => props.swapTime / 1000}s forwards;
+    ${(props) => swapTime / 1000}s forwards;
 `;
 
 const Destination = styled(ArrayItem)`
   animation: ${(props) => sourceAnimation(props.distance, swapColor)}
-    ${(props) => props.swapTime / 1000}s forwards;
+    ${(props) => swapTime / 1000}s forwards;
 `;
 
 export function ArrayContainer({
@@ -35,7 +42,6 @@ export function ArrayContainer({
   sortedIndices,
 }) {
   const { width, height } = useWindowSize();
-  console.log(width);
 
   function getBackgroundColor(i) {
     if (highlightIndices.includes(i)) {
@@ -61,7 +67,6 @@ export function ArrayContainer({
             <Source
               key={i + ":" + source + ":" + destination + ":" + value}
               distance={destination - source}
-              swapTime={swapTime}
               style={{
                 order: source,
                 backgroundColor: getBackgroundColor(i),
@@ -76,7 +81,6 @@ export function ArrayContainer({
             <Destination
               key={i + ":" + destination + ":" + source + ":" + value}
               distance={destination - source}
-              swapTime={swapTime}
               style={{
                 order: destination,
                 backgroundColor: getBackgroundColor(i),

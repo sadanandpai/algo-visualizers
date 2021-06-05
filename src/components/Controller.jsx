@@ -3,10 +3,20 @@ import styled from "styled-components";
 import { VscDebugStart } from "react-icons/vsc";
 import { VscDebugRestart } from "react-icons/vsc";
 import { ImPause } from "react-icons/im";
-import { swapTime, setArrayForSorting, setSpeed } from "../core/config";
+import { setArrayForSorting } from "../core/config";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+
+import shallow from "zustand/shallow";
+import { useControls } from "../core/store";
+
+const ControlBar = styled.div`
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+`;
 
 function convertInputToArrayData(value) {
   value = value.replaceAll(/\s/g, "");
@@ -18,31 +28,34 @@ function convertInputToArrayData(value) {
   return value;
 }
 
-export function Controller({ array, setArray, algoSelection, progress, setProgress }) {
-  const [timeSpeed, setTimeSpeed] = useState(3000 / swapTime);
+export function Controller({ array, setArray }) {
+  const [progress, speed] = useControls(
+    (state) => [state.progress, state.speed],
+    shallow
+  );
 
-  function startHandler() {
-    setProgress("start");
-  }
+  const [startSorting, pauseSorting, resetSorting, setSpeed] = useControls(
+    (state) => [
+      state.startSorting,
+      state.pauseSorting,
+      state.resetSorting,
+      state.setSpeed,
+    ],
+    shallow
+  );
 
-  function pauseHandler() {
-    setProgress("pause");
-  }
-
-  function resetHandler() {
-    setProgress("reset");
-  }
+  const startElement = <VscDebugStart onClick={startSorting} />;
+  const pauseElement = <ImPause onClick={pauseSorting} />;
+  const resetElement = <VscDebugRestart onClick={resetSorting} />;
+  const disabledPauseElement = (
+    <ImPause onClick={pauseSorting} style={{ color: "#e5e5e5" }} />
+  );
 
   function arrayDataChangeHandler(value) {
     const filteredValue = convertInputToArrayData(value);
     setArrayForSorting([...filteredValue.split(",")]);
     setArray(filteredValue);
-    setProgress("reset");
-  }
-
-  function speedHandler(value) {
-    setSpeed(+value);
-    setTimeSpeed(+value);
+    resetSorting();
   }
 
   function generate() {
@@ -52,41 +65,24 @@ export function Controller({ array, setArray, algoSelection, progress, setProgre
     );
     setArrayForSorting(randomArray);
     setArray(randomArray);
-    setProgress("reset");
+    resetSorting();
   }
 
   function getProgressButton() {
-    let element;
     switch (progress) {
       case "reset":
-        element = (
-          <VscDebugStart onClick={startHandler}/>
-        );
-        break;
+        return startElement;
       case "start":
-        element = (
-          <ImPause onClick={pauseHandler} />
-        );
-        break;
-      case "done":
-        element = <ImPause onClick={pauseHandler} style={{ color: "#e5e5e5" }}/>;
-        break;
+        return pauseElement;
       case "pause":
-        element = <VscDebugStart onClick={startHandler} />;
-        break;
+        return startElement;
+      case "done":
+        return disabledPauseElement;
     }
-    return element;
   }
 
   return (
-    <div
-      style={{
-        fontSize: "2rem",
-        display: "flex",
-        alignItems: "center",
-        margin: "10px 0",
-      }}
-    >
+    <ControlBar>
       <Button
         variant="contained"
         color="primary"
@@ -103,14 +99,14 @@ export function Controller({ array, setArray, algoSelection, progress, setProgre
         onChange={(event) => arrayDataChangeHandler(event.target.value)}
         value={array}
         size="small"
-        widht="100px"
+        width="100px"
         style={{ flexBasis: "50%", flexGrow: 1 }}
       />
 
       <Slider
-        key={`slider-${timeSpeed}`}
-        defaultValue={timeSpeed}
-        onChange={(event, value) => speedHandler(value)}
+        key={`slider-${speed}`}
+        defaultValue={speed}
+        onChange={(event, value) => setSpeed(value)}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
         step={1}
@@ -122,8 +118,8 @@ export function Controller({ array, setArray, algoSelection, progress, setProgre
 
       <div style={{ display: "flex" }}>
         {getProgressButton()}
-        <VscDebugRestart onClick={resetHandler} />
+        {resetElement}
       </div>
-    </div>
+    </ControlBar>
   );
 }
