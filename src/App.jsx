@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import "./app.css";
-import { Header } from "./components/header";
+import { Header } from "./components/Header";
 import { Controller } from "./components/Controller";
-import { Home } from "./components/Home";
-import { arrayForSorting } from "./components/config";
+import { Home } from "./components/AlgoDisplay";
+import { arrayForSorting } from "./core/config";
 
 export const ProgressContext = React.createContext({
   value: '',
-  setValue: () => {}
 });
 
 const Container = styled.div`
@@ -18,10 +17,10 @@ const Container = styled.div`
 export default function App() {
   const [array, setArray] = useState(arrayForSorting);
   const [progress, setProgress] = useState("reset");
-  const [value, setValue] = useState(0);
+  const [algoSelection, setAlgoSelection] = useState(0);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setAlgoSelection(newValue);
   };
 
   const state = {
@@ -32,14 +31,15 @@ export default function App() {
   return (
     <Container>
       <ProgressContext.Provider value={state}>
-        <Header value={value} handleChange={handleChange} />
+        <Header value={algoSelection} handleChange={handleChange} />
         <Controller
           array={array}
           setArray={setArray}
+          algoSelection={algoSelection}
           progress={progress}
           setProgress={setProgress}
         />
-        <Home progress={progress} value={value} />
+        <Home progress={progress} value={algoSelection} />
       </ProgressContext.Provider>
     </Container>
   );

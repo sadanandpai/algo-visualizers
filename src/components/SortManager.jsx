@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { swapTime, compareTime } from "./config";
+import { swapTime, compareTime } from "../core/config";
 import { ArrayContainer } from "./ArrayContainer";
 import { MergeContainer } from "./MergeContainer";
-import { Info } from "./Info";
-import { Timer } from "./Timer";
+import { InfoFooter } from "./InfoFooter";
+import { Timer } from "../core/Timer";
 
 import {ProgressContext} from "../App"
+import Card from '@material-ui/core/Card';
 
 let progress = "";
-
-const Container = styled.div`
-  background-color: aqua;
+``
+const Container = styled(Card)`
   padding: 10px;
-  border: 2px solid black;
+  border: 1px solid rgba(0,0,0,0.15);
 `;
 
 function delay(time) {
@@ -36,8 +36,7 @@ export const SortManager = React.memo(function ({
   const comparisionCount = useRef(0);
   const isAlgoExecutionOver = useRef(false);
 
-  const context = useContext(ProgressContext);
-
+  const progressContext = useContext(ProgressContext);
   const sortProgressIterator = useRef(null);
 
   async function reset() {
@@ -81,7 +80,7 @@ export const SortManager = React.memo(function ({
       isAlgoExecutionOver.current = true;
       setSwapIndices([-1, -1]);
       setHightlightedIndices([-1, -1]);
-      // context.setProgress('pause');
+      progressContext.setProgress('done');
     }
   }
 
@@ -138,12 +137,12 @@ export const SortManager = React.memo(function ({
           sortedIndices={sortedIndices.current}
         />
       )}
-      <Info
+      <InfoFooter
         swapCount={swapCount.current}
         comparisionCount={comparisionCount.current}
       >
         <Timer progressStatus={progressStatus} isAlgoExecutionOver={isAlgoExecutionOver.current} />
-      </Info>
+      </InfoFooter>
     </Container>
   );
 });
