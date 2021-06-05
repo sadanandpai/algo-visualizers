@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { comparisionColor, swapColor, sortedColor } from "../core/config";
 import {
-  comparisionColor,
-  swapColor,
-  sortedColor,
-} from "../core/config";
-import { ArrayHolder, ArrayItem, swapAnimation, moveAnimation } from "../core/styles";
+  ArrayHolder,
+  ArrayItem,
+  swapAnimation,
+  moveAnimation,
+} from "../core/styles";
 import { useControls } from "../core/store";
 
 let swapTime = useControls.getState().swapTime;
@@ -16,11 +17,11 @@ useControls.subscribe(
 
 const AnimatedItem = styled(ArrayItem)`
   animation: ${(props) => swapAnimation(props.distance, swapColor)}
-    ${swapTime / 1000}s forwards;
+    ${() => swapTime / 1000}s forwards;
 `;
 
 const MoveItem = styled(ArrayItem)`
-  animation: ${moveAnimation()} ${swapTime / 1000}s forwards;
+  animation: ${moveAnimation()} ${() => swapTime / 1000}s forwards;
 `;
 
 const generateItems = (setItems, source, destination) => {

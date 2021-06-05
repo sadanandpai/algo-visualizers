@@ -1,15 +1,17 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+
 import { VscDebugStart } from "react-icons/vsc";
 import { VscDebugRestart } from "react-icons/vsc";
 import { ImPause } from "react-icons/im";
-import { setArrayForSorting } from "../core/config";
+
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 import shallow from "zustand/shallow";
-import { useControls } from "../core/store";
+import { useControls, useData } from "../core/store";
+import { convertInputToArrayString, convertArrayStringToArray, getRandomArray } from "../core/helper";
 
 const ControlBar = styled.div`
   font-size: 2rem;
@@ -18,19 +20,15 @@ const ControlBar = styled.div`
   margin: 10px 0;
 `;
 
-function convertInputToArrayData(value) {
-  value = value.replaceAll(/\s/g, "");
-  value = value.replaceAll(/\d{4}/g, "");
-  value = value.replaceAll(/\s\s/g, " ");
-  value = value.replaceAll(/\s,/g, ",");
-  value = value.replaceAll(/,,/g, ",");
-  value = value.replaceAll(/[^0-9,\s]/g, "");
-  return value;
-}
 
-export function Controller({ array, setArray }) {
+export function Controller() {
   const [progress, speed] = useControls(
     (state) => [state.progress, state.speed],
+    shallow
+  );
+
+  const [sortingArray, setSortingArray] = useData(
+    (state) => [state.sortingArray, state.setSortingArray],
     shallow
   );
 
@@ -44,27 +42,26 @@ export function Controller({ array, setArray }) {
     shallow
   );
 
+  const [arrayInput, setArrayInput] = useState(sortingArray);
+
   const startElement = <VscDebugStart onClick={startSorting} />;
   const pauseElement = <ImPause onClick={pauseSorting} />;
   const resetElement = <VscDebugRestart onClick={resetSorting} />;
-  const disabledPauseElement = (
-    <ImPause onClick={pauseSorting} style={{ color: "#e5e5e5" }} />
-  );
+  const disabledPauseElement = <ImPause style={{ color: "#e5e5e5" }} />;
 
   function arrayDataChangeHandler(value) {
-    const filteredValue = convertInputToArrayData(value);
-    setArrayForSorting([...filteredValue.split(",")]);
-    setArray(filteredValue);
+    const arrayString = convertInputToArrayString(value);
+    setArrayInput(arrayString);
+    
+    const array = convertArrayStringToArray(arrayString);
+    setSortingArray(array);
     resetSorting();
   }
 
   function generate() {
-    const randomArray = Array.from(
-      new Array(Math.floor(Math.random() * 20 + 10)),
-      () => Math.floor(Math.random() * 999)
-    );
-    setArrayForSorting(randomArray);
-    setArray(randomArray);
+    const randomArray = getRandomArray();
+    setArrayInput(randomArray);
+    setSortingArray(randomArray);
     resetSorting();
   }
 
@@ -97,7 +94,7 @@ export function Controller({ array, setArray }) {
         label="Input"
         variant="outlined"
         onChange={(event) => arrayDataChangeHandler(event.target.value)}
-        value={array}
+        value={arrayInput}
         size="small"
         width="100px"
         style={{ flexBasis: "50%", flexGrow: 1 }}

@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 
-import { sortingArray } from "../core/config";
 import { SortManager } from "./SortManager";
 import { BubbleSort } from "../sortFunctions/BubbleSort";
 import { SelectionSort } from "../sortFunctions/SelectionSort";
@@ -11,7 +10,7 @@ import { HeapSort } from "../sortFunctions/HeapSort.js";
 import { MergeSort } from "../sortFunctions/MergeSort";
 
 import shallow from 'zustand/shallow'
-import { useControls } from "../core/store";
+import { useControls, useData } from "../core/store";
 
 const sortingAlgorithms = [
   { component: BubbleSort, name: "BubbleSort" },
@@ -53,6 +52,10 @@ function TabPanel(props) {
 export function AlgoDisplay({ value }) {
   const resetSorting = useControls(
     (state) => state.resetSorting
+  );
+  
+  const sortingArray = useData(
+    (state) => state.sortingArray
   );
 
   useEffect(() => {

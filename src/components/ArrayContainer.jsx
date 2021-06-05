@@ -25,12 +25,12 @@ import {
 
 const Source = styled(ArrayItem)`
   animation: ${(props) => destinationAnimation(props.distance, swapColor)}
-    ${(props) => swapTime / 1000}s forwards;
+    ${() => swapTime / 1000}s forwards;
 `;
 
 const Destination = styled(ArrayItem)`
   animation: ${(props) => sourceAnimation(props.distance, swapColor)}
-    ${(props) => swapTime / 1000}s forwards;
+    ${() => swapTime / 1000}s forwards;
 `;
 
 export function ArrayContainer({

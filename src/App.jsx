@@ -11,7 +11,6 @@ const Container = styled.div`
 `;
 
 export default function App() {
-  const [array, setArray] = useState(sortingArray);
   const [algoSelection, setAlgoSelection] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -20,13 +19,9 @@ export default function App() {
 
   return (
     <Container>
-        <Header value={algoSelection} handleChange={handleChange} />
-        <Controller
-          array={array}
-          setArray={setArray}
-          algoSelection={algoSelection}
-        />
-        <AlgoDisplay value={algoSelection} />
+      <Header value={algoSelection} handleChange={handleChange} />
+      <Controller />
+      <AlgoDisplay value={algoSelection} />
     </Container>
   );
 }

@@ -4,7 +4,7 @@ export async function* MergeSort(
   highlight,
   markSort,
   offSet = 0,
-  finalMerge = false
+  finalMerge = true
 ) {
   if (array.length === 1) {
     return array;
@@ -15,8 +15,8 @@ export async function* MergeSort(
   const right = array.slice(middle);
 
   const arr = yield* await merge(
-    yield* await MergeSort(left, combine, highlight, markSort, offSet),
-    yield* await MergeSort(right, combine, highlight, markSort, offSet + middle),
+    yield* await MergeSort(left, combine, highlight, markSort, offSet, false),
+    yield* await MergeSort(right, combine, highlight, markSort, offSet + middle, false),
     offSet,
     offSet + middle,
     finalMerge,

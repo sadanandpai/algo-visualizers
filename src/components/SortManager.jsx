@@ -62,14 +62,7 @@ export const SortManager = React.memo(function ({
 
     sortProgressIterator.current =
       sortingAlgorithmName === "MergeSort"
-        ? await sortFunction(
-            algoArray.current,
-            combine,
-            highlight,
-            markSort,
-            0,
-            true
-          )
+        ? await sortFunction(algoArray.current, combine, highlight, markSort)
         : await sortFunction(algoArray.current, swap, highlight, markSort);
   }
 
