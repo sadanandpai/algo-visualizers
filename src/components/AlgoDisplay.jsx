@@ -1,31 +1,18 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-
 import { SortManager } from "./SortManager";
-import { BubbleSort } from "../sortFunctions/BubbleSort";
-import { SelectionSort } from "../sortFunctions/SelectionSort";
-import { InsertionSort } from "../sortFunctions/InsertionSort";
-import { QuickSort } from "../sortFunctions/QuickSort";
-import { HeapSort } from "../sortFunctions/HeapSort.js";
-import { MergeSort } from "../sortFunctions/MergeSort";
-
-import shallow from 'zustand/shallow'
 import { useControls, useData } from "../core/store";
+import shallow from "zustand/shallow";
 
-const sortingAlgorithms = [
-  { component: BubbleSort, name: "BubbleSort" },
-  { component: SelectionSort, name: "SelectionSort" },
-  { component: InsertionSort, name: "InsertionSort" },
-  { component: HeapSort, name: "HeapSort" },
-  { component: MergeSort, name: "MergeSort" },
-  { component: QuickSort, name: "QuickSort" },
-];
+import { sortingAlgorithms } from "../core/config";
 
 const FlexWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   max-width: 100%;
+  column-gap: 10px;
+  row-gap: 10px;
 
   & > div {
     max-width: 100%;
@@ -49,23 +36,22 @@ function TabPanel(props) {
   );
 }
 
-export function AlgoDisplay({ value }) {
-  const resetSorting = useControls(
-    (state) => state.resetSorting
-  );
-  
-  const sortingArray = useData(
-    (state) => state.sortingArray
+export function AlgoDisplay() {
+  const resetSorting = useControls((state) => state.resetSorting);
+
+  const [sortingArray, algorithm] = useData(
+    (state) => [state.sortingArray, state.algorithm],
+    shallow
   );
 
   useEffect(() => {
     resetSorting();
-  }, [value]);
+  }, [algorithm]);
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       {sortingAlgorithms.map((algoInfo, idx) => (
-        <TabPanel value={value} index={idx}>
+        <TabPanel value={algorithm} index={idx} key={algoInfo.name} >
           <SortManager
             array={sortingArray}
             sortFunction={algoInfo.component}
@@ -73,13 +59,14 @@ export function AlgoDisplay({ value }) {
           />
         </TabPanel>
       ))}
-      <TabPanel value={value} index={6}>
+      <TabPanel value={algorithm} index={6}>
         <FlexWrap>
           {sortingAlgorithms.map((algoInfo) => (
             <SortManager
               array={sortingArray}
               sortFunction={algoInfo.component}
               sortingAlgorithmName={algoInfo.name}
+              key={algoInfo.name}
             />
           ))}
         </FlexWrap>

@@ -11,15 +11,34 @@ import Button from "@material-ui/core/Button";
 
 import shallow from "zustand/shallow";
 import { useControls, useData } from "../core/store";
-import { convertInputToArrayString, convertArrayStringToArray, getRandomArray } from "../core/helper";
+import {
+  convertInputToArrayString,
+  convertArrayStringToArray,
+  getRandomArray,
+} from "../core/helper";
 
 const ControlBar = styled.div`
   font-size: 2rem;
   display: flex;
   align-items: center;
   margin: 10px 0;
+  flex-wrap: wrap;
 `;
 
+const ArrayBar = styled.div`
+  display: flex;
+  align-items: center;
+  flex-basis: 60%;
+  flex-grow: 1;
+  min-width: 300px;
+`;
+
+const ExecutionBar = styled.div`
+  display: flex;
+  align-items: center;
+  flex-basis: 40%;
+  flex-grow: 1;
+`;
 
 export function Controller() {
   const [progress, speed] = useControls(
@@ -52,7 +71,7 @@ export function Controller() {
   function arrayDataChangeHandler(value) {
     const arrayString = convertInputToArrayString(value);
     setArrayInput(arrayString);
-    
+
     const array = convertArrayStringToArray(arrayString);
     setSortingArray(array);
     resetSorting();
@@ -80,43 +99,45 @@ export function Controller() {
 
   return (
     <ControlBar>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={generate}
-        style={{ margin: "0 10px" }}
-      >
-        Generate
-      </Button>
+      <ArrayBar>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={generate}
+        >
+          Generate
+        </Button>
 
-      <TextField
-        id="outlined-basic"
-        label="Input"
-        variant="outlined"
-        onChange={(event) => arrayDataChangeHandler(event.target.value)}
-        value={arrayInput}
-        size="small"
-        width="100px"
-        style={{ flexBasis: "50%", flexGrow: 1 }}
-      />
+        <TextField
+          id="outlined-basic"
+          label="Input"
+          variant="outlined"
+          onChange={(event) => arrayDataChangeHandler(event.target.value)}
+          value={arrayInput}
+          size="small"
+          width="100px"
+          style={{ flexGrow: 1, margin: '0 10px' }}
+        />
+      </ArrayBar>
+      <ExecutionBar>
+        <Slider
+          key={`slider-${speed}`}
+          defaultValue={speed}
+          onChange={(event, value) => setSpeed(value)}
+          aria-labelledby="discrete-slider"
+          valueLabelDisplay="auto"
+          step={1}
+          marks
+          min={1}
+          max={10}
+          style={{ flexGrow: 1, flexBasis: "100%" }}
+        />
 
-      <Slider
-        key={`slider-${speed}`}
-        defaultValue={speed}
-        onChange={(event, value) => setSpeed(value)}
-        aria-labelledby="discrete-slider"
-        valueLabelDisplay="auto"
-        step={1}
-        marks
-        min={1}
-        max={10}
-        style={{ margin: "0 15px", flexBasis: "30%" }}
-      />
-
-      <div style={{ display: "flex" }}>
-        {getProgressButton()}
-        {resetElement}
-      </div>
+        <div style={{ display: "flex", marginLeft: '20px', columnGap: '5px' }}>
+          {getProgressButton()}
+          {resetElement}
+        </div>
+      </ExecutionBar>
     </ControlBar>
   );
 }

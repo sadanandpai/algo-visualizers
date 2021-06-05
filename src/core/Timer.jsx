@@ -35,5 +35,5 @@ export function Timer({ progressStatus, isAlgoExecutionOver }) {
 
   return `${minutes.toString().padStart(2, 0)}:${seconds
     .toString()
-    .padStart(2, 0)}:${milliSeconds}`;
+    .padStart(2, 0)}:${milliSeconds} s`;
 }

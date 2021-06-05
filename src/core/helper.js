@@ -20,6 +20,9 @@ export function getRandomArray(length = generateRandomNumberInRange(5, 30)) {
 }
 
 function generateRandomNumberInRange(lowerLimit = 0, upperLimit = 999) {
-  var x = lowerLimit + Math.floor(Math.random() * upperLimit);
-  return x;
+  return lowerLimit + Math.floor(Math.random() * upperLimit);
+}
+
+export function getScreenWidth(){
+  return window.innerWidth;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { ArrayContainer } from "./ArrayContainer";
 import { MergeContainer } from "./MergeContainer";
@@ -24,6 +24,12 @@ useControls.subscribe(
 const Container = styled(Card)`
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.15);
+`;
+
+const AlgoHeaderBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 function delay(time) {
@@ -76,14 +82,15 @@ export const SortManager = React.memo(function ({
   }, [progress.current]);
 
   async function runAlgo() {
-    let completionStatus = { done: false };
-    while (!completionStatus.done && progress.current === "start") {
-      completionStatus = await sortProgressIterator.current.next();
+    let completion = {done: false};
+    while (!completion.done && progress.current === "start") {
+      completion = await sortProgressIterator.current.next();
     }
-    if (completionStatus.done) {
+    if (!isAlgoExecutionOver.current && completion.done) {
       isAlgoExecutionOver.current = true;
       setSwapIndices([-1, -1]);
       setHightlightedIndices([-1, -1]);
+
       markSortngDone();
     }
   }
@@ -122,7 +129,18 @@ export const SortManager = React.memo(function ({
 
   return (
     <Container>
-      <div>{sortingAlgorithmName}</div>
+      <AlgoHeaderBar>
+        <div><strong>{sortingAlgorithmName}</strong></div>
+        <div>
+          Time:{" "}
+          <strong>
+            <Timer
+              progressStatus={progress.current}
+              isAlgoExecutionOver={isAlgoExecutionOver.current}
+            />
+          </strong>
+        </div>
+      </AlgoHeaderBar>
       {sortingAlgorithmName === "MergeSort" ? (
         <MergeContainer
           array={algoArray.current}
@@ -144,12 +162,7 @@ export const SortManager = React.memo(function ({
       <InfoFooter
         swapCount={swapCount.current}
         comparisionCount={comparisionCount.current}
-      >
-        <Timer
-          progressStatus={progress.current}
-          isAlgoExecutionOver={isAlgoExecutionOver.current}
-        />
-      </InfoFooter>
+      ></InfoFooter>
     </Container>
   );
 });
