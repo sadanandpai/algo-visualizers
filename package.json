@@ -12,7 +12,6 @@
     "react-dom": "^17.0.0",
     "react-icons": "^4.2.0",
     "react-use": "^17.2.4",
-    "rxjs": "^6.6.7",
     "styled-components": "^5.2.3",
     "zustand": "^3.5.1"
   },

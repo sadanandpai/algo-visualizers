@@ -7,7 +7,7 @@ import { Timer } from "./Timer";
 import Card from "@material-ui/core/Card";
 import { delay } from "../../common/helper";
 import shallow from "zustand/shallow";
-import { useControls } from "../../common/store";
+import { useControls, useData } from "../../common/store";
 
 let compareTime = useControls.getState().compareTime;
 let swapTime = useControls.getState().swapTime;
@@ -61,7 +61,7 @@ export const SortManager = React.memo(function ({
   const sortProgressIterator = useRef(null);
 
   async function reset() {
-    algoArray.current = [...array];
+    algoArray.current = [...useData.getState().sortingArray];
     sortedIndices.current = [];
     pivot.current = -1;
     swapCount.current = 0;
