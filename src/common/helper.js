@@ -19,10 +19,14 @@ export function getRandomArray(length = generateRandomNumberInRange(5, 30)) {
   return Array.from(new Array(length), () => generateRandomNumberInRange());
 }
 
-function generateRandomNumberInRange(lowerLimit = 0, upperLimit = 999) {
-  return lowerLimit + Math.floor(Math.random() * upperLimit);
-}
-
 export function getScreenWidth(){
   return window.innerWidth;
+}
+
+export function delay(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+function generateRandomNumberInRange(lowerLimit = 0, upperLimit = 999) {
+  return lowerLimit + Math.floor(Math.random() * upperLimit);
 }

@@ -7,6 +7,8 @@ export async function* MergeSort(
   finalMerge = true
 ) {
   if (array.length === 1) {
+    if(finalMerge)
+      markSort(0);
     return array;
   }
 

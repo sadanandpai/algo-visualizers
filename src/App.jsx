@@ -1,27 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import "./app.css";
-import { Header } from "./components/Header";
+import { NavBar } from "./components/NavBar";
+import { Footer } from "./components/Footer";
 import { Controller } from "./components/Controller";
 import { AlgoDisplay } from "./components/AlgoDisplay";
-import { sortingArray } from "./core/config";
 
 const Container = styled.div`
   margin: 0 10px;
+  min-height: calc(100vh - 50px);
+  position: relative;
+  margin-bottom: 50px;
 `;
 
 export default function App() {
-  const [algoSelection, setAlgoSelection] = useState(0);
-
-  const handleChange = (event, newValue) => {
-    setAlgoSelection(newValue);
-  };
-
   return (
     <Container>
-      <Header value={algoSelection} handleChange={handleChange} />
+      <NavBar />
       <Controller />
-      <AlgoDisplay value={algoSelection} />
+      <AlgoDisplay />
+      <Footer />
     </Container>
   );
 }

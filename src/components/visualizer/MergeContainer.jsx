@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { comparisionColor, swapColor, sortedColor } from "../core/config";
+import { comparisionColor, swapColor, sortedColor } from "../../common/config";
 import {
   ArrayHolder,
   ArrayItem,
   swapAnimation,
   moveAnimation,
-} from "../core/styles";
-import { useControls } from "../core/store";
+} from "../../common/styles";
+import { useControls } from "../../common/store";
 
 let swapTime = useControls.getState().swapTime;
 useControls.subscribe(

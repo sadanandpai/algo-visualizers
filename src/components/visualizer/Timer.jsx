@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useControls } from "../../common/store";
 
-export function Timer({ progressStatus, isAlgoExecutionOver }) {
+export function Timer({ isAlgoExecutionOver }) {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [milliSeconds, setMilliSeconds] = useState(0);
+
+  const progress = useControls((state) => state.progress);
 
   function resetTimer() {
     setMilliSeconds(0);
@@ -13,11 +16,11 @@ export function Timer({ progressStatus, isAlgoExecutionOver }) {
 
   useEffect(() => {
     if (isAlgoExecutionOver) return;
-    if (progressStatus === "start")
+    if (progress === "start")
       var intervalId = setInterval(() => setMilliSeconds((ml) => ml + 1), 100);
-    else if (progressStatus === "reset") resetTimer();
+    else if (progress === "reset") resetTimer();
     return () => clearInterval(intervalId);
-  }, [progressStatus, isAlgoExecutionOver]);
+  }, [progress, isAlgoExecutionOver]);
 
   useEffect(() => {
     if (milliSeconds === 10) {

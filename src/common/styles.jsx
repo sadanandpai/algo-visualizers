@@ -54,7 +54,7 @@ export const moveAnimation = () => keyframes`
   }
 `;
 
-export const sourceAnimation = (distance, swapColor) => keyframes`
+export const destinationAnimation = (distance, swapColor) => keyframes`
   0%{
     background-color: ${swapColor};
   }
@@ -80,7 +80,7 @@ export const sourceAnimation = (distance, swapColor) => keyframes`
   }
 `;
 
-export const destinationAnimation = (distance, swapColor) => keyframes`
+export const sourceAnimation = (distance, swapColor) => keyframes`
   0%{
     background-color: ${swapColor};
   }

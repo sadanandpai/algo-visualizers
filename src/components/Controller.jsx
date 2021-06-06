@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { VscDebugStart } from "react-icons/vsc";
@@ -8,20 +8,21 @@ import { ImPause } from "react-icons/im";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { delay } from "../common/helper";
 
 import shallow from "zustand/shallow";
-import { useControls, useData } from "../core/store";
+import { useControls, useData } from "../common/store";
 import {
   convertInputToArrayString,
   convertArrayStringToArray,
   getRandomArray,
-} from "../core/helper";
+} from "../common/helper";
 
 const ControlBar = styled.div`
   font-size: 2rem;
   display: flex;
   align-items: center;
-  margin: 10px 0;
+  margin: 15px 0;
   flex-wrap: wrap;
 `;
 
@@ -41,6 +42,9 @@ const ExecutionBar = styled.div`
 `;
 
 export function Controller() {
+
+  const [isPausing, setIsPausing] = useState(false);
+
   const [progress, speed] = useControls(
     (state) => [state.progress, state.speed],
     shallow
@@ -64,9 +68,16 @@ export function Controller() {
   const [arrayInput, setArrayInput] = useState(sortingArray);
 
   const startElement = <VscDebugStart onClick={startSorting} />;
-  const pauseElement = <ImPause onClick={pauseSorting} />;
+  const pauseElement = <ImPause onClick={pauseAndDelaySorting} />;
   const resetElement = <VscDebugRestart onClick={resetSorting} />;
   const disabledPauseElement = <ImPause style={{ color: "#e5e5e5" }} />;
+
+  async function pauseAndDelaySorting(){
+    pauseSorting();
+    setIsPausing(true);
+    await delay(useControls.getState().swapTime);
+    setIsPausing(false);
+  }
 
   function arrayDataChangeHandler(value) {
     const arrayString = convertInputToArrayString(value);
@@ -85,6 +96,9 @@ export function Controller() {
   }
 
   function getProgressButton() {
+    if(isPausing)
+      return disabledPauseElement;
+
     switch (progress) {
       case "reset":
         return startElement;

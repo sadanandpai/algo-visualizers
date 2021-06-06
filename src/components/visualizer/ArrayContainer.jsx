@@ -5,10 +5,8 @@ import {
   swapColor,
   sortedColor,
   pivotColor,
-} from "../core/config";
-import { useWindowSize } from "react-use";
-import shallow from "zustand/shallow";
-import { useControls } from "../core/store";
+} from "../../common/config";
+import { useControls } from "../../common/store";
 
 let swapTime = useControls.getState().swapTime;
 useControls.subscribe(
@@ -21,7 +19,7 @@ import {
   ArrayItem,
   sourceAnimation,
   destinationAnimation,
-} from "../core/styles";
+} from "../../common/styles";
 
 const Source = styled(ArrayItem)`
   animation: ${(props) => destinationAnimation(props.distance, swapColor)}
@@ -41,9 +39,12 @@ export function ArrayContainer({
   highlightIndices,
   sortedIndices,
 }) {
-  const { width, height } = useWindowSize();
 
   function getBackgroundColor(i) {
+    if (i === pivot) {
+      return pivotColor;
+    }
+
     if (highlightIndices.includes(i)) {
       return comparisionColor;
     }
@@ -51,11 +52,6 @@ export function ArrayContainer({
     if (sortedIndices.includes(i)) {
       return sortedColor;
     }
-
-    if (i === pivot) {
-      return pivotColor;
-    }
-
     return "";
   }
 
@@ -68,7 +64,7 @@ export function ArrayContainer({
               key={i + ":" + source + ":" + destination + ":" + value}
               distance={destination - source}
               style={{
-                order: source,
+                order: destination,
                 backgroundColor: getBackgroundColor(i),
               }}
             >
@@ -82,7 +78,7 @@ export function ArrayContainer({
               key={i + ":" + destination + ":" + source + ":" + value}
               distance={destination - source}
               style={{
-                order: destination,
+                order: source,
                 backgroundColor: getBackgroundColor(i),
               }}
             >

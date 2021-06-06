@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { ArrayContainer } from "./ArrayContainer";
 import { MergeContainer } from "./MergeContainer";
 import { InfoFooter } from "./InfoFooter";
-import { Timer } from "../core/Timer";
+import { Timer } from "./Timer";
 import Card from "@material-ui/core/Card";
-
+import { delay } from "../../common/helper";
 import shallow from "zustand/shallow";
-import { useControls } from "../core/store";
+import { useControls } from "../../common/store";
 
 let compareTime = useControls.getState().compareTime;
 let swapTime = useControls.getState().swapTime;
@@ -30,11 +30,15 @@ const AlgoHeaderBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  column-gap: 20px;
 `;
 
-function delay(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
+const TimerDiv = styled.div`
+  display: flex;
+  column-gap: 5px;
+  min-width: 8rem;
+  justify-content: flex-end;
+`;
 
 export const SortManager = React.memo(function ({
   array,
@@ -50,19 +54,19 @@ export const SortManager = React.memo(function ({
   const swapCount = useRef(0);
   const comparisionCount = useRef(0);
   const isAlgoExecutionOver = useRef(false);
+  const isComponentUnMounted = useRef(false);
 
   const markSortngDone = useControls((state) => state.markSortngDone);
   const progress = useRef("");
-  progress.current = useControls((state) => state.progress);
-
   const sortProgressIterator = useRef(null);
 
   async function reset() {
-    pivot.current = -1;
+    algoArray.current = [...array];
     sortedIndices.current = [];
+    pivot.current = -1;
     swapCount.current = 0;
     comparisionCount.current = 0;
-    algoArray.current = [...array];
+    isAlgoExecutionOver.current = false;
     setSwapIndices([-1, -1]);
     setHightlightedIndices([-1, -1]);
 
@@ -73,34 +77,55 @@ export const SortManager = React.memo(function ({
   }
 
   useEffect(() => {
+    progress.current = useControls.getState().progress;
+    useControls.subscribe(
+      (value) => {
+        progress.current = value;
+        
+        if (progress.current === "start") runAlgo();
+        if (progress.current === "reset") reset();
+      },
+      (state) => state.progress,
+    );
+
+    return () => {
+      isComponentUnMounted.current = true;
+    };
+  }, []);
+
+  useEffect(() => {
     reset();
   }, [array]);
 
-  useEffect(() => {
-    if (progress.current === "start") runAlgo();
-    if (progress.current === "reset") reset();
-  }, [progress.current]);
-
   async function runAlgo() {
-    let completion = {done: false};
-    while (!completion.done && progress.current === "start") {
-      completion = await sortProgressIterator.current.next();
+    let completion = { done: false };
+    while (
+      !completion?.done &&
+      progress.current === "start" &&
+      !isComponentUnMounted.current
+    ) {
+      completion = await sortProgressIterator.current?.next();
     }
-    if (!isAlgoExecutionOver.current && completion.done) {
+
+    if (isComponentUnMounted.current) {
+      return;
+    }
+
+    if (!isAlgoExecutionOver.current && completion?.done) {
       isAlgoExecutionOver.current = true;
+      pivot.current = -1;
       setSwapIndices([-1, -1]);
       setHightlightedIndices([-1, -1]);
-
       markSortngDone();
     }
   }
 
   async function swap(i, j) {
-    setSwapIndices([i, j]);
     let tmp = algoArray.current[i];
     algoArray.current[i] = algoArray.current[j];
     algoArray.current[j] = tmp;
-
+    setSwapIndices([i, j]);
+    
     pivot.current = -1;
     swapCount.current += 1;
     await delay(swapTime);
@@ -127,38 +152,40 @@ export const SortManager = React.memo(function ({
     sortedIndices.current.push(...indices);
   }
 
+  const mergeContainer = (
+    <MergeContainer
+      array={algoArray.current}
+      source={swapIndices[0]}
+      destination={swapIndices[1]}
+      hightlightedIndices={hightlightedIndices}
+      sortedIndices={sortedIndices.current}
+    />
+  );
+  const arrayContainer = (
+    <ArrayContainer
+      array={algoArray.current}
+      source={swapIndices[0]}
+      destination={swapIndices[1]}
+      pivot={pivot.current}
+      highlightIndices={hightlightedIndices}
+      sortedIndices={sortedIndices.current}
+    />
+  );
+
   return (
     <Container>
       <AlgoHeaderBar>
-        <div><strong>{sortingAlgorithmName}</strong></div>
-        <div>
-          Time:{" "}
+        <strong>{sortingAlgorithmName}</strong>
+        <TimerDiv>
+          <span>Time:</span>
           <strong>
             <Timer
-              progressStatus={progress.current}
               isAlgoExecutionOver={isAlgoExecutionOver.current}
             />
           </strong>
-        </div>
+        </TimerDiv>
       </AlgoHeaderBar>
-      {sortingAlgorithmName === "MergeSort" ? (
-        <MergeContainer
-          array={algoArray.current}
-          source={swapIndices[0]}
-          destination={swapIndices[1]}
-          hightlightedIndices={hightlightedIndices}
-          sortedIndices={sortedIndices.current}
-        />
-      ) : (
-        <ArrayContainer
-          array={algoArray.current}
-          source={swapIndices[0]}
-          destination={swapIndices[1]}
-          pivot={pivot.current}
-          highlightIndices={hightlightedIndices}
-          sortedIndices={sortedIndices.current}
-        />
-      )}
+      {sortingAlgorithmName === "MergeSort" ? mergeContainer : arrayContainer}
       <InfoFooter
         swapCount={swapCount.current}
         comparisionCount={comparisionCount.current}

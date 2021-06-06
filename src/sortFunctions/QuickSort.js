@@ -19,16 +19,17 @@ export async function* QuickSort(
     let j = high + 1;
 
     while (i < j) {
-      while (i <= high) {
-        yield await highlight([i], pivot);
-        if (array[++i] > array[pivot]) {
-          break;
-        }
-      }
 
       while (--j > low) {
         yield await highlight([i, j], pivot);
         if (array[j] < array[pivot]) {
+          break;
+        }
+      }
+
+      while (i <= high && i < j) {
+        yield await highlight([i], pivot);
+        if (array[++i] > array[pivot]) {
           break;
         }
       }

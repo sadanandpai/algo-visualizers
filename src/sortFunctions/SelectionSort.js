@@ -10,7 +10,7 @@ export async function* SelectionSort(array, swap, highlight, marksort) {
     }
 
     j = j - 1;
-    if (maxIndex !== j) {
+    if (maxIndex !== j && array[maxIndex] !== array[j]) {
       yield await swap(maxIndex, j);
     }
 
