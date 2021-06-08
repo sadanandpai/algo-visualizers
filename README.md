@@ -47,6 +47,11 @@ Features
 
 ---
 
-#### Feel free to use this project and modify for your needs.
+### Contributing Guide
 
-Raise a PR for contributions / improvments / bug fixes.
+If you want to contribute, improve or fix bugs in this repo, then check out the [Contributing Guide](./CONTRIBUTING.md)
+<br/>
+
+### License
+
+This repository is MIT licensed. [Read more](./LICENSE)
