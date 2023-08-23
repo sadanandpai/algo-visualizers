@@ -5,6 +5,9 @@ import { InsertionSort } from "../sortFunctions/InsertionSort";
 import { QuickSort } from "../sortFunctions/QuickSort";
 import { HeapSort } from "../sortFunctions/HeapSort.js";
 import { MergeSort } from "../sortFunctions/MergeSort";
+import { CocktailSort } from "../sortFunctions/CocktailSort";
+import { OddevenSort } from "../sortFunctions/OddevenSort";
+import { ShellSort } from "../sortFunctions/ShellSort";
 
 // colors setting
 export const comparisionColor = "pink";
@@ -26,6 +29,9 @@ export const sortingAlgorithms = [
   { component: HeapSort, title: "Heap", name: "HeapSort" },
   { component: MergeSort, title: "Merge", name: "MergeSort" },
   { component: QuickSort, title: "Quick", name: "QuickSort" },
+  { component: OddevenSort, title: "Oddeven", name: "OddevenSort" },
+  { component: ShellSort, title: "Shell", name: "ShellSort" },
+  { component: CocktailSort, title: "Cocktail", name: "CocktailSort" }
 ];
 
 function initArrayForScreenSize() {
