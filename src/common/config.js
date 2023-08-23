@@ -1,13 +1,12 @@
-import { getScreenWidth } from "./helper";
 import { BubbleSort } from "../sortFunctions/BubbleSort";
-import { SelectionSort } from "../sortFunctions/SelectionSort";
-import { InsertionSort } from "../sortFunctions/InsertionSort";
-import { QuickSort } from "../sortFunctions/QuickSort";
-import { HeapSort } from "../sortFunctions/HeapSort.js";
-import { MergeSort } from "../sortFunctions/MergeSort";
 import { CocktailSort } from "../sortFunctions/CocktailSort";
-import { OddevenSort } from "../sortFunctions/OddevenSort";
+import { HeapSort } from "../sortFunctions/HeapSort.js";
+import { InsertionSort } from "../sortFunctions/InsertionSort";
+import { MergeSort } from "../sortFunctions/MergeSort";
+import { QuickSort } from "../sortFunctions/QuickSort";
+import { SelectionSort } from "../sortFunctions/SelectionSort";
 import { ShellSort } from "../sortFunctions/ShellSort";
+import { getScreenWidth } from "./helper";
 
 // colors setting
 export const comparisionColor = "pink";
@@ -29,9 +28,8 @@ export const sortingAlgorithms = [
   { component: HeapSort, title: "Heap", name: "HeapSort" },
   { component: MergeSort, title: "Merge", name: "MergeSort" },
   { component: QuickSort, title: "Quick", name: "QuickSort" },
-  { component: OddevenSort, title: "Oddeven", name: "OddevenSort" },
   { component: ShellSort, title: "Shell", name: "ShellSort" },
-  { component: CocktailSort, title: "Cocktail", name: "CocktailSort" }
+  { component: CocktailSort, title: "Cocktail", name: "CocktailSort" },
 ];
 
 function initArrayForScreenSize() {
