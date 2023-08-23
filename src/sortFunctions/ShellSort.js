@@ -1,12 +1,11 @@
 export async function* ShellSort(array, swap, highlight, marksort) {
   let gap = 1;
 
-  while(gap * 3 + 1 < array.length){
-    gap  = gap * 3 + 1;
+  while (gap * 3 + 1 < array.length) {
+    gap = gap * 3 + 1;
   }
 
-  while(gap > 0){
-
+  while (gap > 0) {
     for (let i = gap; i < array.length; i++) {
       let j = i;
       let temp = array[i];
@@ -14,20 +13,18 @@ export async function* ShellSort(array, swap, highlight, marksort) {
       while (j > 0 && array[j] <= array[j - gap]) {
         yield await highlight([j, j - gap]);
         yield await swap(j - gap, j);
-        j-=gap;
+        j -= gap;
       }
 
       array[j] = temp;
 
-      if (gap == 1)
-    {
+      if (gap == 1) {
         marksort(0);
         marksort(i);
         yield;
       }
-
     }
 
-    gap = Math.floor((gap - 1)/3);
+    gap = Math.floor((gap - 1) / 3);
   }
 }
