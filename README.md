@@ -1,4 +1,4 @@
-<h1 align="center">
+h1 align="center">
     Sorting Visualizer
 </h1>
 
@@ -14,16 +14,7 @@
 Helps to
 
 - understand the working of sorting algorithm
-- check total swaps required
-- check total comparisions
-- compare algorithms side by side
-- know the time taken (time is just an approximate unit for comparision)
-
-Features
-
-- Sort any given array of 3 digits positive integers
-- Alter the speed of execution
-- Start, pause and reset the execution
+- check total swaps require
 - Generate random array of numbers of sorting
 
 ### Technologies
