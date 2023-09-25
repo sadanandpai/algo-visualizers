@@ -4,9 +4,10 @@ import { AppDispatch } from "./store";
 import { AppState } from "../models/interfaces";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
+import { initialArray } from "./config";
 
 const initialState: AppState = {
-  array: [6, 8, 3, 5, 1, 9, 2, 7, 4],
+  array: initialArray,
   isPlaying: false,
   reset: false,
   time: 0,

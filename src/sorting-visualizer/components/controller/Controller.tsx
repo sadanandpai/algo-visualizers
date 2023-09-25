@@ -2,7 +2,7 @@ import {
   convertArrayStringToArray,
   convertInputToArrayString,
   getRndmNumInRange,
-} from "@/sorting-visualizer/helpers/array";
+} from "@/sorting-visualizer/helpers/arrayHelpers";
 import {
   setArray,
   setIsPlaying,

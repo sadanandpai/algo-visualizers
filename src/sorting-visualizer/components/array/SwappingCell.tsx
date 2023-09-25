@@ -1,6 +1,6 @@
 import Cell from "@/sorting-visualizer/components/array/Cell";
 import { MovingCellProps } from "@/sorting-visualizer/models/interfaces";
-import { getSwapAnimation } from "@/sorting-visualizer/helpers/keyFrames";
+import { getSwapAnimation } from "@/sorting-visualizer/helpers/keyFramesHelpers";
 import { interval } from "@/sorting-visualizer/store/global";
 
 function SwappingCell({

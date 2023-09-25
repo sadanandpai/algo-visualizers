@@ -1,7 +1,7 @@
 import {
   getMovingAnimation,
   getSwapAnimation,
-} from "@/sorting-visualizer/helpers/keyFrames";
+} from "@/sorting-visualizer/helpers/keyFramesHelpers";
 
 import Cell from "@/sorting-visualizer/components/array/Cell";
 import { MovingCellProps } from "@/sorting-visualizer/models/interfaces";

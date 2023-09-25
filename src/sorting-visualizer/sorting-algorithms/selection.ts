@@ -1,4 +1,8 @@
-import { highlight, showPivot, swap } from "@/sorting-visualizer/helpers/algo";
+import {
+  highlight,
+  showPivot,
+  swap,
+} from "@/sorting-visualizer/helpers/algorithmHelpers";
 
 import { SortAsyncGenerator } from "@/sorting-visualizer/models/types";
 

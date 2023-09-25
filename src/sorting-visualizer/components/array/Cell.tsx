@@ -1,5 +1,6 @@
 import { CellProps } from "@/sorting-visualizer/models/interfaces";
 import classes from "./array.module.scss";
+import { colors } from "@/sorting-visualizer/store/config";
 
 function Cell({
   order,
@@ -9,13 +10,19 @@ function Cell({
   isHighlighted = false,
   isPivot = false,
 }: CellProps) {
-  const backgroundColor = isSorted
-    ? "springgreen"
-    : isHighlighted
-    ? "yellow"
-    : isPivot
-    ? "orange"
-    : "";
+  let backgroundColor = "";
+
+  if (isPivot) {
+    backgroundColor = colors.pivot;
+  }
+
+  if (isHighlighted) {
+    backgroundColor = colors.highlight;
+  }
+
+  if (isSorted) {
+    backgroundColor = colors.sort;
+  }
 
   return (
     <li

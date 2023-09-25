@@ -1,3 +1,4 @@
+import { cellCSS } from "../store/config";
 import { interval } from "../store/global";
 
 const animationEl = document.querySelector(
@@ -7,15 +8,19 @@ const animationEl = document.querySelector(
 export function getSwapAnimation(gap: number, time = 1000) {
   const animationName = `anime-${Math.random().toString(36).substring(2, 9)}`;
   const animation = `${time}ms linear forwards ${animationName}`;
+  const shiftSize = cellCSS.size + cellCSS.margin;
+
   const rule = `@keyframes ${animationName} {
     25% {
-        transform: translateY(${Math.sign(gap) * 55}px);
+        transform: translateY(${Math.sign(gap) * (cellCSS.size + 5)}px);
     }
     75% {
-        transform: translate(${gap * 50}px, ${Math.sign(gap) * 55}px);
+        transform: translate(${gap * shiftSize}px, ${
+    Math.sign(gap) * (cellCSS.size + 5)
+  }px);
     }
     100% {
-        transform: translate(${gap * 50}px, 0);
+        transform: translate(${gap * shiftSize}px, 0);
     }
 }`;
 
@@ -26,10 +31,11 @@ export function getSwapAnimation(gap: number, time = 1000) {
 export function getMovingAnimation(gap: number, time = 1000) {
   const animationName = `anime-${Math.random().toString(36).substring(2, 9)}`;
   const animation = `${time}ms linear forwards ${animationName}`;
+  const shiftSize = cellCSS.size + cellCSS.margin;
 
   const rule = `@keyframes ${animationName} {
       100% {
-          transform: translateX(${gap * 50}px);
+          transform: translateX(${gap * shiftSize}px);
       }
   }`;
 

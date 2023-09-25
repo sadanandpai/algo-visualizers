@@ -5,7 +5,7 @@
 
   .indices {
     position: absolute;
-    bottom: 45px;
+    bottom: calc(var(--cell-size) - 5px);
     display: flex;
     font-size: 0.75rem;
     opacity: 0.25;
@@ -13,20 +13,21 @@
 
     span {
       display: flex;
-      width: 50px;
+      width: var(--cell-size);
       justify-content: center;
     }
   }
 
   .values {
     display: flex;
-    padding: 70px 0;
+    padding: calc(var(--cell-size) + 20px) 0;
 
     .cell {
       display: flex;
-      width: 50px;
-      height: 50px;
+      width: var(--cell-size);
+      height: var(--cell-size);
       border-radius: 4px;
+      margin: 0 calc(var(--cell-margin) / 2);
       border: 1px solid black;
       justify-content: center;
       align-items: center;

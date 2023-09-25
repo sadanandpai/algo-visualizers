@@ -1,4 +1,4 @@
-import { highlight, move } from "@/sorting-visualizer/helpers/algo";
+import { highlight, move } from "@/sorting-visualizer/helpers/algorithmHelpers";
 
 import { SortAsyncGenerator } from "@/sorting-visualizer/models/types";
 
