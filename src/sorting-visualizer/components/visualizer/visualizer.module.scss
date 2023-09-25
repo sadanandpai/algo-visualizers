@@ -1,0 +1,20 @@
+.container {
+  display: inline-block;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  min-width: 300px;
+  max-width: 100%;
+  padding: 20px;
+
+  header,
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+}

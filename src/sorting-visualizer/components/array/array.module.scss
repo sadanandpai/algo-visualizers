@@ -1,0 +1,37 @@
+.arrayContainer {
+  position: relative;
+  padding: 0 20px;
+  overflow: auto;
+
+  .indices {
+    position: absolute;
+    bottom: 45px;
+    display: flex;
+    font-size: 0.75rem;
+    opacity: 0.25;
+    z-index: -1;
+
+    span {
+      display: flex;
+      width: 50px;
+      justify-content: center;
+    }
+  }
+
+  .values {
+    display: flex;
+    padding: 70px 0;
+
+    .cell {
+      display: flex;
+      width: 50px;
+      height: 50px;
+      border-radius: 4px;
+      border: 1px solid black;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
