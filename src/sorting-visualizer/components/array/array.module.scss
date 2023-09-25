@@ -14,6 +14,7 @@
     span {
       display: flex;
       width: var(--cell-size);
+      margin: 0 calc(var(--cell-margin) / 2);
       justify-content: center;
     }
   }
