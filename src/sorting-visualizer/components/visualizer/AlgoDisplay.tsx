@@ -58,7 +58,7 @@ function AlgoDisplay() {
 
   return (
     <>
-      {algoList?.filter((item) => updatedList?.includes(item?.name)).map((algo) => (
+      {algoList?.filter((item) => updatedList?.length > 0 ? updatedList?.includes(item?.name) : item).map((algo) => (
         <Visualiser
           key={array.toString() + reset + algo.name}
           array={array}
