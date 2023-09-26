@@ -1,10 +1,10 @@
 import { pauseSimulation, playSimulation } from "./global";
 
 import { AppDispatch } from "./store";
-import { AppState } from "../models/interfaces";
+import { AppState, SelectedListProps } from "../models/interfaces";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { initialArray } from "./config";
+import { initialArray,selectedList } from "./config";
 
 const initialState: AppState = {
   array: initialArray,
@@ -12,6 +12,7 @@ const initialState: AppState = {
   reset: false,
   time: 0,
   timeIntervalId: null,
+  selectedList: selectedList,
 };
 
 export const appSlice = createSlice({
@@ -45,6 +46,10 @@ export const appSlice = createSlice({
       pauseSimulation();
       state.time = 0;
     },
+
+    setSelectedList: (state, action: PayloadAction<SelectedListProps[]>) => {
+      state.selectedList = action.payload;
+    },
   },
 });
 
@@ -54,6 +59,7 @@ export const {
   setReset,
   setIntervalId,
   incrementTime,
+  setSelectedList,
 } = appSlice.actions;
 export default appSlice.reducer;
 
