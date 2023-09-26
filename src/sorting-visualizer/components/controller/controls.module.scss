@@ -1,9 +1,11 @@
-.controllerWrapper{
+.controllerWrapper {
   padding: 0 20px;
   margin-bottom: 16px;
-  gap: 20px;
 
   .controller {
+    margin-bottom: 20px;
+    gap: 10px;
+
     .numbers {
       display: flex;
       gap: 1rem;
@@ -43,42 +45,42 @@
         flex: 1;
       }
     }
-
   }
-  .checkboxWrapper{
+
+  .checkboxWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap:10px;
-    margin-top: 12px;
-    .listItem{
+    gap: 20px;
+    flex-wrap: wrap;
+
+    .listItem {
       list-style-type: none;
 
-      .checkbox{
+      .checkbox {
         display: flex;
         justify-content: center;
         align-items: center;
-        gap:4px;
-        > input, > label{
+        gap: 4px;
+        > input,
+        > label {
           cursor: pointer;
         }
 
-        > label{
+        > label {
           text-transform: capitalize;
         }
       }
     }
   }
 }
-@media screen and (width >= 960px) {
-  .controllerWrapper{
-    .controller {
-      display: flex;
-  
-      .controls {
-        margin-top: 0;
-      }
-    }
 
+@media screen and (width >= 960px) {
+  .controllerWrapper .controller {
+    display: flex;
+
+    .controls {
+      margin-top: 0;
+    }
   }
 }

@@ -17,12 +17,6 @@ export interface MovingCellProps {
   isSwap?: boolean;
 }
 
-export interface AppState {
-  array: number[];
-  isPlaying: boolean | null;
-  reset: boolean;
-}
-
 export interface ArrayUIProps {
   array: number[];
   swapPositions: number[];
@@ -48,7 +42,7 @@ export interface VisualizerProps {
   onComplete: () => void;
 }
 
-export interface SelectedListProps{
+export interface SelectedListProps {
   name: string;
   selected: boolean;
 }
