@@ -46,30 +46,30 @@
       }
     }
   }
+}
 
-  .checkboxWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+.checkboxWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 
-    .listItem {
-      list-style-type: none;
+  .listItem {
+    list-style-type: none;
 
-      .checkbox {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 4px;
-        > input,
-        > label {
-          cursor: pointer;
-        }
+    .checkbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      > input,
+      > label {
+        cursor: pointer;
+      }
 
-        > label {
-          text-transform: capitalize;
-        }
+      > label {
+        text-transform: capitalize;
       }
     }
   }

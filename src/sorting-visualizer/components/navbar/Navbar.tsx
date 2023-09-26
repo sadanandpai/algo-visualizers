@@ -1,20 +1,10 @@
-import { NavLink, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-
+import { NavLink } from "react-router-dom";
 import { NavbarProps } from "@/sorting-visualizer/models/interfaces";
 import classes from "./navbar.module.scss";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Navbar({ menuItems }: NavbarProps) {
-  const { algoName } = useParams();
-  const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
-
-  useEffect(() => {
-    if (!algoName) {
-      navigate(`/sorting-visualizer/${menuItems[0]}`);
-    }
-  }, [algoName, menuItems, navigate]);
 
   return (
     <nav className={classes.navbar}>
