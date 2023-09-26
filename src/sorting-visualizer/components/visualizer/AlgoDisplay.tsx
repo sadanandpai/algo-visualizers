@@ -19,6 +19,9 @@ function AlgoDisplay() {
   const completionCount = useRef(0);
   const { algoName } = useParams();
   const dispatch = useAppDispatch();
+  const selectedList = useAppSelector((state) => state.app.selectedList)?.filter((item) => item?.selected);
+  const updatedList = selectedList?.map((item) => item?.name);
+
 
   if (array.length === 0) {
     return ErrorInfoEl;
@@ -55,7 +58,7 @@ function AlgoDisplay() {
 
   return (
     <>
-      {algoList.map((algo) => (
+      {algoList?.filter((item) => updatedList?.includes(item?.name)).map((algo) => (
         <Visualiser
           key={array.toString() + reset + algo.name}
           array={array}

@@ -1,55 +1,84 @@
-.controller {
+.controllerWrapper{
   padding: 0 20px;
   margin-bottom: 16px;
   gap: 20px;
 
-  .numbers {
-    display: flex;
-    gap: 1rem;
-    flex-basis: 75%;
+  .controller {
+    .numbers {
+      display: flex;
+      gap: 1rem;
+      flex-basis: 75%;
 
-    input {
+      input {
+        flex: 1;
+        padding: 5px;
+        border: 1px solid black;
+      }
+
+      .rndmBtn {
+        background-color: #2b4bfe;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+      }
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
       flex: 1;
-      padding: 5px;
-      border: 1px solid black;
+      flex-basis: 25%;
+
+      button:disabled {
+        cursor: not-allowed;
+      }
+
+      button:disabled img {
+        opacity: 0.5;
+      }
+
+      input[type="range"] {
+        flex: 1;
+      }
     }
 
-    .rndmBtn {
-      background-color: #2b4bfe;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      border-radius: 4px;
-    }
   }
-
-  .controls {
+  .checkboxWrapper{
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-    flex: 1;
-    flex-basis: 25%;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    margin-top: 12px;
+    .listItem{
+      list-style-type: none;
 
-    button:disabled {
-      cursor: not-allowed;
-    }
+      .checkbox{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:4px;
+        > input, > label{
+          cursor: pointer;
+        }
 
-    button:disabled img {
-      opacity: 0.5;
-    }
-
-    input[type="range"] {
-      flex: 1;
+        > label{
+          text-transform: capitalize;
+        }
+      }
     }
   }
 }
-
 @media screen and (width >= 960px) {
-  .controller {
-    display: flex;
-
-    .controls {
-      margin-top: 0;
+  .controllerWrapper{
+    .controller {
+      display: flex;
+  
+      .controls {
+        margin-top: 0;
+      }
     }
+
   }
 }

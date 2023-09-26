@@ -7,6 +7,7 @@ import {
   setArray,
   setIsPlaying,
   setReset,
+  setSelectedList,
   startTimer,
 } from "@/sorting-visualizer/store/app.slice";
 import {
@@ -26,6 +27,17 @@ function Controller() {
   const isPlaying = useAppSelector((state) => state.app.isPlaying);
   const reset = useAppSelector((state) => state.app.reset);
   const { algoName } = useParams();
+  const selectedAlgo = useAppSelector((state) => state.app.selectedList);
+  const [checkedState, setCheckedState] = useState(selectedAlgo);
+
+  const handleOnChange = (position: number) => {
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? {...item, selected: !item?.selected} : {...item, selected: item?.selected}
+    );
+    dispatch(setSelectedList(updatedCheckedState));
+    setCheckedState(updatedCheckedState);
+  };
+
 
   useEffect(() => {
     if (isPlaying) {
@@ -57,7 +69,8 @@ function Controller() {
   };
 
   return (
-    <section className={classes.controller}>
+    <section className={classes.controllerWrapper}>
+      <div className={classes.controller}> 
       <div className={classes.numbers}>
         <button className={classes.rndmBtn} onClick={onRandomize}>
           Randomize
@@ -100,6 +113,29 @@ function Controller() {
           onChange={(e) => setSpeed(e.target.valueAsNumber)}
         />
       </div>
+      </div>
+      {
+        algoName === "all" && array?.length > 0 &&
+        <div className={classes.checkboxWrapper}>
+        {selectedAlgo.map(({name, selected}, index) => {
+          return (
+            <li key={index} className={classes.listItem}>
+              <div className={classes.checkbox}>
+                <input
+                  type="checkbox"
+                  id={`custom-checkbox-${index}`}
+                  name={name}
+                  value={name}
+                  checked={selected}
+                  onChange={() => handleOnChange(index)}
+                />
+                <label htmlFor={`custom-checkbox-${index}`}>{name}</label>
+              </div>
+            </li>
+          );
+        })}
+      </div>
+      }
     </section>
   );
 }

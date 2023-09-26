@@ -48,10 +48,16 @@ export interface VisualizerProps {
   onComplete: () => void;
 }
 
+export interface SelectedListProps{
+  name: string;
+  selected: boolean;
+}
+
 export interface AppState {
   array: number[];
   isPlaying: boolean | null;
   reset: boolean;
   time: number;
   timeIntervalId: NodeJS.Timeout | null;
+  selectedList: SelectedListProps[];
 }
