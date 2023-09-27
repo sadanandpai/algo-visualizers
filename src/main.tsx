@@ -2,12 +2,12 @@ import "./index.css";
 
 import { RouterProvider, createHashRouter } from "react-router-dom";
 
-import Home from "./sorting-visualizer/pages/algorithm.page";
+import Home from "./apps/sorting-visualizer/pages/algorithm.page";
 import { Provider } from "react-redux";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { sortingVisualizerRoutes } from "./sorting-visualizer/routes";
-import { store } from "./sorting-visualizer/store/store";
+import { sortingVisualizerRoutes } from "./apps/sorting-visualizer/routes";
+import { store } from "./store/store";
 
 const router = createHashRouter([
   ...sortingVisualizerRoutes,
