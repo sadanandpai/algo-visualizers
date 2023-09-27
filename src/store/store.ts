@@ -20,7 +20,10 @@ const persistConfig = {
 
 export const store = configureStore({
   reducer: {
-    sortViz: persistReducer(persistConfig, sortingVisualizerReducer),
+    sortViz: persistReducer<ReturnType<typeof sortingVisualizerReducer>>(
+      persistConfig,
+      sortingVisualizerReducer
+    ),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
