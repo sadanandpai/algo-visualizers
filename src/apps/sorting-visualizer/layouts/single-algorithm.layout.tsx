@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 import MainLayout from "./main.layout";
+import NoInput from "../components/visualizer/no-input";
 import Visualizer from "../components/visualizer/visualizer";
 import { algoList } from "../sorting-algorithms/algo-list";
 import { setIsPlaying } from "../store/sorting-visualizer.slice";
@@ -23,6 +24,14 @@ function SingleAlgorithmLayout() {
       dispatch(setIsPlaying(null));
     }
   }, [dispatch, isComplete]);
+
+  if (array.length === 0) {
+    return (
+      <MainLayout>
+        <NoInput />
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>

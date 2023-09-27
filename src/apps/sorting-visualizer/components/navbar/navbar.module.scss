@@ -1,11 +1,16 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
   position: relative;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
   margin-bottom: 24px;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
+
+  img {
+    width: 25px;
+    height: 25px;
+  }
 
   h1 {
     font-size: 1.5rem;
@@ -13,55 +18,50 @@
 
     img {
       display: inline-block;
-      vertical-align: text-top;
-      margin-left: 10px;
       margin-top: 2px;
+      margin-left: 10px;
+      vertical-align: text-top;
     }
   }
 
   ul {
-    z-index: 1;
-    list-style: none;
-    gap: 10px;
     position: absolute;
     top: 65px;
-    width: 100%;
     left: 0;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    gap: 10px;
+    width: 100%;
     padding-bottom: 12px;
+    list-style: none;
     background-color: white;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
 
     &[data-toggle="false"] {
       display: none;
     }
 
     li {
+      width: 100%;
       padding: 10px;
       background-color: white;
-      width: 100%;
 
       a {
         display: block;
-        padding: 8px;
-        border-radius: 8px;
         width: auto;
+        padding: 8px;
         text-transform: capitalize;
+        border-radius: 8px;
       }
 
       a.active {
-        background-color: rgb(255, 64, 0);
         color: white;
+        background-color: rgb(255 64 0);
       }
 
       a:hover {
-        outline: 1px solid rgb(255, 163, 132);
+        outline: 1px solid rgb(255 163 132);
       }
     }
-  }
-
-  img {
-    width: 25px;
-    height: 25px;
   }
 }
 
@@ -71,8 +71,8 @@
 
     ul {
       position: static;
-      width: auto;
       display: flex;
+      width: auto;
       box-shadow: none;
 
       li {

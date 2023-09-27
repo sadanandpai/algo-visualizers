@@ -3,13 +3,13 @@
   margin-bottom: 16px;
 
   .controller {
-    margin-bottom: 20px;
     gap: 10px;
+    margin-bottom: 20px;
 
     .numbers {
       display: flex;
-      gap: 16px;
       flex-basis: 75%;
+      gap: 16px;
 
       input {
         flex: 1;
@@ -18,9 +18,9 @@
       }
 
       .rndmBtn {
-        background-color: #2b4bfe;
-        color: white;
         padding: 5px 10px;
+        color: white;
+        background-color: #2b4bfe;
         border: none;
         border-radius: 4px;
       }
@@ -28,10 +28,10 @@
 
     .controls {
       display: flex;
-      gap: 16px;
-      margin-top: 20px;
       flex: 1;
       flex-basis: 25%;
+      gap: 16px;
+      margin-top: 20px;
 
       button:disabled {
         cursor: not-allowed;
@@ -51,19 +51,20 @@
 
 .checkboxWrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
 
   .listItem {
     list-style-type: none;
 
     .checkbox {
       display: flex;
-      justify-content: center;
-      align-items: center;
       gap: 4px;
+      align-items: center;
+      justify-content: center;
+
       > input,
       > label {
         cursor: pointer;

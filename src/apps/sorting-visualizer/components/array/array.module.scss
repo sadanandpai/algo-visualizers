@@ -6,16 +6,16 @@
   .indices {
     position: absolute;
     bottom: calc(var(--cell-size) - 5px);
+    z-index: -1;
     display: flex;
     font-size: 0.75rem;
     opacity: 0.25;
-    z-index: -1;
 
     span {
       display: flex;
+      justify-content: center;
       width: var(--cell-size);
       margin: 0 calc(var(--cell-margin) / 2);
-      justify-content: center;
     }
   }
 
@@ -25,15 +25,15 @@
 
     .cell {
       display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
       width: var(--cell-size);
       height: var(--cell-size);
-      border-radius: 4px;
       margin: 0 calc(var(--cell-margin) / 2);
       border: 1px solid black;
-      justify-content: center;
-      align-items: center;
-      flex-shrink: 0;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      box-shadow: 0 4px 4px rgb(0 0 0 / 10%);
     }
   }
 }

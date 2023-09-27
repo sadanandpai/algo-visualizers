@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 import AlgoSelection from "../components/controller/algo-selection";
 import MainLayout from "./main.layout";
+import NoInput from "../components/visualizer/no-input";
 import Visualizer from "../components/visualizer/visualizer";
 import { algoList } from "../sorting-algorithms/algo-list";
 import classes from "./layout.module.scss";
@@ -17,7 +18,10 @@ function AllAlgorithmLayout() {
     (state) => state.sortViz.selectedAlgosStatus
   );
 
-  const selectedAlgos = algoList.filter((_, idx) => selectedAlgosStatus[idx]);
+  let selectedAlgos = algoList.filter((_, idx) => selectedAlgosStatus[idx]);
+  if (selectedAlgos.length === 0) {
+    selectedAlgos = algoList;
+  }
   const { onComplete, isComplete } = useCompletion(selectedAlgos.length, reset);
 
   useEffect(() => {
@@ -25,6 +29,14 @@ function AllAlgorithmLayout() {
       dispatch(setIsPlaying(null));
     }
   }, [dispatch, isComplete]);
+
+  if (array.length === 0) {
+    return (
+      <MainLayout>
+        <NoInput />
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>
