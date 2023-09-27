@@ -1,0 +1,88 @@
+.controllerWrapper {
+  padding: 0 20px;
+  margin-bottom: 16px;
+
+  .controller {
+    gap: 10px;
+    margin-bottom: 20px;
+
+    .numbers {
+      display: flex;
+      flex-basis: 75%;
+      gap: 16px;
+
+      input {
+        flex: 1;
+        padding: 5px;
+        border: 1px solid black;
+      }
+
+      .rndmBtn {
+        padding: 5px 10px;
+        color: white;
+        background-color: #2b4bfe;
+        border: none;
+        border-radius: 4px;
+      }
+    }
+
+    .controls {
+      display: flex;
+      flex: 1;
+      flex-basis: 25%;
+      gap: 16px;
+      margin-top: 20px;
+
+      button:disabled {
+        cursor: not-allowed;
+      }
+
+      button:disabled img {
+        opacity: 0.5;
+      }
+
+      input[type="range"] {
+        flex: 1;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.checkboxWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+
+  .listItem {
+    list-style-type: none;
+
+    .checkbox {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+
+      > input,
+      > label {
+        cursor: pointer;
+      }
+
+      > label {
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+@media screen and (width >= 960px) {
+  .controllerWrapper .controller {
+    display: flex;
+
+    .controls {
+      margin-top: 0;
+    }
+  }
+}

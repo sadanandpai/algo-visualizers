@@ -1,0 +1,39 @@
+.arrayContainer {
+  position: relative;
+  padding: 0 20px;
+  overflow: auto;
+
+  .indices {
+    position: absolute;
+    bottom: calc(var(--cell-size) - 5px);
+    z-index: -1;
+    display: flex;
+    font-size: 0.75rem;
+    opacity: 0.25;
+
+    span {
+      display: flex;
+      justify-content: center;
+      width: var(--cell-size);
+      margin: 0 calc(var(--cell-margin) / 2);
+    }
+  }
+
+  .values {
+    display: flex;
+    padding: calc(var(--cell-size) + 20px) 0;
+
+    .cell {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: var(--cell-size);
+      height: var(--cell-size);
+      margin: 0 calc(var(--cell-margin) / 2);
+      border: 1px solid black;
+      border-radius: 4px;
+      box-shadow: 0 4px 4px rgb(0 0 0 / 10%);
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.container {
+  display: inline-block;
+  min-width: 300px;
+  max-width: 100%;
+  padding: 20px;
+  box-shadow: 0 0 4px rgb(0 0 0 / 40%);
+
+  header,
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+}
+
+.warning {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: rgb(255 47 47);
+}
