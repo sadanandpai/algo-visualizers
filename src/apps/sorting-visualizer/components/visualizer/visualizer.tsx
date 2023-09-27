@@ -6,7 +6,7 @@ import { VisualizerProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./visualizer.module.scss";
 import useAlgo from "@/apps/sorting-visualizer/hooks/use-algo.hook";
 
-const Visualiser = memo(function Visualiser({
+const Visualizer = memo(function Visualizer({
   array,
   algoFn,
   algoName = "Bubble",
@@ -56,4 +56,4 @@ const Visualiser = memo(function Visualiser({
   );
 });
 
-export default Visualiser;
+export default Visualizer;

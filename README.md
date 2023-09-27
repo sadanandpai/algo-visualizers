@@ -1,11 +1,9 @@
-<h1 align="center">
-    Sorting Visualizer
-</h1>
-
-## Responsive visualizer built using React for popular algorithms
-
-<a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="cover.png" alt="cover" /></a>
-[See it in action](https://sadanandpai.github.io/sorting-visualizer/dist/)
+<div align="center">
+    <h1>Sorting Visualizer</h1>
+    <h2>Responsive visualizer built using React for popular algorithms</h2>
+    <a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="cover.png" alt="cover" /></a>
+    <a href="https://sadanandpai.github.io/sorting-visualizer/dist/">See it in action</a>
+</div>
 
 ---
 
@@ -28,9 +26,9 @@ Features
 
 ### Technologies
 
-- React with hooks
-- [Styled components](https://styled-components.com/) + [React material](https://material-ui.com/) (css and component libraries)
-- [Zustand](https://github.com/pmndrs/zustand) (hooks based state management library)
+- [React](https://react.dev/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Sass](https://sass-lang.com/)
 - [Vite](https://vitejs.dev/) (Bundler)
 
 ### Features built using
@@ -41,9 +39,9 @@ Features
 
 ### Run in your local
 
-- ```git clone https://github.com/sadanandpai/sorting-visualizer.git```
-- ```npm install``` (after navigating inside the directory)
-- ```npm run dev```
+- `git clone https://github.com/sadanandpai/sorting-visualizer.git`
+- `npm install` (after navigating inside the directory)
+- `npm run dev`
 
 ---
 

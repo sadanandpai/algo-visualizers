@@ -6,11 +6,11 @@ import { menuItems } from "../config";
 
 function MainLayout({ children }: PropsWithChildren) {
   return (
-    <>
+    <div>
       <Navbar menuItems={menuItems} />
       <Controller />
       <main className={classes.main}>{children}</main>
-    </>
+    </div>
   );
 }
 

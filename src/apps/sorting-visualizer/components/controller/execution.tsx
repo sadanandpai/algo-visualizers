@@ -40,6 +40,7 @@ function Execution() {
         <img
           src={isPlaying ? "/pause.svg" : "/play.svg"}
           alt={isPlaying ? "Pause" : "Play"}
+          title={isPlaying ? "Pause" : "Play"}
           height={24}
           width={24}
         />
@@ -48,6 +49,7 @@ function Execution() {
       <button
         onClick={() => dispatch(setReset())}
         disabled={array.length === 0}
+        title={"Reset"}
       >
         <img src="/reset.svg" height={24} width={24} />
       </button>
@@ -58,6 +60,7 @@ function Execution() {
         max={10}
         value={speed}
         step={1}
+        title="Animation speed"
         onChange={(e) => dispatch(setSpeed(e.target.valueAsNumber))}
       />
     </div>

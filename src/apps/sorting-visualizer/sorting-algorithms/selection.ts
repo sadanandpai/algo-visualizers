@@ -1,6 +1,7 @@
 import {
   highlight,
   showPivot,
+  sort,
   swap,
 } from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
 
@@ -26,6 +27,6 @@ export async function* selectionSort(array: number[]): SortAsyncGenerator {
       yield* swap(array, maxIndex, j);
     }
 
-    yield { type: "sort", position: j };
+    yield* sort(j);
   }
 }

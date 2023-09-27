@@ -1,5 +1,6 @@
 import {
   highlight,
+  sort,
   swap,
 } from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
 
@@ -17,6 +18,6 @@ export async function* bubbleSort(array: number[]): SortAsyncGenerator {
       }
     }
 
-    yield { type: "sort", position: j };
+    yield* sort(j);
   }
 }

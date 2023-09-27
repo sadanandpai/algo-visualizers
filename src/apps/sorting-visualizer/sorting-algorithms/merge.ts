@@ -1,6 +1,7 @@
 import {
   highlight,
   move,
+  sort,
 } from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
 
 import { SortAsyncGenerator } from "@/apps/sorting-visualizer/models/types";
@@ -44,7 +45,7 @@ async function* merge(
       iMove++;
 
       if (isFinal) {
-        yield { type: "sort", position: left };
+        yield* sort(left);
       }
     }
 
@@ -59,7 +60,7 @@ async function* merge(
       jMove++;
 
       if (isFinal) {
-        yield { type: "sort", position: left };
+        yield* sort(left);
       }
     }
   }
@@ -68,7 +69,7 @@ async function* merge(
     yield* highlight(k);
 
     if (isFinal) {
-      yield { type: "sort", position: k };
+      yield* sort(k);
     }
   }
 
@@ -76,7 +77,7 @@ async function* merge(
     yield* highlight(k);
 
     if (isFinal) {
-      yield { type: "sort", position: k };
+      yield* sort(k);
     }
   }
 }

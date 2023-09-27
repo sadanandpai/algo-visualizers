@@ -1,6 +1,7 @@
 import {
   highlight,
   showPivot,
+  sort,
   swap,
 } from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
 
@@ -14,12 +15,12 @@ export async function* heapSort(array: number[]): SortAsyncGenerator {
 
   for (let i = array.length - 1; i > 0; i--) {
     length--;
-    yield { type: "sort", position: length };
+    yield* sort(length);
     yield* swap(array, 0, i);
     yield* maxHeap(array, 0, length);
   }
 
-  yield { type: "sort", position: 0 };
+  yield* sort(0);
 }
 
 async function* maxHeap(

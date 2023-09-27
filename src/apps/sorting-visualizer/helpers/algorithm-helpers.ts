@@ -28,13 +28,17 @@ export async function* highlight(...positions: number[]): SortAsyncGenerator {
   await resolveWhenPlaying;
 
   yield { type: "highlight", positions };
-  await delay(animationInterval / 2);
+  await delay(animationInterval / 4);
 
   await resolveWhenPlaying;
 }
 
 export async function* showPivot(position: number): SortAsyncGenerator {
   yield { type: "pivot", position };
+}
+
+export async function* sort(position: number): SortAsyncGenerator {
+  yield { type: "sort", position: position };
 }
 
 export async function* move(...positions: number[]): SortAsyncGenerator {

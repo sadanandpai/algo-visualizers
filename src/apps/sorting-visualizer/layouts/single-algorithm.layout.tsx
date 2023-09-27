@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 import MainLayout from "./main.layout";
-import Visualiser from "../components/visualizer/visualizer";
+import Visualizer from "../components/visualizer/visualizer";
 import { algoList } from "../sorting-algorithms/algo-list";
 import { setIsPlaying } from "../store/sorting-visualizer.slice";
 import useCompletion from "../hooks/use-completion.hook";
@@ -26,7 +26,7 @@ function SingleAlgorithmLayout() {
 
   return (
     <MainLayout>
-      <Visualiser
+      <Visualizer
         key={selectedAlgo.name + array.toString() + reset}
         array={array}
         algoName={selectedAlgo.name}

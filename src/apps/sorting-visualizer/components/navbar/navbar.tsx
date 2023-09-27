@@ -8,7 +8,19 @@ function Navbar({ menuItems }: NavbarProps) {
 
   return (
     <nav className={classes.navbar}>
-      <h1>Sorting visualizer</h1>
+      <h1>
+        Sorting visualizers
+        <a
+          href="https://github.com/sadanandpai/sorting-visualizer"
+          target="blank"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+            alt="github repo"
+            className="github"
+          />
+        </a>
+      </h1>
 
       <button onClick={() => setToggle(!toggle)}>
         <img src="/ham.svg" alt="logo" />
@@ -20,7 +32,7 @@ function Navbar({ menuItems }: NavbarProps) {
             <NavLink
               to={`/sorting-visualizer/${item}`}
               className={({ isActive }) => (isActive ? classes.active : "")}
-              onClick={() => setToggle(!toggle)}
+              onClick={() => setToggle(false)}
             >
               {item}
             </NavLink>

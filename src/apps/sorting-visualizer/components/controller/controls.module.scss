@@ -8,7 +8,7 @@
 
     .numbers {
       display: flex;
-      gap: 1rem;
+      gap: 16px;
       flex-basis: 75%;
 
       input {
@@ -28,8 +28,8 @@
 
     .controls {
       display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
+      gap: 16px;
+      margin-top: 20px;
       flex: 1;
       flex-basis: 25%;
 
@@ -43,6 +43,7 @@
 
       input[type="range"] {
         flex: 1;
+        cursor: pointer;
       }
     }
   }

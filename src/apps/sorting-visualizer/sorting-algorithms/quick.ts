@@ -1,6 +1,7 @@
 import {
   highlight,
   showPivot,
+  sort,
   swap,
 } from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
 
@@ -56,6 +57,6 @@ async function* partition(
     yield* swap(array, pivot, j);
   }
 
-  yield { type: "sort", position: j };
+  yield* sort(j);
   return j;
 }

@@ -1,5 +1,6 @@
 import {
   highlight,
+  sort,
   swap,
 } from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
 
@@ -20,6 +21,6 @@ export async function* insertionSort(array: number[]): SortAsyncGenerator {
       }
     }
 
-    yield { type: "sort", position: i };
+    yield* sort(i);
   }
 }

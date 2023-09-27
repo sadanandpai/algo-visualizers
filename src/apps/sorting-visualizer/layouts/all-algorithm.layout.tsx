@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 import AlgoSelection from "../components/controller/algo-selection";
 import MainLayout from "./main.layout";
-import Visualiser from "../components/visualizer/visualizer";
+import Visualizer from "../components/visualizer/visualizer";
 import { algoList } from "../sorting-algorithms/algo-list";
 import classes from "./layout.module.scss";
 import { setIsPlaying } from "../store/sorting-visualizer.slice";
@@ -32,7 +32,7 @@ function AllAlgorithmLayout() {
 
       <div className={classes.allAlgos}>
         {selectedAlgos.map((algo) => (
-          <Visualiser
+          <Visualizer
             key={array.toString() + reset + algo.name}
             array={array}
             algoName={algo.name}

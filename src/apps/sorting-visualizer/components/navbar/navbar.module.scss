@@ -5,11 +5,18 @@
   padding: 12px 20px;
   position: relative;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
-  margin-bottom: 1rem;
+  margin-bottom: 24px;
 
   h1 {
     font-size: 1.5rem;
     font-weight: 600;
+
+    img {
+      display: inline-block;
+      vertical-align: text-top;
+      margin-left: 10px;
+      margin-top: 2px;
+    }
   }
 
   ul {
@@ -17,10 +24,12 @@
     list-style: none;
     gap: 10px;
     position: absolute;
-    top: 60px;
+    top: 65px;
     width: 100%;
     left: 0;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+    padding-bottom: 12px;
+    background-color: white;
 
     &[data-toggle="false"] {
       display: none;
@@ -56,7 +65,7 @@
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (width >= 910px) {
   .navbar.navbar {
     padding: 10px 10px 10px 20px;
 
@@ -71,7 +80,7 @@
       }
     }
 
-    img {
+    button {
       display: none;
     }
   }
