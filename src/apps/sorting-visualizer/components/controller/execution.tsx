@@ -7,6 +7,9 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import classes from "./controls.module.scss";
+import pauseIcon from "/pause.svg";
+import playIcon from "/play.svg";
+import resetIcon from "/reset.svg";
 import { setAnimationInterval } from "@/apps/sorting-visualizer/store/global.state";
 import { useEffect } from "react";
 
@@ -38,7 +41,7 @@ function Execution() {
         disabled={array.length === 0 || isPlaying === null}
       >
         <img
-          src={isPlaying ? "/pause.svg" : "/play.svg"}
+          src={isPlaying ? pauseIcon : playIcon}
           alt={isPlaying ? "Pause" : "Play"}
           title={isPlaying ? "Pause" : "Play"}
           height={24}
@@ -51,7 +54,7 @@ function Execution() {
         disabled={array.length === 0}
         title={"Reset"}
       >
-        <img src="/reset.svg" height={24} width={24} />
+        <img src={resetIcon} height={24} width={24} />
       </button>
 
       <input

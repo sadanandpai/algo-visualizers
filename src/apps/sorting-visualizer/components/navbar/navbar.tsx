@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { NavbarProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./navbar.module.scss";
+import hamIcon from "/ham.svg";
 import { useState } from "react";
 
 function Navbar({ menuItems }: NavbarProps) {
@@ -23,7 +24,7 @@ function Navbar({ menuItems }: NavbarProps) {
       </h1>
 
       <button onClick={() => setToggle(!toggle)}>
-        <img src="/ham.svg" alt="logo" />
+        <img src={hamIcon} alt="hamburger" />
       </button>
 
       <ul data-toggle={toggle}>
