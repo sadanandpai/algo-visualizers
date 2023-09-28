@@ -13,6 +13,10 @@ export async function* mergeSort(
   isFinal = true
 ): SortAsyncGenerator {
   if (i === j) {
+    if (isFinal && array.length === 1) {
+      yield* sort(i);
+    }
+
     return;
   }
 

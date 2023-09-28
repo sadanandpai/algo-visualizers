@@ -65,7 +65,7 @@
   }
 }
 
-@media screen and (width >= 910px) {
+@media screen and (width >= 960px) {
   .navbar.navbar {
     padding: 10px 10px 10px 20px;
 
@@ -73,6 +73,7 @@
       position: static;
       display: flex;
       width: auto;
+      padding-bottom: 0;
       box-shadow: none;
 
       li {

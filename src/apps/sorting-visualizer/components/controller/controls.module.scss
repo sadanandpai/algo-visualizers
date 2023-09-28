@@ -11,10 +11,16 @@
       flex-basis: 75%;
       gap: 16px;
 
-      input {
+      .arrayInput {
         flex: 1;
         padding: 5px;
         border: 1px solid black;
+        border-radius: 4px;
+      }
+
+      .arrayInput:placeholder-shown {
+        border: 1px solid transparent;
+        outline: 2px solid red;
       }
 
       .rndmBtn {

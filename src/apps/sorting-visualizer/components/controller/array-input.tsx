@@ -43,7 +43,7 @@ function ArrayInput() {
         Randomize
       </button>
       <input
-        className={classes.input}
+        className={classes.arrayInput}
         type="text"
         placeholder="Numbers to sort (comma separate - max 3 digits)"
         value={input}
