@@ -14,7 +14,7 @@ import sortingVisualizerReducer from "@/apps/sorting-visualizer/store/sorting-vi
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "sorting-visualizer",
+  key: "sorting-viz",
   storage,
 };
 

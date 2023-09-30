@@ -1,11 +1,11 @@
-import { memo, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import Header from "./header";
 import { VisualizerProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./visualizer.module.scss";
 import useAlgo from "@/apps/sorting-visualizer/hooks/use-algo.hook";
 
-const Visualizer = memo(function Visualizer({
+const Visualizer = function Visualizer({
   array,
   algoFn,
   algoName = "Bubble",
@@ -54,6 +54,6 @@ const Visualizer = memo(function Visualizer({
       </footer>
     </section>
   );
-});
+};
 
 export default Visualizer;

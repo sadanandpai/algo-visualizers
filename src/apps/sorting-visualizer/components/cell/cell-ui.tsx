@@ -3,9 +3,8 @@ import MovingCell from "./moving-cell";
 import SwappingCell from "@/apps/sorting-visualizer/components/cell/swapping-cell";
 import { UIProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./cell.module.scss";
-import { memo } from "react";
 
-const CellUI = memo(function CellUI({
+const CellUI = function CellUI({
   array,
   swapPositions,
   sortPositions,
@@ -57,13 +56,13 @@ const CellUI = memo(function CellUI({
         {array.map((item, idx) => getCell(idx, item))}
       </ul>
 
-      <div className={classes.indices}>
+      <ul className={classes.indices}>
         {array.map((_, idx) => (
-          <span key={idx}>{idx}</span>
+          <li key={idx}>{idx}</li>
         ))}
-      </div>
+      </ul>
     </div>
   );
-});
+};
 
 export default CellUI;
