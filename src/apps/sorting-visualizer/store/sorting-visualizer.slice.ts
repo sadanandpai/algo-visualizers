@@ -1,13 +1,24 @@
-import { initialArray, selectedAlgosStatus } from "../config";
-import { pauseSimulation, playSimulation } from "./global.state";
+import {
+  initialArray,
+  selectedAlgosStatus,
+} from "@/apps/sorting-visualizer/config";
+import {
+  maxInterval,
+  pauseSimulation,
+  playSimulation,
+  setHighlightInterval,
+  setSwapInterval,
+} from "./global.state";
 
-import { AppDispatch } from "../../../store/store";
+import { AppDispatch } from "@/store/store";
 import { AppState } from "../models/interfaces";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { WritableDraft } from "immer/dist/internal.js";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: AppState = {
   array: initialArray,
+  visualizerType: "cell",
   isPlaying: false,
   reset: false,
   time: 0,
@@ -17,7 +28,7 @@ const initialState: AppState = {
 };
 
 export const sortingVisualizerSlice = createSlice({
-  name: "app",
+  name: "sortViz",
   initialState,
   reducers: {
     setArray: (state, action: PayloadAction<number[]>) => {
@@ -55,9 +66,24 @@ export const sortingVisualizerSlice = createSlice({
 
     setSpeed: (state, action: PayloadAction<number>) => {
       state.speed = action.payload;
+      setIntervals(state);
+    },
+
+    toggleVisualizerType: (state) => {
+      state.visualizerType = state.visualizerType === "cell" ? "bar" : "cell";
+      setIntervals(state);
     },
   },
 });
+
+function setIntervals(state: WritableDraft<AppState>) {
+  if (state.visualizerType === "cell") {
+    setSwapInterval(maxInterval / state.speed);
+  } else {
+    setSwapInterval(maxInterval / (state.speed * 4));
+  }
+  setHighlightInterval(maxInterval / (state.speed * 4));
+}
 
 export const {
   setArray,
@@ -67,6 +93,7 @@ export const {
   setIntervalId,
   incrementTime,
   modifyAlgoSelection,
+  toggleVisualizerType,
 } = sortingVisualizerSlice.actions;
 export default sortingVisualizerSlice.reducer;
 

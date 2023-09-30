@@ -3,9 +3,9 @@ import {
   getSwapAnimation,
 } from "@/apps/sorting-visualizer/helpers/key-frames-helpers";
 
-import Cell from "@/apps/sorting-visualizer/components/array/cell";
+import Cell from "@/apps/sorting-visualizer/components/cell/cell";
 import { MovingCellProps } from "@/apps/sorting-visualizer/models/interfaces";
-import { animationInterval } from "@/apps/sorting-visualizer/store/global.state";
+import { swapInterval } from "@/apps/sorting-visualizer/store/global.state";
 
 function MovingCell({
   originalOrder,
@@ -14,10 +14,10 @@ function MovingCell({
   value,
   isHighlighted,
 }: MovingCellProps) {
-  let animation = getMovingAnimation(originalOrder - order, animationInterval);
+  let animation = getMovingAnimation(originalOrder - order, swapInterval);
 
   if (isSwap) {
-    animation = getSwapAnimation(originalOrder - order, animationInterval);
+    animation = getSwapAnimation(originalOrder - order, swapInterval);
   }
 
   return (

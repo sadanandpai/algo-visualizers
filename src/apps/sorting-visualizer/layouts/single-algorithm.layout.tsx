@@ -1,11 +1,13 @@
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
+import BarUI from "@/apps/sorting-visualizer/components/bar/bar-ui";
+import CellUI from "@/apps/sorting-visualizer/components/cell/cell-ui";
 import MainLayout from "./main.layout";
-import NoInput from "../components/visualizer/no-input";
-import Visualizer from "../components/visualizer/visualizer";
-import { algoList } from "../sorting-algorithms/algo-list";
-import { setIsPlaying } from "../store/sorting-visualizer.slice";
-import useCompletion from "../hooks/use-completion.hook";
+import NoInput from "@/apps/sorting-visualizer/components/visualizer/no-input";
+import Visualizer from "@/apps/sorting-visualizer/components/visualizer/visualizer";
+import { algoList } from "@/apps/sorting-visualizer/sorting-algorithms/algo-list";
+import { setIsPlaying } from "@/apps/sorting-visualizer/store/sorting-visualizer.slice";
+import useCompletion from "@/apps/sorting-visualizer/hooks/use-completion.hook";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -14,6 +16,9 @@ function SingleAlgorithmLayout() {
   const dispatch = useAppDispatch();
   const array = useAppSelector((state) => state.sortViz.array);
   const reset = useAppSelector((state) => state.sortViz.reset);
+  const visualizerType = useAppSelector(
+    (state) => state.sortViz.visualizerType
+  );
   const selectedAlgo =
     algoList.find(({ name }) => name === algoName) ?? algoList[0];
 
@@ -36,11 +41,12 @@ function SingleAlgorithmLayout() {
   return (
     <MainLayout>
       <Visualizer
-        key={selectedAlgo.name + array.toString() + reset}
+        key={selectedAlgo.name + array.toString() + reset + visualizerType}
         array={array}
         algoName={selectedAlgo.name}
         algoFn={selectedAlgo.fn}
         onComplete={onComplete}
+        Render={visualizerType === "cell" ? CellUI : BarUI}
       />
     </MainLayout>
   );

@@ -1,18 +1,18 @@
-import { ArrayUIProps } from "@/apps/sorting-visualizer/models/interfaces";
-import Cell from "@/apps/sorting-visualizer/components/array/cell";
+import Cell from "@/apps/sorting-visualizer/components/cell/cell";
 import MovingCell from "./moving-cell";
-import SwappingCell from "@/apps/sorting-visualizer/components/array/swapping-cell";
-import classes from "./array.module.scss";
+import SwappingCell from "@/apps/sorting-visualizer/components/cell/swapping-cell";
+import { UIProps } from "@/apps/sorting-visualizer/models/interfaces";
+import classes from "./cell.module.scss";
 import { memo } from "react";
 
-const ArrayUI = memo(function ArrayUI({
+const CellUI = memo(function CellUI({
   array,
   swapPositions,
   sortPositions,
   highlightPositions,
   movePositions,
   pivot,
-}: ArrayUIProps) {
+}: UIProps) {
   function getCell(idx: number, item: number) {
     if (swapPositions.includes(idx)) {
       return (
@@ -66,4 +66,4 @@ const ArrayUI = memo(function ArrayUI({
   );
 });
 
-export default ArrayUI;
+export default CellUI;

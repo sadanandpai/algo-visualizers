@@ -84,6 +84,13 @@
   }
 }
 
+.switchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
 @media screen and (width >= 960px) {
   .controllerWrapper .controller {
     display: flex;

@@ -35,8 +35,11 @@ async function* maxHeap(
   const highlightArray = [];
   if (left < length) highlightArray.push(left);
   if (right < length) highlightArray.push(right);
-  yield* showPivot(i);
-  yield* highlight(...highlightArray);
+
+  if (highlightArray.length > 0) {
+    yield* showPivot(i);
+    yield* highlight(...highlightArray);
+  }
 
   if (left < length) {
     if (array[left] > array[max]) {
@@ -52,6 +55,7 @@ async function* maxHeap(
 
   if (max !== i) {
     yield* swap(array, i, max);
+    yield* showPivot(-1);
     yield* maxHeap(array, max, length);
   }
 }

@@ -1,6 +1,5 @@
 import { memo, useEffect, useRef } from "react";
 
-import ArrayUI from "@/apps/sorting-visualizer/components/array/array-ui";
 import Header from "./header";
 import { VisualizerProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./visualizer.module.scss";
@@ -11,6 +10,7 @@ const Visualizer = memo(function Visualizer({
   algoFn,
   algoName = "Bubble",
   onComplete,
+  Render,
 }: VisualizerProps) {
   const sortingArray = useRef([...array]);
 
@@ -35,7 +35,7 @@ const Visualizer = memo(function Visualizer({
     <section className={classes.container}>
       <Header algoName={algoName} isCompleted={isCompleted} />
 
-      <ArrayUI
+      <Render
         pivot={pivot}
         array={sortingArray.current}
         swapPositions={swapPositions}

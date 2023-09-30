@@ -1,4 +1,4 @@
-import AllAlgorithmLayout from "../layouts/all-algorithm.layout";
+import AllAlgorithmLayout from "@/apps/sorting-visualizer/layouts/all-algorithm.layout";
 
 function AllAlgorithmPage() {
   return <AllAlgorithmLayout />;

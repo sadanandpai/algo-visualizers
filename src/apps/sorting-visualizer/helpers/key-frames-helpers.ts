@@ -1,5 +1,5 @@
-import { animationInterval } from "@/apps/sorting-visualizer/store/global.state";
 import { cellCSS } from "@/apps/sorting-visualizer/config";
+import { swapInterval } from "@/apps/sorting-visualizer/store/global.state";
 
 const animationEl = document.querySelector(
   '[data-id="animation-element"]'
@@ -51,5 +51,5 @@ function addAnimationRule(rule: string) {
     if (animationIdx) {
       animationEl?.sheet?.deleteRule(animationIdx);
     }
-  }, animationInterval);
+  }, swapInterval);
 }

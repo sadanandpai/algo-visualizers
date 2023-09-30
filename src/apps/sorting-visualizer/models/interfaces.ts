@@ -17,7 +17,7 @@ export interface MovingCellProps {
   isSwap?: boolean;
 }
 
-export interface ArrayUIProps {
+export interface UIProps {
   array: number[];
   swapPositions: number[];
   sortPositions: number[];
@@ -40,10 +40,12 @@ export interface VisualizerProps {
   algoName: string;
   algoFn: (array: number[]) => SortAsyncGenerator;
   onComplete: () => void;
+  Render: React.NamedExoticComponent<UIProps>;
 }
 
 export interface AppState {
   array: number[];
+  visualizerType: "cell" | "bar";
   isPlaying: boolean | null;
   reset: boolean;
   time: number;

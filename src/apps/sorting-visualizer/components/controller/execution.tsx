@@ -10,7 +10,6 @@ import classes from "./controls.module.scss";
 import pauseIcon from "/pause.svg";
 import playIcon from "/play.svg";
 import resetIcon from "/reset.svg";
-import { setAnimationInterval } from "@/apps/sorting-visualizer/store/global.state";
 import { useEffect } from "react";
 
 function Execution() {
@@ -31,8 +30,8 @@ function Execution() {
   }, [dispatch, reset]);
 
   useEffect(() => {
-    setAnimationInterval(speed);
-  }, [speed]);
+    dispatch(setSpeed(speed));
+  }, [dispatch, speed]);
 
   return (
     <div className={classes.controls}>
@@ -60,7 +59,7 @@ function Execution() {
       <input
         type="range"
         min={1}
-        max={10}
+        max={20}
         value={speed}
         step={1}
         title="Animation speed"

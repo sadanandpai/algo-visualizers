@@ -1,7 +1,9 @@
 let resolver: () => void;
 export let resolveWhenPlaying: Promise<void>;
 export let isPlaying = false;
-export let animationInterval = 1000;
+export const maxInterval = 2000;
+export let highlightInterval = 250;
+export let swapInterval = 1000;
 
 export const playSimulation = () => {
   if (isPlaying) {
@@ -27,8 +29,12 @@ export const setResolver = () => {
   });
 };
 
-export const setAnimationInterval = (speed: number) => {
-  animationInterval = 2000 / speed;
+export const setSwapInterval = (interval: number) => {
+  swapInterval = interval;
+};
+
+export const setHighlightInterval = (interval: number) => {
+  highlightInterval = interval;
 };
 
 setResolver();

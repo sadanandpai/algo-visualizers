@@ -24,7 +24,7 @@ function ArrayInput() {
   }, [array, dispatch]);
 
   const onRandomize = () => {
-    const newInput = Array.from(new Array(getRndmNumInRange(5, 20)), () =>
+    const newInput = Array.from(new Array(getRndmNumInRange(10, 40)), () =>
       getRndmNumInRange()
     );
     setInput(newInput.join(", "));

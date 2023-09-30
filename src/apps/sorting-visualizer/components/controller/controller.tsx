@@ -5,6 +5,7 @@ import {
 
 import ArrayInput from "./array-input";
 import Execution from "./execution";
+import TypeSwitch from "./type-switch";
 import classes from "./controls.module.scss";
 import { useAppDispatch } from "@/store/hooks";
 import { useEffect } from "react";
@@ -25,6 +26,7 @@ function Controller() {
         <ArrayInput />
         <Execution />
       </div>
+      <TypeSwitch />
     </section>
   );
 }

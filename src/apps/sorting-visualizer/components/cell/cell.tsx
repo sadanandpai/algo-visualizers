@@ -1,5 +1,5 @@
 import { CellProps } from "@/apps/sorting-visualizer/models/interfaces";
-import classes from "./array.module.scss";
+import classes from "./cell.module.scss";
 import { colors } from "@/apps/sorting-visualizer/config";
 
 function Cell({

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 
-import SingleAlgorithmLayout from "../layouts/single-algorithm.layout";
-import { menuItems } from "../config";
+import SingleAlgorithmLayout from "@/apps/sorting-visualizer/layouts/single-algorithm.layout";
+import { menuItems } from "@/apps/sorting-visualizer/config";
 import { useEffect } from "react";
 
 function AlgorithmPage() {
