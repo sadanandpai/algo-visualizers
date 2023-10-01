@@ -15,14 +15,14 @@ const Visualizer = function Visualizer({
   const sortingArray = useRef([...array]);
 
   const {
-    swaps,
-    pivot,
-    compares,
+    swapCount,
+    compareCount,
     isCompleted,
-    swapPositions,
-    sortPositions,
-    highlightPositions,
-    movePositions,
+    swaps,
+    sorts,
+    highlights,
+    pivot,
+    moves,
   } = useAlgo(sortingArray.current, algoFn);
 
   useEffect(() => {
@@ -38,18 +38,18 @@ const Visualizer = function Visualizer({
       <Render
         pivot={pivot}
         array={sortingArray.current}
-        swapPositions={swapPositions}
-        highlightPositions={highlightPositions}
-        sortPositions={sortPositions}
-        movePositions={movePositions}
+        swaps={swaps}
+        highlights={highlights}
+        sorts={sorts}
+        moves={moves}
       />
 
       <footer>
         <span>
-          Swaps: <strong>{swaps}</strong>
+          Swaps: <strong>{swapCount}</strong>
         </span>
         <span>
-          Comparisons: <strong>{compares}</strong>
+          Comparisons: <strong>{compareCount}</strong>
         </span>
       </footer>
     </section>

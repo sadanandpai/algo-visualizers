@@ -1,3 +1,6 @@
+@use "/src/styles/theme";
+@use "/src/apps/sorting-visualizer/styles/cell-colors";
+
 .arrayContainer {
   position: relative;
   padding: 0 20px;
@@ -15,10 +18,14 @@
       width: var(--cell-size);
       height: var(--cell-size);
       margin: 0 calc(var(--cell-margin) / 2);
-      border: 1px solid black;
+      color: black;
+      background-color: white;
+      border: 1px solid theme.$base;
       border-radius: 4px;
-      box-shadow: 0 4px 4px rgb(0 0 0 / 10%);
+      box-shadow: 0 4px 4px theme.$shadow1;
     }
+
+    @include cell-colors.sort-status-colors;
   }
 
   .indices {

@@ -1,3 +1,5 @@
+@use "/src/styles/theme";
+
 .controllerWrapper {
   padding: 0 20px;
   margin-bottom: 16px;
@@ -12,9 +14,11 @@
       gap: 16px;
 
       .arrayInput {
-        width: 100%;
         flex: 1;
+        width: 100%;
         padding: 5px;
+        color: black;
+        background-color: white;
         border: 1px solid black;
         border-radius: 4px;
       }
@@ -27,7 +31,7 @@
       .rndmBtn {
         padding: 5px 10px;
         color: white;
-        background-color: #2b4bfe;
+        background-color: theme.$primary;
         border: none;
         border-radius: 4px;
       }
@@ -86,9 +90,9 @@
 
 .switchContainer {
   display: flex;
+  gap: 20px;
   align-items: center;
   justify-content: center;
-  gap: 20px;
 }
 
 @media screen and (width >= 960px) {
@@ -98,5 +102,18 @@
     .controls {
       margin-top: 0;
     }
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  img {
+    filter: invert(1);
+  }
+}
+
+[data-theme="dark"] {
+  /* stylelint-disable-next-line no-descending-specificity */
+  .controllerWrapper img {
+    filter: invert(1);
   }
 }

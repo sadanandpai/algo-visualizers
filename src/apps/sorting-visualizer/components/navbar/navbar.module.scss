@@ -1,3 +1,5 @@
+@use "/src/styles/theme";
+
 .navbar {
   position: relative;
   display: flex;
@@ -5,7 +7,7 @@
   justify-content: space-between;
   padding: 12px 20px;
   margin-bottom: 24px;
-  box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
+  box-shadow: 0 4px 4px theme.$shadow1;
 
   img {
     width: 25px;
@@ -33,8 +35,8 @@
     width: 100%;
     padding-bottom: 12px;
     list-style: none;
-    background-color: white;
-    box-shadow: 0 4px 4px rgb(0 0 0 / 15%);
+    background-color: theme.$background;
+    box-shadow: 0 4px 4px theme.$shadow1;
 
     &[data-toggle="false"] {
       display: none;
@@ -43,23 +45,22 @@
     li {
       width: 100%;
       padding: 10px;
-      background-color: white;
 
       a {
         display: block;
         width: auto;
-        padding: 8px;
+        padding: 8px 6px;
         text-transform: capitalize;
         border-radius: 8px;
       }
 
       a.active {
         color: white;
-        background-color: rgb(255 64 0);
+        background-color: theme.$primary;
       }
 
       a:hover {
-        outline: 1px solid rgb(255 163 132);
+        outline: 1px solid theme.$primary;
       }
     }
   }
@@ -83,6 +84,22 @@
 
     button {
       display: none;
+    }
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .navbar {
+    img {
+      filter: invert(1);
+    }
+  }
+}
+
+[data-theme="dark"] {
+  .navbar {
+    img {
+      filter: invert(1);
     }
   }
 }

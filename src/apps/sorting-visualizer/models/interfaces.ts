@@ -19,10 +19,10 @@ export interface MovingCellProps {
 
 export interface UIProps {
   array: number[];
-  swapPositions: number[];
-  sortPositions: number[];
-  highlightPositions: number[];
-  movePositions?: number[];
+  swaps: number[];
+  sorts: number[];
+  highlights: number[];
+  moves?: number[];
   pivot?: number;
 }
 

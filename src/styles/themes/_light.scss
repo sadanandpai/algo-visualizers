@@ -1,0 +1,9 @@
+@use "../colors";
+
+@mixin light-theme {
+  --base: #{colors.$black};
+  --background: #{colors.$white};
+  --primary: #{colors.$blue1};
+  --shadow1: #{colors.$black1};
+  --shadow2: #{colors.$black2};
+}

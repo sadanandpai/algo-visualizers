@@ -1,7 +1,9 @@
+@use "/src/apps/sorting-visualizer/styles/cell-colors";
+
 .arrayContainer {
+  position: relative;
   padding: 25px 0 40px;
   overflow-x: auto;
-  position: relative;
 
   .values {
     display: flex;
@@ -9,13 +11,15 @@
     height: var(--bar-max-height);
 
     li {
-      border: 1px solid var(--bar-bg);
+      flex-shrink: 1;
       width: var(--bar-size);
       min-width: var(--bar-min-size);
-      background-color: var(--bar-bg);
-      flex-shrink: 1;
       margin: 0 calc(var(--bar-margin) / 2);
+      background-color: var(--color-bar);
+      border: 1px solid var(--color-bar);
     }
+
+    @include cell-colors.sort-status-colors;
   }
 
   .indices {
@@ -27,9 +31,9 @@
     opacity: 0.4;
 
     li {
+      flex-shrink: 1;
       width: var(--bar-size);
       min-width: var(--bar-min-size);
-      flex-shrink: 1;
       margin: 0 calc(var(--bar-margin) / 2);
     }
   }

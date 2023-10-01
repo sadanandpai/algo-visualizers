@@ -1,0 +1,13 @@
+@mixin sort-status-colors {
+  .pivot {
+    background-color: var(--color-pivot);
+  }
+
+  .sort {
+    background-color: var(--color-sort);
+  }
+
+  .highlight {
+    background-color: var(--color-highlight);
+  }
+}

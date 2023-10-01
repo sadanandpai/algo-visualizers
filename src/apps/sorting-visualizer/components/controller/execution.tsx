@@ -7,9 +7,9 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import classes from "./controls.module.scss";
-import pauseIcon from "/pause.svg";
-import playIcon from "/play.svg";
-import resetIcon from "/reset.svg";
+import pauseIcon from "/icons/pause.svg";
+import playIcon from "/icons/play.svg";
+import resetIcon from "/icons/reset.svg";
 import { useEffect } from "react";
 
 function Execution() {

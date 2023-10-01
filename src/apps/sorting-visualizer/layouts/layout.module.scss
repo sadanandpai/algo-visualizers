@@ -10,3 +10,21 @@
   justify-content: center;
   margin: 30px 0;
 }
+
+.iconBtn {
+  position: absolute;
+  right: 25px;
+  bottom: 25px;
+  padding: 5px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 50%;
+  fill: red;
+  transition: all 0.5s;
+
+  img {
+    width: 25px;
+    height: 25px;
+  }
+}

@@ -1,6 +1,5 @@
 import { CellProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./cell.module.scss";
-import { colors } from "@/apps/sorting-visualizer/config";
 
 function Cell({
   order,
@@ -10,27 +9,26 @@ function Cell({
   isHighlighted = false,
   isPivot = false,
 }: CellProps) {
-  let backgroundColor = "";
+  let cellClass = "";
 
   if (isPivot) {
-    backgroundColor = colors.pivot;
-  }
-
-  if (isHighlighted) {
-    backgroundColor = colors.highlight;
+    cellClass = "pivot";
   }
 
   if (isSorted) {
-    backgroundColor = colors.sort;
+    cellClass = "sort";
+  }
+
+  if (isHighlighted) {
+    cellClass = "highlight";
   }
 
   return (
     <li
-      className={classes.cell}
+      className={`${classes.cell} ${classes[cellClass]}`}
       style={{
         animation,
         order,
-        backgroundColor,
       }}
     >
       {value}

@@ -9,19 +9,25 @@ import {
   persistStore,
 } from "redux-persist";
 
+import appReducer from "./app.slice";
 import { configureStore } from "@reduxjs/toolkit";
 import sortingVisualizerReducer from "@/apps/sorting-visualizer/store/sorting-visualizer.slice";
 import storage from "redux-persist/lib/storage";
 
-const persistConfig = {
-  key: "sorting-viz",
-  storage,
-};
-
 export const store = configureStore({
   reducer: {
+    app: persistReducer<ReturnType<typeof appReducer>>(
+      {
+        key: "app",
+        storage,
+      },
+      appReducer
+    ),
     sortViz: persistReducer<ReturnType<typeof sortingVisualizerReducer>>(
-      persistConfig,
+      {
+        key: "sorting-viz",
+        storage,
+      },
       sortingVisualizerReducer
     ),
   },

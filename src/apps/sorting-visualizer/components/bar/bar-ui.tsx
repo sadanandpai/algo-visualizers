@@ -1,27 +1,26 @@
 import { UIProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./bar.module.scss";
-import { colors } from "@/apps/sorting-visualizer/config";
 import { useMemo } from "react";
 
-function BarUI({ array, sortPositions, highlightPositions, pivot }: UIProps) {
+function BarUI({ array, sorts, highlights, pivot }: UIProps) {
   const max = useMemo(() => Math.max(...array), [array]);
 
   function getBarColor(idx: number) {
-    let backgroundColor = "";
+    let cellClass = "";
 
     if (pivot === idx) {
-      backgroundColor = colors.pivot;
+      cellClass = "pivot";
     }
 
-    if (highlightPositions.includes(idx)) {
-      backgroundColor = colors.highlight;
+    if (sorts.includes(idx)) {
+      cellClass = "sort";
     }
 
-    if (sortPositions.includes(idx)) {
-      backgroundColor = colors.sort;
+    if (highlights.includes(idx)) {
+      cellClass = "highlight";
     }
 
-    return backgroundColor;
+    return cellClass;
   }
 
   return (
@@ -30,9 +29,9 @@ function BarUI({ array, sortPositions, highlightPositions, pivot }: UIProps) {
         {array.map((item, idx) => (
           <li
             key={idx}
+            className={classes[getBarColor(idx)]}
             style={{
               height: `${(item / max) * 100}%`,
-              backgroundColor: getBarColor(idx),
             }}
           ></li>
         ))}
