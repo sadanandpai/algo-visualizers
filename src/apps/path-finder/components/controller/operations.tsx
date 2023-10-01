@@ -1,6 +1,6 @@
+import { AppState, ClickType } from "../../models/interfaces";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
-import { AppState } from "../../models/interfaces";
 import classes from "./controller.module.scss";
 import { setClickType } from "../../store/path-finder.slice";
 
@@ -8,7 +8,7 @@ function Operations() {
   const dispatch = useAppDispatch();
   const clickType = useAppSelector((state) => state.pathFinder.clickType);
 
-  const buttons: AppState["clickType"][] = ["entry", "exit", "wall", "clear"];
+  const buttons = ["clear", "start", "end", "wall"];
 
   const handleBtnClick = (type: AppState["clickType"]) => {
     dispatch(setClickType(type));
@@ -17,11 +17,11 @@ function Operations() {
   return (
     <section className={classes.operations}>
       <div>
-        {buttons.map((btn) => (
+        {buttons.map((btn, idx) => (
           <button
             key={btn}
-            onClick={() => handleBtnClick(btn)}
-            className={clickType === btn ? classes.active : ""}
+            onClick={() => handleBtnClick(idx)}
+            className={clickType === idx ? classes.active : ""}
           >
             {btn}
           </button>
