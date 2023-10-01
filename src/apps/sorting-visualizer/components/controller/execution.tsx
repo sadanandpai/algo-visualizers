@@ -11,6 +11,7 @@ import pauseIcon from "/pause.svg";
 import playIcon from "/play.svg";
 import resetIcon from "/reset.svg";
 import { useEffect } from "react";
+import Tooltip from "../tooltip/tooltip";
 
 function Execution() {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ function Execution() {
 
   return (
     <div className={classes.controls}>
+      <Tooltip text={isPlaying ? "Pause" : "Play"}>
       <button
         onClick={() => dispatch(setIsPlaying(!isPlaying))}
         disabled={array.length === 0 || isPlaying === null}
@@ -42,29 +44,31 @@ function Execution() {
         <img
           src={isPlaying ? pauseIcon : playIcon}
           alt={isPlaying ? "Pause" : "Play"}
-          title={isPlaying ? "Pause" : "Play"}
           height={24}
           width={24}
         />
       </button>
+      </Tooltip>
 
+      <Tooltip text={"Reset"}>
       <button
         onClick={() => dispatch(setReset())}
         disabled={array.length === 0}
-        title={"Reset"}
       >
         <img src={resetIcon} height={24} width={24} />
       </button>
+      </Tooltip>
 
+      <Tooltip text={"Animation speed"}>
       <input
         type="range"
         min={1}
         max={20}
         value={speed}
         step={1}
-        title="Animation speed"
         onChange={(e) => dispatch(setSpeed(e.target.valueAsNumber))}
       />
+      </Tooltip>
     </div>
   );
 }
