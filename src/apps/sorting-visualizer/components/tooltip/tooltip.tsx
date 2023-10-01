@@ -1,12 +1,7 @@
-import { FC, ReactNode } from 'react';
 import classes from "./tooltip.module.scss";
+import { TooltipProps } from "@/apps/sorting-visualizer/models/interfaces";
 
-interface TooltipProps {
-  text: string;
-  children: ReactNode;
-}
-
-const Tooltip: FC<TooltipProps> = ({ text, children }) => {
+function Tooltip({ text, children }: TooltipProps) {
   return (
     <div className={classes.tooltipContainer}>
       {children}
@@ -15,6 +10,6 @@ const Tooltip: FC<TooltipProps> = ({ text, children }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Tooltip;

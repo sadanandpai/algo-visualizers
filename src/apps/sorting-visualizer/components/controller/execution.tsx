@@ -11,7 +11,7 @@ import pauseIcon from "/pause.svg";
 import playIcon from "/play.svg";
 import resetIcon from "/reset.svg";
 import { useEffect } from "react";
-import Tooltip from "../tooltip/tooltip";
+import Tooltip from "@/apps/sorting-visualizer/components/tooltip/tooltip";
 
 function Execution() {
   const dispatch = useAppDispatch();

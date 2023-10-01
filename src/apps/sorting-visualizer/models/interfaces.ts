@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { SortAsyncGenerator } from "./types";
 
 export interface CellProps {
@@ -52,4 +53,9 @@ export interface AppState {
   speed: number;
   timeIntervalId: NodeJS.Timeout | null;
   selectedAlgosStatus: boolean[];
+}
+
+export interface TooltipProps {
+  text: string;
+  children: ReactNode;
 }
