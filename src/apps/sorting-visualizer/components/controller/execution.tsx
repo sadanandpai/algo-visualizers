@@ -11,7 +11,6 @@ import pauseIcon from "/pause.svg";
 import playIcon from "/play.svg";
 import resetIcon from "/reset.svg";
 import { useEffect } from "react";
-import Tooltip from "@/apps/sorting-visualizer/components/tooltip/tooltip";
 
 function Execution() {
   const dispatch = useAppDispatch();
@@ -36,10 +35,10 @@ function Execution() {
 
   return (
     <div className={classes.controls}>
-      <Tooltip text={isPlaying ? "Pause" : "Play"}>
       <button
         onClick={() => dispatch(setIsPlaying(!isPlaying))}
         disabled={array.length === 0 || isPlaying === null}
+        data-tooltip={isPlaying ? "Pause" : "Play"}
       >
         <img
           src={isPlaying ? pauseIcon : playIcon}
@@ -48,19 +47,17 @@ function Execution() {
           width={24}
         />
       </button>
-      </Tooltip>
 
-      <Tooltip text={"Reset"}>
       <button
         onClick={() => dispatch(setReset())}
         disabled={array.length === 0}
+        data-tooltip="Reset"
       >
         <img src={resetIcon} height={24} width={24} />
       </button>
-      </Tooltip>
 
-      <Tooltip text={"Animation speed"}>
       <input
+        data-tooltip="Animation speed"
         type="range"
         min={1}
         max={20}
@@ -68,7 +65,6 @@ function Execution() {
         step={1}
         onChange={(e) => dispatch(setSpeed(e.target.valueAsNumber))}
       />
-      </Tooltip>
     </div>
   );
 }

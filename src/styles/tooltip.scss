@@ -1,0 +1,30 @@
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover:after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background-color: #333;
+  padding: 5px;
+  border-radius: 4px;
+  transform: translate(-50%, 100%);
+  color: #fff;
+  bottom: -6px;
+  left: 50%;
+  text-align: center;
+  font-size: 0.75rem;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+}
+
+[data-tooltip]:hover:before {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 6px 10px 6px;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+}

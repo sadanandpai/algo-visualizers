@@ -1,4 +1,4 @@
-import "./index.css";
+import "./index.scss";
 
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import { persistor, store } from "./store/store";
