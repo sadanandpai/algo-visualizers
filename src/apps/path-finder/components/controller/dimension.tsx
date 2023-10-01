@@ -22,8 +22,8 @@ function Dimension() {
       <input
         type="range"
         id="rows"
-        min={1}
-        max={10}
+        min={5}
+        max={100}
         value={rows}
         onChange={handleRowsChange}
       />
@@ -32,8 +32,8 @@ function Dimension() {
       <input
         type="range"
         id="cols"
-        min={1}
-        max={10}
+        min={5}
+        max={100}
         value={cols}
         onChange={handleColsChange}
       />
