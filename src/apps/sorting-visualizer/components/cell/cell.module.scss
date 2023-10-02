@@ -1,23 +1,10 @@
+@use "/src/styles/theme";
+@use "/src/apps/sorting-visualizer/styles/cell-colors";
+
 .arrayContainer {
   position: relative;
   padding: 0 20px;
   overflow: auto;
-
-  .indices {
-    position: absolute;
-    bottom: calc(var(--cell-size) - 5px);
-    z-index: -1;
-    display: flex;
-    font-size: 0.75rem;
-    opacity: 0.25;
-
-    span {
-      display: flex;
-      justify-content: center;
-      width: var(--cell-size);
-      margin: 0 calc(var(--cell-margin) / 2);
-    }
-  }
 
   .values {
     display: flex;
@@ -31,9 +18,29 @@
       width: var(--cell-size);
       height: var(--cell-size);
       margin: 0 calc(var(--cell-margin) / 2);
-      border: 1px solid black;
+      color: theme.$dark;
+      background-color: theme.$light;
+      border: 1px solid theme.$base;
       border-radius: 4px;
-      box-shadow: 0 4px 4px rgb(0 0 0 / 10%);
+      box-shadow: 0 4px 4px theme.$shadow1;
+    }
+
+    @include cell-colors.sort-status-colors;
+  }
+
+  .indices {
+    position: absolute;
+    bottom: calc(var(--cell-size) - 5px);
+    z-index: -1;
+    display: flex;
+    font-size: 0.75rem;
+    opacity: 0.25;
+
+    li {
+      display: flex;
+      justify-content: center;
+      width: var(--cell-size);
+      margin: 0 calc(var(--cell-margin) / 2);
     }
   }
 }

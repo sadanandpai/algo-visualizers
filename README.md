@@ -1,7 +1,9 @@
 <div align="center">
     <h1>Sorting Visualizer</h1>
     <h2>Responsive visualizer built using React for popular algorithms</h2>
-    <a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="cover.png" alt="cover" /></a>
+    <a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="./public/images/cell.png" alt="cover" /></a>
+    <br/>
+    <a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="./public/images/bar.png" alt="cover" /></a>
     <a href="https://sadanandpai.github.io/sorting-visualizer/dist/">See it in action</a>
 </div>
 

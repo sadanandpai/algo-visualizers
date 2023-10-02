@@ -7,9 +7,9 @@ import {
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import classes from "./controls.module.scss";
-import pauseIcon from "/pause.svg";
-import playIcon from "/play.svg";
-import resetIcon from "/reset.svg";
+import pauseIcon from "/icons/pause.svg";
+import playIcon from "/icons/play.svg";
+import resetIcon from "/icons/reset.svg";
 import { useEffect } from "react";
 
 function Execution() {
@@ -38,11 +38,11 @@ function Execution() {
       <button
         onClick={() => dispatch(setIsPlaying(!isPlaying))}
         disabled={array.length === 0 || isPlaying === null}
+        data-tooltip={isPlaying ? "Pause" : "Play"}
       >
         <img
           src={isPlaying ? pauseIcon : playIcon}
           alt={isPlaying ? "Pause" : "Play"}
-          title={isPlaying ? "Pause" : "Play"}
           height={24}
           width={24}
         />
@@ -51,18 +51,18 @@ function Execution() {
       <button
         onClick={() => dispatch(setReset())}
         disabled={array.length === 0}
-        title={"Reset"}
+        data-tooltip="Reset"
       >
         <img src={resetIcon} height={24} width={24} />
       </button>
 
       <input
+        data-tooltip="Animation speed"
         type="range"
         min={1}
         max={20}
         value={speed}
         step={1}
-        title="Animation speed"
         onChange={(e) => dispatch(setSpeed(e.target.valueAsNumber))}
       />
     </div>

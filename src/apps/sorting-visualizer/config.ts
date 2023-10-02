@@ -11,11 +11,12 @@ export const cellCSS = {
 export const barCSS = {
   size: 30,
   minSize: 10,
-  margin: 1,
+  maxHeight: 250,
+  margin: 2,
 };
 
 export const colors = {
-  sort: "limegreen",
+  sort: "#8cf12b",
   highlight: "yellow",
   pivot: "orange",
   bar: "lightgrey",
@@ -26,7 +27,11 @@ export const selectedAlgosStatus = algoList.map(() => true);
 const root = document.querySelector(":root") as HTMLElement;
 root.style.setProperty("--cell-size", `${cellCSS.size}px`);
 root.style.setProperty("--cell-margin", `${cellCSS.margin}px`);
-root.style.setProperty("--bar-bg", `${colors.bar}`);
 root.style.setProperty("--bar-size", `${barCSS.size}px`);
 root.style.setProperty("--bar-min-size", `${barCSS.minSize}px`);
+root.style.setProperty("--bar-max-height", `${barCSS.maxHeight}px`);
 root.style.setProperty("--bar-margin", `${barCSS.margin}px`);
+root.style.setProperty("--color-sort", colors.sort);
+root.style.setProperty("--color-highlight", colors.highlight);
+root.style.setProperty("--color-pivot", colors.pivot);
+root.style.setProperty("--color-bar", colors.bar);

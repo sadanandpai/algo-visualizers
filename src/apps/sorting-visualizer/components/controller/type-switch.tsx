@@ -22,16 +22,19 @@ function TypeSwitch() {
 
   return (
     <div className={classes.switchContainer}>
-      Cell
+      <label>Cell</label>
       <Switch
+        id="visualizerType"
         onChange={() => dispatch(toggleVisualizerType())}
         checked={visualizerType === "bar"}
         checkedIcon={false}
         uncheckedIcon={false}
         height={20}
         width={40}
+        offColor="#2b4bfe"
+        onColor="#2b4bfe"
       />
-      Bar
+      <label>Bar</label>
     </div>
   );
 }

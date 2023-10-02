@@ -3,38 +3,37 @@ import MovingCell from "./moving-cell";
 import SwappingCell from "@/apps/sorting-visualizer/components/cell/swapping-cell";
 import { UIProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./cell.module.scss";
-import { memo } from "react";
 
-const CellUI = memo(function CellUI({
+const CellUI = function CellUI({
   array,
-  swapPositions,
-  sortPositions,
-  highlightPositions,
-  movePositions,
+  swaps,
+  sorts,
+  highlights,
+  moves,
   pivot,
 }: UIProps) {
   function getCell(idx: number, item: number) {
-    if (swapPositions.includes(idx)) {
+    if (swaps.includes(idx)) {
       return (
         <SwappingCell
           key={idx}
           originalOrder={idx}
-          order={swapPositions[0] === idx ? swapPositions[1] : swapPositions[0]}
+          order={swaps[0] === idx ? swaps[1] : swaps[0]}
           value={item}
-          isHighlighted={highlightPositions.includes(idx)}
+          isHighlighted={highlights.includes(idx)}
         />
       );
     }
 
-    if (movePositions && idx >= movePositions[0] && idx <= movePositions[1]) {
+    if (moves && idx >= moves[0] && idx <= moves[1]) {
       return (
         <MovingCell
           key={idx}
           originalOrder={idx}
-          order={idx === movePositions[0] ? movePositions[1] : idx - 1}
-          isSwap={idx === movePositions[0]}
+          order={idx === moves[0] ? moves[1] : idx - 1}
+          isSwap={idx === moves[0]}
           value={item}
-          isHighlighted={highlightPositions.includes(idx)}
+          isHighlighted={highlights.includes(idx)}
         />
       );
     }
@@ -44,8 +43,8 @@ const CellUI = memo(function CellUI({
         key={idx}
         order={idx}
         value={item}
-        isSorted={sortPositions.includes(idx)}
-        isHighlighted={highlightPositions.includes(idx)}
+        isSorted={sorts.includes(idx)}
+        isHighlighted={highlights.includes(idx)}
         isPivot={idx === pivot}
       />
     );
@@ -57,13 +56,13 @@ const CellUI = memo(function CellUI({
         {array.map((item, idx) => getCell(idx, item))}
       </ul>
 
-      <div className={classes.indices}>
+      <ul className={classes.indices}>
         {array.map((_, idx) => (
-          <span key={idx}>{idx}</span>
+          <li key={idx}>{idx}</li>
         ))}
-      </div>
+      </ul>
     </div>
   );
-});
+};
 
 export default CellUI;

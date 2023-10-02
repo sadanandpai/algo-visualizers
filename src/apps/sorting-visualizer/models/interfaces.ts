@@ -19,10 +19,10 @@ export interface MovingCellProps {
 
 export interface UIProps {
   array: number[];
-  swapPositions: number[];
-  sortPositions: number[];
-  highlightPositions: number[];
-  movePositions?: number[];
+  swaps: number[];
+  sorts: number[];
+  highlights: number[];
+  moves?: number[];
   pivot?: number;
 }
 
@@ -40,7 +40,7 @@ export interface VisualizerProps {
   algoName: string;
   algoFn: (array: number[]) => SortAsyncGenerator;
   onComplete: () => void;
-  Render: React.NamedExoticComponent<UIProps>;
+  Render: React.FC<UIProps>;
 }
 
 export interface AppState {

@@ -1,11 +1,11 @@
-import { memo, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import Header from "./header";
 import { VisualizerProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./visualizer.module.scss";
 import useAlgo from "@/apps/sorting-visualizer/hooks/use-algo.hook";
 
-const Visualizer = memo(function Visualizer({
+const Visualizer = function Visualizer({
   array,
   algoFn,
   algoName = "Bubble",
@@ -15,14 +15,14 @@ const Visualizer = memo(function Visualizer({
   const sortingArray = useRef([...array]);
 
   const {
-    swaps,
-    pivot,
-    compares,
+    swapCount,
+    compareCount,
     isCompleted,
-    swapPositions,
-    sortPositions,
-    highlightPositions,
-    movePositions,
+    swaps,
+    sorts,
+    highlights,
+    pivot,
+    moves,
   } = useAlgo(sortingArray.current, algoFn);
 
   useEffect(() => {
@@ -38,22 +38,22 @@ const Visualizer = memo(function Visualizer({
       <Render
         pivot={pivot}
         array={sortingArray.current}
-        swapPositions={swapPositions}
-        highlightPositions={highlightPositions}
-        sortPositions={sortPositions}
-        movePositions={movePositions}
+        swaps={swaps}
+        highlights={highlights}
+        sorts={sorts}
+        moves={moves}
       />
 
       <footer>
         <span>
-          Swaps: <strong>{swaps}</strong>
+          Swaps: <strong>{swapCount}</strong>
         </span>
         <span>
-          Comparisons: <strong>{compares}</strong>
+          Comparisons: <strong>{compareCount}</strong>
         </span>
       </footer>
     </section>
   );
-});
+};
 
 export default Visualizer;

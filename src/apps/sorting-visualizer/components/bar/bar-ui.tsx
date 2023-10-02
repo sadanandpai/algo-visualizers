@@ -1,55 +1,49 @@
-import { memo, useMemo } from "react";
-
 import { UIProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./bar.module.scss";
-import { colors } from "@/apps/sorting-visualizer/config";
+import { useMemo } from "react";
 
-const BarUI = memo(function BarUI({
-  array,
-  sortPositions,
-  highlightPositions,
-  pivot,
-}: UIProps) {
+function BarUI({ array, sorts, highlights, pivot }: UIProps) {
+  const max = useMemo(() => Math.max(...array), [array]);
+
   function getBarColor(idx: number) {
-    let backgroundColor = "";
+    let cellClass = "";
 
     if (pivot === idx) {
-      backgroundColor = colors.pivot;
+      cellClass = "pivot";
     }
 
-    if (highlightPositions.includes(idx)) {
-      backgroundColor = colors.highlight;
+    if (sorts.includes(idx)) {
+      cellClass = "sort";
     }
 
-    if (sortPositions.includes(idx)) {
-      backgroundColor = colors.sort;
+    if (highlights.includes(idx)) {
+      cellClass = "highlight";
     }
 
-    return backgroundColor;
+    return cellClass;
   }
-
-  const max = useMemo(() => Math.max(...array), [array]);
 
   return (
     <div className={classes.arrayContainer}>
-      {array.map((item, idx) => (
-        <div
-          key={idx}
-          className={classes.bar}
-          style={{
-            height: `${(item / max) * 100}%`,
-            backgroundColor: getBarColor(idx),
-          }}
-        ></div>
-      ))}
-
-      <div className={classes.indices}>
-        {array.map((_, idx) => (
-          <span key={idx}>{idx}</span>
+      <ul className={classes.values}>
+        {array.map((item, idx) => (
+          <li
+            key={idx}
+            className={classes[getBarColor(idx)]}
+            style={{
+              height: `${(item / max) * 100}%`,
+            }}
+          ></li>
         ))}
-      </div>
+      </ul>
+
+      <ul className={classes.indices}>
+        {array.map((_, idx) => (
+          <li key={idx}>{idx}</li>
+        ))}
+      </ul>
     </div>
   );
-});
+}
 
 export default BarUI;

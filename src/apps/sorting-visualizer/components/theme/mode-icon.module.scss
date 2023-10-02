@@ -1,0 +1,18 @@
+@use "/src/styles/theme";
+
+.iconBtn {
+  position: absolute;
+  right: 20px;
+  bottom: 15px;
+  padding: 5px;
+  cursor: pointer;
+  background-color: theme.$light;
+  border: 1px solid theme.$dark;
+  border-radius: 50%;
+  opacity: 0.5;
+
+  img {
+    width: 25px;
+    height: 25px;
+  }
+}

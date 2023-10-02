@@ -1,0 +1,46 @@
+/* stylelint-disable scss/at-rule-no-unknown */
+@use "./styles/tooltip";
+@use "./styles/themes/light";
+@use "./styles/themes/dark";
+@use "./styles/theme";
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @include light.light-theme;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    @include dark.dark-theme;
+  }
+}
+
+html[data-theme="light"] {
+  @include light.light-theme;
+}
+
+html[data-theme="dark"] {
+  @include dark.dark-theme;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  color: theme.$base;
+  background-color: theme.$background;
+}
+
+#screen-layout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  pointer-events: none;
+
+  * {
+    pointer-events: all;
+  }
+}

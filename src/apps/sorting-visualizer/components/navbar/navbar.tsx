@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { NavbarProps } from "@/apps/sorting-visualizer/models/interfaces";
 import classes from "./navbar.module.scss";
-import hamIcon from "/ham.svg";
+import hamIcon from "/icons/ham.svg";
 import { useState } from "react";
 
 function Navbar({ menuItems }: NavbarProps) {
