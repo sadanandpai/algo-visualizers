@@ -88,14 +88,6 @@
   }
 }
 
-@media screen and (prefers-color-scheme: dark) {
-  .navbar {
-    img {
-      filter: invert(1);
-    }
-  }
-}
-
 [data-theme="dark"] {
   .navbar {
     img {

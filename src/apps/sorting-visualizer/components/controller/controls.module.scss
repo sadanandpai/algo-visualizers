@@ -105,12 +105,6 @@
   }
 }
 
-@media screen and (prefers-color-scheme: dark) {
-  img {
-    filter: invert(1);
-  }
-}
-
 [data-theme="dark"] {
   /* stylelint-disable-next-line no-descending-specificity */
   .controllerWrapper img {
