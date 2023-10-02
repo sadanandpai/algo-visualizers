@@ -23,6 +23,11 @@
         border: 1px solid transparent;
         outline: 2px solid red;
       }
+      
+      .buttonContainer {
+        display: grid;
+        place-content: center;
+      }
 
       .rndmBtn {
         padding: 5px 10px;
@@ -100,3 +105,15 @@
     }
   }
 }
+
+@media screen and (width <= 767px) {
+  .controllerWrapper .controller .numbers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    .arrayInput {
+      grid-column: span 2;
+    }
+  }
+}
+  
