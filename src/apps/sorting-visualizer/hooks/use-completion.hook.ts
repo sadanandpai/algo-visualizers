@@ -10,8 +10,6 @@ function useCompletion(count: number, reset: boolean) {
   }, [reset]);
 
   function onComplete() {
-    console.log('completed');
-
     completionCount.current++;
     if (completionCount.current === count) {
       setIsComplete(true);
