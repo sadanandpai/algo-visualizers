@@ -8,7 +8,8 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import {
   convertArrayStringToArray,
   convertInputToArrayString,
-  getRndmNumInRange
+  getRndmNumInRange,
+  sortArray
 } from '@/apps/sorting-visualizer/helpers/array-helpers'
 
 import classes from './controls.module.scss'
@@ -35,21 +36,15 @@ function ArrayInput () {
   }
 
   const handleSortAscending = () => {
-    const sortedAscending: number[] = input
-      .split(', ')
-      .map(num => parseInt(num, 10))
-      .sort((a, b) => a - b)
-    setInput(sortedAscending.join(', '))
-    dispatch(setArray(sortedAscending))
+    const sortedAscending = sortArray(input, 'asc');
+    setInput(sortedAscending.join(', '));
+    dispatch(setArray(sortedAscending));
   }
 
   const handleSortDescending = () => {
-    const sortedDescending: number[] = input
-      .split(', ')
-      .map(num => parseInt(num, 10))
-      .sort((a, b) => b - a)
-    setInput(sortedDescending.join(', '))
-    dispatch(setArray(sortedDescending))
+    const sortedDescending = sortArray(input, 'desc');
+    setInput(sortedDescending.join(', '));
+    dispatch(setArray(sortedDescending));
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
