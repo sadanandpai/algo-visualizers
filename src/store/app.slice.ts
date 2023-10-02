@@ -1,19 +1,19 @@
-import { AppState, Theme } from "@/types/interfaces";
+import { AppState, Theme } from '@/types/interfaces';
 
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: AppState = {
   theme: null,
 };
 
 export const appSlice = createSlice({
-  name: "app",
+  name: 'app',
   initialState,
   reducers: {
     setTheme: (state, action: PayloadAction<Theme>) => {
       state.theme = action.payload;
-      document.documentElement.setAttribute("data-theme", action.payload);
+      document.documentElement.setAttribute('data-theme', action.payload);
     },
   },
 });

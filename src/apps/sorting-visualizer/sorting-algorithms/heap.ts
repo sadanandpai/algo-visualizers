@@ -3,9 +3,9 @@ import {
   showPivot,
   sort,
   swap,
-} from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
+} from '@/apps/sorting-visualizer/helpers/algorithm-helpers';
 
-import { SortAsyncGenerator } from "@/apps/sorting-visualizer/models/types";
+import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
 
 export async function* heapSort(array: number[]): SortAsyncGenerator {
   let length = array.length;

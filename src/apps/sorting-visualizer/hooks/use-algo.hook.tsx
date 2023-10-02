@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-import { SortAsyncGenerator } from "@/apps/sorting-visualizer/models/types";
-import { resolveWhenPlaying } from "@/apps/sorting-visualizer/store/global.state";
+import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
+import { resolveWhenPlaying } from '@/apps/sorting-visualizer/store/global.state';
 
 function useAlgo(
   array: number[],
@@ -27,26 +27,26 @@ function useAlgo(
       setMoves([-1, -1]);
 
       switch (data.type) {
-        case "swap":
+        case 'swap':
           setHighlights(data.positions);
           setSwaps(data.positions);
           if (data.positions[0] !== data.positions[1]) {
             swapCount.current++;
           }
           break;
-        case "sort":
+        case 'sort':
           setSorts((arr) => [...arr, data.position]);
           break;
-        case "highlight":
+        case 'highlight':
           setHighlights(data.positions);
           if (data.positions[0] !== data.positions[1]) {
             compareCount.current++;
           }
           break;
-        case "pivot":
+        case 'pivot':
           setPivot(data.position);
           break;
-        case "move":
+        case 'move':
           setHighlights([data.positions[0], data.positions[0] + 1]);
           setMoves(data.positions);
           if (data.positions[0] !== data.positions[1]) {

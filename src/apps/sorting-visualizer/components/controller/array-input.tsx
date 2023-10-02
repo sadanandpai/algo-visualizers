@@ -1,93 +1,49 @@
-import React, { useState, useEffect } from 'react'
-import {
-  setArray,
-  setIsPlaying,
-  setReset
-} from '@/apps/sorting-visualizer/store/sorting-visualizer.slice'
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import React, { useEffect, useState } from 'react';
 import {
   convertArrayStringToArray,
   convertInputToArrayString,
-  getRndmNumInRange,
-  sortArray
-} from '@/apps/sorting-visualizer/helpers/array-helpers'
+} from '@/apps/sorting-visualizer/helpers/array-helpers';
+import {
+  setArray,
+  setIsPlaying,
+  setReset,
+} from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
-import classes from './controls.module.scss'
+import NumberGenerator from './number-generator';
+import classes from './controls.module.scss';
 
-type SortFunction = () => void
-
-function ArrayInput () {
-  const dispatch = useAppDispatch()
-  const array = useAppSelector(state => state.sortViz.array)
-  const [input, setInput] = useState(array.join(', '))
-  // const [sortingOptionsVisible, setSortingOptionsVisible] = useState(false)
+function ArrayInput() {
+  const dispatch = useAppDispatch();
+  const array = useAppSelector((state) => state.sortViz.array);
+  const [input, setInput] = useState(array.join(', '));
 
   useEffect(() => {
-    dispatch(setIsPlaying(false))
-    dispatch(setReset())
-  }, [array, dispatch])
+    dispatch(setIsPlaying(false));
+    dispatch(setReset());
+    setInput(array.join(', '));
+  }, [array, dispatch]);
 
-  const onRandomize = () => {
-    const newInput = Array.from(new Array(getRndmNumInRange(10, 40)), () =>
-      getRndmNumInRange()
-    )
-    setInput(newInput.join(', '))
-    dispatch(setArray(newInput))
-  }
-
-  const handleSortAscending = () => {
-    const sortedAscending = sortArray(input, 'asc');
-    setInput(sortedAscending.join(', '));
-    dispatch(setArray(sortedAscending));
-  }
-
-  const handleSortDescending = () => {
-    const sortedDescending = sortArray(input, 'desc');
-    setInput(sortedDescending.join(', '));
-    dispatch(setArray(sortedDescending));
-  }
-
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputAsStr = convertInputToArrayString(e.target.value)
-    setInput(inputAsStr)
-    dispatch(setArray(convertArrayStringToArray(inputAsStr)))
-  }
-
-  const sortOptions: { [key: string]: SortFunction } = {
-    ascending: handleSortAscending,
-    descending: handleSortDescending
-  }
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputAsStr = convertInputToArrayString(e.target.value);
+    setInput(inputAsStr);
+    const inputAsArray = convertArrayStringToArray(inputAsStr);
+    dispatch(setArray(inputAsArray));
+  };
 
   return (
     <div className={classes.numbers}>
-      <button className={classes.rndmBtn} onClick={onRandomize}>
-        Randomize
-      </button>
-      {/* <div className={classes.buttonContainer}> */}
-          <select
-            className={classes.buttonContainer}
-            onChange={e => {
-              let sortOption = e.target.value
-              if (sortOptions[sortOption]) {
-                sortOptions[sortOption]()
-              }
-            }}
-          >
-            <option value=''>Sort </option>
-            <option value='ascending'>Ascending</option>
-            <option value='descending'>Descending</option>
-          </select>
-      {/* </div> */}
+      <NumberGenerator />
 
       <input
         className={classes.arrayInput}
-        type='text'
-        placeholder='Numbers to sort (comma separate - max 3 digits)'
+        type="text"
+        placeholder="Numbers to sort (comma separate - max 3 digits)"
         value={input}
-        onChange={onChange}
+        onChange={onInputChange}
       />
     </div>
-  )
+  );
 }
 
-export default ArrayInput
+export default ArrayInput;

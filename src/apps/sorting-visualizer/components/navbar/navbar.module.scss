@@ -1,4 +1,4 @@
-@use "/src/styles/theme";
+@use '/src/styles/theme';
 
 .navbar {
   position: relative;
@@ -38,7 +38,7 @@
     background-color: theme.$background;
     box-shadow: 0 4px 4px theme.$shadow1;
 
-    &[data-toggle="false"] {
+    &[data-toggle='false'] {
       display: none;
     }
 
@@ -88,7 +88,7 @@
   }
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   .navbar {
     img {
       filter: invert(1);

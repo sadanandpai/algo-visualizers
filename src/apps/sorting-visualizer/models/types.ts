@@ -1,10 +1,10 @@
 export type SortAsyncGenerator = AsyncGenerator<
   | {
-      type: "swap" | "highlight" | "move";
+      type: 'swap' | 'highlight' | 'move';
       positions: number[];
     }
   | {
-      type: "sort" | "pivot";
+      type: 'sort' | 'pivot';
       position: number;
     },
   void | number,

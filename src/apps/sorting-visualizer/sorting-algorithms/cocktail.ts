@@ -2,9 +2,9 @@ import {
   highlight,
   sort,
   swap,
-} from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
+} from '@/apps/sorting-visualizer/helpers/algorithm-helpers';
 
-import { SortAsyncGenerator } from "@/apps/sorting-visualizer/models/types";
+import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
 
 export async function* cocktailSort(array: number[]): SortAsyncGenerator {
   for (let i = 0; i < array.length; i++) {
@@ -18,11 +18,9 @@ export async function* cocktailSort(array: number[]): SortAsyncGenerator {
         yield* swap(array, j, j + 1);
         sorted = 0;
       }
-
     }
 
     if (sorted == 1) {
-
       for (let index = 0; index < array.length; index++) {
         yield* sort(index);
       }
@@ -41,7 +39,6 @@ export async function* cocktailSort(array: number[]): SortAsyncGenerator {
         yield* swap(array, k - 1, k);
         sorted = 0;
       }
-
     }
 
     if (sorted == 1) {

@@ -1,11 +1,11 @@
 import {
   modifyAlgoSelection,
   setReset,
-} from "@/apps/sorting-visualizer/store/sorting-visualizer.slice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+} from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
-import { algoList } from "@/apps/sorting-visualizer/sorting-algorithms/algo-list";
-import classes from "./controls.module.scss";
+import { algoList } from '@/apps/sorting-visualizer/sorting-algorithms/algo-list';
+import classes from './controls.module.scss';
 
 function AlgoSelection() {
   const dispatch = useAppDispatch();

@@ -3,9 +3,9 @@ import {
   showPivot,
   sort,
   swap,
-} from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
+} from '@/apps/sorting-visualizer/helpers/algorithm-helpers';
 
-import { SortAsyncGenerator } from "@/apps/sorting-visualizer/models/types";
+import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
 
 export async function* quickSort(
   array: number[],
@@ -14,7 +14,7 @@ export async function* quickSort(
 ): SortAsyncGenerator {
   if (low <= high) {
     const pivot = yield* partition(array, low, high);
-    if (typeof pivot === "number") {
+    if (typeof pivot === 'number') {
       yield* quickSort(array, low, pivot - 1);
       yield* quickSort(array, pivot + 1, high);
     }

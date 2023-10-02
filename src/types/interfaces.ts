@@ -1,6 +1,6 @@
 export const enum Theme {
-  LIGHT = "light",
-  DARK = "dark",
+  LIGHT = 'light',
+  DARK = 'dark',
 }
 
 export interface AppState {

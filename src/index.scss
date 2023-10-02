@@ -1,9 +1,9 @@
 /* stylelint-disable scss/at-rule-no-unknown */
-@use "./styles/tooltip";
-@use "./styles/themes/light";
-@use "./styles/themes/dark";
-@use "./styles/theme";
-@import "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap";
+@use './styles/tooltip';
+@use './styles/themes/light';
+@use './styles/themes/dark';
+@use './styles/theme';
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,11 +18,11 @@
   }
 }
 
-html[data-theme="light"] {
+html[data-theme='light'] {
   @include light.light-theme;
 }
 
-html[data-theme="dark"] {
+html[data-theme='dark'] {
   @include dark.dark-theme;
 }
 

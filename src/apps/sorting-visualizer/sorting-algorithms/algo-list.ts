@@ -1,43 +1,43 @@
-import { bubbleSort } from "./bubble";
-import { cocktailSort } from "./cocktail";
-import { heapSort } from "./heap";
-import { insertionSort } from "./insertion";
-import { mergeSort } from "./merge";
-import { quickSort } from "./quick";
-import { selectionSort } from "./selection";
-import { shellSort } from "./shell";
+import { bubbleSort } from './bubble';
+import { cocktailSort } from './cocktail';
+import { heapSort } from './heap';
+import { insertionSort } from './insertion';
+import { mergeSort } from './merge';
+import { quickSort } from './quick';
+import { selectionSort } from './selection';
+import { shellSort } from './shell';
 
 export const algoList = [
   {
-    name: "bubble",
+    name: 'bubble',
     fn: bubbleSort,
   },
   {
-    name: "selection",
+    name: 'selection',
     fn: selectionSort,
   },
   {
-    name: "insertion",
+    name: 'insertion',
     fn: insertionSort,
   },
   {
-    name: "heap",
+    name: 'heap',
     fn: heapSort,
   },
   {
-    name: "merge",
+    name: 'merge',
     fn: mergeSort,
   },
   {
-    name: "quick",
+    name: 'quick',
     fn: quickSort,
   },
   {
-    name: "shell",
+    name: 'shell',
     fn: shellSort,
   },
   {
-    name: "cocktail",
+    name: 'cocktail',
     fn: cocktailSort,
   },
 ];

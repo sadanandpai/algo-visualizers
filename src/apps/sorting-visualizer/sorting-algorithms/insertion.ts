@@ -2,9 +2,9 @@ import {
   highlight,
   sort,
   swap,
-} from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
+} from '@/apps/sorting-visualizer/helpers/algorithm-helpers';
 
-import { SortAsyncGenerator } from "@/apps/sorting-visualizer/models/types";
+import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
 
 export async function* insertionSort(array: number[]): SortAsyncGenerator {
   let i, j;

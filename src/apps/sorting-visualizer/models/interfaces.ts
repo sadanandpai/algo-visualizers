@@ -1,4 +1,4 @@
-import { SortAsyncGenerator } from "./types";
+import { SortAsyncGenerator } from './types';
 
 export interface CellProps {
   order: number;
@@ -40,12 +40,11 @@ export interface VisualizerProps {
   algoName: string;
   algoFn: (array: number[]) => SortAsyncGenerator;
   onComplete: () => void;
-  Render: React.FC<UIProps>;
 }
 
 export interface AppState {
   array: number[];
-  visualizerType: "cell" | "bar";
+  visualizerType: 'cell' | 'bar';
   isPlaying: boolean | null;
   reset: boolean;
   time: number;

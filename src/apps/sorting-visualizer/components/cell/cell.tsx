@@ -1,5 +1,5 @@
-import { CellProps } from "@/apps/sorting-visualizer/models/interfaces";
-import classes from "./cell.module.scss";
+import { CellProps } from '@/apps/sorting-visualizer/models/interfaces';
+import classes from './cell.module.scss';
 
 function Cell({
   order,
@@ -9,18 +9,18 @@ function Cell({
   isHighlighted = false,
   isPivot = false,
 }: CellProps) {
-  let cellClass = "";
+  let cellClass = '';
 
   if (isPivot) {
-    cellClass = "pivot";
+    cellClass = 'pivot';
   }
 
   if (isSorted) {
-    cellClass = "sort";
+    cellClass = 'sort';
   }
 
   if (isHighlighted) {
-    cellClass = "highlight";
+    cellClass = 'highlight';
   }
 
   return (

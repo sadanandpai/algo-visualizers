@@ -1,4 +1,4 @@
-@use "/src/styles/theme";
+@use '/src/styles/theme';
 
 .controllerWrapper {
   padding: 0 20px;
@@ -9,14 +9,40 @@
     margin-bottom: 20px;
 
     .numbers {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;      
+      display: flex;
+      flex-basis: 80%;
+      flex-wrap: wrap;
+      gap: 16px;
+
+      .generator {
+        display: flex;
+        flex: 1;
+        gap: 16px;
+
+        .rndmBtn {
+          flex: 1;
+          padding: 5px 10px;
+          color: theme.$light;
+          background-color: theme.$primary;
+          border: none;
+          border-radius: 4px;
+        }
+
+        .select {
+          flex: 1;
+          padding: 0 4px;
+          color: theme.$dark;
+          text-transform: capitalize;
+          background-color: theme.$light;
+          border: 1px solid theme.$shadow1;
+          border-radius: 4px;
+        }
+      }
 
       .arrayInput {
-        grid-column: span 2;
-        flex: 1;
+        flex: 2;
         width: 100%;
+        min-width: 300px;
         padding: 5px;
         color: theme.$dark;
         background-color: theme.$light;
@@ -27,19 +53,6 @@
       .arrayInput:placeholder-shown {
         border: 1px solid transparent;
         outline: 2px solid theme.$error;
-      }
-      
-      .buttonContainer {
-        display: grid;
-        place-content: center;
-      }
-
-      .rndmBtn {
-        padding: 5px 10px;
-        color: theme.$light;
-        background-color: theme.$primary;
-        border: none;
-        border-radius: 4px;
       }
     }
 
@@ -58,7 +71,7 @@
         opacity: 0.5;
       }
 
-      input[type="range"] {
+      input[type='range'] {
         flex: 1;
         cursor: pointer;
       }
@@ -101,15 +114,20 @@
   justify-content: center;
 }
 
+@media screen and (width >= 768px) {
+  .controllerWrapper .controller {
+    .numbers {
+      .generator,
+      .rndmBtn {
+        flex-grow: 0;
+      }
+    }
+  }
+}
+
 @media screen and (width >= 960px) {
   .controllerWrapper .controller {
     display: flex;
-
-    .numbers {
-      display: flex;
-      flex-basis: 75%;
-      gap: 16px;
-    }
 
     .controls {
       margin-top: 0;
@@ -117,7 +135,7 @@
   }
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   /* stylelint-disable-next-line no-descending-specificity */
   .controllerWrapper img {
     filter: invert(1);

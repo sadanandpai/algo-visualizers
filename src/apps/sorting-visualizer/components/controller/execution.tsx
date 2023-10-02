@@ -3,14 +3,14 @@ import {
   setReset,
   setSpeed,
   startTimer,
-} from "@/apps/sorting-visualizer/store/sorting-visualizer.slice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+} from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
-import classes from "./controls.module.scss";
-import pauseIcon from "/icons/pause.svg";
-import playIcon from "/icons/play.svg";
-import resetIcon from "/icons/reset.svg";
-import { useEffect } from "react";
+import classes from './controls.module.scss';
+import pauseIcon from '/icons/pause.svg';
+import playIcon from '/icons/play.svg';
+import resetIcon from '/icons/reset.svg';
+import { useEffect } from 'react';
 
 function Execution() {
   const dispatch = useAppDispatch();
@@ -38,11 +38,11 @@ function Execution() {
       <button
         onClick={() => dispatch(setIsPlaying(!isPlaying))}
         disabled={array.length === 0 || isPlaying === null}
-        data-tooltip={isPlaying ? "Pause" : "Play"}
+        data-tooltip={isPlaying ? 'Pause' : 'Play'}
       >
         <img
           src={isPlaying ? pauseIcon : playIcon}
-          alt={isPlaying ? "Pause" : "Play"}
+          alt={isPlaying ? 'Pause' : 'Play'}
           height={24}
           width={24}
         />

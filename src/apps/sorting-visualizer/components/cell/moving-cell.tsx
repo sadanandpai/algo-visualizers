@@ -1,11 +1,11 @@
 import {
   getMovingAnimation,
   getSwapAnimation,
-} from "@/apps/sorting-visualizer/helpers/key-frames-helpers";
+} from '@/apps/sorting-visualizer/helpers/key-frames-helpers';
 
-import Cell from "@/apps/sorting-visualizer/components/cell/cell";
-import { MovingCellProps } from "@/apps/sorting-visualizer/models/interfaces";
-import { swapInterval } from "@/apps/sorting-visualizer/store/global.state";
+import Cell from '@/apps/sorting-visualizer/components/cell/cell';
+import { MovingCellProps } from '@/apps/sorting-visualizer/models/interfaces';
+import { swapInterval } from '@/apps/sorting-visualizer/store/global.state';
 
 function MovingCell({
   originalOrder,

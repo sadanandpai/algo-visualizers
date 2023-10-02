@@ -1,7 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
-import { HeaderProps } from "@/apps/sorting-visualizer/models/interfaces";
-import { useAppSelector } from "@/store/hooks";
+import { HeaderProps } from '@/apps/sorting-visualizer/models/interfaces';
+import { useAppSelector } from '@/store/hooks';
 
 function Header({ algoName, isCompleted }: HeaderProps) {
   const time = useAppSelector((state) => state.sortViz.time);

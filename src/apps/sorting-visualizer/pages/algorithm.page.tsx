@@ -1,8 +1,8 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom';
 
-import SingleAlgorithmLayout from "@/apps/sorting-visualizer/layouts/single-algorithm.layout";
-import { menuItems } from "@/apps/sorting-visualizer/config";
-import { useEffect } from "react";
+import SingleAlgorithmLayout from '@/apps/sorting-visualizer/layouts/single-algorithm.layout';
+import { menuItems } from '@/apps/sorting-visualizer/config';
+import { useEffect } from 'react';
 
 function AlgorithmPage() {
   const { algoName } = useParams();

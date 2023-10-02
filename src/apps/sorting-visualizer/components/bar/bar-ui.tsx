@@ -1,23 +1,23 @@
-import { UIProps } from "@/apps/sorting-visualizer/models/interfaces";
-import classes from "./bar.module.scss";
-import { useMemo } from "react";
+import { UIProps } from '@/apps/sorting-visualizer/models/interfaces';
+import classes from './bar.module.scss';
+import { useMemo } from 'react';
 
 function BarUI({ array, sorts, highlights, pivot }: UIProps) {
   const max = useMemo(() => Math.max(...array), [array]);
 
   function getBarColor(idx: number) {
-    let cellClass = "";
+    let cellClass = '';
 
     if (pivot === idx) {
-      cellClass = "pivot";
+      cellClass = 'pivot';
     }
 
     if (sorts.includes(idx)) {
-      cellClass = "sort";
+      cellClass = 'sort';
     }
 
     if (highlights.includes(idx)) {
-      cellClass = "highlight";
+      cellClass = 'highlight';
     }
 
     return cellClass;

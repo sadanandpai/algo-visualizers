@@ -1,13 +1,8 @@
-import {
-  setIsPlaying,
-  setReset,
-  toggleVisualizerType,
-} from "@/apps/sorting-visualizer/store/sorting-visualizer.slice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
-import Switch from "react-switch";
-import classes from "./controls.module.scss";
-import { useEffect } from "react";
+import Switch from 'react-switch';
+import classes from './controls.module.scss';
+import { toggleVisualizerType } from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
 
 function TypeSwitch() {
   const dispatch = useAppDispatch();
@@ -15,18 +10,13 @@ function TypeSwitch() {
     (state) => state.sortViz.visualizerType
   );
 
-  useEffect(() => {
-    dispatch(setIsPlaying(false));
-    dispatch(setReset());
-  }, [visualizerType, dispatch]);
-
   return (
     <div className={classes.switchContainer}>
       <label>Cell</label>
       <Switch
         id="visualizerType"
         onChange={() => dispatch(toggleVisualizerType())}
-        checked={visualizerType === "bar"}
+        checked={visualizerType === 'bar'}
         checkedIcon={false}
         uncheckedIcon={false}
         height={20}

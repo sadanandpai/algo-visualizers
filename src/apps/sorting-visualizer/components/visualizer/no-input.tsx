@@ -1,4 +1,4 @@
-import classes from "./visualizer.module.scss";
+import classes from './visualizer.module.scss';
 
 function NoInput() {
   return (

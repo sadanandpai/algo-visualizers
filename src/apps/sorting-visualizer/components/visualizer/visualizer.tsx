@@ -1,16 +1,16 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
-import Header from "./header";
-import { VisualizerProps } from "@/apps/sorting-visualizer/models/interfaces";
-import classes from "./visualizer.module.scss";
-import useAlgo from "@/apps/sorting-visualizer/hooks/use-algo.hook";
+import Header from './header';
+import VisualizerDisplay from './visualizer-display';
+import { VisualizerProps } from '@/apps/sorting-visualizer/models/interfaces';
+import classes from './visualizer.module.scss';
+import useAlgo from '@/apps/sorting-visualizer/hooks/use-algo.hook';
 
 const Visualizer = function Visualizer({
   array,
   algoFn,
-  algoName = "Bubble",
+  algoName = 'Bubble',
   onComplete,
-  Render,
 }: VisualizerProps) {
   const sortingArray = useRef([...array]);
 
@@ -35,7 +35,7 @@ const Visualizer = function Visualizer({
     <section className={classes.container}>
       <Header algoName={algoName} isCompleted={isCompleted} />
 
-      <Render
+      <VisualizerDisplay
         pivot={pivot}
         array={sortingArray.current}
         swaps={swaps}

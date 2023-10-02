@@ -2,9 +2,9 @@ import {
   highlight,
   sort,
   swap,
-} from "@/apps/sorting-visualizer/helpers/algorithm-helpers";
+} from '@/apps/sorting-visualizer/helpers/algorithm-helpers';
 
-import { SortAsyncGenerator } from "@/apps/sorting-visualizer/models/types";
+import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
 
 export async function* shellSort(array: number[]): SortAsyncGenerator {
   let gap = 1;
@@ -14,10 +14,9 @@ export async function* shellSort(array: number[]): SortAsyncGenerator {
   }
 
   while (gap > 0) {
-    
     for (let i = gap; i < array.length; i++) {
       let j = i;
-      let temp = array[i];
+      const temp = array[i];
       yield* highlight(j, j - gap);
       while (j > 0 && array[j] <= array[j - gap]) {
         yield* highlight(j, j - gap);

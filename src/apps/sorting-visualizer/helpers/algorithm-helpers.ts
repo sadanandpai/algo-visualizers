@@ -2,9 +2,9 @@ import {
   highlightInterval,
   resolveWhenPlaying,
   swapInterval,
-} from "@/apps/sorting-visualizer/store/global.state";
+} from '@/apps/sorting-visualizer/store/global.state';
 
-import { SortAsyncGenerator } from "@/apps/sorting-visualizer/models/types";
+import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
 
 export async function* swap(
   array: number[],
@@ -17,34 +17,34 @@ export async function* swap(
   array[i] = array[j];
   array[j] = temp;
 
-  yield { type: "swap", positions: [i, j] };
+  yield { type: 'swap', positions: [i, j] };
   await delay(swapInterval);
 
   await resolveWhenPlaying;
 }
 
 export async function* highlight(...positions: number[]): SortAsyncGenerator {
-  yield { type: "highlight", positions: [-1, -1] };
+  yield { type: 'highlight', positions: [-1, -1] };
   await delay(highlightInterval);
   await resolveWhenPlaying;
 
-  yield { type: "highlight", positions };
+  yield { type: 'highlight', positions };
   await delay(highlightInterval);
 
   await resolveWhenPlaying;
 }
 
 export async function* showPivot(position: number): SortAsyncGenerator {
-  yield { type: "pivot", position };
+  yield { type: 'pivot', position };
 }
 
 export async function* sort(position: number): SortAsyncGenerator {
-  yield { type: "sort", position: position };
+  yield { type: 'sort', position: position };
 }
 
 export async function* move(...positions: number[]): SortAsyncGenerator {
   await resolveWhenPlaying;
-  yield { type: "move", positions };
+  yield { type: 'move', positions };
   await delay(swapInterval);
 }
 

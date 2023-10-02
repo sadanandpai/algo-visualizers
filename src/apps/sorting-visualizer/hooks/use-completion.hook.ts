@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 function useCompletion(count: number, reset: boolean) {
   const [isComplete, setIsComplete] = useState(false);
@@ -10,6 +10,8 @@ function useCompletion(count: number, reset: boolean) {
   }, [reset]);
 
   function onComplete() {
+    console.log('completed');
+
     completionCount.current++;
     if (completionCount.current === count) {
       setIsComplete(true);
