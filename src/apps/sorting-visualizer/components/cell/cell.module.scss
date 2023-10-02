@@ -18,8 +18,8 @@
       width: var(--cell-size);
       height: var(--cell-size);
       margin: 0 calc(var(--cell-margin) / 2);
-      color: black;
-      background-color: white;
+      color: theme.$dark;
+      background-color: theme.$light;
       border: 1px solid theme.$base;
       border-radius: 4px;
       box-shadow: 0 4px 4px theme.$shadow1;

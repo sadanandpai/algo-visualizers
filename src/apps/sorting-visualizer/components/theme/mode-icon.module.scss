@@ -1,15 +1,15 @@
+@use "/src/styles/theme";
+
 .iconBtn {
   position: absolute;
-  right: 25px;
+  right: 20px;
   bottom: 15px;
   padding: 5px;
   cursor: pointer;
-  background-color: white;
-  border: 1px solid black;
+  background-color: theme.$light;
+  border: 1px solid theme.$dark;
   border-radius: 50%;
   opacity: 0.5;
-  fill: red;
-  transition: all 0.5s;
 
   img {
     width: 25px;
