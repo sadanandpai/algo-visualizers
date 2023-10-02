@@ -18,3 +18,12 @@ export function convertArrayStringToArray(input: string) {
 export function getRndmNumInRange(lowerLimit = 0, upperLimit = 999) {
   return Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
 }
+
+export const sortArray = (input: string, order: 'asc' | 'desc'): number[] => {
+  const sortedArray: number[] = input
+    .split(', ')
+    .map(num => parseInt(num, 10))
+    .sort((a, b) => (order === 'asc' ? a - b : b - a));
+  return sortedArray;
+};
+
