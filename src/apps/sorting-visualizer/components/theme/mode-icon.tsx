@@ -41,7 +41,6 @@ function ModeIcon() {
         >
           {currentTheme === Theme.LIGHT ? MoonIcon : SunIcon}
         </button>,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         document.getElementById('screen-layout')!
       )}
     </>

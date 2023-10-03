@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Sadanand pai",
+    "email": "sadypai@gmail.com"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -24,13 +29,15 @@
     "@types/node": "^20.6.3",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.5",
+    "eslint-plugin-unused-imports": "^3.0.0",
     "jsdom": "^22.1.0",
     "postcss": "^8.4.30",
     "sass": "^1.68.0",
@@ -42,5 +49,12 @@
     "typescript": "^5.2.2",
     "vite": "^4.3.9",
     "vitest": "^0.34.5"
-  }
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "volta": {
+    "node": "18.18.0"
+  },
+  "homepage": "https://github.com/sadanandpai/sorting-visualizer"
 }
