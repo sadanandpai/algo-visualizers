@@ -9,7 +9,7 @@ function Navbar({ menuItems }: NavbarProps) {
 
   return (
     <nav className={classes.navbar}>
-      <h1>
+      <h1 data-testid="navbar">
         Sorting visualizers
         <a
           href="https://github.com/sadanandpai/sorting-visualizer"

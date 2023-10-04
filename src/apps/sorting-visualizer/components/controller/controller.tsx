@@ -22,7 +22,7 @@ function Controller() {
 
   return (
     <section className={classes.controllerWrapper}>
-      <div className={classes.controller}>
+      <div className={classes.controller} data-testid="controller">
         <ArrayInput />
         <Execution />
       </div>

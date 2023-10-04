@@ -25,7 +25,7 @@ function BarUI({ array, sorts, highlights, pivot }: UIProps) {
 
   return (
     <div className={classes.arrayContainer}>
-      <ul className={classes.values}>
+      <ul className={classes.values} data-testid="bar-values">
         {array.map((item, idx) => (
           <li
             key={idx}

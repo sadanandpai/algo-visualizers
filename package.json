@@ -13,7 +13,11 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "e2e:open": "start-server-and-test dev http://localhost:5173 cypress:open",
+    "e2e:test": "start-server-and-test dev http://localhost:5173 cypress:run"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -35,6 +39,7 @@
     "@typescript-eslint/parser": "^6.7.4",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "autoprefixer": "^10.4.16",
+    "cypress": "^13.3.0",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -43,6 +48,7 @@
     "jsdom": "^22.1.0",
     "postcss": "^8.4.31",
     "sass": "^1.68.0",
+    "start-server-and-test": "^2.0.1",
     "stylelint": "^15.10.3",
     "stylelint-config-recess-order": "^4.3.0",
     "stylelint-config-standard": "^34.0.0",

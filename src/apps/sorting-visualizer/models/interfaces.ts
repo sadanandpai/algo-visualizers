@@ -35,6 +35,10 @@ export interface NavbarProps {
   menuItems: string[];
 }
 
+export interface NumberGenProps {
+  setInput: React.Dispatch<React.SetStateAction<string>>;
+}
+
 export interface VisualizerProps {
   array: number[];
   algoName: string;

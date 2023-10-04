@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "http://localhost:5173",
+    "target": "ES2015",
+    "lib": ["ES2015", "dom"],
+    "types": ["cypress", "node"],
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "paths": {
+      "@/*": ["../src/*"]
+    }
+  },
+  "include": ["**/*.ts"]
+}

@@ -52,7 +52,7 @@ const CellUI = function CellUI({
 
   return (
     <div className={classes.arrayContainer}>
-      <ul className={classes.values}>
+      <ul className={classes.values} data-testid="cell-values">
         {array.map((item, idx) => getCell(idx, item))}
       </ul>
 

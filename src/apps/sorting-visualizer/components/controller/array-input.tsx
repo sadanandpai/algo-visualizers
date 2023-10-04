@@ -21,7 +21,6 @@ function ArrayInput() {
   useEffect(() => {
     dispatch(setIsPlaying(false));
     dispatch(setReset());
-    setInput(array.join(', '));
   }, [array, dispatch]);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,9 +32,10 @@ function ArrayInput() {
 
   return (
     <div className={classes.numbers}>
-      <NumberGenerator />
+      <NumberGenerator setInput={setInput} />
 
       <input
+        id="user-input"
         className={classes.arrayInput}
         type="text"
         placeholder="Numbers to sort (comma separate - max 3 digits)"

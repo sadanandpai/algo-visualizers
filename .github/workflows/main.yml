@@ -26,6 +26,7 @@ jobs:
         run: |
           npm install
           npm test
+          npm run e2e:test
           rm -rf dist
           npm run build
           git add dist -f

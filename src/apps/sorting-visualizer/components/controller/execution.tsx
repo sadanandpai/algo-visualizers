@@ -36,6 +36,7 @@ function Execution() {
   return (
     <div className={classes.controls}>
       <button
+        data-testid="player"
         onClick={() => dispatch(setIsPlaying(!isPlaying))}
         disabled={array.length === 0 || isPlaying === null}
         data-tooltip={isPlaying ? 'Pause' : 'Play'}
@@ -57,6 +58,7 @@ function Execution() {
       </button>
 
       <input
+        id="speed"
         data-tooltip="Animation speed"
         type="range"
         min={1}
