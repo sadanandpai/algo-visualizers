@@ -1,10 +1,20 @@
 <div align="center">
-    <h1>Sorting Visualizer</h1>
-    <h2>Responsive visualizer built using React for popular algorithms</h2>
-    <a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="./public/images/cell.png" alt="cover" /></a>
-    <br/>
-    <a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="./public/images/bar.png" alt="cover" /></a>
-    <a href="https://sadanandpai.github.io/sorting-visualizer/dist/">See it in action</a>
+  <h1>Sorting Visualizer</h1>
+  <h2>Responsive visualizer built using React for popular algorithms</h2>
+  <div>
+    <a name="stars"><img src="https://img.shields.io/github/stars/sadanandpai/sorting-visualizer?style=for-the-badge"></a>
+    <a name="forks"><img src="https://img.shields.io/github/forks/sadanandpai/sorting-visualizer?logoColor=green&style=for-the-badge"></a>
+    <a name="license"><img src="https://img.shields.io/github/license/sadanandpai/sorting-visualizer?style=for-the-badge"></a>
+  </div>
+
+[![built with Codeium](https://codeium.com/badges/main)](https://codeium.com)
+
+<a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="./public/images/cell.png" alt="cover" /></a>
+<br/>
+<a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="./public/images/bar.png" alt="cover" /></a>
+<a href="https://sadanandpai.github.io/sorting-visualizer/dist/">See it in
+action</a>
+
 </div>
 
 ---
@@ -35,9 +45,12 @@ Features
 
 ### Features built using
 
-- Animations are done using pure CSS and uses [FLIP principle](https://aerotwist.com/blog/flip-your-animations/)
-- Flex is used for array display and manipulation of positions (flex order property)
-- JavaScript async generators are used heavily for the controlled execution of algorithms
+- Animations are done using pure CSS and uses
+  [FLIP principle](https://aerotwist.com/blog/flip-your-animations/)
+- Flex is used for array display and manipulation of positions (flex order
+  property)
+- JavaScript async generators are used heavily for the controlled execution of
+  algorithms
 
 ### Run in your local
 
@@ -49,8 +62,8 @@ Features
 
 ### Contributing Guide
 
-If you want to contribute, improve or fix bugs in this repo, then check out the [Contributing Guide](./CONTRIBUTING.md)
-<br/>
+If you want to contribute, improve or fix bugs in this repo, then check out the
+[Contributing Guide](./CONTRIBUTING.md) <br/>
 
 ### License
 

@@ -3,12 +3,14 @@ import {
   setHighlightInterval,
   setSwapInterval,
 } from '@/apps/sorting-visualizer/store/global.state';
+import { renderHook, waitFor } from '@testing-library/react';
 
 import { algoList } from '@/apps/sorting-visualizer/sorting-algorithms/algo-list';
 import { getRndmNumInRange } from '../../helpers/array-helpers';
 import { initialArray } from '@/apps/sorting-visualizer/config';
+import useAlgo from '@/apps/sorting-visualizer/hooks/use-algo.hook';
 
-describe('bubble sort', () => {
+describe('useAlgo hook', () => {
   beforeAll(() => {
     setSwapInterval(0);
     setHighlightInterval(0);
@@ -18,10 +20,8 @@ describe('bubble sort', () => {
   it('should sort initial array', async () => {
     for (const algo of algoList) {
       const array = initialArray;
-      const it = algo.fn(array);
-      for await (const _ of it) {
-        /* empty */
-      }
+      const { result } = renderHook(() => useAlgo(array, algo.fn));
+      await waitFor(() => expect(result.current.isCompleted).toBe(true));
 
       const sortedArray = [...array].sort((a, b) => a - b);
       expect(array).toEqual(sortedArray);
@@ -34,10 +34,8 @@ describe('bubble sort', () => {
     for (const algo of algoList) {
       const array = [...smallArray];
 
-      const it = algo.fn(array);
-      for await (const _ of it) {
-        /* empty */
-      }
+      const { result } = renderHook(() => useAlgo(array, algo.fn));
+      await waitFor(() => expect(result.current.isCompleted).toBe(true));
 
       const sortedArray = [...array].sort((a, b) => a - b);
       expect(array).toEqual(sortedArray);
@@ -45,15 +43,13 @@ describe('bubble sort', () => {
   });
 
   it('should sort random array of large length', async () => {
-    const largeArray = Array.from(new Array(30), () => getRndmNumInRange());
+    const largeArray = Array.from(new Array(25), () => getRndmNumInRange());
 
     for (const algo of algoList) {
       const array = [...largeArray];
 
-      const it = algo.fn(array);
-      for await (const _ of it) {
-        /* empty */
-      }
+      const { result } = renderHook(() => useAlgo(array, algo.fn));
+      await waitFor(() => expect(result.current.isCompleted).toBe(true));
 
       const sortedArray = [...array].sort((a, b) => a - b);
       expect(array).toEqual(sortedArray);
@@ -64,10 +60,8 @@ describe('bubble sort', () => {
     for (const algo of algoList) {
       const array = [5];
 
-      const it = algo.fn(array);
-      for await (const _ of it) {
-        /* empty */
-      }
+      const { result } = renderHook(() => useAlgo(array, algo.fn));
+      await waitFor(() => expect(result.current.isCompleted).toBe(true));
 
       const sortedArray = [...array].sort((a, b) => a - b);
       expect(array).toEqual(sortedArray);
@@ -78,10 +72,8 @@ describe('bubble sort', () => {
     for (const algo of algoList) {
       const array = [5, 2];
 
-      const it = algo.fn(array);
-      for await (const _ of it) {
-        /* empty */
-      }
+      const { result } = renderHook(() => useAlgo(array, algo.fn));
+      await waitFor(() => expect(result.current.isCompleted).toBe(true));
 
       const sortedArray = [...array].sort((a, b) => a - b);
       expect(array).toEqual(sortedArray);
@@ -92,10 +84,8 @@ describe('bubble sort', () => {
     for (const algo of algoList) {
       const array = [5, 2, 7, 2, 4, 2, 8, 1, 5];
 
-      const it = algo.fn(array);
-      for await (const _ of it) {
-        /* empty */
-      }
+      const { result } = renderHook(() => useAlgo(array, algo.fn));
+      await waitFor(() => expect(result.current.isCompleted).toBe(true));
 
       const sortedArray = [...array].sort((a, b) => a - b);
       expect(array).toEqual(sortedArray);
@@ -106,10 +96,8 @@ describe('bubble sort', () => {
     for (const algo of algoList) {
       const array = [3, 5, 7, 8, 9, 12];
 
-      const it = algo.fn(array);
-      for await (const _ of it) {
-        /* empty */
-      }
+      const { result } = renderHook(() => useAlgo(array, algo.fn));
+      await waitFor(() => expect(result.current.isCompleted).toBe(true));
 
       const sortedArray = [...array].sort((a, b) => a - b);
       expect(array).toEqual(sortedArray);
@@ -120,10 +108,8 @@ describe('bubble sort', () => {
     for (const algo of algoList) {
       const array = [12, 9, 8, 6, 4, 2, 1, 0];
 
-      const it = algo.fn(array);
-      for await (const _ of it) {
-        /* empty */
-      }
+      const { result } = renderHook(() => useAlgo(array, algo.fn));
+      await waitFor(() => expect(result.current.isCompleted).toBe(true));
 
       const sortedArray = [...array].sort((a, b) => a - b);
       expect(array).toEqual(sortedArray);

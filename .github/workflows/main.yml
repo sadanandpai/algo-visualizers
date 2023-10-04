@@ -25,6 +25,7 @@ jobs:
       - name: setup deployment
         run: |
           npm install
+          npm test
           rm -rf dist
           npm run build
           git add dist -f
