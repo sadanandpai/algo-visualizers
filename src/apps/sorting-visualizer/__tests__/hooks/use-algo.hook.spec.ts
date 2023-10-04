@@ -6,7 +6,7 @@ import {
 import { renderHook, waitFor } from '@testing-library/react';
 
 import { algoList } from '@/apps/sorting-visualizer/sorting-algorithms/algo-list';
-import { getRndmNumInRange } from '../../helpers/array-helpers';
+import { getRndmNumInRange } from '@/apps/sorting-visualizer/helpers/array-helpers';
 import { initialArray } from '@/apps/sorting-visualizer/config';
 import useAlgo from '@/apps/sorting-visualizer/hooks/use-algo.hook';
 

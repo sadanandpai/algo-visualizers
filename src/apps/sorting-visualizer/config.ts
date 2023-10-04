@@ -3,6 +3,7 @@ import { algoList } from './sorting-algorithms/algo-list';
 export const menuItems = algoList.map((item) => item.name).concat('all');
 export const initialArray = [6, 8, 3, 5, 1, 9, 2, 7, 4];
 export const numberGenerator = { min: 10, max: 40 };
+export const sortCompletionMessage = 'Sorting is complete';
 
 export const cellCSS = {
   size: 50,

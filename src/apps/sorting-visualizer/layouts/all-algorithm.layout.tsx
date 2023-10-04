@@ -7,6 +7,8 @@ import Visualizer from '@/apps/sorting-visualizer/components/visualizer/visualiz
 import { algoList } from '@/apps/sorting-visualizer/sorting-algorithms/algo-list';
 import classes from './layout.module.scss';
 import { setIsPlaying } from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+import { sortCompletionMessage } from '../config';
+import { toast } from 'sonner';
 import useCompletion from '@/apps/sorting-visualizer/hooks/use-completion.hook';
 import { useEffect } from 'react';
 
@@ -26,6 +28,7 @@ function AllAlgorithmLayout() {
 
   useEffect(() => {
     if (isComplete) {
+      toast.success(sortCompletionMessage);
       dispatch(setIsPlaying(null));
     }
   }, [dispatch, isComplete]);

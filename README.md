@@ -40,6 +40,9 @@ Features
 
 - [React](https://react.dev/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Router](https://reactrouter.com/en/main/)
+- [React Switch](https://react-switch.netlify.app/)
+- [Sonner](https://sonner.emilkowal.ski/)
 - [Sass](https://sass-lang.com/)
 - [Vite](https://vitejs.dev/) (Bundler)
 
