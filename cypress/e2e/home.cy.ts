@@ -1,8 +1,3 @@
-const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-  window.HTMLInputElement.prototype,
-  'value'
-).set;
-
 describe('template spec', () => {
   beforeEach(() => {
     cy.visit('/');

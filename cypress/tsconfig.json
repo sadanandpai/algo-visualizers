@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "baseUrl": "http://localhost:5173",
+    "baseUrl": ".",
     "target": "ES2015",
     "lib": ["ES2015", "dom"],
     "types": ["cypress", "node"],
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
     "paths": {
       "@/*": ["../src/*"]
     }
