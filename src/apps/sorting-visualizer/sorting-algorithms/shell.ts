@@ -7,6 +7,11 @@ import {
 import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
 
 export async function* shellSort(array: number[]): SortAsyncGenerator {
+  if (array.length === 1) {
+    yield* sort(0);
+    return;
+  }
+
   let gap = 1;
 
   while (gap * 3 + 1 < array.length) {
