@@ -1,11 +1,18 @@
 .grid {
   display: inline-grid;
+  gap: 2px;
   margin: auto;
-  gap: 2px;
-  gap: 2px;
 
   button {
     border: 1px solid grey;
+  }
+
+  .type1 {
+    background-color: blue;
+  }
+
+  .type2 {
+    background-color: green;
   }
 
   .type3 {

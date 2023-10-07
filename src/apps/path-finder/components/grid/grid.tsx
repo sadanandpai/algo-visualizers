@@ -1,9 +1,9 @@
-import { setClickType, updateGrid } from "../../store/path-finder.slice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useEffect, useRef } from "react";
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useEffect, useRef } from 'react';
 
-import classes from "./grid.module.scss";
-import useMouseAction from "../../hooks/useMouseAction.hook";
+import classes from './grid.module.scss';
+import { updateGrid } from '../../store/path-finder.slice';
+import useMouseAction from '../../hooks/useMouseAction.hook';
 
 function Grid() {
   const dispatch = useAppDispatch();
@@ -11,8 +11,8 @@ function Grid() {
   const ref = useRef<HTMLDivElement>(null);
 
   const gridStyle: React.CSSProperties = {
-    gridTemplateColumns: `repeat(${grid.length}, 25px)`,
-    gridTemplateRows: `repeat(${grid[0].length}, 25px)`,
+    gridTemplateRows: `repeat(${grid.length}, 25px)`,
+    gridTemplateColumns: `repeat(${grid[0].length}, 25px)`,
   };
 
   const clickIdx = useMouseAction(ref);
@@ -31,7 +31,7 @@ function Grid() {
             key={`${rowIndex}-${colIndex}`}
             data-row={rowIndex}
             data-col={colIndex}
-            className={classes["type" + clickType]}
+            className={classes['type' + clickType]}
             onClick={() =>
               dispatch(updateGrid({ row: rowIndex, col: colIndex }))
             }
