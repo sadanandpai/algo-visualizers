@@ -1,7 +1,9 @@
+import { AppDispatch, RootState } from '@/store/store';
 import { AppState, ClickType } from '../models/interfaces';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { startBFSAlgo } from '../algorithms/bfs';
 
 const initialState: AppState = {
   rows: 10,
@@ -19,11 +21,15 @@ export const pathFinderSlice = createSlice({
     setRows: (state, action: PayloadAction<number>) => {
       state.rows = action.payload;
       state.grid = generateGrid(state.rows, state.cols);
+      state.entry = null;
+      state.exit = null;
     },
 
     setCols: (state, action: PayloadAction<number>) => {
       state.cols = action.payload;
       state.grid = generateGrid(state.rows, state.cols);
+      state.entry = null;
+      state.exit = null;
     },
 
     setClickType: (state, action: PayloadAction<ClickType>) => {
@@ -43,13 +49,17 @@ export const pathFinderSlice = createSlice({
         return;
       }
 
-      if (state.clickType === ClickType.entry && state.entry) {
-        state.grid[state.entry.row][state.entry.col] = 0;
+      if (state.clickType === ClickType.entry) {
+        if (state.entry !== null) {
+          state.grid[state.entry.row][state.entry.col] = 0;
+        }
         state.entry = action.payload;
       }
 
-      if (state.clickType === ClickType.exit && state.exit) {
-        state.grid[state.exit.row][state.exit.col] = 0;
+      if (state.clickType === ClickType.exit) {
+        if (state.exit !== null) {
+          state.grid[state.exit.row][state.exit.col] = 0;
+        }
         state.exit = action.payload;
       }
 
@@ -72,3 +82,19 @@ function generateGrid(rows: number, cols: number) {
 export const { setRows, setCols, setClickType, updateGrid } =
   pathFinderSlice.actions;
 export default pathFinderSlice.reducer;
+
+export const searchPath =
+  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+    const state = getState().pathFinder;
+    dispatch(setClickType(ClickType.fill));
+
+    await startBFSAlgo(
+      state.grid,
+      state.entry!,
+      state.exit!,
+      (value: { row: number; col: number }) => dispatch(updateGrid(value)),
+      true
+    );
+
+    dispatch(setClickType(ClickType.clear));
+  };

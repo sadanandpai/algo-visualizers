@@ -12,4 +12,5 @@ export const enum ClickType {
   entry,
   exit,
   wall,
+  fill,
 }
