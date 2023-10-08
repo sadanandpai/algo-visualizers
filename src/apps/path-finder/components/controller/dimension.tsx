@@ -1,23 +1,18 @@
-import { setCols, setRows } from "../../store/path-finder.slice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-
-import React from "react";
+import { resetGrid, setDimension } from '../../store/path-finder.slice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 function Dimension() {
   const dispatch = useAppDispatch();
   const rows = useAppSelector((state) => state.pathFinder.rows);
   const cols = useAppSelector((state) => state.pathFinder.cols);
 
-  const handleRowsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setRows(Number(event.target.value)));
-  };
-
-  const handleColsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setCols(Number(event.target.value)));
+  const handleDimensionChange = (obj: { rows?: number; cols?: number }) => {
+    dispatch(setDimension(obj));
+    dispatch(resetGrid());
   };
 
   return (
-    <div>
+    <>
       <label htmlFor="rows">Rows:</label>
       <input
         type="range"
@@ -25,7 +20,9 @@ function Dimension() {
         min={5}
         max={100}
         value={rows}
-        onChange={handleRowsChange}
+        onChange={(e) =>
+          handleDimensionChange({ rows: Number(e.target.value) })
+        }
       />
 
       <label htmlFor="cols">Cols:</label>
@@ -35,9 +32,11 @@ function Dimension() {
         min={5}
         max={100}
         value={cols}
-        onChange={handleColsChange}
+        onChange={(e) =>
+          handleDimensionChange({ cols: Number(e.target.value) })
+        }
       />
-    </div>
+    </>
   );
 }
 

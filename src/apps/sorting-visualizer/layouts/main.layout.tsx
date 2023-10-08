@@ -9,7 +9,7 @@ import { menuItems } from '@/apps/sorting-visualizer/config';
 function MainLayout({ children }: PropsWithChildren) {
   return (
     <div>
-      <Navbar menuItems={menuItems} />
+      <Navbar title="Sorting visualizer" menuItems={menuItems} />
       <Controller />
       <main className={classes.main}>{children}</main>
       <ModeIcon />

@@ -31,13 +31,13 @@ export const store = configureStore({
       },
       sortingVisualizerReducer
     ),
-    pathFinder: persistReducer<ReturnType<typeof pathFinderReducer>>(
-      {
-        key: 'path-finder',
-        storage,
-      },
-      pathFinderReducer
-    ),
+    // pathFinder: persistReducer<ReturnType<typeof pathFinderReducer>>(
+    //   {
+    //     key: 'path-finder',
+    //     storage,
+    //   },
+    pathFinder: pathFinderReducer,
+    // ),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

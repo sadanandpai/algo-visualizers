@@ -1,6 +1,6 @@
 .grid {
   display: inline-grid;
-  gap: 2px;
+  gap: 1px;
   margin: auto;
 
   button {
@@ -21,5 +21,9 @@
 
   .type4 {
     background-color: lightgray;
+  }
+
+  .type5 {
+    background-color: yellow;
   }
 }

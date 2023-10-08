@@ -1,13 +1,15 @@
 import Controller from '../components/controller/controller';
 import Grid from '../components/grid/grid';
-import Navbar from '../components/navbar/navbar';
+import Navbar from '@/apps/sorting-visualizer/components/navbar/navbar';
 
 function MainLayout() {
   return (
     <>
-      <Navbar />
+      <Navbar title="Path finder" />
       <Controller />
-      <Grid />
+      <main className="text-center">
+        <Grid />
+      </main>
     </>
   );
 }

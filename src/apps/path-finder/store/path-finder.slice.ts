@@ -1,9 +1,8 @@
-import { AppDispatch, RootState } from '@/store/store';
 import { AppState, ClickType } from '../models/interfaces';
+import { generateGrid, randomMazeGenerator } from '../helpers/grid';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { startBFSAlgo } from '../algorithms/bfs';
 
 const initialState: AppState = {
   rows: 10,
@@ -12,24 +11,19 @@ const initialState: AppState = {
   clickType: ClickType.clear,
   entry: null,
   exit: null,
+  isPlaying: false,
 };
 
 export const pathFinderSlice = createSlice({
   name: 'pathFinder',
   initialState,
   reducers: {
-    setRows: (state, action: PayloadAction<number>) => {
-      state.rows = action.payload;
-      state.grid = generateGrid(state.rows, state.cols);
-      state.entry = null;
-      state.exit = null;
-    },
-
-    setCols: (state, action: PayloadAction<number>) => {
-      state.cols = action.payload;
-      state.grid = generateGrid(state.rows, state.cols);
-      state.entry = null;
-      state.exit = null;
+    setDimension: (
+      state,
+      action: PayloadAction<{ rows?: number; cols?: number }>
+    ) => {
+      state.rows = action.payload.rows ?? state.rows;
+      state.cols = action.payload.cols ?? state.cols;
     },
 
     setClickType: (state, action: PayloadAction<ClickType>) => {
@@ -65,36 +59,41 @@ export const pathFinderSlice = createSlice({
 
       state.grid[action.payload.row][action.payload.col] = state.clickType;
     },
+
+    setIsPlaying: (state, action: PayloadAction<boolean>) => {
+      state.isPlaying = action.payload;
+    },
+
+    randomizeGrid: (state) => {
+      const { grid, entry, exit } = randomMazeGenerator(
+        state.rows,
+        state.cols,
+        {
+          entryType: ClickType.entry,
+          exitType: ClickType.exit,
+          wallType: ClickType.wall,
+        }
+      );
+      state.grid = grid;
+      state.entry = entry;
+      state.exit = exit;
+    },
+
+    resetGrid: (state) => {
+      state.grid = generateGrid(state.rows, state.cols);
+      state.entry = null;
+      state.exit = null;
+      state.isPlaying = false;
+    },
   },
 });
 
-function generateGrid(rows: number, cols: number) {
-  const grid: number[][] = [];
-  for (let i = 0; i < rows; i++) {
-    grid[i] = [];
-    for (let j = 0; j < cols; j++) {
-      grid[i][j] = 0;
-    }
-  }
-  return grid;
-}
-
-export const { setRows, setCols, setClickType, updateGrid } =
-  pathFinderSlice.actions;
+export const {
+  setDimension,
+  setClickType,
+  updateGrid,
+  randomizeGrid,
+  resetGrid,
+  setIsPlaying,
+} = pathFinderSlice.actions;
 export default pathFinderSlice.reducer;
-
-export const searchPath =
-  () => async (dispatch: AppDispatch, getState: () => RootState) => {
-    const state = getState().pathFinder;
-    dispatch(setClickType(ClickType.fill));
-
-    await startBFSAlgo(
-      state.grid,
-      state.entry!,
-      state.exit!,
-      (value: { row: number; col: number }) => dispatch(updateGrid(value)),
-      true
-    );
-
-    dispatch(setClickType(ClickType.clear));
-  };

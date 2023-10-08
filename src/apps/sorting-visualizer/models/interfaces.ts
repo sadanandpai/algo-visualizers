@@ -32,7 +32,8 @@ export interface HeaderProps {
 }
 
 export interface NavbarProps {
-  menuItems: string[];
+  title: string;
+  menuItems?: string[];
 }
 
 export interface NumberGenProps {

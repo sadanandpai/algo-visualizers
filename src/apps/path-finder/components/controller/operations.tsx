@@ -1,12 +1,21 @@
-import { searchPath, setClickType } from '../../store/path-finder.slice';
+import {
+  randomizeGrid,
+  resetGrid,
+  setClickType,
+} from '../../store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 
 import { AppState } from '../../models/interfaces';
 import classes from './controller.module.scss';
+import playIcon from '/icons/play.svg';
+import resetIcon from '/icons/reset.svg';
+import { searchPath } from '../../store/thunk';
 
 function Operations() {
   const dispatch = useAppDispatch();
   const clickType = useAppSelector((state) => state.pathFinder.clickType);
+  const entry = useAppSelector((state) => state.pathFinder.entry);
+  const exit = useAppSelector((state) => state.pathFinder.exit);
 
   const buttons = ['clear', 'start', 'end', 'wall'];
 
@@ -15,23 +24,42 @@ function Operations() {
   };
 
   return (
-    <section className={classes.operations}>
+    <>
       <div>
         {buttons.map((btn, idx) => (
           <button
             key={btn}
             onClick={() => handleBtnClick(idx)}
-            className={clickType === idx ? classes.active : ''}
+            className={`${classes.clickType} ${
+              clickType === idx ? classes.active : ''
+            }`}
           >
             {btn}
           </button>
         ))}
+
+        <button onClick={() => dispatch(randomizeGrid())}>Randomize</button>
       </div>
 
       <div>
-        <button onClick={() => dispatch(searchPath())}>Search</button>
+        <button
+          data-testid="player"
+          onClick={() => dispatch(searchPath())}
+          disabled={entry === null || exit === null}
+          data-tooltip="Play"
+        >
+          <img src={playIcon} alt="Play" height={24} width={24} />
+        </button>
+
+        <button
+          data-testid="reset"
+          onClick={() => dispatch(resetGrid())}
+          data-tooltip="Reset"
+        >
+          <img src={resetIcon} alt="Reset" height={24} width={24} />
+        </button>
       </div>
-    </section>
+    </>
   );
 }
 

@@ -44,3 +44,11 @@ body {
     pointer-events: all;
   }
 }
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button:disabled img {
+  opacity: 0.5;
+}

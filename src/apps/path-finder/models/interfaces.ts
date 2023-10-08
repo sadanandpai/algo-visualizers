@@ -5,6 +5,7 @@ export interface AppState {
   clickType: ClickType;
   entry: { row: number; col: number } | null;
   exit: { row: number; col: number } | null;
+  isPlaying: boolean;
 }
 
 export const enum ClickType {
@@ -13,4 +14,10 @@ export const enum ClickType {
   exit,
   wall,
   fill,
+  path,
+}
+
+export interface Cell {
+  row: number;
+  col: number;
 }

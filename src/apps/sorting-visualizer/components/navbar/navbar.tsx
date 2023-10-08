@@ -4,13 +4,13 @@ import classes from './navbar.module.scss';
 import hamIcon from '/icons/ham.svg';
 import { useState } from 'react';
 
-function Navbar({ menuItems }: NavbarProps) {
+function Navbar({ title, menuItems }: NavbarProps) {
   const [toggle, setToggle] = useState(false);
 
   return (
     <nav className={classes.navbar}>
       <h1 data-testid="navbar">
-        Sorting visualizers
+        {title}
         <a
           href="https://github.com/sadanandpai/sorting-visualizer"
           target="blank"
@@ -23,23 +23,26 @@ function Navbar({ menuItems }: NavbarProps) {
         </a>
       </h1>
 
-      <button onClick={() => setToggle(!toggle)}>
-        <img src={hamIcon} alt="hamburger" />
-      </button>
-
-      <ul data-toggle={toggle}>
-        {menuItems.map((item) => (
-          <li key={item}>
-            <NavLink
-              to={`/sorting-visualizer/${item}`}
-              className={({ isActive }) => (isActive ? classes.active : '')}
-              onClick={() => setToggle(false)}
-            >
-              {item}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
+      {menuItems ? (
+        <>
+          <button onClick={() => setToggle(!toggle)}>
+            <img src={hamIcon} alt="hamburger" />
+          </button>
+          <ul data-toggle={toggle}>
+            {menuItems.map((item) => (
+              <li key={item}>
+                <NavLink
+                  to={`/sorting-visualizer/${item}`}
+                  className={({ isActive }) => (isActive ? classes.active : '')}
+                  onClick={() => setToggle(false)}
+                >
+                  {item}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
     </nav>
   );
 }
