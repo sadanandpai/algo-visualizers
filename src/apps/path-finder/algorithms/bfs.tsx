@@ -1,29 +1,18 @@
-function generateGrid(rows: number, cols: number, value: unknown) {
+import { Cell } from '../models/interfaces';
+
+function generateGrid<T>(rows: number, cols: number, value: T | null): T[][] {
   return Array.from(new Array(rows), () => new Array(cols).fill(value));
 }
 
-// function setGridCell(grid: number[][], setGrid: any, x, y, value) {
-//   const newGrid = [...grid]; // though its an array of array, shallow copy should work fine
-//   newGrid[x][y] = value; // set the value to the specific cell
-//   setGrid(newGrid);
-// }
-
-// function setGridCells(grid, setGrid, positions, value, entry) {
-//   const newGrid = [...grid];
-//   positions.forEach((position) => {
-//     if (!(position.x === entry.x && position.y === entry.y)) {
-//       // check if position is not same as entry
-//       newGrid[position.x][position.y] = value; // set value of cell
-//     }
-//   });
-//   setGrid(newGrid);
-// }
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 function getAddToQueueIfAllowedFunction(
   grid: number[][],
-  parents: { row: number; col: number }[][],
+  parents: Cell[][],
   visited: boolean[][],
-  queue: { row: number; col: number }[]
+  queue: Cell[]
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -41,40 +30,46 @@ function getAddToQueueIfAllowedFunction(
   };
 }
 
-// async function tracePath(entry, exit, parents, grid, setGrid, isInProgress) {
-//   let x = exit.x;
-//   let y = exit.y;
-//   [x, y] = [parents[x][y].x, parents[x][y].y];
+export async function tracePath(
+  parents: Cell[][],
+  entry: Cell,
+  exit: Cell,
+  setGrid: (value: Cell) => void,
+  getIsPlaying: () => boolean
+) {
+  let row = exit.row;
+  let col = exit.col;
+  [row, col] = [parents[row][col].row, parents[row][col].col];
 
-//   let pathLength = 0;
-//   // if entry and exit are next to each other
-//   if (entry.x === x && entry.y === y) {
-//     return pathLength;
-//   }
+  let pathLength = 0;
+  // if entry and exit are next to each other
+  if (entry.row === row && entry.col === col) {
+    return pathLength;
+  }
 
-//   // Start marking the path with a small delay
-//   do {
-//     setGridCell(grid, setGrid, x, y, pathType);
-//     await delay(100);
-//     [x, y] = [parents[x][y].x, parents[x][y].y]; // set parents for next iteration
-//     pathLength += 1;
-//   } while (isInProgress.current && (entry.x !== x || entry.y !== y)); // check if entry is reached
+  // Start marking the path with a small delay
+  do {
+    setGrid({ row, col });
+    await delay(100);
+    [row, col] = [parents[row][col].row, parents[row][col].col]; // set parents for next iteration
+    pathLength += 1;
+  } while (getIsPlaying() && (entry.row !== row || entry.col !== col)); // check if entry is reached
 
-//   return pathLength;
-// }
+  return pathLength;
+}
 
 // The Breadth First Search Algorithm (Use different alogirthm if needed)
 export async function startBFSAlgo(
   grid: number[][],
-  entry: { row: number; col: number },
-  exit: { row: number; col: number },
-  setGrid: any,
-  isInProgress: boolean
+  entry: Cell,
+  exit: Cell,
+  setGrid: (value: Cell) => void,
+  getIsPlaying: () => boolean
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
   const visited = generateGrid(rows, cols, false); // initalize visited arrays
-  const parents = generateGrid(rows, cols, -1); // initalize parents arrays
+  const parents = generateGrid<Cell>(rows, cols, null); // initalize parents arrays
 
   const queue = [entry]; // Add entry coordinate to the queue
   visited[entry.row][entry.col] = true; // mark it as visited
@@ -87,8 +82,7 @@ export async function startBFSAlgo(
     queue
   );
 
-  let isPathFound = false;
-  outerLoop: while (queue.length) {
+  while (queue.length) {
     // iterate till queue items are over
     const length = queue.length;
 
@@ -98,12 +92,11 @@ export async function startBFSAlgo(
 
       if (value.row === exit.row && value.col === exit.col) {
         // if exit is found, stop searching
-        isPathFound = true;
-        break outerLoop;
+        return parents;
       }
 
-      if (!isInProgress) {
-        break outerLoop;
+      if (!getIsPlaying()) {
+        return;
       }
 
       // Validate and add next coordinates to the queue (All 4 directions i.e up, down, left, right)
@@ -131,31 +124,5 @@ export async function startBFSAlgo(
     await delay(200);
   }
 
-  // if (isPathFound && isInProgress.current) {
-  //   // trace the path only if present
-  //   // toast.success("Path found!!! 😃");
-  //   const pathLength = await tracePath(
-  //     entry,
-  //     exit,
-  //     parents,
-  //     grid,
-  //     setGrid,
-  //     isInProgress
-  //   );
-
-  //   if (isInProgress.current) {
-  //     // toast("Shortest path length is " + (pathLength + 1));
-  //   }
-  //   return;
-  // }
-
-  // if no path found
-  // if (isInProgress.current) {
-  //   // toast.warning("No path found!!! 😟");
-  //   return;
-  // }
-}
-
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return null;
 }
