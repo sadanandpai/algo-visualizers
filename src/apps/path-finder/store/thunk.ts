@@ -1,5 +1,5 @@
 import { AppDispatch, RootState } from '@/store/store';
-import { setClickType, setIsPlaying, updateGrid } from './path-finder.slice';
+import { setCell, setClickType, setIsPlaying } from './path-finder.slice';
 import { startBFSAlgo, tracePath } from '../algorithms/bfs';
 
 import { ClickType } from '../models/interfaces';
@@ -15,7 +15,7 @@ export const searchPath =
       state.grid,
       state.entry!,
       state.exit!,
-      (value: { row: number; col: number }) => dispatch(updateGrid(value)),
+      (value: { row: number; col: number }) => dispatch(setCell(value)),
       () => getState().pathFinder.isPlaying
     );
 
@@ -27,7 +27,7 @@ export const searchPath =
         parents,
         state.entry!,
         state.exit!,
-        (value: { row: number; col: number }) => dispatch(updateGrid(value)),
+        (value: { row: number; col: number }) => dispatch(setCell(value)),
         () => getState().pathFinder.isPlaying
       );
 
