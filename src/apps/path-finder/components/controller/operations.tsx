@@ -17,7 +17,7 @@ function Operations() {
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
 
-  const buttons = ['clear', 'start', 'end', 'wall'];
+  const buttons = ['clear', 'entry', 'exit', 'wall'];
 
   const handleBtnClick = (type: AppState['clickType']) => {
     dispatch(setClickType(type));
@@ -26,6 +26,7 @@ function Operations() {
   return (
     <>
       <div>
+        <button onClick={() => dispatch(randomizeGrid())}>Randomize</button>
         {buttons.map((btn, idx) => (
           <button
             key={btn}
@@ -37,8 +38,6 @@ function Operations() {
             {btn}
           </button>
         ))}
-
-        <button onClick={() => dispatch(randomizeGrid())}>Randomize</button>
       </div>
 
       <div>

@@ -1,12 +1,24 @@
+import { RouterProvider, createHashRouter } from 'react-router-dom';
+
+import Home from './apps/path-finder/pages/home.page';
+import { Toaster } from 'sonner';
+import { pathFinderRoutes } from './apps/path-finder/routes';
+import { sortingVisualizerRoutes } from './apps/sorting-visualizer/routes';
+
+const router = createHashRouter([
+  ...sortingVisualizerRoutes,
+  ...pathFinderRoutes,
+  {
+    path: '/',
+    element: <Home />,
+  },
+]);
+
 function App() {
   return (
     <>
-      <h2>
-        <a href="#/sorting-visualizer">Sorting Visualizer</a>
-      </h2>
-      <h1>Path Finder</h1>
-      <h1>Island Marker</h1>
-      <h1>Word Finder</h1>
+      <Toaster richColors duration={3000} />
+      <RouterProvider router={router} />
     </>
   );
 }
