@@ -45,3 +45,10 @@ export function randomMazeGenerator(
   grid[exit.row][exit.col] = exitType;
   return { grid, entry, exit };
 }
+
+export function getDimensionsFromScrenSize() {
+  return {
+    maxRows: Math.floor((window.innerHeight - 140) / 26),
+    maxCols: Math.floor(window.innerWidth / 26),
+  };
+}

@@ -63,14 +63,6 @@
       gap: 16px;
       margin-top: 20px;
 
-      button:disabled {
-        cursor: not-allowed;
-      }
-
-      button:disabled img {
-        opacity: 0.5;
-      }
-
       input[type='range'] {
         flex: 1;
         cursor: pointer;

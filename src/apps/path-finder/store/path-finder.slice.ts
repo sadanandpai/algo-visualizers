@@ -1,13 +1,19 @@
 import { AppState, ClickType } from '../models/interfaces';
-import { generateGrid, randomMazeGenerator } from '../helpers/grid';
+import {
+  generateGrid,
+  getDimensionsFromScrenSize,
+  randomMazeGenerator,
+} from '../helpers/grid';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
+export const { maxRows, maxCols } = getDimensionsFromScrenSize();
+
 const initialState: AppState = {
-  rows: 10,
-  cols: 10,
-  grid: generateGrid(10, 10),
+  rows: maxRows,
+  cols: maxCols,
+  grid: generateGrid(maxRows, maxCols),
   clickType: ClickType.clear,
   entry: null,
   exit: null,
