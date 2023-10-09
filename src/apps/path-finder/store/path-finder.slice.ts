@@ -1,4 +1,4 @@
-import { AppState, ClickType } from '../models/interfaces';
+import { AppState, Cell, ClickType } from '../models/interfaces';
 import {
   generateGrid,
   getDimensionsFromScrenSize,
@@ -13,11 +13,11 @@ export const { maxRows, maxCols } = getDimensionsFromScrenSize();
 const initialState: AppState = {
   rows: maxRows,
   cols: maxCols,
-  grid: generateGrid(maxRows, maxCols),
-  clickType: ClickType.clear,
   entry: null,
   exit: null,
   isPlaying: false,
+  clickType: ClickType.clear,
+  grid: generateGrid(maxRows, maxCols),
 };
 
 export const pathFinderSlice = createSlice({
@@ -36,31 +36,28 @@ export const pathFinderSlice = createSlice({
       state.clickType = action.payload;
     },
 
-    updateGrid: (
-      state,
-      action: PayloadAction<{ row: number; col: number }>
-    ) => {
-      if (
-        action.payload.row < 0 ||
-        action.payload.row >= state.rows ||
-        action.payload.col < 0 ||
-        action.payload.col >= state.cols
-      ) {
-        return;
+    setEntry: (state, action: PayloadAction<Cell>) => {
+      if (state.entry !== null) {
+        state.grid[state.entry.row][state.entry.col] = 0;
       }
+      state.entry = action.payload;
+      state.grid[action.payload.row][action.payload.col] = state.clickType;
+    },
 
-      if (state.clickType === ClickType.entry) {
-        if (state.entry !== null) {
-          state.grid[state.entry.row][state.entry.col] = 0;
-        }
-        state.entry = action.payload;
+    setExit: (state, action: PayloadAction<Cell>) => {
+      if (state.exit !== null) {
+        state.grid[state.exit.row][state.exit.col] = 0;
       }
+      state.exit = action.payload;
+      state.grid[action.payload.row][action.payload.col] = state.clickType;
+    },
 
-      if (state.clickType === ClickType.exit) {
-        if (state.exit !== null) {
-          state.grid[state.exit.row][state.exit.col] = 0;
-        }
-        state.exit = action.payload;
+    setCell: (state, action: PayloadAction<Cell>) => {
+      const cellType = state.grid[action.payload.row][action.payload.col];
+      if (cellType === ClickType.entry) {
+        state.entry = null;
+      } else if (cellType === ClickType.exit) {
+        state.exit = null;
       }
 
       state.grid[action.payload.row][action.payload.col] = state.clickType;
@@ -97,7 +94,9 @@ export const pathFinderSlice = createSlice({
 export const {
   setDimension,
   setClickType,
-  updateGrid,
+  setEntry,
+  setExit,
+  setCell,
   randomizeGrid,
   resetGrid,
   setIsPlaying,
