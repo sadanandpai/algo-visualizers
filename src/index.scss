@@ -45,10 +45,26 @@ body {
   }
 }
 
-button:disabled {
-  cursor: not-allowed;
+button.primary {
+  padding: 5px 10px;
+  color: theme.$light;
+  background-color: theme.$primary;
+  border: 1px solid theme.$primary;
+  border-radius: 4px;
 }
 
-button:disabled img {
+button.primary-outline {
+  padding: 5px 10px;
+  color: theme.$base;
+  border: 1px solid theme.$primary;
+  border-radius: 4px;
+}
+
+button:disabled {
+  cursor: not-allowed;
   opacity: 0.5;
+}
+
+button:active:enabled {
+  transform: scale(0.95);
 }
