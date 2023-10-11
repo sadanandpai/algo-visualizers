@@ -13,6 +13,7 @@ import { searchPath } from '../../store/thunk';
 
 function Operations() {
   const dispatch = useAppDispatch();
+  const isPlaying = useAppSelector((state) => state.pathFinder.isPlaying);
   const clickType = useAppSelector((state) => state.pathFinder.clickType);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
@@ -25,22 +26,32 @@ function Operations() {
 
   return (
     <>
-      <div>
-        <button onClick={() => dispatch(randomizeGrid())}>Randomize</button>
-        {buttons.map((btn, idx) => (
-          <button
-            key={btn}
-            onClick={() => handleBtnClick(idx)}
-            className={`${classes.clickType} ${
-              clickType === idx ? classes.active : ''
-            }`}
-          >
-            {btn}
-          </button>
-        ))}
+      <div className={classes.cellControls}>
+        <button
+          onClick={() => dispatch(randomizeGrid())}
+          disabled={isPlaying}
+          className="primary"
+        >
+          Randomize
+        </button>
+
+        <div className={classes.clickType}>
+          {buttons.map((btn, idx) => (
+            <button
+              key={btn}
+              onClick={() => handleBtnClick(idx)}
+              disabled={isPlaying}
+              className={`primary-outline ${
+                clickType === idx ? classes.active : ''
+              }`}
+            >
+              {btn}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div>
+      <div className={classes.execution}>
         <button
           data-testid="player"
           onClick={() => dispatch(searchPath())}

@@ -7,6 +7,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { useDebounce, useWindowSize } from 'react-use';
 
+import classes from './controller.module.scss';
 import { getDimensionsFromScrenSize } from '../../helpers/grid';
 
 function Dimension() {
@@ -48,7 +49,7 @@ function Dimension() {
   };
 
   return (
-    <div>
+    <div className={classes.dimension}>
       <label htmlFor="rows">Rows:</label>
       <input
         type="range"

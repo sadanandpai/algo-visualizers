@@ -1,16 +1,43 @@
+@use '/src/styles/theme';
+
 .controller {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 20px;
 
-  .clickType {
-    padding: 5px 10px;
-    border: 1px solid blue;
-    border-radius: 4px;
+  .cellControls {
+    display: flex;
+    gap: 10px;
+  }
 
-    &.active {
-      box-shadow: 0 4px 8px rgb(0 0 0 / 50%);
+  button {
+    text-transform: capitalize;
+  }
+
+  .clickType {
+    display: flex;
+    gap: 1px;
+
+    .active {
+      color: theme.$light;
+      background-color: theme.$primary;
     }
+  }
+
+  .execution {
+    display: flex;
+    gap: 10px;
+  }
+
+  .dimension {
+    display: none;
+  }
+}
+
+@media (width >= 960px) {
+  .controller .dimension {
+    display: flex;
+    gap: 10px;
   }
 }
