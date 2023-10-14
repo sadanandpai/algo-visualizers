@@ -1,4 +1,4 @@
-import { AppState, Theme } from '@/types/interfaces';
+import { AppState, Theme } from '@/host/types/interfaces';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';

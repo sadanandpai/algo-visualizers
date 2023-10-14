@@ -1,4 +1,4 @@
-@use '/src/styles/theme';
+@use '/src/host/styles/theme';
 
 .controller {
   display: flex;
@@ -15,13 +15,25 @@
     text-transform: capitalize;
   }
 
-  .clickType {
+  .clickTypes {
     display: flex;
     gap: 1px;
 
     .active {
       color: theme.$light;
       background-color: theme.$primary;
+
+      &.entry {
+        color: var(--cell-entry);
+      }
+
+      &.exit {
+        color: var(--cell-exit);
+      }
+
+      &.wall {
+        color: var(--cell-wall);
+      }
     }
   }
 

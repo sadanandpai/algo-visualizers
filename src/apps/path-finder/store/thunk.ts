@@ -1,4 +1,4 @@
-import { AppDispatch, RootState } from '@/store/store';
+import { AppDispatch, RootState } from '@/host/store/store';
 import { setCell, setClickType, setIsPlaying } from './path-finder.slice';
 import { startBFSAlgo, tracePath } from '../algorithms/bfs';
 

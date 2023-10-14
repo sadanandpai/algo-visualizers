@@ -10,7 +10,7 @@ import {
   setSwapInterval,
 } from './global.state';
 
-import { AppDispatch } from '@/store/store';
+import { AppDispatch } from '@/host/store/store';
 import { AppState } from '../models/interfaces';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';

@@ -4,7 +4,7 @@ import {
   setSpeed,
   startTimer,
 } from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import classes from './controls.module.scss';
 import pauseIcon from '/icons/pause.svg';

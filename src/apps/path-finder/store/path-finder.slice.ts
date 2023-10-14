@@ -1,3 +1,5 @@
+import '@/apps/path-finder/config';
+
 import { AppState, Cell, ClickType } from '../models/interfaces';
 import {
   generateGrid,

@@ -3,7 +3,7 @@ import {
   resetGrid,
   setClickType,
 } from '../../store/path-finder.slice';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import { AppState } from '../../models/interfaces';
 import classes from './controller.module.scss';
@@ -35,13 +35,13 @@ function Operations() {
           Randomize
         </button>
 
-        <div className={classes.clickType}>
+        <div className={classes.clickTypes}>
           {buttons.map((btn, idx) => (
             <button
               key={btn}
               onClick={() => handleBtnClick(idx)}
               disabled={isPlaying}
-              className={`primary-outline ${
+              className={`primary-outline ${classes[btn]} ${
                 clickType === idx ? classes.active : ''
               }`}
             >

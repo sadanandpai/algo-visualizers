@@ -7,7 +7,7 @@ import ArrayInput from './array-input';
 import Execution from './execution';
 import TypeSwitch from './type-switch';
 import classes from './controls.module.scss';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch } from '@/host/store/hooks';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 

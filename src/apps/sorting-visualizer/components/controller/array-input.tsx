@@ -8,7 +8,7 @@ import {
   setIsPlaying,
   setReset,
 } from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import NumberGenerator from './number-generator';
 import classes from './controls.module.scss';

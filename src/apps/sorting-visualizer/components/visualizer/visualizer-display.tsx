@@ -1,7 +1,7 @@
 import BarUI from '../bar/bar-ui';
 import CellUI from '../cell/cell-ui';
 import { UIProps } from '../../models/interfaces';
-import { useAppSelector } from '@/store/hooks';
+import { useAppSelector } from '@/host/store/hooks';
 
 function VisualizerDisplay(props: UIProps) {
   const visualizerType = useAppSelector(

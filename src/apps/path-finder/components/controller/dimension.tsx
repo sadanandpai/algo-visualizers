@@ -4,7 +4,7 @@ import {
   resetGrid,
   setDimension,
 } from '../../store/path-finder.slice';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useDebounce, useWindowSize } from 'react-use';
 
 import classes from './controller.module.scss';

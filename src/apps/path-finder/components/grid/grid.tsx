@@ -1,5 +1,5 @@
 import { setCell, setEntry, setExit } from '../../store/path-finder.slice';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useEffect, useRef } from 'react';
 
 import { ClickType } from '../../models/interfaces';

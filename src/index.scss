@@ -1,8 +1,8 @@
 /* stylelint-disable scss/at-rule-no-unknown */
-@use './styles/tooltip';
-@use './styles/themes/light';
-@use './styles/themes/dark';
-@use './styles/theme';
+@use 'src/host/styles/tooltip';
+@use 'src/host/styles/themes/light';
+@use 'src/host/styles/themes/dark';
+@use 'src/host/styles/theme';
 @import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
 @tailwind base;
 @tailwind components;

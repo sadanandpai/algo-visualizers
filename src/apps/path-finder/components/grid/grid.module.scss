@@ -8,23 +8,27 @@
     transition: all 0.33s;
   }
 
+  .type0 {
+    background-color: var(--cell-clear);
+  }
+
   .type1 {
-    background-color: blue;
+    background-color: var(--cell-entry);
   }
 
   .type2 {
-    background-color: green;
+    background-color: var(--cell-exit);
   }
 
   .type3 {
-    background-color: red;
+    background-color: var(--cell-wall);
   }
 
   .type4 {
-    background-color: lightgray;
+    background-color: var(--cell-fill);
   }
 
   .type5 {
-    background-color: yellow;
+    background-color: var(--cell-path);
   }
 }
