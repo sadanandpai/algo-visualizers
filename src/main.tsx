@@ -2,7 +2,7 @@ import './index.scss';
 
 import { persistor, store } from './host/store/store';
 
-import App from './App';
+import App from './host/app';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import React from 'react';
