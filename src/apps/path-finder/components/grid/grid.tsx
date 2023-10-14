@@ -10,6 +10,7 @@ function Grid() {
   const dispatch = useAppDispatch();
   const grid = useAppSelector((state) => state.pathFinder.grid);
   const clickType = useAppSelector((state) => state.pathFinder.clickType);
+  const isPlaying = useAppSelector((state) => state.pathFinder.isPlaying);
   const ref = useRef<HTMLDivElement>(null);
 
   const gridStyle: React.CSSProperties = {
@@ -44,6 +45,7 @@ function Grid() {
             data-row={rowIndex}
             data-col={colIndex}
             className={classes['type' + clickType]}
+            disabled={isPlaying}
           ></button>
         ))
       )}
