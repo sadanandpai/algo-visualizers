@@ -13,6 +13,10 @@
 
   button {
     text-transform: capitalize;
+
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 
   .clickTypes {
@@ -51,5 +55,14 @@
   .controller .dimension {
     display: flex;
     gap: 10px;
+  }
+}
+
+[data-theme='dark'] {
+  /* stylelint-disable-next-line no-descending-specificity */
+  .execution {
+    img {
+      filter: invert(1);
+    }
   }
 }
