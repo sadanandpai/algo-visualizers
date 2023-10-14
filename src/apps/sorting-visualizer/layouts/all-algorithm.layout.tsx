@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import AlgoSelection from '@/apps/sorting-visualizer/components/controller/algo-selection';
 import MainLayout from './main.layout';

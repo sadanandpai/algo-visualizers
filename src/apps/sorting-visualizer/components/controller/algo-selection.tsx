@@ -2,7 +2,7 @@ import {
   modifyAlgoSelection,
   setReset,
 } from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import { algoList } from '@/apps/sorting-visualizer/sorting-algorithms/algo-list';
 import classes from './controls.module.scss';

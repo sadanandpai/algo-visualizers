@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import MainLayout from './main.layout';
 import NoInput from '@/apps/sorting-visualizer/components/visualizer/no-input';

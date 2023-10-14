@@ -3,7 +3,7 @@ import {
   configureArray,
   getRndmNumInRange,
 } from '@/apps/sorting-visualizer/helpers/array-helpers';
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import { NumberGenProps } from '../../models/interfaces';
 import classes from './controls.module.scss';

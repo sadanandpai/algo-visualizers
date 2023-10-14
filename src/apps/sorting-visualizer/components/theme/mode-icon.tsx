@@ -1,10 +1,10 @@
-import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
-import { Theme } from '@/types/interfaces';
+import { Theme } from '@/host/types/interfaces';
 import classes from './mode-icon.module.scss';
 import { createPortal } from 'react-dom';
 import moonIcon from '/icons/moon.svg';
-import { setTheme } from '@/store/app.slice';
+import { setTheme } from '@/host/store/app.slice';
 import sunIcon from '/icons/sun.svg';
 import { useEffect } from 'react';
 
