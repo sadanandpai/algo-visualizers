@@ -1,4 +1,5 @@
 import { ClickType } from '../models/interfaces';
+import { generateMazeUsingPrims } from '../algorithms/maze/prims';
 
 function getRandom(max: number) {
   return Math.floor(Math.random() * max);
@@ -24,7 +25,14 @@ export function randomMazeGenerator(
     exitType,
   }: { wallType: ClickType; entryType: ClickType; exitType: ClickType }
 ) {
-  const grid = generateGrid(rows, cols, 0);
+  const grid = generateGrid(rows, cols, wallType);
+  generateMazeUsingPrims(grid);
+
+  return {
+    grid,
+    entry: null,
+    exit: null,
+  };
 
   grid.forEach((row) => {
     row.forEach((_, pos) => {
@@ -47,8 +55,9 @@ export function randomMazeGenerator(
 }
 
 export function getDimensionsFromScrenSize() {
+  const size = 30;
   return {
-    maxRows: Math.floor((window.innerHeight - 140) / 26),
-    maxCols: Math.floor(window.innerWidth / 26),
+    maxRows: Math.floor((window.innerHeight - 150) / size),
+    maxCols: Math.floor((window.innerWidth - 30) / size),
   };
 }
