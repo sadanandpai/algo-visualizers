@@ -1,10 +1,9 @@
 .grid {
   display: inline-grid;
-  gap: 1px;
   margin: auto;
 
   button {
-    border: 1px solid grey;
+    border: 0.5px solid lightgrey;
     transition: all 0.33s;
   }
 
@@ -22,13 +21,16 @@
 
   .type3 {
     background-color: var(--cell-wall);
+    border-color: var(--cell-wall);
   }
 
   .type4 {
     background-color: var(--cell-fill);
+    border-color: var(--cell-fill);
   }
 
   .type5 {
     background-color: var(--cell-path);
+    border-color: var(--cell-path);
   }
 }

@@ -14,8 +14,8 @@ function Grid() {
   const ref = useRef<HTMLDivElement>(null);
 
   const gridStyle: React.CSSProperties = {
-    gridTemplateRows: `repeat(${grid.length}, 25px)`,
-    gridTemplateColumns: `repeat(${grid[0].length}, 25px)`,
+    gridTemplateRows: `repeat(${grid.length}, 30px)`,
+    gridTemplateColumns: `repeat(${grid[0].length}, 30px)`,
   };
 
   const clickIdx = useMouseAction(ref);
