@@ -1,14 +1,12 @@
 import '@/apps/path-finder/config';
 
 import { AppState, Cell, ClickType } from '../models/interfaces';
-import {
-  generateGrid,
-  getDimensionsFromScrenSize,
-  randomMazeGenerator,
-} from '../helpers/grid';
+import { generateGrid, getDimensionsFromScrenSize } from '../helpers/grid';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { mazeGenerators } from '../algorithms/maze-generator';
+import { pathFinders } from '../algorithms/path-finder';
 
 export const { maxRows, maxCols } = getDimensionsFromScrenSize();
 
@@ -17,9 +15,11 @@ const initialState: AppState = {
   cols: maxCols,
   entry: null,
   exit: null,
-  isPlaying: false,
-  clickType: ClickType.clear,
   grid: generateGrid(maxRows, maxCols),
+  mazeGenerator: [...mazeGenerators.keys()][0],
+  pathFinder: [...pathFinders.keys()][0],
+  clickType: ClickType.clear,
+  isPlaying: false,
 };
 
 export const pathFinderSlice = createSlice({
@@ -32,6 +32,14 @@ export const pathFinderSlice = createSlice({
     ) => {
       state.rows = action.payload.rows ?? state.rows;
       state.cols = action.payload.cols ?? state.cols;
+    },
+
+    setMazeGenerator: (state, action: PayloadAction<string>) => {
+      state.mazeGenerator = action.payload;
+    },
+
+    setPathFinder: (state, action: PayloadAction<string>) => {
+      state.pathFinder = action.payload;
     },
 
     setClickType: (state, action: PayloadAction<ClickType>) => {
@@ -69,19 +77,18 @@ export const pathFinderSlice = createSlice({
       state.isPlaying = action.payload;
     },
 
-    randomizeGrid: (state) => {
-      const { grid, entry, exit } = randomMazeGenerator(
-        state.rows,
-        state.cols,
-        {
-          entryType: ClickType.entry,
-          exitType: ClickType.exit,
-          wallType: ClickType.wall,
-        }
-      );
-      state.grid = grid;
-      state.entry = entry;
-      state.exit = exit;
+    generateMaze: (state) => {
+      const mazeAlgo = mazeGenerators.get(state.mazeGenerator);
+      if (mazeAlgo) {
+        const { grid, entry, exit } = mazeAlgo.fn(state.rows, state.cols, {
+          clear: ClickType.clear,
+          wall: ClickType.wall,
+        });
+
+        state.grid = grid;
+        state.entry = entry;
+        state.exit = exit;
+      }
     },
 
     resetGrid: (state) => {
@@ -99,8 +106,10 @@ export const {
   setEntry,
   setExit,
   setCell,
-  randomizeGrid,
+  generateMaze,
   resetGrid,
   setIsPlaying,
+  setMazeGenerator,
+  setPathFinder,
 } = pathFinderSlice.actions;
 export default pathFinderSlice.reducer;

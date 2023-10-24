@@ -1,9 +1,11 @@
+import { generateGrid } from '../../helpers/grid';
+
 export function generateMazeUsingPrims(
-  grid: number[][],
+  rows: number,
+  cols: number,
   cellType = { clear: 0, wall: 3 }
 ) {
-  const height = grid.length;
-  const width = grid[0].length;
+  const grid = generateGrid(rows, cols, cellType.wall);
   const OOB = {};
 
   const walls: { x: number; y: number }[] = [];
@@ -17,21 +19,21 @@ export function generateMazeUsingPrims(
       { x, y: y + 1 },
     ];
     for (const wall of candidates) {
-      if (lookup(grid, width, height, wall.x, wall.y) === cellType.wall) {
+      if (lookup(grid, cols, rows, wall.x, wall.y) === cellType.wall) {
         walls.push(wall);
       }
     }
   }
 
   // Pick random point and make it a passage
-  makePassage((Math.random() * width) | 0, (Math.random() * height) | 0);
+  makePassage((Math.random() * cols) | 0, (Math.random() * rows) | 0);
   while (walls.length !== 0) {
     const { x, y } = walls.splice((Math.random() * walls.length) | 0, 1)[0];
 
-    const left = lookup(grid, width, height, x - 1, y, OOB as number);
-    const right = lookup(grid, width, height, x + 1, y, OOB as number);
-    const top = lookup(grid, width, height, x, y - 1, OOB as number);
-    const bottom = lookup(grid, width, height, x, y + 1, OOB as number);
+    const left = lookup(grid, cols, rows, x - 1, y, OOB as number);
+    const right = lookup(grid, cols, rows, x + 1, y, OOB as number);
+    const top = lookup(grid, cols, rows, x, y - 1, OOB as number);
+    const bottom = lookup(grid, cols, rows, x, y + 1, OOB as number);
 
     if (left === cellType.clear && right === cellType.wall) {
       grid[y][x] = cellType.clear;
@@ -48,7 +50,11 @@ export function generateMazeUsingPrims(
     }
   }
 
-  return grid;
+  return {
+    grid,
+    entry: null,
+    exit: null,
+  };
 }
 
 function lookup(

@@ -1,6 +1,6 @@
 import { AppDispatch, RootState } from '@/host/store/store';
 import { setCell, setClickType, setIsPlaying } from './path-finder.slice';
-import { startBFSAlgo, tracePath } from '../algorithms/bfs';
+import { startBFSAlgo, tracePath } from '../algorithms/path-finder/bfs';
 
 import { ClickType } from '../models/interfaces';
 import { toast } from 'sonner';
