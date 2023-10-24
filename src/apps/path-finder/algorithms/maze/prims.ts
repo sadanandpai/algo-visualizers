@@ -28,10 +28,10 @@ export function generateMazeUsingPrims(
   while (walls.length !== 0) {
     const { x, y } = walls.splice((Math.random() * walls.length) | 0, 1)[0];
 
-    const left = lookup(grid, width, height, x - 1, y, OOB);
-    const right = lookup(grid, width, height, x + 1, y, OOB);
-    const top = lookup(grid, width, height, x, y - 1, OOB);
-    const bottom = lookup(grid, width, height, x, y + 1, OOB);
+    const left = lookup(grid, width, height, x - 1, y, OOB as number);
+    const right = lookup(grid, width, height, x + 1, y, OOB as number);
+    const top = lookup(grid, width, height, x, y - 1, OOB as number);
+    const bottom = lookup(grid, width, height, x, y + 1, OOB as number);
 
     if (left === cellType.clear && right === cellType.wall) {
       grid[y][x] = cellType.clear;
