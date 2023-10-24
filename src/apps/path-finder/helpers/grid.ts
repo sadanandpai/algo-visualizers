@@ -1,6 +1,3 @@
-import { ClickType } from '../models/interfaces';
-import { generateMazeUsingPrims } from '../algorithms/maze/prims';
-
 function getRandom(max: number) {
   return Math.floor(Math.random() * max);
 }
@@ -16,42 +13,29 @@ export function generateGrid(rows: number, cols: number, value = 0) {
   return grid;
 }
 
-export function randomMazeGenerator(
+export function getEntryAndExit(
+  grid: number[][],
   rows: number,
   cols: number,
-  {
-    wallType,
-    entryType,
-    exitType,
-  }: { wallType: ClickType; entryType: ClickType; exitType: ClickType }
+  cellType: {
+    clear: number;
+    entry: number;
+    exit: number;
+    wall: number;
+  }
 ) {
-  const grid = generateGrid(rows, cols, wallType);
-  generateMazeUsingPrims(grid);
+  let entry = { row: -1, col: -1 };
+  let exit = { row: -1, col: -1 };
 
-  return {
-    grid,
-    entry: null,
-    exit: null,
-  };
-
-  grid.forEach((row) => {
-    row.forEach((_, pos) => {
-      if (Math.random() < 0.25) {
-        row[pos] = wallType;
-      }
-    });
-  });
-
-  const entry = { row: getRandom(rows), col: getRandom(cols) };
-  const exit = { row: -1, col: -1 };
   do {
-    exit.row = getRandom(rows);
-    exit.col = getRandom(cols);
-  } while (exit.row === entry.row && exit.col === entry.col);
+    entry = { row: getRandom(rows), col: getRandom(cols) };
+  } while (grid[entry.row][entry.col] !== cellType.clear);
 
-  grid[entry.row][entry.col] = entryType;
-  grid[exit.row][exit.col] = exitType;
-  return { grid, entry, exit };
+  do {
+    exit = { row: getRandom(rows), col: getRandom(cols) };
+  } while (grid[exit.row][exit.col] !== cellType.clear);
+
+  return { entry, exit };
 }
 
 export function getDimensionsFromScrenSize() {

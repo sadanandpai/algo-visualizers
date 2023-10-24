@@ -1,4 +1,4 @@
-import { Cell } from '../models/interfaces';
+import { Cell } from '../../models/interfaces';
 
 function generateGrid<T>(rows: number, cols: number, value: T | null): T[][] {
   return Array.from(new Array(rows), () => new Array(cols).fill(value));

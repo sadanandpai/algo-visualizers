@@ -6,6 +6,8 @@ export interface AppState {
   entry: { row: number; col: number } | null;
   exit: { row: number; col: number } | null;
   isPlaying: boolean;
+  mazeGenerator: string;
+  pathFinder: string;
 }
 
 export const enum ClickType {

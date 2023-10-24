@@ -1,24 +1,23 @@
 import {
-  randomizeGrid,
-  resetGrid,
+  generateMaze,
   setClickType,
+  setMazeGenerator,
 } from '../../store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import { AppState } from '../../models/interfaces';
 import classes from './controller.module.scss';
-import playIcon from '/icons/play.svg';
-import resetIcon from '/icons/reset.svg';
-import { searchPath } from '../../store/thunk';
+import { mazeGenerators } from '../../algorithms/maze-generator';
+
+const buttons = ['clear', 'entry', 'exit', 'wall'];
 
 function Operations() {
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector((state) => state.pathFinder.isPlaying);
   const clickType = useAppSelector((state) => state.pathFinder.clickType);
-  const entry = useAppSelector((state) => state.pathFinder.entry);
-  const exit = useAppSelector((state) => state.pathFinder.exit);
-
-  const buttons = ['clear', 'entry', 'exit', 'wall'];
+  const mazeAlgoName = useAppSelector(
+    (state) => state.pathFinder.mazeGenerator
+  );
 
   const handleBtnClick = (type: AppState['clickType']) => {
     dispatch(setClickType(type));
@@ -27,12 +26,25 @@ function Operations() {
   return (
     <>
       <div className={classes.cellControls}>
+        <select
+          name="maze"
+          id="maze"
+          value={mazeAlgoName}
+          onChange={(e) => dispatch(setMazeGenerator(e.target.value))}
+        >
+          {[...mazeGenerators.entries()].map(([key, { name }]) => (
+            <option key={key} value={key}>
+              {name}
+            </option>
+          ))}
+        </select>
+
         <button
-          onClick={() => dispatch(randomizeGrid())}
+          onClick={() => dispatch(generateMaze())}
           disabled={isPlaying}
           className="primary"
         >
-          Randomize
+          Maze
         </button>
 
         <div className={classes.clickTypes}>
@@ -49,25 +61,6 @@ function Operations() {
             </button>
           ))}
         </div>
-      </div>
-
-      <div className={classes.execution}>
-        <button
-          data-testid="player"
-          onClick={() => dispatch(searchPath())}
-          disabled={entry === null || exit === null}
-          data-tooltip="Play"
-        >
-          <img src={playIcon} alt="Play" height={24} width={24} />
-        </button>
-
-        <button
-          data-testid="reset"
-          onClick={() => dispatch(resetGrid())}
-          data-tooltip="Reset"
-        >
-          <img src={resetIcon} alt="Reset" height={24} width={24} />
-        </button>
       </div>
     </>
   );
