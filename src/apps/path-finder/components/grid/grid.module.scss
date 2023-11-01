@@ -1,6 +1,7 @@
 .grid {
   display: inline-grid;
   margin: auto;
+  border: 25px solid var(--cell-wall);
 
   button {
     border: 0.5px solid lightgrey;

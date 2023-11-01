@@ -26,7 +26,8 @@ export function generateMazeUsingPrims(
   }
 
   // Pick random point and make it a passage
-  makePassage((Math.random() * cols) | 0, (Math.random() * rows) | 0);
+  makePassage(0, 0);
+
   while (walls.length !== 0) {
     const { x, y } = walls.splice((Math.random() * walls.length) | 0, 1)[0];
 
