@@ -5,6 +5,7 @@ import {
 } from '@/apps/sorting-visualizer/store/global.state';
 
 import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
+import { delay } from '@/lib/helpers/async';
 
 export async function* swap(
   array: number[],
@@ -46,8 +47,4 @@ export async function* move(...positions: number[]): SortAsyncGenerator {
   await resolveWhenPlaying;
   yield { type: 'move', positions };
   await delay(swapInterval);
-}
-
-export function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
 }

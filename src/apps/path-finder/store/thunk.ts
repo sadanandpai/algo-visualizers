@@ -1,9 +1,10 @@
 import { AppDispatch, RootState } from '@/host/store/store';
 import { setCell, setClickType, setIsPlaying } from './path-finder.slice';
-import { startBFSAlgo, tracePath } from '../algorithms/path-finder/bfs';
 
 import { ClickType } from '../models/interfaces';
+import { pathFinders } from '../algorithms/path-finder';
 import { toast } from 'sonner';
+import { tracePath } from '../helpers/path.helper';
 
 export const searchPath =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -11,13 +12,17 @@ export const searchPath =
     dispatch(setIsPlaying(true));
     dispatch(setClickType(ClickType.fill));
 
-    const parents = await startBFSAlgo(
+    const parents = await pathFinders.get(state.pathFinder)?.fn(
       state.grid,
       state.entry!,
       state.exit!,
       (value: { row: number; col: number }) => dispatch(setCell(value)),
       () => getState().pathFinder.isPlaying
     );
+
+    if (!getState().pathFinder.isPlaying) {
+      return;
+    }
 
     if (parents) {
       toast.success('Path found!!! 😃');
@@ -31,7 +36,7 @@ export const searchPath =
         () => getState().pathFinder.isPlaying
       );
 
-      toast('Shortest path length is ' + (pathLength + 1));
+      toast('Path length is ' + (pathLength + 1));
     }
 
     dispatch(setClickType(ClickType.clear));
