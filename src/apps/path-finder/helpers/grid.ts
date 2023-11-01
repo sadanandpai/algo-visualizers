@@ -39,9 +39,20 @@ export function getEntryAndExit(
 }
 
 export function getDimensionsFromScrenSize() {
-  const size = 30;
+  const size = 25;
+  let maxRows = Math.floor((window.innerHeight - 140 - 2 * size) / size);
+  let maxCols = Math.floor((window.innerWidth - 3 * size) / size);
+
+  if (maxRows % 2 === 0) {
+    maxRows -= 1;
+  }
+
+  if (maxCols % 2 === 0) {
+    maxCols -= 1;
+  }
+
   return {
-    maxRows: Math.floor((window.innerHeight - 150) / size),
-    maxCols: Math.floor((window.innerWidth - 30) / size),
+    maxRows,
+    maxCols,
   };
 }
