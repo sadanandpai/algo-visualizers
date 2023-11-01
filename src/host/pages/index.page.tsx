@@ -1,6 +1,6 @@
 import Challenges from '../components/challenges/challenges';
-import Navbar from '@/lib/navbar/navbar';
-import ThemeIcon from '@/lib/theme-icon/theme-icon';
+import Navbar from '@/lib/components/navbar/navbar';
+import ThemeIcon from '@/lib/components/theme-icon/theme-icon';
 
 function Index() {
   return (

@@ -1,7 +1,7 @@
 import Controller from '../components/controller/controller';
 import Grid from '../components/grid/grid';
-import Navbar from '@/lib/navbar/navbar';
-import ThemeIcon from '@/lib/theme-icon/theme-icon';
+import Navbar from '@/lib/components/navbar/navbar';
+import ThemeIcon from '@/lib/components/theme-icon/theme-icon';
 
 function MainLayout() {
   return (

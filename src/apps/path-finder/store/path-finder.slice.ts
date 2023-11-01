@@ -15,7 +15,7 @@ const initialState: AppState = {
   cols: maxCols,
   entry: null,
   exit: null,
-  grid: generateGrid(maxRows, maxCols),
+  grid: generateGrid(maxRows, maxCols, ClickType.clear),
   mazeGenerator: [...mazeGenerators.keys()][0],
   pathFinder: [...pathFinders.keys()][0],
   clickType: ClickType.clear,
