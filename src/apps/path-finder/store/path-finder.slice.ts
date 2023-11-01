@@ -1,14 +1,14 @@
 import '@/apps/path-finder/config';
 
 import { AppState, Cell, ClickType } from '../models/interfaces';
-import { generateGrid, getDimensionsFromScrenSize } from '../helpers/grid';
+import { generateGrid, getDimensionsFromScreenSize } from '../helpers/grid';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { mazeGenerators } from '../algorithms/maze-generator';
 import { pathFinders } from '../algorithms/path-finder';
 
-export const { maxRows, maxCols } = getDimensionsFromScrenSize();
+export const { maxRows, maxCols } = getDimensionsFromScreenSize();
 
 const initialState: AppState = {
   rows: maxRows,

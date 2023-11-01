@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+
 import { NavbarProps } from '@/apps/sorting-visualizer/models/interfaces';
 import classes from './navbar.module.scss';
 import hamIcon from '/icons/ham.svg';
@@ -10,6 +11,9 @@ function Navbar({ title, menuItems }: NavbarProps) {
   return (
     <nav className={classes.navbar}>
       <h1 data-testid="navbar">
+        <Link to="/" className={classes.home}>
+          <img src="/icons/home.svg" alt="home" />
+        </Link>
         {title}
         <a
           href="https://github.com/sadanandpai/sorting-visualizer"
@@ -18,7 +22,7 @@ function Navbar({ title, menuItems }: NavbarProps) {
           <img
             src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
             alt="github repo"
-            className="github"
+            className={classes.github}
           />
         </a>
       </h1>

@@ -1,8 +1,5 @@
 import { Cell } from '../../models/interfaces';
-
-function generateGrid<T>(rows: number, cols: number, value: T | null): T[][] {
-  return Array.from(new Array(rows), () => new Array(cols).fill(value));
-}
+import { generateGrid } from '../../helpers/grid';
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));

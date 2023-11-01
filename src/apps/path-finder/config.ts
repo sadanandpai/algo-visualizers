@@ -1,3 +1,5 @@
+export const cellSize = 25;
+
 export const cellColors = {
   clear: 'transparent',
   entry: 'aqua',
@@ -8,9 +10,10 @@ export const cellColors = {
 };
 
 const root = document.querySelector(':root') as HTMLElement;
-root.style.setProperty('--cell-clear', cellColors.clear);
-root.style.setProperty('--cell-entry', cellColors.entry);
-root.style.setProperty('--cell-exit', cellColors.exit);
-root.style.setProperty('--cell-wall', cellColors.wall);
-root.style.setProperty('--cell-fill', cellColors.fill);
-root.style.setProperty('--cell-path', cellColors.path);
+root.style.setProperty('--pf-cell-size', cellSize + 'px');
+root.style.setProperty('--pf-cell-clear', cellColors.clear);
+root.style.setProperty('--pf-cell-entry', cellColors.entry);
+root.style.setProperty('--pf-cell-exit', cellColors.exit);
+root.style.setProperty('--pf-cell-wall', cellColors.wall);
+root.style.setProperty('--pf-cell-fill', cellColors.fill);
+root.style.setProperty('--pf-cell-path', cellColors.path);

@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
+  padding: 10px 20px;
   margin-bottom: 24px;
   box-shadow: 0 4px 4px theme.$shadow1;
 
@@ -15,14 +15,14 @@
   }
 
   h1 {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
     font-size: 1.5rem;
     font-weight: 600;
 
-    img {
-      display: inline-block;
-      margin-top: 2px;
-      margin-left: 10px;
-      vertical-align: text-top;
+    .github {
+      margin-left: 4px;
     }
   }
 
@@ -49,7 +49,7 @@
       a {
         display: block;
         width: auto;
-        padding: 8px 6px;
+        padding: 6px;
         text-transform: capitalize;
         border-radius: 8px;
       }
