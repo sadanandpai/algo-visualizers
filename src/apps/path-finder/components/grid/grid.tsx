@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useEffect, useRef } from 'react';
 
 import { ClickType } from '../../models/interfaces';
+import { cellSize } from '../../config';
 import classes from './grid.module.scss';
 import useMouseAction from '../../hooks/useMouseAction.hook';
 
@@ -14,8 +15,8 @@ function Grid() {
   const ref = useRef<HTMLDivElement>(null);
 
   const gridStyle: React.CSSProperties = {
-    gridTemplateRows: `repeat(${grid.length}, 25px)`,
-    gridTemplateColumns: `repeat(${grid[0].length}, 25px)`,
+    gridTemplateRows: `repeat(${grid.length}, ${cellSize}px)`,
+    gridTemplateColumns: `repeat(${grid[0].length}, ${cellSize}px)`,
   };
 
   const clickIdx = useMouseAction(ref);

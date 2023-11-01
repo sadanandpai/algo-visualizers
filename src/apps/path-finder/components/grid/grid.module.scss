@@ -1,7 +1,7 @@
 .grid {
   display: inline-grid;
   margin: auto;
-  border: 25px solid var(--cell-wall);
+  border: var(--pf-cell-size) solid var(--pf-cell-wall);
 
   button {
     border: 0.5px solid lightgrey;
@@ -9,29 +9,29 @@
   }
 
   .type0 {
-    background-color: var(--cell-clear);
+    background-color: var(--pf-cell-clear);
   }
 
   .type1 {
-    background-color: var(--cell-entry);
+    background-color: var(--pf-cell-entry);
   }
 
   .type2 {
-    background-color: var(--cell-exit);
+    background-color: var(--pf-cell-exit);
   }
 
   .type3 {
-    background-color: var(--cell-wall);
-    border-color: var(--cell-wall);
+    background-color: var(--pf-cell-wall);
+    border-color: var(--pf-cell-wall);
   }
 
   .type4 {
-    background-color: var(--cell-fill);
-    border-color: var(--cell-fill);
+    background-color: var(--pf-cell-fill);
+    border-color: var(--pf-cell-fill);
   }
 
   .type5 {
-    background-color: var(--cell-path);
-    border-color: var(--cell-path);
+    background-color: var(--pf-cell-path);
+    border-color: var(--pf-cell-path);
   }
 }

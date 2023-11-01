@@ -1,16 +1,15 @@
+import { cellSize } from '../config';
+
 function getRandom(max: number) {
   return Math.floor(Math.random() * max);
 }
 
-export function generateGrid(rows: number, cols: number, value = 0) {
-  const grid: number[][] = [];
-  for (let i = 0; i < rows; i++) {
-    grid[i] = [];
-    for (let j = 0; j < cols; j++) {
-      grid[i][j] = value;
-    }
-  }
-  return grid;
+export function generateGrid<T>(
+  rows: number,
+  cols: number,
+  value: T | null = null
+): T[][] {
+  return Array.from(new Array(rows), () => new Array(cols).fill(value));
 }
 
 export function getEntryAndExit(
@@ -38,10 +37,11 @@ export function getEntryAndExit(
   return { entry, exit };
 }
 
-export function getDimensionsFromScrenSize() {
-  const size = 25;
-  let maxRows = Math.floor((window.innerHeight - 140 - 2 * size) / size);
-  let maxCols = Math.floor((window.innerWidth - 3 * size) / size);
+export function getDimensionsFromScreenSize() {
+  let maxRows = Math.floor(
+    (window.innerHeight - 140 - 2 * cellSize) / cellSize
+  );
+  let maxCols = Math.floor((window.innerWidth - 3 * cellSize) / cellSize);
 
   if (maxRows % 2 === 0) {
     maxRows -= 1;

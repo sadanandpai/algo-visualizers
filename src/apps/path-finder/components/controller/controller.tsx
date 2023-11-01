@@ -5,7 +5,7 @@ import { useDebounce, useWindowSize } from 'react-use';
 import Execution from './execution';
 import Operations from './operations';
 import classes from './controller.module.scss';
-import { getDimensionsFromScrenSize } from '../../helpers/grid';
+import { getDimensionsFromScreenSize } from '../../helpers/grid';
 
 function Controller() {
   const dispatch = useAppDispatch();
@@ -15,7 +15,7 @@ function Controller() {
 
   useDebounce(
     () => {
-      const maxDimension = getDimensionsFromScrenSize();
+      const maxDimension = getDimensionsFromScreenSize();
       if (maxDimension.maxRows === rows && maxDimension.maxCols === cols) {
         return;
       }

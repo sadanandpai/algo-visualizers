@@ -28,15 +28,15 @@
       background-color: theme.$primary;
 
       &.entry {
-        color: var(--cell-entry);
+        color: var(--pf-cell-entry);
       }
 
       &.exit {
-        color: var(--cell-exit);
+        color: var(--pf-cell-exit);
       }
 
       &.wall {
-        color: var(--cell-wall);
+        color: var(--pf-cell-wall);
       }
     }
   }
