@@ -13,7 +13,6 @@ import {
 import { AppDispatch } from '@/store/store';
 import { AppState } from '../models/interfaces';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { WritableDraft } from 'immer/dist/internal.js';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: AppState = {
@@ -76,7 +75,7 @@ export const sortingVisualizerSlice = createSlice({
   },
 });
 
-function setIntervals(state: WritableDraft<AppState>) {
+function setIntervals(state: AppState) {
   if (state.visualizerType === 'cell') {
     setSwapInterval(maxInterval / state.speed);
   } else {
