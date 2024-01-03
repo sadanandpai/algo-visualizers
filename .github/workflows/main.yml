@@ -16,18 +16,27 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: setup git config
+      - name: Setup git config
         run: |
           git config user.name "Sadanand Pai"
           git config user.email "sadypai@gmail.com"
 
-      # Runs a set of commands using the runners shell
-      - name: setup deployment
+      - name: NPM installation
+        run: npm install
+
+      - name: Lint check
+        run: npm run lint
+
+      - name: Unit & E2E testing
         run: |
-          npm install
           npm test
           npm run e2e:test
+
+      - name: Build setup
+        run: |
           rm -rf dist
           npm run build
           git add dist -f
-          git diff --staged --quiet || (git commit -m "build files - github action" && git push)
+
+      - name: Commit & push
+        run: git diff --staged --quiet || (git commit -m "build files - github action" && git push)
