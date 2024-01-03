@@ -36,15 +36,24 @@ Features
 - Start, pause and reset the execution
 - Generate random array of numbers of sorting
 
+<br>
+
 ### Technologies
 
-- [React](https://react.dev/)
-- [Redux Toolkit](https://redux-toolkit.js.org/)
-- [React Router](https://reactrouter.com/en/main/)
-- [React Switch](https://react-switch.netlify.app/)
-- [Sonner](https://sonner.emilkowal.ski/)
-- [Sass](https://sass-lang.com/)
+Production libraries
+- [React](https://react.dev/) (Frontend Library)
+- [Redux Toolkit](https://redux-toolkit.js.org/) (State management)
+- [React Router](https://reactrouter.com/en/main/) (Router)
+- [React Switch](https://react-switch.netlify.app/) (Switch)
+- [Sonner](https://sonner.emilkowal.ski/) (Toast)
+
+Build libraries
+- [Sass](https://sass-lang.com/) (CSS compiler)
 - [Vite](https://vitejs.dev/) (Bundler)
+- [Vitest](https://vitest.dev/) (Unit test)
+- [Cypress](https://www.cypress.io/) (E2E test)
+
+<br>
 
 ### Features built using
 
@@ -55,10 +64,13 @@ Features
 - JavaScript async generators are used heavily for the controlled execution of
   algorithms
 
+<br>
+
 ### Run in your local
 
 - `git clone https://github.com/sadanandpai/sorting-visualizer.git`
-- `npm install` (after navigating inside the directory)
+- 'cd sorting-visualizer
+- `npm install`
 - `npm run dev`
 
 ---
@@ -67,6 +79,8 @@ Features
 
 If you want to contribute, improve or fix bugs in this repo, then check out the
 [Contributing Guide](./CONTRIBUTING.md) <br/>
+
+<br>
 
 ### License
 
