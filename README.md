@@ -69,7 +69,7 @@ Build libraries
 ### Run in your local
 
 - `git clone https://github.com/sadanandpai/sorting-visualizer.git`
-- 'cd sorting-visualizer
+- `cd sorting-visualizer`
 - `npm install`
 - `npm run dev`
 
