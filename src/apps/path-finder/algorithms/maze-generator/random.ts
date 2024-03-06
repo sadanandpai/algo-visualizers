@@ -1,23 +1,26 @@
 import { generateGrid } from '../../helpers/grid';
+import { Cell, CellType } from '../../models/interfaces';
 
 export function generateMazeRandomly(
   rows: number,
   cols: number,
-  cellType = { clear: 0, wall: 3 }
+  entry: Cell,
+  exit: Cell
 ) {
-  const grid = generateGrid(rows, cols, cellType.clear);
+  const grid = generateGrid(rows, cols, CellType.clear);
 
   grid.forEach((row) => {
     row.forEach((_, pos) => {
       if (Math.random() < 0.25) {
-        row[pos] = cellType.wall;
+        row[pos] = CellType.wall;
       }
     });
   });
 
+  grid[entry.row][entry.col] = CellType.entry;
+  grid[exit.row][exit.col] = CellType.exit;
+
   return {
     grid,
-    entry: null,
-    exit: null,
   };
 }

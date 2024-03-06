@@ -1,27 +1,15 @@
-import {
-  generateMaze,
-  setClickType,
-  setMazeGenerator,
-} from '../../store/path-finder.slice';
+import { generateMaze, setMazeGenerator } from '../../store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
-import { AppState } from '../../models/interfaces';
 import classes from './controller.module.scss';
 import { mazeGenerators } from '../../algorithms/maze-generator';
-
-const buttons = ['clear', 'entry', 'exit', 'wall'];
 
 function Operations() {
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector((state) => state.pathFinder.isPlaying);
-  const clickType = useAppSelector((state) => state.pathFinder.clickType);
   const mazeAlgoName = useAppSelector(
     (state) => state.pathFinder.mazeGenerator
   );
-
-  const handleBtnClick = (type: AppState['clickType']) => {
-    dispatch(setClickType(type));
-  };
 
   return (
     <>
@@ -46,21 +34,6 @@ function Operations() {
         >
           Maze
         </button>
-
-        <div className={classes.clickTypes}>
-          {buttons.map((btn, idx) => (
-            <button
-              key={btn}
-              onClick={() => handleBtnClick(idx)}
-              disabled={isPlaying}
-              className={`primary-outline ${classes[btn]} ${
-                clickType === idx ? classes.active : ''
-              }`}
-            >
-              {btn}
-            </button>
-          ))}
-        </div>
       </div>
     </>
   );
