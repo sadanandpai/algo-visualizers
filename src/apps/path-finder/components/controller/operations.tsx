@@ -6,7 +6,7 @@ import { mazeGenerators } from '../../algorithms/maze-generator';
 
 function Operations() {
   const dispatch = useAppDispatch();
-  const isPlaying = useAppSelector((state) => state.pathFinder.isPlaying);
+  const isTriggered = useAppSelector((state) => state.pathFinder.isTriggered);
   const mazeAlgoName = useAppSelector(
     (state) => state.pathFinder.mazeGenerator
   );
@@ -29,7 +29,7 @@ function Operations() {
 
         <button
           onClick={() => dispatch(generateMaze())}
-          disabled={isPlaying}
+          disabled={isTriggered}
           className="primary"
         >
           Maze

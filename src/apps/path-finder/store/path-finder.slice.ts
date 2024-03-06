@@ -1,7 +1,11 @@
 import '@/apps/path-finder/config';
 
 import { AppState, CellElement, CellType } from '../models/interfaces';
-import { generateGrid, getDimensionsFromScreenSize } from '../helpers/grid';
+import {
+  generateGrid,
+  getDimensionsFromScreenSize,
+  initGrid,
+} from '../helpers/grid';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
@@ -15,10 +19,10 @@ const initialState: AppState = {
   cols: maxCols,
   entry: { row: 0, col: 0 },
   exit: { row: maxRows - 1, col: maxCols - 1 },
-  grid: generateGrid(maxRows, maxCols, 0),
+  grid: initGrid(maxRows, maxCols),
   mazeGenerator: [...mazeGenerators.keys()][0],
   pathFinder: [...pathFinders.keys()][0],
-  isPlaying: false,
+  isTriggered: false,
 };
 
 export const pathFinderSlice = createSlice({
@@ -57,8 +61,8 @@ export const pathFinderSlice = createSlice({
       }
     },
 
-    setIsPlaying: (state, action: PayloadAction<boolean>) => {
-      state.isPlaying = action.payload;
+    setIsTriggered: (state, action: PayloadAction<boolean>) => {
+      state.isTriggered = action.payload;
     },
 
     generateMaze: (state) => {
@@ -76,12 +80,10 @@ export const pathFinderSlice = createSlice({
     },
 
     resetGrid: (state) => {
-      state.grid = generateGrid(state.rows, state.cols);
-      state.entry = { row: 0, col: 0 };
-      state.exit = { row: state.rows - 1, col: state.cols - 1 };
+      state.grid = generateGrid(state.rows, state.cols, CellType.clear);
       state.grid[state.entry.row][state.entry.col] = CellType.entry;
       state.grid[state.exit.row][state.exit.col] = CellType.exit;
-      state.isPlaying = false;
+      state.isTriggered = false;
     },
   },
 });
@@ -91,7 +93,7 @@ export const {
   setCell,
   generateMaze,
   resetGrid,
-  setIsPlaying,
+  setIsTriggered,
   setMazeGenerator,
   setPathFinder,
 } = pathFinderSlice.actions;

@@ -13,7 +13,7 @@ export interface AppState {
   grid: number[][];
   entry: Cell;
   exit: Cell;
-  isPlaying: boolean;
+  isTriggered: boolean;
   mazeGenerator: string;
   pathFinder: string;
 }
