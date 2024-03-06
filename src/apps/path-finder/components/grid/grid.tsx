@@ -37,7 +37,7 @@ function Grid() {
   const grid = useAppSelector((state) => state.pathFinder.grid);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
-  const isPlaying = useAppSelector((state) => state.pathFinder.isPlaying);
+  const isTriggered = useAppSelector((state) => state.pathFinder.isTriggered);
   const ref = useRef<HTMLDivElement>(null);
   const cellTypeRef = useRef<CellType | null>(null);
 
@@ -106,7 +106,7 @@ function Grid() {
             data-col={colIndex}
             data-cell-type={cellType}
             className={classes['type' + cellType]}
-            disabled={isPlaying}
+            disabled={isTriggered}
           ></button>
         ))
       )}

@@ -59,10 +59,14 @@
 }
 
 [data-theme='dark'] {
-  /* stylelint-disable-next-line no-descending-specificity */
   .execution {
     img {
       filter: invert(1);
     }
+  }
+
+  select {
+    background-color: theme.$dark;
+    color: theme.$light;
   }
 }

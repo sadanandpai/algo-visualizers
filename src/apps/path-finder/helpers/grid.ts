@@ -1,4 +1,5 @@
 import { cellSize } from '../config';
+import { CellType } from '../models/interfaces';
 
 function getRandom(max: number) {
   return Math.floor(Math.random() * max);
@@ -10,6 +11,13 @@ export function generateGrid<T>(
   value: T | null = null
 ): T[][] {
   return Array.from(new Array(rows), () => new Array(cols).fill(value));
+}
+
+export function initGrid(rows: number, cols: number) {
+  const grid = generateGrid(rows, cols, 0);
+  grid[0][0] = CellType.entry;
+  grid[rows - 1][cols - 1] = CellType.exit;
+  return grid;
 }
 
 export function getEntryAndExit(

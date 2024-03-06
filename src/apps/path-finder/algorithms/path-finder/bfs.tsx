@@ -1,4 +1,4 @@
-import { Cell } from '../../models/interfaces';
+import { Cell, CellType } from '../../models/interfaces';
 import { delay } from '@/lib/helpers/async';
 import { generateGrid } from '../../helpers/grid';
 
@@ -29,8 +29,9 @@ export async function startBFSAlgo(
   grid: number[][],
   entry: Cell,
   exit: Cell,
-  setGrid: (value: Cell) => void,
-  getIsPlaying: () => boolean
+  setCell: (value: Cell) => void,
+  getIsTriggered: () => boolean,
+  delayDuration: number
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -61,7 +62,7 @@ export async function startBFSAlgo(
         return parents;
       }
 
-      if (!getIsPlaying()) {
+      if (!getIsTriggered()) {
         return;
       }
 
@@ -78,19 +79,23 @@ export async function startBFSAlgo(
     // mark all the cells which are covered
     for (let i = 0; i < loopQueue.length; i++) {
       const value = loopQueue[i];
-      if (!visited[value.row][value.col] && grid[value.row][value.col] !== 3) {
+      if (
+        !visited[value.row][value.col] &&
+        grid[value.row][value.col] !== CellType.wall
+      ) {
         visited[value.row][value.col] = true;
         parents[value.row][value.col] = { row: value.row, col: value.col };
         queue.push(value);
       }
-      if (grid[value.row][value.col] === 0) {
-        setGrid({ row: value.row, col: value.col });
+      if (grid[value.row][value.col] === CellType.clear) {
+        setCell({ row: value.row, col: value.col });
       }
-      await delay(1);
+    }
 
-      if (!getIsPlaying()) {
-        return;
-      }
+    await delay(delayDuration);
+
+    if (!getIsTriggered()) {
+      return;
     }
   }
 

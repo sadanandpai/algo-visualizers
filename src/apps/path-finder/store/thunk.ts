@@ -1,5 +1,5 @@
 import { AppDispatch, RootState } from '@/host/store/store';
-import { setCell, setIsPlaying } from './path-finder.slice';
+import { setCell, setIsTriggered } from './path-finder.slice';
 
 import { CellType } from '../models/interfaces';
 import { pathFinders } from '../algorithms/path-finder';
@@ -9,7 +9,7 @@ import { tracePath } from '../helpers/path.helper';
 export const searchPath =
   () => async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().pathFinder;
-    dispatch(setIsPlaying(true));
+    dispatch(setIsTriggered(true));
 
     const parents = await pathFinders.get(state.pathFinder)?.fn(
       state.grid,
@@ -17,10 +17,11 @@ export const searchPath =
       state.exit,
       (value: { row: number; col: number }) =>
         dispatch(setCell({ ...value, cellType: CellType.fill })),
-      () => getState().pathFinder.isPlaying
+      () => getState().pathFinder.isTriggered,
+      0
     );
 
-    if (!getState().pathFinder.isPlaying) {
+    if (!getState().pathFinder.isTriggered) {
       return;
     }
 
@@ -33,7 +34,7 @@ export const searchPath =
         state.exit!,
         (value: { row: number; col: number }) =>
           dispatch(setCell({ ...value, cellType: CellType.path })),
-        () => getState().pathFinder.isPlaying
+        () => getState().pathFinder.isTriggered
       );
 
       toast('Path length is ' + (pathLength + 1));

@@ -8,7 +8,8 @@ export async function startDFSAlgo(
   entry: Cell,
   exit: Cell,
   setGrid: (value: Cell) => void,
-  getIsPlaying: () => boolean
+  getIsTriggered: () => boolean,
+  delayDuration: number
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -21,7 +22,7 @@ export async function startDFSAlgo(
     parentRow = -1,
     parentCol = -1
   ): Promise<boolean> {
-    if (!getIsPlaying()) {
+    if (!getIsTriggered()) {
       return false;
     }
 
@@ -44,7 +45,7 @@ export async function startDFSAlgo(
       setGrid({ row, col });
     }
 
-    await delay(1);
+    await delay(delayDuration);
 
     return (
       (await explorePath(row + 1, col, row, col)) ||

@@ -9,8 +9,7 @@ import { searchPath } from '../../store/thunk';
 
 function Execution() {
   const dispatch = useAppDispatch();
-  const entry = useAppSelector((state) => state.pathFinder.entry);
-  const exit = useAppSelector((state) => state.pathFinder.exit);
+  const isTriggered = useAppSelector((state) => state.pathFinder.isTriggered);
   const pathFinderKey = useAppSelector((state) => state.pathFinder.pathFinder);
 
   return (
@@ -31,7 +30,7 @@ function Execution() {
       <button
         data-testid="player"
         onClick={() => dispatch(searchPath())}
-        disabled={entry === null || exit === null}
+        disabled={isTriggered}
         data-tooltip="Play"
       >
         <img src={playIcon} alt="Play" height={24} width={24} />

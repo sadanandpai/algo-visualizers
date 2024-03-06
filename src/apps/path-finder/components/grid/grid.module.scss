@@ -32,6 +32,7 @@
 
   .type5 {
     background-color: var(--pf-cell-path);
-    border-color: var(--pf-cell-path);
+    border-color: var(--pf-cell-fill);
+    border-width: 8px;
   }
 }
