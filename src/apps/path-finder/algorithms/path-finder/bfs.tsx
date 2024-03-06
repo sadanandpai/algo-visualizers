@@ -86,7 +86,7 @@ export async function startBFSAlgo(
       if (grid[value.row][value.col] === 0) {
         setGrid({ row: value.row, col: value.col });
       }
-      await delay(25);
+      await delay(1);
 
       if (!getIsPlaying()) {
         return;

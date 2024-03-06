@@ -1,4 +1,5 @@
 import { generateGrid } from '../../helpers/grid';
+import { Cell, CellType } from '../../models/interfaces';
 
 function randomInt(min: number, max: number) {
   min = Math.ceil(min);
@@ -7,22 +8,23 @@ function randomInt(min: number, max: number) {
 }
 
 function addWall(grid: number[][], x: number, y: number) {
-  grid[x][y] = 3;
+  grid[x][y] = CellType.wall;
 }
 
 export function generateMazeUsingRecursiveDivision(
   rows: number,
   cols: number,
-  cellType = { clear: 0, wall: 3 }
+  entry: Cell,
+  exit: Cell
 ) {
-  const grid = generateGrid(rows, cols, cellType.clear);
+  const grid = generateGrid(rows, cols, CellType.clear);
 
   recursiveDivision(grid, -1, -1, rows, cols);
+  grid[entry.row][entry.col] = CellType.entry;
+  grid[exit.row][exit.col] = CellType.exit;
 
   return {
     grid,
-    entry: null,
-    exit: null,
   };
 }
 

@@ -1,17 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 function useMouseAction(ref: React.RefObject<HTMLDivElement>) {
-  const [clickIdx, setClickIdx] = useState<{ row: number; col: number } | null>(
-    null
-  );
+  const [element, setElement] = useState<HTMLElement | null>(null);
   const isMouseDown = useRef(false);
-
-  const setClick = (el: HTMLElement) => {
-    setClickIdx({
-      row: +(el.dataset.row ?? -1),
-      col: +(el.dataset.col ?? -1),
-    });
-  };
 
   useEffect(() => {
     const referenceEl = ref.current;
@@ -19,40 +10,39 @@ function useMouseAction(ref: React.RefObject<HTMLDivElement>) {
       return;
     }
 
-    referenceEl.addEventListener("mousedown", onMouseDown);
-    referenceEl.addEventListener("mousemove", onmouseMove);
-    referenceEl.addEventListener("mouseup", onMouseUp);
-    referenceEl.addEventListener("mouseleave", onMouseUp);
+    referenceEl.addEventListener('mousedown', onMouseDown);
+    referenceEl.addEventListener('mousemove', onmouseMove);
+    referenceEl.addEventListener('mouseup', onMouseUp);
+    referenceEl.addEventListener('mouseleave', onMouseUp);
 
     return () => {
-      referenceEl.removeEventListener("mousedown", onMouseDown);
-      referenceEl.removeEventListener("mousemove", onmouseMove);
-      referenceEl.removeEventListener("mouseup", onMouseUp);
-      referenceEl.removeEventListener("mouseleave", onMouseUp);
+      referenceEl.removeEventListener('mousedown', onMouseDown);
+      referenceEl.removeEventListener('mousemove', onmouseMove);
+      referenceEl.removeEventListener('mouseup', onMouseUp);
+      referenceEl.removeEventListener('mouseleave', onMouseUp);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
   const onMouseDown = (e: MouseEvent) => {
-    const el = e.target as HTMLElement;
-    if (el?.tagName === "BUTTON") {
+    if (e.target) {
       isMouseDown.current = true;
-      setClick(el);
+      setElement(e.target as HTMLElement);
     }
   };
 
   const onmouseMove = (e: MouseEvent) => {
-    const el = e.target as HTMLElement;
-    if (isMouseDown.current && el?.tagName === "BUTTON") {
-      setClick(el);
+    if (isMouseDown.current) {
+      setElement(e.target as HTMLElement);
     }
   };
 
   const onMouseUp = () => {
     isMouseDown.current = false;
+    setElement(null);
   };
 
-  return clickIdx;
+  return { element, isMouseDown: isMouseDown.current };
 }
 
 export default useMouseAction;

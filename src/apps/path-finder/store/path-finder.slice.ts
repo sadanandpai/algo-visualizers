@@ -1,6 +1,6 @@
 import '@/apps/path-finder/config';
 
-import { AppState, Cell, ClickType } from '../models/interfaces';
+import { AppState, CellElement, CellType } from '../models/interfaces';
 import { generateGrid, getDimensionsFromScreenSize } from '../helpers/grid';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
@@ -13,12 +13,11 @@ export const { maxRows, maxCols } = getDimensionsFromScreenSize();
 const initialState: AppState = {
   rows: maxRows,
   cols: maxCols,
-  entry: null,
-  exit: null,
-  grid: generateGrid(maxRows, maxCols, ClickType.clear),
+  entry: { row: 0, col: 0 },
+  exit: { row: maxRows - 1, col: maxCols - 1 },
+  grid: generateGrid(maxRows, maxCols, 0),
   mazeGenerator: [...mazeGenerators.keys()][0],
   pathFinder: [...pathFinders.keys()][0],
-  clickType: ClickType.clear,
   isPlaying: false,
 };
 
@@ -42,35 +41,20 @@ export const pathFinderSlice = createSlice({
       state.pathFinder = action.payload;
     },
 
-    setClickType: (state, action: PayloadAction<ClickType>) => {
-      state.clickType = action.payload;
-    },
+    setCell: (state, action: PayloadAction<CellElement>) => {
+      const payload = action.payload;
+      state.grid[payload.row][payload.col] = payload.cellType;
 
-    setEntry: (state, action: PayloadAction<Cell>) => {
-      if (state.entry !== null) {
-        state.grid[state.entry.row][state.entry.col] = 0;
+      if (
+        payload.cellType === CellType.entry ||
+        payload.cellType === CellType.exit
+      ) {
+        const cell = payload.cellType === CellType.entry ? 'entry' : 'exit';
+        state[cell] = {
+          row: payload.row,
+          col: payload.col,
+        };
       }
-      state.entry = action.payload;
-      state.grid[action.payload.row][action.payload.col] = state.clickType;
-    },
-
-    setExit: (state, action: PayloadAction<Cell>) => {
-      if (state.exit !== null) {
-        state.grid[state.exit.row][state.exit.col] = 0;
-      }
-      state.exit = action.payload;
-      state.grid[action.payload.row][action.payload.col] = state.clickType;
-    },
-
-    setCell: (state, action: PayloadAction<Cell>) => {
-      const cellType = state.grid[action.payload.row][action.payload.col];
-      if (cellType === ClickType.entry) {
-        state.entry = null;
-      } else if (cellType === ClickType.exit) {
-        state.exit = null;
-      }
-
-      state.grid[action.payload.row][action.payload.col] = state.clickType;
     },
 
     setIsPlaying: (state, action: PayloadAction<boolean>) => {
@@ -80,21 +64,23 @@ export const pathFinderSlice = createSlice({
     generateMaze: (state) => {
       const mazeAlgo = mazeGenerators.get(state.mazeGenerator);
       if (mazeAlgo) {
-        const { grid, entry, exit } = mazeAlgo.fn(state.rows, state.cols, {
-          clear: ClickType.clear,
-          wall: ClickType.wall,
-        });
+        const { grid } = mazeAlgo.fn(
+          state.rows,
+          state.cols,
+          state.entry,
+          state.exit
+        );
 
         state.grid = grid;
-        state.entry = entry;
-        state.exit = exit;
       }
     },
 
     resetGrid: (state) => {
       state.grid = generateGrid(state.rows, state.cols);
-      state.entry = null;
-      state.exit = null;
+      state.entry = { row: 0, col: 0 };
+      state.exit = { row: state.rows - 1, col: state.cols - 1 };
+      state.grid[state.entry.row][state.entry.col] = CellType.entry;
+      state.grid[state.exit.row][state.exit.col] = CellType.exit;
       state.isPlaying = false;
     },
   },
@@ -102,9 +88,6 @@ export const pathFinderSlice = createSlice({
 
 export const {
   setDimension,
-  setClickType,
-  setEntry,
-  setExit,
   setCell,
   generateMaze,
   resetGrid,

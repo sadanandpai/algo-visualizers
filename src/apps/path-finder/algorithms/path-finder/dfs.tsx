@@ -44,7 +44,7 @@ export async function startDFSAlgo(
       setGrid({ row, col });
     }
 
-    await delay(25);
+    await delay(1);
 
     return (
       (await explorePath(row + 1, col, row, col)) ||
