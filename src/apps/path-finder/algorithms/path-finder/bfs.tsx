@@ -24,6 +24,14 @@ function getAddToQueueIfAllowedFunction(
   };
 }
 
+function markCells(coveredCells: Cell[], setCell: (value: Cell) => void) {
+  if (coveredCells.length > 0) {
+    for (let i = 0; i < coveredCells.length; i++) {
+      setCell(coveredCells[i]); // instead use setgrid
+    }
+  }
+}
+
 // The Breadth First Search Algorithm
 export async function startBFSAlgo(
   grid: number[][],
@@ -49,6 +57,7 @@ export async function startBFSAlgo(
     queue
   );
 
+  const coveredCells = [];
   while (queue.length) {
     // iterate till queue items are over
     const length = queue.length;
@@ -58,6 +67,8 @@ export async function startBFSAlgo(
       const value = queue.shift()!;
 
       if (value.row === exit.row && value.col === exit.col) {
+        markCells(coveredCells, setCell);
+
         // if exit is found, stop searching
         return parents;
       }
@@ -87,17 +98,25 @@ export async function startBFSAlgo(
         parents[value.row][value.col] = { row: value.row, col: value.col };
         queue.push(value);
       }
+
       if (grid[value.row][value.col] === CellType.clear) {
-        setCell({ row: value.row, col: value.col });
+        if (delayDuration > 0) {
+          setCell({ row: value.row, col: value.col });
+        } else {
+          coveredCells.push({ row: value.row, col: value.col });
+        }
       }
     }
 
-    await delay(delayDuration);
+    if (delayDuration > 0) {
+      await delay(delayDuration);
+    }
 
     if (!getIsTriggered()) {
       return;
     }
   }
 
+  markCells(coveredCells, setCell);
   return null;
 }

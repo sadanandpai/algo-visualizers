@@ -1,4 +1,8 @@
-import { resetGrid, setPathFinder } from '../../store/path-finder.slice';
+import {
+  resetGrid,
+  resetGridSearch,
+  setPathFinder,
+} from '../../store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import classes from './controller.module.scss';
@@ -6,11 +10,25 @@ import { pathFinders } from '../../algorithms/path-finder';
 import playIcon from '/icons/play.svg';
 import resetIcon from '/icons/reset.svg';
 import { searchPath } from '../../store/thunk';
+import { useDebounce } from 'react-use';
 
 function Execution() {
   const dispatch = useAppDispatch();
+  const entry = useAppSelector((state) => state.pathFinder.entry);
+  const exit = useAppSelector((state) => state.pathFinder.exit);
   const isTriggered = useAppSelector((state) => state.pathFinder.isTriggered);
   const pathFinderKey = useAppSelector((state) => state.pathFinder.pathFinder);
+
+  useDebounce(
+    () => {
+      if (isTriggered) {
+        dispatch(resetGridSearch());
+        dispatch(searchPath(0));
+      }
+    },
+    333,
+    [entry, exit]
+  );
 
   return (
     <div className={classes.execution}>
@@ -29,7 +47,7 @@ function Execution() {
 
       <button
         data-testid="player"
-        onClick={() => dispatch(searchPath())}
+        onClick={() => dispatch(searchPath(50))}
         disabled={isTriggered}
         data-tooltip="Play"
       >
