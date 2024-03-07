@@ -1,6 +1,6 @@
 import '@/apps/path-finder/config';
 
-import { AppState, CellElement, CellType } from '../models/interfaces';
+import { AppState, CellElement, CellType, Status } from '../models/interfaces';
 import {
   generateGrid,
   getDimensionsFromScreenSize,
@@ -22,7 +22,7 @@ const initialState: AppState = {
   grid: initGrid(maxRows, maxCols),
   mazeGenerator: [...mazeGenerators.keys()][0],
   pathFinder: [...pathFinders.keys()][0],
-  isTriggered: false,
+  status: Status.Ready,
 };
 
 export const pathFinderSlice = createSlice({
@@ -61,8 +61,8 @@ export const pathFinderSlice = createSlice({
       }
     },
 
-    setIsTriggered: (state, action: PayloadAction<boolean>) => {
-      state.isTriggered = action.payload;
+    setStatus: (state, action: PayloadAction<Status>) => {
+      state.status = action.payload;
     },
 
     generateMaze: (state) => {
@@ -83,10 +83,10 @@ export const pathFinderSlice = createSlice({
       state.grid = generateGrid(state.rows, state.cols, CellType.clear);
       state.grid[state.entry.row][state.entry.col] = CellType.entry;
       state.grid[state.exit.row][state.exit.col] = CellType.exit;
-      state.isTriggered = false;
+      state.status = Status.Ready;
     },
 
-    resetGridSearch: (state) => {
+    clearGrid: (state) => {
       const gridClone = state.grid.map((row) => row.slice());
       for (let i = 0; i < state.rows; i++) {
         for (let j = 0; j < state.cols; j++) {
@@ -108,9 +108,9 @@ export const {
   setCell,
   generateMaze,
   resetGrid,
-  setIsTriggered,
+  clearGrid,
   setMazeGenerator,
   setPathFinder,
-  resetGridSearch,
+  setStatus,
 } = pathFinderSlice.actions;
 export default pathFinderSlice.reducer;

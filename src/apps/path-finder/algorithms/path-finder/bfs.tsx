@@ -38,7 +38,7 @@ export async function startBFSAlgo(
   entry: Cell,
   exit: Cell,
   setCell: (value: Cell) => void,
-  getIsTriggered: () => boolean,
+  isRunning: () => boolean,
   delayDuration: number
 ) {
   const rows = grid.length;
@@ -73,7 +73,7 @@ export async function startBFSAlgo(
         return parents;
       }
 
-      if (!getIsTriggered()) {
+      if (!isRunning()) {
         return;
       }
 
@@ -112,7 +112,7 @@ export async function startBFSAlgo(
       await delay(delayDuration);
     }
 
-    if (!getIsTriggered()) {
+    if (!isRunning()) {
       return;
     }
   }

@@ -2,7 +2,7 @@ import { setCell } from '../../store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useEffect, useRef } from 'react';
 
-import { CellType } from '../../models/interfaces';
+import { CellType, Status } from '../../models/interfaces';
 import { cellSize } from '../../config';
 import classes from './grid.module.scss';
 import useMouseAction from '../../hooks/useMouseAction.hook';
@@ -37,6 +37,7 @@ function Grid() {
   const grid = useAppSelector((state) => state.pathFinder.grid);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
+  const status = useAppSelector((state) => state.pathFinder.status);
   const ref = useRef<HTMLDivElement>(null);
   const cellTypeRef = useRef<CellType | null>(null);
 
@@ -87,8 +88,7 @@ function Grid() {
         setCell({
           row: row!,
           col: col!,
-          cellType:
-            cellType === CellType.clear ? CellType.wall : CellType.clear,
+          cellType: cellType === CellType.wall ? CellType.clear : CellType.wall,
         })
       );
     }
@@ -109,7 +109,7 @@ function Grid() {
             data-col={colIndex}
             data-cell-type={cellType}
             className={classes['type' + cellType]}
-            // disabled={isTriggered}
+            disabled={status === Status.Running}
           ></button>
         ))
       )}

@@ -1,6 +1,6 @@
 import {
   resetGrid,
-  resetGridSearch,
+  clearGrid,
   setPathFinder,
 } from '../../store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
@@ -11,18 +11,19 @@ import playIcon from '/icons/play.svg';
 import resetIcon from '/icons/reset.svg';
 import { searchPath } from '../../store/thunk';
 import { useDebounce } from 'react-use';
+import { Status } from '../../models/interfaces';
 
 function Execution() {
   const dispatch = useAppDispatch();
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
-  const isTriggered = useAppSelector((state) => state.pathFinder.isTriggered);
+  const status = useAppSelector((state) => state.pathFinder.status);
   const pathFinderKey = useAppSelector((state) => state.pathFinder.pathFinder);
 
   useDebounce(
     () => {
-      if (isTriggered) {
-        dispatch(resetGridSearch());
+      if (status === Status.Complete) {
+        dispatch(clearGrid());
         dispatch(searchPath(0));
       }
     },
@@ -48,7 +49,7 @@ function Execution() {
       <button
         data-testid="player"
         onClick={() => dispatch(searchPath(50))}
-        disabled={isTriggered}
+        disabled={status !== Status.Ready}
         data-tooltip="Play"
       >
         <img src={playIcon} alt="Play" height={24} width={24} />

@@ -8,7 +8,7 @@ export async function startDFSAlgo(
   entry: Cell,
   exit: Cell,
   setCell: (value: Cell) => void,
-  getIsTriggered: () => boolean,
+  isRunning: () => boolean,
   delayDuration: number
 ) {
   const rows = grid.length;
@@ -23,7 +23,7 @@ export async function startDFSAlgo(
     parentRow = -1,
     parentCol = -1
   ): Promise<boolean> {
-    if (!getIsTriggered()) {
+    if (!isRunning()) {
       return false;
     }
 
