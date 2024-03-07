@@ -1,12 +1,7 @@
-.grid {
+.grid.grid {
   display: inline-grid;
   margin: auto;
   border: var(--pf-cell-size) solid var(--pf-cell-wall);
-
-  button {
-    border: 0.5px solid lightgrey;
-    transition: all 0.33s;
-  }
 
   .type0 {
     background-color: var(--pf-cell-clear);
@@ -34,5 +29,18 @@
     background-color: var(--pf-cell-path);
     border-color: var(--pf-cell-fill);
     border-width: 8px;
+  }
+
+  button {
+    border: 0.5px solid rgb(240, 240, 240);
+    transition: all 0.33s;
+  }
+}
+
+[data-theme='dark'] {
+  .grid {
+    button {
+      border-color: rgb(20, 20, 20);
+    }
   }
 }

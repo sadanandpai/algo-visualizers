@@ -32,3 +32,13 @@ export interface AppState {
   mazeGenerator: string;
   pathFinder: string;
 }
+
+export interface AlgoProps {
+  grid: number[][];
+  entry: Cell;
+  exit: Cell;
+  setCell: (value: Cell, cellType: CellType) => void;
+  setCells: (value: Cell[], cellType: CellType) => void;
+  isRunning: () => boolean;
+  delayDuration: number;
+}

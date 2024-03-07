@@ -1,6 +1,12 @@
 import '@/apps/path-finder/config';
 
-import { AppState, CellElement, CellType, Status } from '../models/interfaces';
+import {
+  AppState,
+  Cell,
+  CellElement,
+  CellType,
+  Status,
+} from '../models/interfaces';
 import {
   generateGrid,
   getDimensionsFromScreenSize,
@@ -61,6 +67,20 @@ export const pathFinderSlice = createSlice({
       }
     },
 
+    setCells: (
+      state,
+      action: PayloadAction<{ cells: Cell[]; cellType: CellType }>
+    ) => {
+      const { cells, cellType } = action.payload;
+
+      const gridClone = state.grid.map((row) => row.slice());
+      cells.forEach((cell) => {
+        gridClone[cell.row][cell.col] = cellType;
+      });
+
+      state.grid = gridClone;
+    },
+
     setStatus: (state, action: PayloadAction<Status>) => {
       state.status = action.payload;
     },
@@ -106,6 +126,7 @@ export const pathFinderSlice = createSlice({
 export const {
   setDimension,
   setCell,
+  setCells,
   generateMaze,
   resetGrid,
   clearGrid,

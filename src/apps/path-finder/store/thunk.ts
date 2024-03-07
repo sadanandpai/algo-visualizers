@@ -1,7 +1,11 @@
 import { AppDispatch, RootState } from '@/host/store/store';
-import { setCell, setStatus } from './path-finder.slice';
+import {
+  setCells as setStateCells,
+  setCell as setStateCell,
+  setStatus,
+} from './path-finder.slice';
 
-import { CellType, Status } from '../models/interfaces';
+import { Cell, CellType, Status } from '../models/interfaces';
 import { pathFinders } from '../algorithms/path-finder';
 import { toast } from 'sonner';
 import { tracePath } from '../helpers/path.helper';
@@ -12,15 +16,18 @@ export const searchPath =
     const state = getState().pathFinder;
     dispatch(setStatus(Status.Running));
 
-    const parents = await pathFinders.get(state.pathFinder)?.fn(
-      state.grid,
-      state.entry,
-      state.exit,
-      (value: { row: number; col: number }) =>
-        dispatch(setCell({ ...value, cellType: CellType.fill })),
-      () => getState().pathFinder.status === Status.Running,
-      delayDuration
-    );
+    const parents = await pathFinders.get(state.pathFinder)?.fn({
+      grid: state.grid,
+      entry: state.entry,
+      exit: state.exit,
+      setCell: (value: Cell, cellType: CellType) =>
+        dispatch(setStateCell({ ...value, cellType })),
+      setCells: (cells: Cell[], cellType: CellType) => {
+        dispatch(setStateCells({ cells, cellType }));
+      },
+      isRunning: () => getState().pathFinder.status === Status.Running,
+      delayDuration,
+    });
 
     if (getState().pathFinder.status !== Status.Running) {
       return;
@@ -34,7 +41,7 @@ export const searchPath =
         state.entry!,
         state.exit!,
         (value: { row: number; col: number }) =>
-          dispatch(setCell({ ...value, cellType: CellType.path })),
+          dispatch(setStateCell({ ...value, cellType: CellType.path })),
         () => getState().pathFinder.status === Status.Running,
         delayDuration
       );

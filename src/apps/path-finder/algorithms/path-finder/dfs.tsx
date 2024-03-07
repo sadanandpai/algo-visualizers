@@ -1,16 +1,17 @@
-import { Cell } from '../../models/interfaces';
+import { AlgoProps, Cell, CellType } from '../../models/interfaces';
 import { delay } from '@/lib/helpers/async';
 import { generateGrid } from '../../helpers/grid';
 
 // The Depth First Search Algorithm
-export async function startDFSAlgo(
-  grid: number[][],
-  entry: Cell,
-  exit: Cell,
-  setCell: (value: Cell) => void,
-  isRunning: () => boolean,
-  delayDuration: number
-) {
+export async function startDFSAlgo({
+  grid,
+  entry,
+  exit,
+  setCell,
+  setCells,
+  isRunning,
+  delayDuration,
+}: AlgoProps) {
   const rows = grid.length;
   const cols = grid[0].length;
   const visited = generateGrid(rows, cols, false); // initalize visited arrays
@@ -44,7 +45,7 @@ export async function startDFSAlgo(
 
     if (parentCol !== -1 && parentRow !== -1) {
       if (delayDuration > 0) {
-        setCell({ row, col });
+        setCell({ row, col }, CellType.fill);
       } else {
         coveredCells.push({ row: row, col: col });
       }
@@ -66,9 +67,7 @@ export async function startDFSAlgo(
   const hasPath = await explorePath(entry.row, entry.col, coveredCells);
 
   if (coveredCells.length) {
-    for (let i = 0; i < coveredCells.length; i++) {
-      setCell(coveredCells[i]); // instead use setgrid
-    }
+    setCells(coveredCells, CellType.fill);
   }
 
   return hasPath ? parents : null;
