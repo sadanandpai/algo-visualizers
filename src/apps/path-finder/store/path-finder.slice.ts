@@ -85,6 +85,21 @@ export const pathFinderSlice = createSlice({
       state.grid[state.exit.row][state.exit.col] = CellType.exit;
       state.isTriggered = false;
     },
+
+    resetGridSearch: (state) => {
+      const gridClone = state.grid.map((row) => row.slice());
+      for (let i = 0; i < state.rows; i++) {
+        for (let j = 0; j < state.cols; j++) {
+          if (
+            gridClone[i][j] === CellType.fill ||
+            gridClone[i][j] === CellType.path
+          ) {
+            gridClone[i][j] = CellType.clear;
+          }
+        }
+      }
+      state.grid = gridClone;
+    },
   },
 });
 
@@ -96,5 +111,6 @@ export const {
   setIsTriggered,
   setMazeGenerator,
   setPathFinder,
+  resetGridSearch,
 } = pathFinderSlice.actions;
 export default pathFinderSlice.reducer;

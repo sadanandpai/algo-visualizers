@@ -37,7 +37,6 @@ function Grid() {
   const grid = useAppSelector((state) => state.pathFinder.grid);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
-  const isTriggered = useAppSelector((state) => state.pathFinder.isTriggered);
   const ref = useRef<HTMLDivElement>(null);
   const cellTypeRef = useRef<CellType | null>(null);
 
@@ -66,7 +65,11 @@ function Grid() {
     if (cellTypeRef.current) {
       const cell = cellTypeRef.current === CellType.entry ? entry : exit;
 
-      if (cell && (cell.row !== row || cell.col !== col)) {
+      if (
+        cell &&
+        (cell.row !== row || cell.col !== col) &&
+        cellType !== CellType.wall
+      ) {
         dispatch(
           setCell({
             row: cell?.row,
@@ -106,7 +109,7 @@ function Grid() {
             data-col={colIndex}
             data-cell-type={cellType}
             className={classes['type' + cellType]}
-            disabled={isTriggered}
+            // disabled={isTriggered}
           ></button>
         ))
       )}

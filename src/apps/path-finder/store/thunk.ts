@@ -7,7 +7,8 @@ import { toast } from 'sonner';
 import { tracePath } from '../helpers/path.helper';
 
 export const searchPath =
-  () => async (dispatch: AppDispatch, getState: () => RootState) => {
+  (delayDuration: number) =>
+  async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().pathFinder;
     dispatch(setIsTriggered(true));
 
@@ -18,7 +19,7 @@ export const searchPath =
       (value: { row: number; col: number }) =>
         dispatch(setCell({ ...value, cellType: CellType.fill })),
       () => getState().pathFinder.isTriggered,
-      0
+      delayDuration
     );
 
     if (!getState().pathFinder.isTriggered) {
@@ -34,7 +35,8 @@ export const searchPath =
         state.exit!,
         (value: { row: number; col: number }) =>
           dispatch(setCell({ ...value, cellType: CellType.path })),
-        () => getState().pathFinder.isTriggered
+        () => getState().pathFinder.isTriggered,
+        delayDuration
       );
 
       toast('Path length is ' + (pathLength + 1));

@@ -7,7 +7,7 @@ export async function startDFSAlgo(
   grid: number[][],
   entry: Cell,
   exit: Cell,
-  setGrid: (value: Cell) => void,
+  setCell: (value: Cell) => void,
   getIsTriggered: () => boolean,
   delayDuration: number
 ) {
@@ -19,6 +19,7 @@ export async function startDFSAlgo(
   async function explorePath(
     row: number,
     col: number,
+    coveredCells: Cell[],
     parentRow = -1,
     parentCol = -1
   ): Promise<boolean> {
@@ -42,19 +43,33 @@ export async function startDFSAlgo(
     }
 
     if (parentCol !== -1 && parentRow !== -1) {
-      setGrid({ row, col });
+      if (delayDuration > 0) {
+        setCell({ row, col });
+      } else {
+        coveredCells.push({ row: row, col: col });
+      }
     }
 
-    await delay(delayDuration);
+    if (delayDuration > 0) {
+      await delay(delayDuration);
+    }
 
     return (
-      (await explorePath(row + 1, col, row, col)) ||
-      (await explorePath(row - 1, col, row, col)) ||
-      (await explorePath(row, col + 1, row, col)) ||
-      (await explorePath(row, col - 1, row, col))
+      (await explorePath(row + 1, col, coveredCells, row, col)) ||
+      (await explorePath(row - 1, col, coveredCells, row, col)) ||
+      (await explorePath(row, col + 1, coveredCells, row, col)) ||
+      (await explorePath(row, col - 1, coveredCells, row, col))
     );
   }
 
-  const hasPath = await explorePath(entry.row, entry.col);
+  const coveredCells: Cell[] = [];
+  const hasPath = await explorePath(entry.row, entry.col, coveredCells);
+
+  if (coveredCells.length) {
+    for (let i = 0; i < coveredCells.length; i++) {
+      setCell(coveredCells[i]); // instead use setgrid
+    }
+  }
+
   return hasPath ? parents : null;
 }
