@@ -23,9 +23,7 @@ export function generateMazeUsingRecursiveDivision(
   grid[entry.row][entry.col] = CellType.entry;
   grid[exit.row][exit.col] = CellType.exit;
 
-  return {
-    grid,
-  };
+  return grid;
 }
 
 function recursiveDivision(

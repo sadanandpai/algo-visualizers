@@ -5,18 +5,20 @@ import {
   setStatus,
 } from './path-finder.slice';
 
-import { Cell, CellType, Status } from '../models/interfaces';
-import { pathFinders } from '../algorithms/path-finder';
+import { AlgoProps, Cell, CellType, Status } from '../models/interfaces';
 import { toast } from 'sonner';
 import { tracePath } from '../helpers/path.helper';
 
 export const searchPath =
-  (delayDuration: number) =>
+  (
+    pathFinderAlgo: (props: AlgoProps) => Promise<Cell[][] | null>,
+    delayDuration: number
+  ) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().pathFinder;
     dispatch(setStatus(Status.Running));
 
-    const parents = await pathFinders.get(state.pathFinder)?.fn({
+    const parents = await pathFinderAlgo({
       grid: state.grid,
       entry: state.entry,
       exit: state.exit,
@@ -43,7 +45,7 @@ export const searchPath =
         (value: { row: number; col: number }) =>
           dispatch(setStateCell({ ...value, cellType: CellType.path })),
         () => getState().pathFinder.status === Status.Running,
-        delayDuration
+        delayDuration * 2
       );
 
       toast('Path length is ' + (pathLength + 1));

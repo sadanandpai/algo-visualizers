@@ -1,43 +1,66 @@
-import {
-  resetGrid,
-  clearGrid,
-  setPathFinder,
-} from '../../store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
+import { clearGrid, resetGrid } from '../../store/path-finder.slice';
 
-import classes from './controller.module.scss';
+import { Play, RefreshCcw, Trash } from 'lucide-react';
 import { pathFinders } from '../../algorithms/path-finder';
-import playIcon from '/icons/play.svg';
-import resetIcon from '/icons/reset.svg';
-import { searchPath } from '../../store/thunk';
+import classes from './controller.module.scss';
+
+import { useState } from 'react';
 import { useDebounce } from 'react-use';
 import { Status } from '../../models/interfaces';
+import { searchPath } from '../../store/thunk';
+
+const speeds = new Map([
+  ['0.5x', 50],
+  ['0.75x', 40],
+  ['1x', 30],
+  ['2x', 20],
+  ['4x', 10],
+  ['xx', 0],
+]);
 
 function Execution() {
   const dispatch = useAppDispatch();
+  const [pathFinder, setPathFinder] = useState([...pathFinders.keys()][0]);
+  const [speed, setSpeed] = useState([...speeds.values()][0]);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
-  const pathFinderKey = useAppSelector((state) => state.pathFinder.pathFinder);
+  const pathFinderAlgo = pathFinders.get(pathFinder)!;
 
   useDebounce(
     () => {
       if (status === Status.Complete) {
         dispatch(clearGrid());
-        dispatch(searchPath(0));
+        dispatch(searchPath(pathFinderAlgo.fn, 0));
       }
     },
     333,
     [entry, exit]
   );
 
+  console.log(speed);
+
   return (
     <div className={classes.execution}>
       <select
+        name="speed"
+        id="speed"
+        value={speed}
+        onChange={(e) => setSpeed(+e.target.value)}
+      >
+        {[...speeds.entries()].map(([key, value]) => (
+          <option key={key} value={value}>
+            {key}
+          </option>
+        ))}
+      </select>
+
+      <select
         name="path-finder"
         id="maze"
-        value={pathFinderKey}
-        onChange={(e) => dispatch(setPathFinder(e.target.value))}
+        value={pathFinder}
+        onChange={(e) => setPathFinder(e.target.value)}
       >
         {[...pathFinders.entries()].map(([key, { name }]) => (
           <option key={key} value={key}>
@@ -48,11 +71,19 @@ function Execution() {
 
       <button
         data-testid="player"
-        onClick={() => dispatch(searchPath(50))}
+        onClick={() => dispatch(searchPath(pathFinderAlgo?.fn, speed))}
         disabled={status !== Status.Ready}
         data-tooltip="Play"
       >
-        <img src={playIcon} alt="Play" height={24} width={24} />
+        <Play size={24} />
+      </button>
+
+      <button
+        data-testid="clear"
+        onClick={() => dispatch(clearGrid())}
+        data-tooltip="clear"
+      >
+        <RefreshCcw size={24} />
       </button>
 
       <button
@@ -60,7 +91,7 @@ function Execution() {
         onClick={() => dispatch(resetGrid())}
         data-tooltip="Reset"
       >
-        <img src={resetIcon} alt="Reset" height={24} width={24} />
+        <Trash size={24} />
       </button>
     </div>
   );
