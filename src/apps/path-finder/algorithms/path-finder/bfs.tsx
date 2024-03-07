@@ -1,4 +1,4 @@
-import { Cell, CellType } from '../../models/interfaces';
+import { AlgoProps, Cell, CellType } from '../../models/interfaces';
 import { delay } from '@/lib/helpers/async';
 import { generateGrid } from '../../helpers/grid';
 
@@ -24,23 +24,16 @@ function getAddToQueueIfAllowedFunction(
   };
 }
 
-function markCells(coveredCells: Cell[], setCell: (value: Cell) => void) {
-  if (coveredCells.length > 0) {
-    for (let i = 0; i < coveredCells.length; i++) {
-      setCell(coveredCells[i]); // instead use setgrid
-    }
-  }
-}
-
 // The Breadth First Search Algorithm
-export async function startBFSAlgo(
-  grid: number[][],
-  entry: Cell,
-  exit: Cell,
-  setCell: (value: Cell) => void,
-  isRunning: () => boolean,
-  delayDuration: number
-) {
+export async function startBFSAlgo({
+  grid,
+  entry,
+  exit,
+  setCell,
+  setCells,
+  isRunning,
+  delayDuration,
+}: AlgoProps) {
   const rows = grid.length;
   const cols = grid[0].length;
   const visited = generateGrid(rows, cols, false); // initalize visited arrays
@@ -67,7 +60,7 @@ export async function startBFSAlgo(
       const value = queue.shift()!;
 
       if (value.row === exit.row && value.col === exit.col) {
-        markCells(coveredCells, setCell);
+        setCells(coveredCells, CellType.fill);
 
         // if exit is found, stop searching
         return parents;
@@ -101,7 +94,7 @@ export async function startBFSAlgo(
 
       if (grid[value.row][value.col] === CellType.clear) {
         if (delayDuration > 0) {
-          setCell({ row: value.row, col: value.col });
+          setCell({ row: value.row, col: value.col }, CellType.fill);
         } else {
           coveredCells.push({ row: value.row, col: value.col });
         }
@@ -117,6 +110,6 @@ export async function startBFSAlgo(
     }
   }
 
-  markCells(coveredCells, setCell);
+  setCells(coveredCells, CellType.fill);
   return null;
 }
