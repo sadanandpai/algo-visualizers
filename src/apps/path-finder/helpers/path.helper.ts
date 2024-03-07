@@ -6,7 +6,7 @@ export async function tracePath(
   entry: Cell,
   exit: Cell,
   setGrid: (value: Cell) => void,
-  getIsTriggered: () => boolean,
+  isRunning: () => boolean,
   delayDuration: number
 ) {
   let row = exit.row;
@@ -27,7 +27,7 @@ export async function tracePath(
     }
     [row, col] = [parents[row][col].row, parents[row][col].col]; // set parents for next iteration
     pathLength += 1;
-  } while (getIsTriggered() && (entry.row !== row || entry.col !== col)); // check if entry is reached
+  } while (isRunning() && (entry.row !== row || entry.col !== col)); // check if entry is reached
 
   return pathLength;
 }

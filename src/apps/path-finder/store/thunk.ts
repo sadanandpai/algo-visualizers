@@ -1,7 +1,7 @@
 import { AppDispatch, RootState } from '@/host/store/store';
-import { setCell, setIsTriggered } from './path-finder.slice';
+import { setCell, setStatus } from './path-finder.slice';
 
-import { CellType } from '../models/interfaces';
+import { CellType, Status } from '../models/interfaces';
 import { pathFinders } from '../algorithms/path-finder';
 import { toast } from 'sonner';
 import { tracePath } from '../helpers/path.helper';
@@ -10,7 +10,7 @@ export const searchPath =
   (delayDuration: number) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().pathFinder;
-    dispatch(setIsTriggered(true));
+    dispatch(setStatus(Status.Running));
 
     const parents = await pathFinders.get(state.pathFinder)?.fn(
       state.grid,
@@ -18,11 +18,11 @@ export const searchPath =
       state.exit,
       (value: { row: number; col: number }) =>
         dispatch(setCell({ ...value, cellType: CellType.fill })),
-      () => getState().pathFinder.isTriggered,
+      () => getState().pathFinder.status === Status.Running,
       delayDuration
     );
 
-    if (!getState().pathFinder.isTriggered) {
+    if (getState().pathFinder.status !== Status.Running) {
       return;
     }
 
@@ -35,10 +35,14 @@ export const searchPath =
         state.exit!,
         (value: { row: number; col: number }) =>
           dispatch(setCell({ ...value, cellType: CellType.path })),
-        () => getState().pathFinder.isTriggered,
+        () => getState().pathFinder.status === Status.Running,
         delayDuration
       );
 
       toast('Path length is ' + (pathLength + 1));
+    } else {
+      toast.error('No path found 😔');
     }
+
+    dispatch(setStatus(Status.Complete));
   };

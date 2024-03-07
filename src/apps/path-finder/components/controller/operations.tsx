@@ -3,10 +3,11 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import classes from './controller.module.scss';
 import { mazeGenerators } from '../../algorithms/maze-generator';
+import { Status } from '../../models/interfaces';
 
 function Operations() {
   const dispatch = useAppDispatch();
-  const isTriggered = useAppSelector((state) => state.pathFinder.isTriggered);
+  const status = useAppSelector((state) => state.pathFinder.status);
   const mazeAlgoName = useAppSelector(
     (state) => state.pathFinder.mazeGenerator
   );
@@ -29,7 +30,7 @@ function Operations() {
 
         <button
           onClick={() => dispatch(generateMaze())}
-          disabled={isTriggered}
+          disabled={status !== Status.Ready}
           className="primary"
         >
           Maze
