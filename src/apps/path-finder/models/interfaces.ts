@@ -29,8 +29,6 @@ export interface AppState {
   entry: Cell;
   exit: Cell;
   status: Status;
-  mazeGenerator: string;
-  pathFinder: string;
 }
 
 export interface AlgoProps {

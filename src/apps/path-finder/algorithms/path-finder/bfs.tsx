@@ -67,7 +67,7 @@ export async function startBFSAlgo({
       }
 
       if (!isRunning()) {
-        return;
+        return null;
       }
 
       // Validate and add next coordinates to the queue (All 4 directions i.e up, down, left, right)
@@ -102,11 +102,11 @@ export async function startBFSAlgo({
     }
 
     if (delayDuration > 0) {
-      await delay(delayDuration);
+      await delay(delayDuration * 4);
     }
 
     if (!isRunning()) {
-      return;
+      return null;
     }
   }
 

@@ -20,7 +20,5 @@ export function generateMazeRandomly(
   grid[entry.row][entry.col] = CellType.entry;
   grid[exit.row][exit.col] = CellType.exit;
 
-  return {
-    grid,
-  };
+  return grid;
 }
