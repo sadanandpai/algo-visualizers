@@ -11,7 +11,7 @@ function addWall(grid: number[][], x: number, y: number) {
   grid[x][y] = CellType.wall;
 }
 
-export function generateMazeUsingRecursiveDivision(
+export function generateRecursiveDivisionMaze(
   rows: number,
   cols: number,
   entry: Cell,

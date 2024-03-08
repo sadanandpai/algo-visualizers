@@ -1,12 +1,9 @@
 import { generateMazeRandomly } from './random';
-import { generateMazeUsingPrims } from './prims';
-import { generateMazeUsingRecursiveDivision } from './recursive-division';
+import { generatePrimsMaze } from './prims';
+import { generateRecursiveDivisionMaze } from './recursive-division';
 
 export const mazeGenerators = new Map([
-  ['prims', { name: 'Prims', fn: generateMazeUsingPrims }],
-  [
-    'recursiveDivision',
-    { name: 'Rec Div', fn: generateMazeUsingRecursiveDivision },
-  ],
+  ['prims', { name: 'Prims', fn: generatePrimsMaze }],
+  ['recursiveDivision', { name: 'Rec Div', fn: generateRecursiveDivisionMaze }],
   ['random', { name: 'Random', fn: generateMazeRandomly }],
 ]);

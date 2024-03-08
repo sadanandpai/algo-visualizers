@@ -1,55 +1,78 @@
 import { generateGrid } from '../../helpers/grid';
 import { Cell, CellType } from '../../models/interfaces';
 
-export function generateMazeUsingPrims(
+const directions = [
+  { row: -2, col: 0 },
+  { row: 2, col: 0 },
+  { row: 0, col: -2 },
+  { row: 0, col: 2 },
+];
+
+export function generatePrimsMaze(
   rows: number,
   cols: number,
   entry: Cell,
   exit: Cell
 ) {
   const grid = generateGrid(rows, cols, CellType.wall);
-  const OOB = {};
+  const maze = generateGrid(rows, cols, false);
+  const neighbors: Cell[] = [];
 
-  const walls: { x: number; y: number }[] = [];
-  function makePassage(x: number, y: number) {
-    grid[y][x] = CellType.clear;
-
-    const candidates = [
-      { x: x - 1, y },
-      { x: x + 1, y },
-      { x, y: y - 1 },
-      { x, y: y + 1 },
-    ];
-    for (const wall of candidates) {
-      if (lookup(grid, cols, rows, wall.x, wall.y) === CellType.wall) {
-        walls.push(wall);
-      }
+  function addNeighbors(row: number, col: number) {
+    if (row > 1 && !maze[row - 2][col]) {
+      neighbors.push({ row: row - 2, col });
+    }
+    if (row < rows - 2 && !maze[row + 2][col]) {
+      neighbors.push({ row: row + 2, col });
+    }
+    if (col > 1 && !maze[row][col - 2]) {
+      neighbors.push({ row, col: col - 2 });
+    }
+    if (col < cols - 2 && !maze[row][col + 2]) {
+      neighbors.push({ row, col: col + 2 });
     }
   }
 
-  // Pick random point and make it a passage
-  makePassage(0, 0);
+  function getMazeCells(row: number, col: number) {
+    return directions
+      .map((direction) => ({
+        row: row + direction.row,
+        col: col + direction.col,
+      }))
+      .filter(
+        (cell) =>
+          cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols
+      )
+      .filter((cell) => maze[cell.row][cell.col]);
+  }
 
-  while (walls.length !== 0) {
-    const { x, y } = walls.splice((Math.random() * walls.length) | 0, 1)[0];
+  function createPassage(row: number, col: number) {
+    const mazeCells = getMazeCells(row, col);
+    const passageCell = mazeCells[Math.floor(Math.random() * mazeCells.length)];
+    const middleCell = {
+      row: row + (passageCell.row - row) / 2,
+      col: col + (passageCell.col - col) / 2,
+    };
 
-    const left = lookup(grid, cols, rows, x - 1, y, OOB as number);
-    const right = lookup(grid, cols, rows, x + 1, y, OOB as number);
-    const top = lookup(grid, cols, rows, x, y - 1, OOB as number);
-    const bottom = lookup(grid, cols, rows, x, y + 1, OOB as number);
+    maze[middleCell.row][middleCell.col] = true;
+    grid[row][col] = CellType.clear;
+    grid[middleCell.row][middleCell.col] = CellType.clear;
+    grid[passageCell.row][passageCell.col] = CellType.clear;
+  }
 
-    if (left === CellType.clear && right === CellType.wall) {
-      grid[y][x] = CellType.clear;
-      makePassage(x + 1, y);
-    } else if (right === CellType.clear && left === CellType.wall) {
-      grid[y][x] = CellType.clear;
-      makePassage(x - 1, y);
-    } else if (top === CellType.clear && bottom === CellType.wall) {
-      grid[y][x] = CellType.clear;
-      makePassage(x, y + 1);
-    } else if (bottom === CellType.clear && top === CellType.wall) {
-      grid[y][x] = CellType.clear;
-      makePassage(x, y - 1);
+  maze[0][0] = true;
+  grid[0][0] = CellType.clear;
+  addNeighbors(0, 0);
+
+  while (neighbors.length) {
+    const randomIndex = Math.floor(Math.random() * neighbors.length);
+    const neighbor = neighbors[randomIndex];
+    neighbors.splice(randomIndex, 1);
+
+    if (!maze[neighbor.row][neighbor.col]) {
+      maze[neighbor.row][neighbor.col] = true;
+      createPassage(neighbor.row, neighbor.col);
+      addNeighbors(neighbor.row, neighbor.col);
     }
   }
 
@@ -57,18 +80,4 @@ export function generateMazeUsingPrims(
   grid[exit.row][exit.col] = CellType.exit;
 
   return grid;
-}
-
-function lookup(
-  grid: number[][],
-  rows: number,
-  cols: number,
-  row: number,
-  col: number,
-  defaultValue = 0
-) {
-  if (row < 0 || col < 0 || row >= rows || col >= cols) {
-    return defaultValue;
-  }
-  return grid[col][row];
 }
