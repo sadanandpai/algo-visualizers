@@ -15,20 +15,19 @@ export function generatePrimsMaze(
   exit: Cell
 ) {
   const grid = generateGrid(rows, cols, CellType.wall);
-  const maze = generateGrid(rows, cols, false);
   const neighbors: Cell[] = [];
 
   function addNeighbors(row: number, col: number) {
-    if (row > 1 && !maze[row - 2][col]) {
+    if (row > 1 && grid[row - 2][col] !== CellType.clear) {
       neighbors.push({ row: row - 2, col });
     }
-    if (row < rows - 2 && !maze[row + 2][col]) {
+    if (row < rows - 2 && grid[row + 2][col] !== CellType.clear) {
       neighbors.push({ row: row + 2, col });
     }
-    if (col > 1 && !maze[row][col - 2]) {
+    if (col > 1 && grid[row][col - 2] !== CellType.clear) {
       neighbors.push({ row, col: col - 2 });
     }
-    if (col < cols - 2 && !maze[row][col + 2]) {
+    if (col < cols - 2 && grid[row][col + 2] !== CellType.clear) {
       neighbors.push({ row, col: col + 2 });
     }
   }
@@ -43,7 +42,7 @@ export function generatePrimsMaze(
         (cell) =>
           cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols
       )
-      .filter((cell) => maze[cell.row][cell.col]);
+      .filter((cell) => grid[cell.row][cell.col] === CellType.clear);
   }
 
   function createPassage(row: number, col: number) {
@@ -54,13 +53,10 @@ export function generatePrimsMaze(
       col: col + (passageCell.col - col) / 2,
     };
 
-    maze[middleCell.row][middleCell.col] = true;
     grid[row][col] = CellType.clear;
     grid[middleCell.row][middleCell.col] = CellType.clear;
-    grid[passageCell.row][passageCell.col] = CellType.clear;
   }
 
-  maze[0][0] = true;
   grid[0][0] = CellType.clear;
   addNeighbors(0, 0);
 
@@ -69,8 +65,7 @@ export function generatePrimsMaze(
     const neighbor = neighbors[randomIndex];
     neighbors.splice(randomIndex, 1);
 
-    if (!maze[neighbor.row][neighbor.col]) {
-      maze[neighbor.row][neighbor.col] = true;
+    if (grid[neighbor.row][neighbor.col] !== CellType.clear) {
       createPassage(neighbor.row, neighbor.col);
       addNeighbors(neighbor.row, neighbor.col);
     }
