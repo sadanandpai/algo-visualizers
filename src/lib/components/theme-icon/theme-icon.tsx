@@ -3,13 +3,9 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { Theme } from '@/host/types/interfaces';
 import classes from './theme-icon.module.scss';
 import { createPortal } from 'react-dom';
-import moonIcon from '/icons/moon.svg';
 import { setTheme } from '@/host/store/app.slice';
-import sunIcon from '/icons/sun.svg';
 import { useEffect } from 'react';
-
-const SunIcon = <img src={sunIcon} alt="dark mode" />;
-const MoonIcon = <img src={moonIcon} alt="dark mode" />;
+import { Moon, Sun } from 'lucide-react';
 
 function ThemeIcon({
   top,
@@ -50,7 +46,7 @@ function ThemeIcon({
             )
           }
         >
-          {currentTheme === Theme.LIGHT ? MoonIcon : SunIcon}
+          {currentTheme === Theme.LIGHT ? <Moon /> : <Sun color="black" />}
         </button>,
         document.getElementById('screen-layout')!
       )}

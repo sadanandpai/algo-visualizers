@@ -32,6 +32,10 @@ const getCellDetails = (element: HTMLElement | null) => {
   };
 };
 
+function isTouchDevice() {
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
+
 function Grid() {
   const dispatch = useAppDispatch();
   const grid = useAppSelector((state) => state.pathFinder.grid);
@@ -40,26 +44,40 @@ function Grid() {
   const status = useAppSelector((state) => state.pathFinder.status);
   const ref = useRef<HTMLDivElement>(null);
   const cellTypeRef = useRef<CellType | null>(null);
+  const cellMoveRef = useRef<CellType | null>(null);
 
   const { element, isMouseDown } = useMouseAction(ref);
   const { isValidCell, row, col, cellType } = getCellDetails(element);
 
   useEffect(() => {
-    if (
-      isMouseDown &&
-      isValidCell &&
-      [CellType.entry, CellType.exit].includes(cellType!)
-    ) {
-      cellTypeRef.current = cellType!;
-    }
+    if (!isTouchDevice()) {
+      if (
+        isMouseDown &&
+        isValidCell &&
+        [CellType.entry, CellType.exit].includes(cellType!)
+      ) {
+        cellTypeRef.current = cellType!;
+      }
 
-    if (!isMouseDown) {
-      cellTypeRef.current = null;
+      if (!isMouseDown) {
+        cellTypeRef.current = null;
+      }
     }
   }, [isMouseDown, isValidCell, cellType]);
 
   useEffect(() => {
-    if (!isValidCell) {
+    if (isTouchDevice() && isValidCell && isMouseDown) {
+      if (
+        [CellType.entry, CellType.exit].includes(cellType!) &&
+        !cellMoveRef.current
+      ) {
+        cellMoveRef.current = cellType!;
+      }
+    }
+  }, [isMouseDown, isValidCell, cellType]);
+
+  useEffect(() => {
+    if (!isValidCell || isTouchDevice()) {
       return;
     }
 
@@ -84,6 +102,49 @@ function Grid() {
         );
       }
     } else {
+      dispatch(
+        setCell({
+          row: row!,
+          col: col!,
+          cellType: cellType === CellType.wall ? CellType.clear : CellType.wall,
+        })
+      );
+    }
+  }, [cellType, col, dispatch, element, isValidCell, row, entry, exit]);
+
+  useEffect(() => {
+    if (!isValidCell || !isTouchDevice()) {
+      return;
+    }
+
+    if (cellMoveRef.current) {
+      const cell = cellMoveRef.current === CellType.entry ? entry : exit;
+
+      if (
+        cell &&
+        (cell.row !== row || cell.col !== col) &&
+        cellType !== CellType.wall
+      ) {
+        dispatch(
+          setCell({ row: row!, col: col!, cellType: cellMoveRef.current })
+        );
+
+        dispatch(
+          setCell({
+            row: cell?.row,
+            col: cell?.col,
+            cellType: CellType.clear,
+          })
+        );
+
+        cellMoveRef.current = null;
+      }
+    } else if (
+      !(
+        (row === entry.row && col === entry.col) ||
+        (row === exit.row && col === exit.col)
+      )
+    ) {
       dispatch(
         setCell({
           row: row!,

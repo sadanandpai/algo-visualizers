@@ -19,42 +19,23 @@
     }
   }
 
-  .clickTypes {
-    display: flex;
-    gap: 1px;
-
-    .active {
-      color: theme.$light;
-      background-color: theme.$primary;
-
-      &.entry {
-        color: var(--pf-cell-entry);
-      }
-
-      &.exit {
-        color: var(--pf-cell-exit);
-      }
-
-      &.wall {
-        color: var(--pf-cell-wall);
-      }
-    }
-  }
-
   .execution {
     display: flex;
     gap: 10px;
-  }
 
-  .dimension {
-    display: none;
+    .speed {
+      display: none;
+    }
   }
 }
 
 @media (width >= 960px) {
-  .controller .dimension {
-    display: flex;
-    gap: 10px;
+  .controller {
+    .execution {
+      .speed {
+        display: block;
+      }
+    }
   }
 }
 

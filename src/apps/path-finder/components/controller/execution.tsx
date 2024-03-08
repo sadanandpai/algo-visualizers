@@ -22,7 +22,7 @@ const speeds = new Map([
 function Execution() {
   const dispatch = useAppDispatch();
   const [pathFinder, setPathFinder] = useState([...pathFinders.keys()][0]);
-  const [speed, setSpeed] = useState([...speeds.values()][0]);
+  const [speed, setSpeed] = useState([...speeds.values()][2]);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
@@ -39,11 +39,10 @@ function Execution() {
     [entry, exit]
   );
 
-  console.log(speed);
-
   return (
     <div className={classes.execution}>
       <select
+        className={classes.speed}
         name="speed"
         id="speed"
         value={speed}

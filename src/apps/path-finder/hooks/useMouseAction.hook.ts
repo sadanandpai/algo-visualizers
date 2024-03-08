@@ -17,21 +17,21 @@ function useMouseAction(ref: React.RefObject<HTMLDivElement>) {
 
     return () => {
       referenceEl.removeEventListener('mousedown', onMouseDown);
-      referenceEl.removeEventListener('mousemove', onmouseMove);
+      referenceEl.removeEventListener('mouseleave', onmouseMove);
       referenceEl.removeEventListener('mouseup', onMouseUp);
       referenceEl.removeEventListener('mouseleave', onMouseUp);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
-  const onMouseDown = (e: MouseEvent) => {
+  const onMouseDown = (e: MouseEvent | TouchEvent) => {
     if (e.target) {
       isMouseDown.current = true;
       setElement(e.target as HTMLElement);
     }
   };
 
-  const onmouseMove = (e: MouseEvent) => {
+  const onmouseMove = (e: MouseEvent | TouchEvent) => {
     if (isMouseDown.current) {
       setElement(e.target as HTMLElement);
     }
