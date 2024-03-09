@@ -39,8 +39,17 @@ export const pathFinderSlice = createSlice({
       state.cols = action.payload.cols ?? state.cols;
     },
 
-    setGrid: (state, action: PayloadAction<CellType[][]>) => {
-      state.grid = action.payload;
+    setGrid: (
+      state,
+      action: PayloadAction<{ grid: CellType[][]; clone?: boolean }>
+    ) => {
+      if (!action.payload.clone) {
+        state.grid = action.payload.grid;
+        return;
+      }
+
+      const gridClone = action.payload.grid.map((row) => row.slice());
+      state.grid = gridClone;
     },
 
     setCell: (state, action: PayloadAction<CellElement>) => {

@@ -40,3 +40,19 @@ export interface AlgoProps {
   isRunning: () => boolean;
   delayDuration: number;
 }
+
+export interface MazeAlgoProps {
+  rows: number;
+  cols: number;
+  entry: Cell;
+  exit: Cell;
+  setStateCells: (cells: Cell[], cellType: CellType) => void;
+  setStateGrid: ({
+    grid,
+    clone,
+  }: {
+    grid: CellType[][];
+    clone?: boolean;
+  }) => void;
+  delayDuration: number;
+}

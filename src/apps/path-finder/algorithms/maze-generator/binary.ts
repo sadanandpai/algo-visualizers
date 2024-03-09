@@ -1,5 +1,5 @@
 import { generateGrid } from '../../helpers/grid';
-import { Cell, CellType } from '../../models/interfaces';
+import { Cell, CellType, MazeAlgoProps } from '../../models/interfaces';
 
 // Any 2 directions to be considered
 const directions = [
@@ -22,12 +22,15 @@ const getNeighbors = (grid: CellType[][], cell: Cell) => {
     );
 };
 
-export function generateBinaryMaze(
-  rows: number,
-  cols: number,
-  entry: Cell,
-  exit: Cell
-) {
+export function generateBinaryMaze({
+  rows,
+  cols,
+  entry,
+  exit,
+  setStateCells,
+  setStateGrid,
+  delayDuration,
+}: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
 
   for (let row = 0; row < rows; row += 2) {
@@ -46,5 +49,5 @@ export function generateBinaryMaze(
   grid[entry.row][entry.col] = CellType.entry;
   grid[exit.row][exit.col] = CellType.exit;
 
-  return grid;
+  setStateGrid({ grid });
 }

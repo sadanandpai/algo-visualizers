@@ -8,7 +8,7 @@ import classes from './controller.module.scss';
 import { useState } from 'react';
 import { useDebounce } from 'react-use';
 import { Status } from '../../models/interfaces';
-import { searchPath } from '../../store/thunk';
+import { searchPath } from '../../store/search-thunk';
 
 const speeds = new Map([
   ['0.5x', 50],

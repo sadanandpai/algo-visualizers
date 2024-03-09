@@ -9,12 +9,11 @@ import { AlgoProps, Cell, CellType, Status } from '../models/interfaces';
 import { toast } from 'sonner';
 import { tracePath } from '../helpers/path.helper';
 
-export const searchPath =
-  (
-    pathFinderAlgo: (props: AlgoProps) => Promise<Cell[][] | null>,
-    delayDuration: number
-  ) =>
-  async (dispatch: AppDispatch, getState: () => RootState) => {
+export function searchPath(
+  pathFinderAlgo: (props: AlgoProps) => Promise<Cell[][] | null>,
+  delayDuration: number
+) {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().pathFinder;
     dispatch(setStatus(Status.Running));
 
@@ -55,3 +54,4 @@ export const searchPath =
 
     dispatch(setStatus(Status.Complete));
   };
+}

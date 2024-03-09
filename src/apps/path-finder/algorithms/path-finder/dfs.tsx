@@ -32,7 +32,7 @@ export async function startDFSAlgo({
       return false;
     }
 
-    if (visited[row][col] || grid[row][col] === 3) {
+    if (visited[row][col] || grid[row][col] === CellType.wall) {
       return false;
     }
 
