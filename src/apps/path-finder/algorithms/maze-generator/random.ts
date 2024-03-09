@@ -1,12 +1,15 @@
 import { generateGrid } from '../../helpers/grid';
-import { Cell, CellType } from '../../models/interfaces';
+import { Cell, CellType, MazeAlgoProps } from '../../models/interfaces';
 
-export function generateMazeRandomly(
-  rows: number,
-  cols: number,
-  entry: Cell,
-  exit: Cell
-) {
+export function generateMazeRandomly({
+  rows,
+  cols,
+  entry,
+  exit,
+  setStateCells,
+  setStateGrid,
+  delayDuration,
+}: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
 
   grid.forEach((row) => {
@@ -20,5 +23,5 @@ export function generateMazeRandomly(
   grid[entry.row][entry.col] = CellType.entry;
   grid[exit.row][exit.col] = CellType.exit;
 
-  return grid;
+  setStateGrid({ grid });
 }

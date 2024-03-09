@@ -2,23 +2,18 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useState } from 'react';
 import { mazeGenerators } from '../../algorithms/maze-generator';
 import { Status } from '../../models/interfaces';
-import { setGrid } from '../../store/path-finder.slice';
 import classes from './controller.module.scss';
+import { generateMaze } from '../../store/maze.thunk';
 
 function Operations() {
   const dispatch = useAppDispatch();
   const [maze, setMaze] = useState([...mazeGenerators.keys()][0]);
-  const rows = useAppSelector((state) => state.pathFinder.rows);
-  const cols = useAppSelector((state) => state.pathFinder.cols);
-  const entry = useAppSelector((state) => state.pathFinder.entry);
-  const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
   const mazeAlgo = mazeGenerators.get(maze);
 
-  function generateMaze() {
-    const grid = mazeAlgo?.fn(rows, cols, entry, exit);
-    if (grid) {
-      dispatch(setGrid(grid));
+  function mazeClickHandler() {
+    if (mazeAlgo) {
+      dispatch(generateMaze(mazeAlgo.fn, 0));
     }
   }
 
@@ -39,7 +34,7 @@ function Operations() {
         </select>
 
         <button
-          onClick={() => generateMaze()}
+          onClick={mazeClickHandler}
           disabled={status !== Status.Ready}
           className="primary"
         >

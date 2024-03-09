@@ -1,5 +1,5 @@
 import { generateGrid } from '../../helpers/grid';
-import { Cell, CellType } from '../../models/interfaces';
+import { Cell, CellType, MazeAlgoProps } from '../../models/interfaces';
 
 const directions = [
   { row: -2, col: 0 },
@@ -8,12 +8,15 @@ const directions = [
   { row: 0, col: 2 },
 ];
 
-export function generateRecursiveBacktrackingMaze(
-  rows: number,
-  cols: number,
-  entry: Cell,
-  exit: Cell
-) {
+export function generateRecursiveBacktrackingMaze({
+  rows,
+  cols,
+  entry,
+  exit,
+  setStateCells,
+  setStateGrid,
+  delayDuration,
+}: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
 
   grid[0][0] = CellType.clear;
@@ -21,7 +24,8 @@ export function generateRecursiveBacktrackingMaze(
 
   grid[entry.row][entry.col] = CellType.entry;
   grid[exit.row][exit.col] = CellType.exit;
-  return grid;
+
+  setStateGrid({ grid });
 }
 
 function getNonMazeNeighbors(grid: CellType[][], row: number, col: number) {
