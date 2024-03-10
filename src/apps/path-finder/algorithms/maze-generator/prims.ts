@@ -76,7 +76,7 @@ export async function generatePrimsMaze({
   setStateCells,
   setStateGrid,
   delayDuration,
-  isRunning,
+  isGenerating,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
   if (delayDuration) {
@@ -93,7 +93,7 @@ export async function generatePrimsMaze({
     const neighbor = neighbors[randomIndex];
     neighbors.splice(randomIndex, 1);
 
-    if (isRunning()) {
+    if (!isGenerating()) {
       return;
     }
 

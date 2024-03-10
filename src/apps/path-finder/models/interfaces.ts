@@ -17,7 +17,6 @@ export interface CellElement extends Cell {
 }
 
 export enum Status {
-  Blank,
   Generating,
   Ready,
   Searching,
@@ -56,6 +55,6 @@ export interface MazeAlgoProps {
     grid: CellType[][];
     clone?: boolean;
   }) => void;
-  isRunning: () => boolean;
+  isGenerating: () => boolean;
   delayDuration: number;
 }

@@ -8,7 +8,7 @@ export async function generateMazeRandomly({
   exit,
   setStateCells,
   setStateGrid,
-  isRunning,
+  isGenerating,
   delayDuration,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
@@ -27,7 +27,7 @@ export async function generateMazeRandomly({
           await new Promise((resolve) => setTimeout(resolve, delayDuration));
         }
 
-        if (isRunning()) {
+        if (!isGenerating()) {
           return;
         }
       }
