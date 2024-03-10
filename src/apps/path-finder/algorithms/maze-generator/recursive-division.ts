@@ -1,14 +1,54 @@
+import { delay } from '@/lib/helpers/async';
 import { generateGrid } from '../../helpers/grid';
-import { Cell, CellType, MazeAlgoProps } from '../../models/interfaces';
+import { CellType, MazeAlgoProps } from '../../models/interfaces';
 
-function randomInt(min: number, max: number) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
+function getRandomEvenNumber(min: number, max: number) {
+  const x = Math.floor((Math.random() * (max - min + 1)) / 2) * 2 + min;
+  return x;
 }
 
-function addWall(grid: number[][], x: number, y: number) {
-  grid[x][y] = CellType.wall;
+function getRandomOddNumber(min: number, max: number) {
+  return Math.floor((Math.random() * (max - min)) / 2) * 2 + 1 + min;
+}
+
+function drawHorizontalWall(
+  grid: CellType[][],
+  {
+    divisionPoint,
+    passagePoint,
+    start,
+    end,
+  }: {
+    divisionPoint: number;
+    passagePoint: number;
+    start: number;
+    end: number;
+  }
+) {
+  for (let pos = start; pos <= end; pos++) {
+    grid[divisionPoint][pos] = CellType.wall;
+  }
+  grid[divisionPoint][passagePoint] = CellType.clear;
+}
+
+function drawVerticalWall(
+  grid: CellType[][],
+  {
+    divisionPoint,
+    passagePoint,
+    start,
+    end,
+  }: {
+    divisionPoint: number;
+    passagePoint: number;
+    start: number;
+    end: number;
+  }
+) {
+  for (let pos = start; pos <= end; pos++) {
+    grid[pos][divisionPoint] = CellType.wall;
+  }
+  grid[passagePoint][divisionPoint] = CellType.clear;
 }
 
 export function generateRecursiveDivisionMaze({
@@ -22,7 +62,7 @@ export function generateRecursiveDivisionMaze({
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
 
-  recursiveDivision(grid, -1, -1, rows, cols);
+  recursiveDivision(grid, 0, rows - 1, 0, cols - 1);
   grid[entry.row][entry.col] = CellType.entry;
   grid[exit.row][exit.col] = CellType.exit;
 
@@ -30,39 +70,45 @@ export function generateRecursiveDivisionMaze({
 }
 
 function recursiveDivision(
-  grid: number[][],
-  rowMin: number,
-  colMin: number,
-  rowMax: number,
-  colMax: number
+  grid: CellType[][],
+  rowStart: number,
+  rowEnd: number,
+  colStart: number,
+  colEnd: number
 ) {
-  if (colMax - colMin > rowMax - rowMin) {
-    let x = randomInt(rowMin + 1, rowMax);
-    let y = randomInt(colMin + 2, colMax - 1);
+  if (rowEnd - rowStart < 2 || colEnd - colStart < 2) {
+    return;
+  }
 
-    if ((x - rowMin) % 2 === 0) x += randomInt(0, 2) === 0 ? 1 : -1;
-    if ((y - colMin) % 2 === 1) y += randomInt(0, 2) === 0 ? 1 : -1;
-    for (let i = rowMin + 1; i < rowMax; i++) {
-      if (i != x) {
-        addWall(grid, i, y);
-      }
-    }
+  const width = colEnd - colStart;
+  const height = rowEnd - rowStart;
+  const isHorizontal = width < height;
 
-    if (y - colMin > 2) recursiveDivision(grid, rowMin, colMin, rowMax, y);
-    if (colMax - y > 2) recursiveDivision(grid, rowMin, y, rowMax, colMax);
+  if (isHorizontal) {
+    const divisionPoint = getRandomOddNumber(rowStart, rowEnd);
+    const passagePoint = getRandomEvenNumber(colStart, colEnd);
+
+    drawHorizontalWall(grid, {
+      divisionPoint,
+      passagePoint,
+      start: colStart,
+      end: colEnd,
+    });
+
+    recursiveDivision(grid, rowStart, divisionPoint - 1, colStart, colEnd);
+    recursiveDivision(grid, divisionPoint + 1, rowEnd, colStart, colEnd);
   } else {
-    let x = randomInt(rowMin + 2, rowMax - 1);
-    let y = randomInt(colMin + 1, colMax);
+    const divisionPoint = getRandomOddNumber(colStart, colEnd);
+    const passagePoint = getRandomEvenNumber(rowStart, rowEnd);
 
-    if ((x - rowMin) % 2 === 1) x += randomInt(0, 2) === 0 ? 1 : -1;
-    if ((y - colMin) % 2 === 0) y += randomInt(0, 2) === 0 ? 1 : -1;
-    for (let i = colMin + 1; i < colMax; i++) {
-      if (i != y) {
-        addWall(grid, x, i);
-      }
-    }
+    drawVerticalWall(grid, {
+      divisionPoint,
+      passagePoint,
+      start: rowStart,
+      end: rowEnd,
+    });
 
-    if (x - rowMin > 2) recursiveDivision(grid, rowMin, colMin, x, colMax);
-    if (rowMax - x > 2) recursiveDivision(grid, x, colMin, rowMax, colMax);
+    recursiveDivision(grid, rowStart, rowEnd, colStart, divisionPoint - 1);
+    recursiveDivision(grid, rowStart, rowEnd, divisionPoint + 1, colEnd);
   }
 }
