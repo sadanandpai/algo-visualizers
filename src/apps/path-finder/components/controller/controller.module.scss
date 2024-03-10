@@ -6,7 +6,12 @@
   justify-content: space-between;
   margin: 20px;
 
-  .cellControls {
+  .operation {
+    display: flex;
+    gap: 10px;
+  }
+
+  .execution {
     display: flex;
     gap: 10px;
   }
@@ -19,23 +24,14 @@
     }
   }
 
-  .execution {
-    display: flex;
-    gap: 10px;
-
-    .speed {
-      display: none;
-    }
+  .speed {
+    display: none;
   }
 }
 
-@media (width >= 960px) {
-  .controller {
-    .execution {
-      .speed {
-        display: block;
-      }
-    }
+@media (width >= 768px) {
+  .controller .speed {
+    display: block;
   }
 }
 

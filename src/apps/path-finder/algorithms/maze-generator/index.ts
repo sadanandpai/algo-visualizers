@@ -7,12 +7,12 @@ import { generateKruskalMaze } from './kruskal';
 
 export const mazeGenerators = new Map([
   ['prims', { name: 'Prims', fn: generatePrimsMaze }],
-  ['recursiveDivision', { name: 'Rec Div', fn: generateRecursiveDivisionMaze }],
+  ['kruskal', { name: 'Kruskal', fn: generateKruskalMaze }],
   [
     'recursiveBacktracking',
     { name: 'Rec Back', fn: generateRecursiveBacktrackingMaze },
   ],
-  ['kruskal', { name: 'Kruskal', fn: generateKruskalMaze }],
+  ['recursiveDivision', { name: 'Rec Div', fn: generateRecursiveDivisionMaze }],
   ['binary', { name: 'Binary', fn: generateBinaryMaze }],
   ['random', { name: 'Random', fn: generateMazeRandomly }],
 ]);

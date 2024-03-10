@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
-import { clearGrid, resetGrid } from '../../store/path-finder.slice';
+import { clearGrid } from '../../store/path-finder.slice';
 
-import { Play, RefreshCcw, Trash } from 'lucide-react';
+import { Play, RefreshCcw } from 'lucide-react';
 import { pathFinders } from '../../algorithms/path-finder';
 import classes from './controller.module.scss';
 
@@ -16,7 +16,7 @@ const speeds = new Map([
   ['1x', 30],
   ['2x', 20],
   ['4x', 1],
-  ['xx', 0],
+  ['∞', 0],
 ]);
 
 function Execution() {
@@ -39,8 +39,28 @@ function Execution() {
     [entry, exit]
   );
 
+  function handlePlay() {
+    if (status === Status.Complete) {
+      dispatch(clearGrid());
+    }
+    dispatch(searchPath(pathFinderAlgo.fn, speed));
+  }
+
   return (
     <div className={classes.execution}>
+      <select
+        name="path-finder"
+        id="maze"
+        value={pathFinder}
+        onChange={(e) => setPathFinder(e.target.value)}
+      >
+        {[...pathFinders.entries()].map(([key, { name }]) => (
+          <option key={key} value={key}>
+            {name}
+          </option>
+        ))}
+      </select>
+
       <select
         className={classes.speed}
         name="speed"
@@ -55,23 +75,10 @@ function Execution() {
         ))}
       </select>
 
-      <select
-        name="path-finder"
-        id="maze"
-        value={pathFinder}
-        onChange={(e) => setPathFinder(e.target.value)}
-      >
-        {[...pathFinders.entries()].map(([key, { name }]) => (
-          <option key={key} value={key}>
-            {name}
-          </option>
-        ))}
-      </select>
-
       <button
         data-testid="player"
-        onClick={() => dispatch(searchPath(pathFinderAlgo?.fn, speed))}
-        disabled={status !== Status.Ready}
+        onClick={handlePlay}
+        disabled={status === Status.Generating || status === Status.Searching}
         data-tooltip="Play"
       >
         <Play size={24} />
@@ -80,17 +87,10 @@ function Execution() {
       <button
         data-testid="clear"
         onClick={() => dispatch(clearGrid())}
+        disabled={status === Status.Generating}
         data-tooltip="clear"
       >
         <RefreshCcw size={24} />
-      </button>
-
-      <button
-        data-testid="reset"
-        onClick={() => dispatch(resetGrid())}
-        data-tooltip="Reset"
-      >
-        <Trash size={24} />
       </button>
     </div>
   );

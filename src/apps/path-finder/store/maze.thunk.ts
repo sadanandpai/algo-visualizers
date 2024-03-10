@@ -30,7 +30,7 @@ export function generateMaze(
       }) => {
         dispatch(setGrid({ grid, clone }));
       },
-      isRunning: () => getState().pathFinder.status === Status.Blank,
+      isGenerating: () => getState().pathFinder.status === Status.Generating,
       delayDuration,
     });
 
