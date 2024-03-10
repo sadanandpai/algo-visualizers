@@ -1,4 +1,3 @@
-import { delay } from '@/lib/helpers/async';
 import { generateGrid } from '../../helpers/grid';
 import { CellType, MazeAlgoProps } from '../../models/interfaces';
 
@@ -56,9 +55,7 @@ export async function generateRecursiveDivisionMaze({
   cols,
   entry,
   exit,
-  setStateCells,
   setStateGrid,
-  delayDuration,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
 
