@@ -27,7 +27,6 @@ export async function generateBinaryMaze({
   cols,
   entry,
   exit,
-  setStateGrid,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
 
@@ -47,5 +46,5 @@ export async function generateBinaryMaze({
   grid[entry.row][entry.col] = CellType.entry;
   grid[exit.row][exit.col] = CellType.exit;
 
-  setStateGrid({ grid });
+  return grid;
 }

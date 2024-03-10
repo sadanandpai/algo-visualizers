@@ -5,35 +5,58 @@ import {
   setStatus,
 } from './path-finder.slice';
 import { Cell, CellType, MazeAlgoProps, Status } from '../models/interfaces';
+import { delay } from '@/lib/helpers/async';
 
 export function generateMaze(
-  mazeAlgo: (props: MazeAlgoProps) => Promise<void>,
+  mazeAlgo: (props: MazeAlgoProps) => Promise<CellType[][] | null>,
   delayDuration: number
 ) {
   return async function (dispatch: AppDispatch, getState: () => RootState) {
     const state = getState().pathFinder;
     dispatch(setStatus(Status.Generating));
 
-    await mazeAlgo({
+    function updateGrid(grid: CellType[][]) {
+      if (delayDuration) {
+        dispatch(setGrid({ grid, clone: true }));
+      }
+    }
+
+    function isGenerating() {
+      return getState().pathFinder.status === Status.Generating;
+    }
+
+    async function updateCells(
+      grid: CellType[][],
+      cells: Cell | Cell[],
+      cellType = CellType.clear
+    ) {
+      if (!Array.isArray(cells)) {
+        cells = [cells];
+      }
+
+      cells.forEach((cell) => {
+        grid[cell.row][cell.col] = cellType;
+      });
+
+      if (delayDuration) {
+        dispatch(setStateCells({ cells, cellType }));
+        await delay(delayDuration);
+      }
+    }
+
+    const grid = await mazeAlgo({
       rows: state.rows,
       cols: state.cols,
       entry: state.entry,
       exit: state.exit,
-      setStateCells: (cells: Cell[], cellType: CellType) =>
-        dispatch(setStateCells({ cells, cellType })),
-      setStateGrid: ({
-        grid,
-        clone,
-      }: {
-        grid: CellType[][];
-        clone?: boolean;
-      }) => {
-        dispatch(setGrid({ grid, clone }));
-      },
-      isGenerating: () => getState().pathFinder.status === Status.Generating,
-      delayDuration,
+      updateGrid,
+      updateCells,
+      isGenerating,
     });
 
-    dispatch(setStatus(Status.Ready));
+    if (grid) {
+      dispatch(setGrid({ grid }));
+      dispatch(setStatus(Status.Ready));
+    }
   };
 }

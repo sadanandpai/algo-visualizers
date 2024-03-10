@@ -54,7 +54,6 @@ export async function generateRecursiveDivisionMaze({
   cols,
   entry,
   exit,
-  setStateGrid,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
 
@@ -62,7 +61,7 @@ export async function generateRecursiveDivisionMaze({
   grid[entry.row][entry.col] = CellType.entry;
   grid[exit.row][exit.col] = CellType.exit;
 
-  setStateGrid({ grid });
+  return grid;
 }
 
 function recursiveDivision(

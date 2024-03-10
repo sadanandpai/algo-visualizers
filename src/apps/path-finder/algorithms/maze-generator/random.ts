@@ -6,43 +6,27 @@ export async function generateMazeRandomly({
   cols,
   entry,
   exit,
-  setStateCells,
-  setStateGrid,
+  updateGrid,
+  updateCells,
   isGenerating,
-  delayDuration,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
-
-  if (delayDuration) {
-    setStateGrid({ grid, clone: true });
-  }
+  updateGrid(grid);
 
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       if (Math.random() < 0.25) {
+        await updateCells(grid, { row: i, col: j }, CellType.wall);
         grid[i][j] = CellType.wall;
 
-        if (delayDuration) {
-          setStateCells([{ row: i, col: j }], CellType.wall);
-          await new Promise((resolve) => setTimeout(resolve, delayDuration));
-        }
-
         if (!isGenerating()) {
-          return;
+          return null;
         }
       }
     }
   }
 
-  grid[entry.row][entry.col] = CellType.entry;
-  grid[exit.row][exit.col] = CellType.exit;
-
-  if (delayDuration) {
-    setStateCells([{ row: entry.row, col: entry.col }], CellType.entry);
-    setStateCells([{ row: exit.row, col: exit.col }], CellType.exit);
-  }
-
-  if (!delayDuration) {
-    setStateGrid({ grid });
-  }
+  updateCells(grid, entry, CellType.entry);
+  updateCells(grid, exit, CellType.exit);
+  return grid;
 }

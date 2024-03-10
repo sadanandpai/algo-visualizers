@@ -1,4 +1,3 @@
-import { delay } from '@/lib/helpers/async';
 import { generateGrid } from '../../helpers/grid';
 import { Cell, CellType, MazeAlgoProps } from '../../models/interfaces';
 
@@ -8,23 +7,6 @@ const directions = [
   { row: 0, col: -2 },
   { row: 0, col: 2 },
 ];
-
-function getSetCell(
-  setStateCells: (cells: Cell[], cellType: CellType) => void,
-  grid: CellType[][],
-  delayDuration = 0
-) {
-  return async function (cells: Cell[], cellType = CellType.clear) {
-    cells.forEach((cell) => {
-      grid[cell.row][cell.col] = cellType;
-    });
-
-    if (delayDuration) {
-      setStateCells(cells, cellType);
-      await delay(delayDuration);
-    }
-  };
-}
 
 function getNonMazeNeighbors(grid: CellType[][], { row, col }: Cell) {
   const rows = grid.length;
@@ -73,41 +55,35 @@ export async function generatePrimsMaze({
   cols,
   entry,
   exit,
-  setStateCells,
-  setStateGrid,
-  delayDuration,
+  updateGrid,
+  updateCells,
   isGenerating,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
-  if (delayDuration) {
-    setStateGrid({ grid, clone: true });
-  }
-  const setCells = getSetCell(setStateCells, grid, delayDuration);
+  updateGrid(grid);
+
   const neighbors: Cell[] = [];
   const startCell = { row: 0, col: 0 };
-  setCells([startCell]);
-  neighbors.push(...getNonMazeNeighbors(grid, startCell));
+  updateCells(grid, startCell);
 
+  neighbors.push(...getNonMazeNeighbors(grid, startCell));
   while (neighbors.length) {
     const randomIndex = Math.floor(Math.random() * neighbors.length);
     const neighbor = neighbors[randomIndex];
     neighbors.splice(randomIndex, 1);
 
     if (!isGenerating()) {
-      return;
+      return null;
     }
 
     if (grid[neighbor.row][neighbor.col] !== CellType.clear) {
       const middleCell = createPassage(grid, neighbor);
-      await setCells([{ row: middleCell.row, col: middleCell.col }, neighbor]);
+      await updateCells(grid, [middleCell, neighbor]);
       neighbors.push(...getNonMazeNeighbors(grid, neighbor));
     }
   }
 
-  setCells([entry], CellType.entry);
-  setCells([exit], CellType.exit);
-
-  if (!delayDuration) {
-    setStateGrid({ grid });
-  }
+  updateCells(grid, entry, CellType.entry);
+  updateCells(grid, exit, CellType.exit);
+  return grid;
 }
