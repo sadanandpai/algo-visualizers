@@ -51,7 +51,7 @@ function drawVerticalWall(
   grid[passagePoint][divisionPoint] = CellType.clear;
 }
 
-export function generateRecursiveDivisionMaze({
+export async function generateRecursiveDivisionMaze({
   rows,
   cols,
   entry,
