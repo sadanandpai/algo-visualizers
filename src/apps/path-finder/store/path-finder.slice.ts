@@ -113,7 +113,7 @@ export const pathFinderSlice = createSlice({
       }
       state.grid[state.exit.row][state.exit.col] = CellType.exit;
       state.grid[state.exit.row][state.exit.col] = CellType.exit;
-      state.status = Status.Ready;
+      state.status = Status.Blank;
     },
   },
 });

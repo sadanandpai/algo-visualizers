@@ -59,7 +59,7 @@ function Operations() {
 
         <button
           onClick={mazeClickHandler}
-          disabled={status !== Status.Ready}
+          disabled={status === Status.Searching || status === Status.Generating}
           className="primary"
         >
           Maze

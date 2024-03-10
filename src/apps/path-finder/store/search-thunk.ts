@@ -15,7 +15,7 @@ export function searchPath(
 ) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().pathFinder;
-    dispatch(setStatus(Status.Running));
+    dispatch(setStatus(Status.Searching));
 
     const parents = await pathFinderAlgo({
       grid: state.grid,
@@ -26,11 +26,11 @@ export function searchPath(
       setCells: (cells: Cell[], cellType: CellType) => {
         dispatch(setStateCells({ cells, cellType }));
       },
-      isRunning: () => getState().pathFinder.status === Status.Running,
+      isRunning: () => getState().pathFinder.status === Status.Searching,
       delayDuration,
     });
 
-    if (getState().pathFinder.status !== Status.Running) {
+    if (getState().pathFinder.status !== Status.Searching) {
       return;
     }
 
@@ -43,7 +43,7 @@ export function searchPath(
         state.exit!,
         (value: { row: number; col: number }) =>
           dispatch(setStateCell({ ...value, cellType: CellType.path })),
-        () => getState().pathFinder.status === Status.Running,
+        () => getState().pathFinder.status === Status.Searching,
         delayDuration * 2
       );
 
