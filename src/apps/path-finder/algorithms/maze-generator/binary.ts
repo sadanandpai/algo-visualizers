@@ -27,9 +27,7 @@ export async function generateBinaryMaze({
   cols,
   entry,
   exit,
-  setStateCells,
   setStateGrid,
-  delayDuration,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
 

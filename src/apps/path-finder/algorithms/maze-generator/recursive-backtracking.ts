@@ -13,9 +13,7 @@ export async function generateRecursiveBacktrackingMaze({
   cols,
   entry,
   exit,
-  setStateCells,
   setStateGrid,
-  delayDuration,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
 
