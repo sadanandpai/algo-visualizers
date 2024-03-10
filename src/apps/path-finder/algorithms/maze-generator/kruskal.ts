@@ -61,13 +61,13 @@ export async function generateKruskalMaze({
   exit,
   setStateCells,
   setStateGrid,
+  isRunning,
   delayDuration,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
 
   if (delayDuration) {
     setStateGrid({ grid, clone: true });
-    await delay(delayDuration);
   }
 
   const edges = getEdges(grid);
@@ -100,6 +100,10 @@ export async function generateKruskalMaze({
         setStateCells([randomEdge], CellType.wall);
         await delay(delayDuration);
       }
+    }
+
+    if (isRunning()) {
+      return;
     }
   }
 

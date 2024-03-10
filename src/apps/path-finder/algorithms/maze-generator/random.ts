@@ -8,6 +8,7 @@ export async function generateMazeRandomly({
   exit,
   setStateCells,
   setStateGrid,
+  isRunning,
   delayDuration,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
@@ -25,12 +26,21 @@ export async function generateMazeRandomly({
           setStateCells([{ row: i, col: j }], CellType.wall);
           await new Promise((resolve) => setTimeout(resolve, delayDuration));
         }
+
+        if (isRunning()) {
+          return;
+        }
       }
     }
   }
 
   grid[entry.row][entry.col] = CellType.entry;
   grid[exit.row][exit.col] = CellType.exit;
+
+  if (delayDuration) {
+    setStateCells([{ row: entry.row, col: entry.col }], CellType.entry);
+    setStateCells([{ row: exit.row, col: exit.col }], CellType.exit);
+  }
 
   if (!delayDuration) {
     setStateGrid({ grid });

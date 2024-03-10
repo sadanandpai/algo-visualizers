@@ -2,8 +2,7 @@ import { generateGrid } from '../../helpers/grid';
 import { CellType, MazeAlgoProps } from '../../models/interfaces';
 
 function getRandomEvenNumber(min: number, max: number) {
-  const x = Math.floor((Math.random() * (max - min + 1)) / 2) * 2 + min;
-  return x;
+  return Math.floor((Math.random() * (max - min + 1)) / 2) * 2 + min;
 }
 
 function getRandomOddNumber(min: number, max: number) {

@@ -170,7 +170,7 @@ function Grid() {
             data-col={colIndex}
             data-cell-type={cellType}
             className={classes['type' + cellType]}
-            disabled={status === Status.Running}
+            disabled={status === Status.Searching}
           ></button>
         ))
       )}
