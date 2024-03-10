@@ -47,14 +47,11 @@ export interface MazeAlgoProps {
   cols: number;
   entry: Cell;
   exit: Cell;
-  setStateCells: (cells: Cell[], cellType: CellType) => void;
-  setStateGrid: ({
-    grid,
-    clone,
-  }: {
-    grid: CellType[][];
-    clone?: boolean;
-  }) => void;
+  updateGrid: (grid: number[][]) => void;
+  updateCells: (
+    grid: number[][],
+    cells: Cell | Cell[],
+    cellType?: CellType
+  ) => Promise<void>;
   isGenerating: () => boolean;
-  delayDuration: number;
 }

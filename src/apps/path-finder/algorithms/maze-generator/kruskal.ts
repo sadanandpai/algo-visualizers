@@ -1,4 +1,3 @@
-import { delay } from '@/lib/helpers/async';
 import { generateGrid } from '../../helpers/grid';
 import { CellType, MazeAlgoProps } from '../../models/interfaces';
 
@@ -59,16 +58,12 @@ export async function generateKruskalMaze({
   cols,
   entry,
   exit,
-  setStateCells,
-  setStateGrid,
+  updateGrid,
+  updateCells,
   isGenerating,
-  delayDuration,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
-
-  if (delayDuration) {
-    setStateGrid({ grid, clone: true });
-  }
+  updateGrid(grid);
 
   const edges = getEdges(grid);
   const cells = getCells(grid);
@@ -85,37 +80,17 @@ export async function generateKruskalMaze({
     if (set1 !== set2) {
       set2!.forEach((cell) => set1!.add(cell));
       sets.splice(sets.indexOf(set2!), 1);
-      grid[randomEdge.row][randomEdge.col] = CellType.clear;
-      grid[cell1.row][cell1.col] = CellType.clear;
-      grid[cell2.row][cell2.col] = CellType.clear;
-
-      if (delayDuration) {
-        setStateCells([cell1, cell2, randomEdge], CellType.clear);
-        await delay(delayDuration);
-      }
+      await updateCells(grid, [cell1, cell2, randomEdge]);
     } else {
-      grid[randomEdge.row][randomEdge.col] = CellType.wall;
-
-      if (delayDuration) {
-        setStateCells([randomEdge], CellType.wall);
-        await delay(delayDuration);
-      }
+      await updateCells(grid, randomEdge, CellType.wall);
     }
 
     if (!isGenerating()) {
-      return;
+      return null;
     }
   }
 
-  grid[entry.row][entry.col] = CellType.entry;
-  grid[exit.row][exit.col] = CellType.exit;
-
-  if (delayDuration) {
-    setStateCells([entry], CellType.entry);
-    setStateCells([exit], CellType.exit);
-  }
-
-  if (!delayDuration) {
-    setStateGrid({ grid });
-  }
+  updateCells(grid, entry, CellType.entry);
+  updateCells(grid, exit, CellType.exit);
+  return grid;
 }
