@@ -22,7 +22,7 @@ const getNeighbors = (grid: CellType[][], cell: Cell) => {
     );
 };
 
-export function generateBinaryMaze({
+export async function generateBinaryMaze({
   rows,
   cols,
   entry,

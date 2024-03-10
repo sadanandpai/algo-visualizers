@@ -8,7 +8,7 @@ const directions = [
   { row: 0, col: 2 },
 ];
 
-export function generateRecursiveBacktrackingMaze({
+export async function generateRecursiveBacktrackingMaze({
   rows,
   cols,
   entry,
