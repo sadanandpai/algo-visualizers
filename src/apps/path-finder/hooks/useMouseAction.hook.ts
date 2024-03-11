@@ -21,7 +21,6 @@ function useMouseAction(ref: React.RefObject<HTMLDivElement>) {
       referenceEl.removeEventListener('mouseup', onMouseUp);
       referenceEl.removeEventListener('mouseleave', onMouseUp);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
   const onMouseDown = (e: MouseEvent | TouchEvent) => {

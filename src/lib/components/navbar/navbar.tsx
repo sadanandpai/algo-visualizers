@@ -4,6 +4,7 @@ import { NavbarProps } from '@/apps/sorting-visualizer/models/interfaces';
 import classes from './navbar.module.scss';
 import hamIcon from '/icons/ham.svg';
 import { useState } from 'react';
+import { Home } from 'lucide-react';
 
 function Navbar({ title, menuItems }: NavbarProps) {
   const [toggle, setToggle] = useState(false);
@@ -12,7 +13,7 @@ function Navbar({ title, menuItems }: NavbarProps) {
     <nav className={classes.navbar}>
       <h1 data-testid="navbar">
         <Link to="/" className={classes.home}>
-          <img src="/icons/home.svg" alt="home" />
+          <Home size={24} />
         </Link>
         {title}
         <a

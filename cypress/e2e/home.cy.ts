@@ -1,6 +1,6 @@
 describe('landing page', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('/#/sorting-visualizer');
   });
 
   it('should verify sorting', () => {
@@ -8,7 +8,7 @@ describe('landing page', () => {
 
     cy.get('[data-testid="navbar"]').should(
       'contain.html',
-      'Sorting visualizers'
+      'Sorting visualizer'
     );
   });
 });

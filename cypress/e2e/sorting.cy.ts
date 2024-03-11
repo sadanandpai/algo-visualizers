@@ -49,7 +49,7 @@ function verifySorting(inputArrayText: string, inputArrayTextSorted: string) {
 
 describe('sorting', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('/#/sorting-visualizer');
   });
 
   it('should verify sorting for known array', () => {
