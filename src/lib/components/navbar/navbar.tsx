@@ -17,7 +17,7 @@ function Navbar({ title, menuItems }: NavbarProps) {
         </Link>
         {title}
         <a
-          href="https://github.com/sadanandpai/sorting-visualizer"
+          href="https://github.com/sadanandpai/algo-visualizers"
           target="blank"
         >
           <img
