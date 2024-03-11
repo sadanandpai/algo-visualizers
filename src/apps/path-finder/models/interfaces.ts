@@ -32,14 +32,15 @@ export interface AppState {
   status: Status;
 }
 
-export interface AlgoProps {
+export interface SearchAlgoProps {
   grid: number[][];
   entry: Cell;
   exit: Cell;
-  setCell: (value: Cell, cellType: CellType) => void;
-  setCells: (value: Cell[], cellType: CellType) => void;
-  isRunning: () => boolean;
-  delayDuration: number;
+  updateCells: (
+    grid: number[][],
+    cells: Cell | Cell[],
+    cellType?: CellType
+  ) => Promise<void>;
 }
 
 export interface MazeAlgoProps {

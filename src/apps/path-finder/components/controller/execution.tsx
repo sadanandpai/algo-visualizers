@@ -11,7 +11,7 @@ import { Status } from '../../models/interfaces';
 import { searchPath } from '../../store/search-thunk';
 
 const speeds = new Map([
-  ['0.5x', 50],
+  ['0.5x', 250],
   ['0.7x', 40],
   ['1x', 30],
   ['2x', 20],
