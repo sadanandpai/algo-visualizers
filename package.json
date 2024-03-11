@@ -1,5 +1,5 @@
 {
-  "name": "algo-visualizer",
+  "name": "algo-visualizers",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -66,5 +66,5 @@
   "volta": {
     "node": "18.18.0"
   },
-  "homepage": "https://github.com/sadanandpai/sorting-visualizer"
+  "homepage": "https://github.com/sadanandpai/algo-visualizers"
 }

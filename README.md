@@ -2,17 +2,17 @@
   <h1>Sorting Visualizer</h1>
   <h2>Responsive visualizer built using React for popular algorithms</h2>
   <div>
-    <a name="stars"><img src="https://img.shields.io/github/stars/sadanandpai/sorting-visualizer?style=for-the-badge"></a>
-    <a name="forks"><img src="https://img.shields.io/github/forks/sadanandpai/sorting-visualizer?logoColor=green&style=for-the-badge"></a>
-    <a name="license"><img src="https://img.shields.io/github/license/sadanandpai/sorting-visualizer?style=for-the-badge"></a>
+    <a name="stars"><img src="https://img.shields.io/github/stars/sadanandpai/algo-visualizers?style=for-the-badge"></a>
+    <a name="forks"><img src="https://img.shields.io/github/forks/sadanandpai/algo-visualizers?logoColor=green&style=for-the-badge"></a>
+    <a name="license"><img src="https://img.shields.io/github/license/sadanandpai/algo-visualizers?style=for-the-badge"></a>
   </div>
 
 [![built with Codeium](https://codeium.com/badges/main)](https://codeium.com)
 
-<a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="./public/images/cell.png" alt="cover" /></a>
+<a href="https://sadanandpai.github.io/algo-visualizers/dist/"><img src="./public/images/cell.png" alt="cover" /></a>
 <br/>
-<a href="https://sadanandpai.github.io/sorting-visualizer/dist/"><img src="./public/images/bar.png" alt="cover" /></a>
-<a href="https://sadanandpai.github.io/sorting-visualizer/dist/">See it in
+<a href="https://sadanandpai.github.io/algo-visualizers/dist/"><img src="./public/images/bar.png" alt="cover" /></a>
+<a href="https://sadanandpai.github.io/algo-visualizers/dist/">See it in
 action</a>
 
 </div>
@@ -41,6 +41,7 @@ Features
 ### Technologies
 
 Production libraries
+
 - [React](https://react.dev/) (Frontend Library)
 - [Redux Toolkit](https://redux-toolkit.js.org/) (State management)
 - [React Router](https://reactrouter.com/en/main/) (Router)
@@ -48,6 +49,7 @@ Production libraries
 - [Sonner](https://sonner.emilkowal.ski/) (Toast)
 
 Build libraries
+
 - [Sass](https://sass-lang.com/) (CSS compiler)
 - [Vite](https://vitejs.dev/) (Bundler)
 - [Vitest](https://vitest.dev/) (Unit test)
@@ -68,8 +70,8 @@ Build libraries
 
 ### Run in your local
 
-- `git clone https://github.com/sadanandpai/sorting-visualizer.git`
-- `cd sorting-visualizer`
+- `git clone https://github.com/sadanandpai/algo-visualizers.git`
+- `cd algo-visualizers`
 - `npm install`
 - `npm run dev`
 
