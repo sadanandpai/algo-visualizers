@@ -57,7 +57,6 @@ export async function generatePrimsMaze({
   exit,
   updateGrid,
   updateCells,
-  isGenerating,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
   updateGrid(grid);
@@ -71,10 +70,6 @@ export async function generatePrimsMaze({
     const randomIndex = Math.floor(Math.random() * neighbors.length);
     const neighbor = neighbors[randomIndex];
     neighbors.splice(randomIndex, 1);
-
-    if (!isGenerating()) {
-      return null;
-    }
 
     if (grid[neighbor.row][neighbor.col] !== CellType.clear) {
       const middleCell = createPassage(grid, neighbor);

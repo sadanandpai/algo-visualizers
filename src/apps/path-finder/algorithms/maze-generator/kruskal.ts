@@ -60,7 +60,6 @@ export async function generateKruskalMaze({
   exit,
   updateGrid,
   updateCells,
-  isGenerating,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
   updateGrid(grid);
@@ -83,10 +82,6 @@ export async function generateKruskalMaze({
       await updateCells(grid, [cell1, cell2, randomEdge]);
     } else {
       await updateCells(grid, randomEdge, CellType.wall);
-    }
-
-    if (!isGenerating()) {
-      return null;
     }
   }
 

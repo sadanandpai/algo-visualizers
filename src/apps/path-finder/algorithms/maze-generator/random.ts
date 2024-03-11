@@ -8,7 +8,6 @@ export async function generateMazeRandomly({
   exit,
   updateGrid,
   updateCells,
-  isGenerating,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
   updateGrid(grid);
@@ -17,11 +16,6 @@ export async function generateMazeRandomly({
     for (let j = 0; j < cols; j++) {
       if (Math.random() < 0.25) {
         await updateCells(grid, { row: i, col: j }, CellType.wall);
-        grid[i][j] = CellType.wall;
-
-        if (!isGenerating()) {
-          return null;
-        }
       }
     }
   }

@@ -8,23 +8,6 @@ const directions = [
   { row: 0, col: 2 },
 ];
 
-export async function generateRecursiveBacktrackingMaze({
-  rows,
-  cols,
-  entry,
-  exit,
-}: MazeAlgoProps) {
-  const grid = generateGrid(rows, cols, CellType.wall);
-
-  grid[0][0] = CellType.clear;
-  recursiveBacktracking(grid, 0, 0, rows, cols);
-
-  grid[entry.row][entry.col] = CellType.entry;
-  grid[exit.row][exit.col] = CellType.exit;
-
-  return grid;
-}
-
 function getNonMazeNeighbors(grid: CellType[][], row: number, col: number) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -41,32 +24,49 @@ function getNonMazeNeighbors(grid: CellType[][], row: number, col: number) {
     .filter((cell) => grid[cell.row][cell.col] !== CellType.clear);
 }
 
-function createPassage(grid: CellType[][], cell: Cell, neighbor: Cell) {
+async function createPassage(
+  grid: CellType[][],
+  updateCells: MazeAlgoProps['updateCells'],
+  cell: Cell,
+  neighbor: Cell
+) {
   const middleCell = {
     row: neighbor.row + (cell.row - neighbor.row) / 2,
     col: neighbor.col + (cell.col - neighbor.col) / 2,
   };
 
-  grid[neighbor.row][neighbor.col] = CellType.clear;
-  grid[middleCell.row][middleCell.col] = CellType.clear;
+  await updateCells(grid, [middleCell, neighbor], CellType.clear);
 }
 
-function recursiveBacktracking(
-  grid: CellType[][],
-  row: number,
-  col: number,
-  rows: number,
-  cols: number
-) {
-  const neighbors = getNonMazeNeighbors(grid, row, col);
-  while (neighbors.length) {
-    const randomIndex = Math.floor(Math.random() * neighbors.length);
-    const neighbor = neighbors[randomIndex];
-    neighbors.splice(randomIndex, 1);
+export async function generateRecursiveBacktrackingMaze({
+  rows,
+  cols,
+  entry,
+  exit,
+  updateGrid,
+  updateCells,
+}: MazeAlgoProps) {
+  const grid = generateGrid(rows, cols, CellType.wall);
+  updateGrid(grid);
+  updateCells(grid, { row: 0, col: 0 });
 
-    if (grid[neighbor.row][neighbor.col] !== CellType.clear) {
-      createPassage(grid, { row, col }, neighbor);
-      recursiveBacktracking(grid, neighbor.row, neighbor.col, rows, cols);
+  async function recursiveBacktracking(row: number, col: number) {
+    const neighbors = getNonMazeNeighbors(grid, row, col);
+    while (neighbors.length) {
+      const randomIndex = Math.floor(Math.random() * neighbors.length);
+      const neighbor = neighbors[randomIndex];
+      neighbors.splice(randomIndex, 1);
+
+      if (grid[neighbor.row][neighbor.col] !== CellType.clear) {
+        await createPassage(grid, updateCells, { row, col }, neighbor);
+        await recursiveBacktracking(neighbor.row, neighbor.col);
+      }
     }
   }
+
+  await recursiveBacktracking(0, 0);
+
+  updateCells(grid, entry, CellType.entry);
+  updateCells(grid, exit, CellType.exit);
+  return grid;
 }

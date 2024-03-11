@@ -53,5 +53,4 @@ export interface MazeAlgoProps {
     cells: Cell | Cell[],
     cellType?: CellType
   ) => Promise<void>;
-  isGenerating: () => boolean;
 }

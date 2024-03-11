@@ -27,24 +27,24 @@ export async function generateBinaryMaze({
   cols,
   entry,
   exit,
+  updateGrid,
+  updateCells,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.wall);
+  updateGrid(grid);
 
   for (let row = 0; row < rows; row += 2) {
     for (let col = 0; col < cols; col += 2) {
-      grid[row][col] = CellType.clear;
-
-      const neighbors = getNeighbors(grid, { row, col });
+      const cell = { row, col };
+      const neighbors = getNeighbors(grid, cell);
       const neighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
 
-      if (neighbor) {
-        grid[neighbor.row][neighbor.col] = CellType.clear;
-      }
+      const cellsToUpdate = neighbor ? [cell, neighbor] : cell;
+      await updateCells(grid, cellsToUpdate);
     }
   }
 
-  grid[entry.row][entry.col] = CellType.entry;
-  grid[exit.row][exit.col] = CellType.exit;
-
+  updateCells(grid, entry, CellType.entry);
+  updateCells(grid, exit, CellType.exit);
   return grid;
 }

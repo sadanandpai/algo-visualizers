@@ -12,7 +12,7 @@ import { searchPath } from '../../store/search-thunk';
 
 const speeds = new Map([
   ['0.5x', 50],
-  ['0.75x', 40],
+  ['0.7x', 40],
   ['1x', 30],
   ['2x', 20],
   ['4x', 1],
