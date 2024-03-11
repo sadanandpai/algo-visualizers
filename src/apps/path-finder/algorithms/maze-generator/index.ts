@@ -1,9 +1,10 @@
-import { generateMazeRandomly } from './random';
+import { generateRandomMaze } from './random';
 import { generatePrimsMaze } from './prims';
 import { generateRecursiveDivisionMaze } from './recursive-division';
 import { generateRecursiveBacktrackingMaze } from './recursive-backtracking';
 import { generateBinaryMaze } from './binary';
 import { generateKruskalMaze } from './kruskal';
+import { generateSideWinderMaze } from './side-winder';
 
 export const mazeGenerators = new Map([
   ['prims', { name: 'Prims', fn: generatePrimsMaze }],
@@ -14,5 +15,6 @@ export const mazeGenerators = new Map([
   ],
   ['recursiveDivision', { name: 'Rec Div', fn: generateRecursiveDivisionMaze }],
   ['binary', { name: 'Binary', fn: generateBinaryMaze }],
-  ['random', { name: 'Random', fn: generateMazeRandomly }],
+  ['sideWinder', { name: 'Side Winder', fn: generateSideWinderMaze }],
+  ['random', { name: 'Random', fn: generateRandomMaze }],
 ]);
