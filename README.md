@@ -1,6 +1,6 @@
 <div align="center">
-  <h1>Sorting Visualizer</h1>
-  <h2>Responsive visualizer built using React for popular algorithms</h2>
+  <h1>Algorithms Visualizers</h1>
+  <h2>Responsive visualizers built using React for popular algorithms</h2>
   <div>
     <a name="stars"><img src="https://img.shields.io/github/stars/sadanandpai/algo-visualizers?style=for-the-badge"></a>
     <a name="forks"><img src="https://img.shields.io/github/forks/sadanandpai/algo-visualizers?logoColor=green&style=for-the-badge"></a>
@@ -12,15 +12,18 @@
 <a href="https://sadanandpai.github.io/algo-visualizers/dist/"><img src="./public/images/cell.png" alt="cover" /></a>
 <br/>
 <a href="https://sadanandpai.github.io/algo-visualizers/dist/"><img src="./public/images/bar.png" alt="cover" /></a>
-<a href="https://sadanandpai.github.io/algo-visualizers/dist/">See it in
-action</a>
+<br/>
+<a href="https://sadanandpai.github.io/algo-visualizers/dist/"><img src="./public/images/path.png" alt="cover" /></a>
+<a href="https://sadanandpai.github.io/algo-visualizers/dist/">Visualize the algorithms</a>
 
 </div>
 
 ---
 
-### This repo is an attempt to help in learning popular sorting algorithms by visualization
+### Algorithms Visualizers
+This repo is an attempt to help in learning popular algorithms by visualization
 
+#### Sorting Visualizer
 Helps to
 
 - understand the working of sorting algorithm
@@ -36,6 +39,10 @@ Features
 - Start, pause and reset the execution
 - Generate random array of numbers of sorting
 
+#### Path finder
+
+> Still in progress
+
 <br>
 
 ### Technologies
@@ -46,6 +53,7 @@ Production libraries
 - [Redux Toolkit](https://redux-toolkit.js.org/) (State management)
 - [React Router](https://reactrouter.com/en/main/) (Router)
 - [React Switch](https://react-switch.netlify.app/) (Switch)
+- [Lucide](https://lucide.dev/) (Icons pack)
 - [Sonner](https://sonner.emilkowal.ski/) (Toast)
 
 Build libraries
