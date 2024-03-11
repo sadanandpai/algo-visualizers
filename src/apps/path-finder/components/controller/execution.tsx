@@ -11,18 +11,18 @@ import { Status } from '../../models/interfaces';
 import { searchPath } from '../../store/search-thunk';
 
 const speeds = new Map([
-  ['0.5x', 250],
-  ['0.7x', 40],
-  ['1x', 30],
-  ['2x', 20],
-  ['4x', 1],
   ['∞', 0],
+  ['4x', 1],
+  ['2x', 20],
+  ['1x', 30],
+  ['0.5x', 50],
+  ['0.1x', 250],
 ]);
 
 function Execution() {
   const dispatch = useAppDispatch();
   const [pathFinder, setPathFinder] = useState([...pathFinders.keys()][0]);
-  const [speed, setSpeed] = useState([...speeds.values()][2]);
+  const [speed, setSpeed] = useState([...speeds.values()][1]);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);

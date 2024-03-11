@@ -19,7 +19,7 @@ const speeds = new Map([
 
 function Operations() {
   const dispatch = useAppDispatch();
-  const [speed, setSpeed] = useState([...speeds.values()][0]);
+  const [speed, setSpeed] = useState([...speeds.values()][1]);
   const [maze, setMaze] = useState([...mazeGenerators.keys()][0]);
   const status = useAppSelector((state) => state.pathFinder.status);
   const mazeAlgo = mazeGenerators.get(maze);

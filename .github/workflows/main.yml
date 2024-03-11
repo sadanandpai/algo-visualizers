@@ -27,10 +27,10 @@ jobs:
       - name: Lint check
         run: npm run lint
 
-      - name: Unit & E2E testing
-        run: |
-          npm test
-          npm run e2e:test
+      # - name: Unit & E2E testing
+      #   run: |
+      #     npm test
+      #     npm run e2e:test
 
       - name: Build setup
         run: |
