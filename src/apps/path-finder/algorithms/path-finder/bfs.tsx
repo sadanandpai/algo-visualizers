@@ -1,5 +1,4 @@
-import { AlgoProps, Cell, CellType } from '../../models/interfaces';
-import { delay } from '@/lib/helpers/async';
+import { SearchAlgoProps, Cell, CellType } from '../../models/interfaces';
 import { generateGrid } from '../../helpers/grid';
 
 function getAddToQueueIfAllowedFunction(
@@ -26,14 +25,12 @@ function getAddToQueueIfAllowedFunction(
 
 // The Breadth First Search Algorithm
 export async function startBFSAlgo({
-  grid,
+  grid: stateGrid,
   entry,
   exit,
-  setCell,
-  setCells,
-  isRunning,
-  delayDuration,
-}: AlgoProps) {
+  updateCells,
+}: SearchAlgoProps) {
+  const grid = stateGrid.map((row) => row.slice());
   const rows = grid.length;
   const cols = grid[0].length;
   const visited = generateGrid(rows, cols, false); // initalize visited arrays
@@ -50,7 +47,6 @@ export async function startBFSAlgo({
     queue
   );
 
-  const coveredCells = [];
   while (queue.length) {
     // iterate till queue items are over
     const length = queue.length;
@@ -60,14 +56,8 @@ export async function startBFSAlgo({
       const value = queue.shift()!;
 
       if (value.row === exit.row && value.col === exit.col) {
-        setCells(coveredCells, CellType.fill);
-
         // if exit is found, stop searching
-        return parents;
-      }
-
-      if (!isRunning()) {
-        return null;
+        return { grid, parents };
       }
 
       // Validate and add next coordinates to the queue (All 4 directions i.e up, down, left, right)
@@ -93,23 +83,10 @@ export async function startBFSAlgo({
       }
 
       if (grid[value.row][value.col] === CellType.clear) {
-        if (delayDuration > 0) {
-          setCell({ row: value.row, col: value.col }, CellType.fill);
-        } else {
-          coveredCells.push({ row: value.row, col: value.col });
-        }
+        await updateCells(grid, value, CellType.fill);
       }
-    }
-
-    if (delayDuration > 0) {
-      await delay(delayDuration * 4);
-    }
-
-    if (!isRunning()) {
-      return null;
     }
   }
 
-  setCells(coveredCells, CellType.fill);
-  return null;
+  return { grid, parents: null };
 }
