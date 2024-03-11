@@ -8,7 +8,7 @@ import { Cell, CellType, MazeAlgoProps, Status } from '../models/interfaces';
 import { delay } from '@/lib/helpers/async';
 
 export function generateMaze(
-  mazeAlgo: (props: MazeAlgoProps) => Promise<CellType[][] | null>,
+  mazeAlgo: (props: MazeAlgoProps) => Promise<CellType[][]>,
   delayDuration: number
 ) {
   return async function (dispatch: AppDispatch, getState: () => RootState) {
@@ -30,6 +30,10 @@ export function generateMaze(
       cells: Cell | Cell[],
       cellType = CellType.clear
     ) {
+      if (!isGenerating()) {
+        throw new Error('Maze generation cancelled');
+      }
+
       if (!Array.isArray(cells)) {
         cells = [cells];
       }
@@ -44,19 +48,21 @@ export function generateMaze(
       }
     }
 
-    const grid = await mazeAlgo({
-      rows: state.rows,
-      cols: state.cols,
-      entry: state.entry,
-      exit: state.exit,
-      updateGrid,
-      updateCells,
-      isGenerating,
-    });
+    try {
+      const grid = await mazeAlgo({
+        rows: state.rows,
+        cols: state.cols,
+        entry: state.entry,
+        exit: state.exit,
+        updateGrid,
+        updateCells,
+      });
 
-    if (grid) {
       dispatch(setGrid({ grid }));
       dispatch(setStatus(Status.Ready));
+    } catch {
+      // maze generation cancelled
+      // no action needed
     }
   };
 }

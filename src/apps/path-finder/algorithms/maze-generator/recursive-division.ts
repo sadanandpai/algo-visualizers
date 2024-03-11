@@ -1,6 +1,14 @@
 import { generateGrid } from '../../helpers/grid';
 import { CellType, MazeAlgoProps } from '../../models/interfaces';
 
+interface DrawWallConfig {
+  updateCells: MazeAlgoProps['updateCells'];
+  divisionPoint: number;
+  passagePoint: number;
+  start: number;
+  end: number;
+}
+
 function getRandomEvenNumber(min: number, max: number) {
   return Math.floor((Math.random() * (max - min + 1)) / 2) * 2 + min;
 }
@@ -9,44 +17,24 @@ function getRandomOddNumber(min: number, max: number) {
   return Math.floor((Math.random() * (max - min)) / 2) * 2 + 1 + min;
 }
 
-function drawHorizontalWall(
+async function drawHorizontalWall(
   grid: CellType[][],
-  {
-    divisionPoint,
-    passagePoint,
-    start,
-    end,
-  }: {
-    divisionPoint: number;
-    passagePoint: number;
-    start: number;
-    end: number;
-  }
+  { updateCells, divisionPoint, passagePoint, start, end }: DrawWallConfig
 ) {
   for (let pos = start; pos <= end; pos++) {
-    grid[divisionPoint][pos] = CellType.wall;
+    await updateCells(grid, [{ row: divisionPoint, col: pos }], CellType.wall);
   }
-  grid[divisionPoint][passagePoint] = CellType.clear;
+  await updateCells(grid, [{ row: divisionPoint, col: passagePoint }]);
 }
 
-function drawVerticalWall(
+async function drawVerticalWall(
   grid: CellType[][],
-  {
-    divisionPoint,
-    passagePoint,
-    start,
-    end,
-  }: {
-    divisionPoint: number;
-    passagePoint: number;
-    start: number;
-    end: number;
-  }
+  { updateCells, divisionPoint, passagePoint, start, end }: DrawWallConfig
 ) {
   for (let pos = start; pos <= end; pos++) {
-    grid[pos][divisionPoint] = CellType.wall;
+    await updateCells(grid, [{ row: pos, col: divisionPoint }], CellType.wall);
   }
-  grid[passagePoint][divisionPoint] = CellType.clear;
+  await updateCells(grid, [{ row: passagePoint, col: divisionPoint }]);
 }
 
 export async function generateRecursiveDivisionMaze({
@@ -54,56 +42,60 @@ export async function generateRecursiveDivisionMaze({
   cols,
   entry,
   exit,
+  updateGrid,
+  updateCells,
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
+  updateGrid(grid);
 
-  recursiveDivision(grid, 0, rows - 1, 0, cols - 1);
-  grid[entry.row][entry.col] = CellType.entry;
-  grid[exit.row][exit.col] = CellType.exit;
+  async function recursiveDivision(
+    rowStart: number,
+    rowEnd: number,
+    colStart: number,
+    colEnd: number
+  ) {
+    if (rowEnd - rowStart < 2 || colEnd - colStart < 2) {
+      return;
+    }
+
+    const width = colEnd - colStart;
+    const height = rowEnd - rowStart;
+    const isHorizontal = width < height;
+
+    if (isHorizontal) {
+      const divisionPoint = getRandomOddNumber(rowStart, rowEnd);
+      const passagePoint = getRandomEvenNumber(colStart, colEnd);
+
+      await drawHorizontalWall(grid, {
+        updateCells,
+        divisionPoint,
+        passagePoint,
+        start: colStart,
+        end: colEnd,
+      });
+
+      await recursiveDivision(rowStart, divisionPoint - 1, colStart, colEnd);
+      await recursiveDivision(divisionPoint + 1, rowEnd, colStart, colEnd);
+    } else {
+      const divisionPoint = getRandomOddNumber(colStart, colEnd);
+      const passagePoint = getRandomEvenNumber(rowStart, rowEnd);
+
+      await drawVerticalWall(grid, {
+        updateCells,
+        divisionPoint,
+        passagePoint,
+        start: rowStart,
+        end: rowEnd,
+      });
+
+      await recursiveDivision(rowStart, rowEnd, colStart, divisionPoint - 1);
+      await recursiveDivision(rowStart, rowEnd, divisionPoint + 1, colEnd);
+    }
+  }
+
+  await recursiveDivision(0, rows - 1, 0, cols - 1);
+  updateCells(grid, entry, CellType.entry);
+  updateCells(grid, exit, CellType.exit);
 
   return grid;
-}
-
-function recursiveDivision(
-  grid: CellType[][],
-  rowStart: number,
-  rowEnd: number,
-  colStart: number,
-  colEnd: number
-) {
-  if (rowEnd - rowStart < 2 || colEnd - colStart < 2) {
-    return;
-  }
-
-  const width = colEnd - colStart;
-  const height = rowEnd - rowStart;
-  const isHorizontal = width < height;
-
-  if (isHorizontal) {
-    const divisionPoint = getRandomOddNumber(rowStart, rowEnd);
-    const passagePoint = getRandomEvenNumber(colStart, colEnd);
-
-    drawHorizontalWall(grid, {
-      divisionPoint,
-      passagePoint,
-      start: colStart,
-      end: colEnd,
-    });
-
-    recursiveDivision(grid, rowStart, divisionPoint - 1, colStart, colEnd);
-    recursiveDivision(grid, divisionPoint + 1, rowEnd, colStart, colEnd);
-  } else {
-    const divisionPoint = getRandomOddNumber(colStart, colEnd);
-    const passagePoint = getRandomEvenNumber(rowStart, rowEnd);
-
-    drawVerticalWall(grid, {
-      divisionPoint,
-      passagePoint,
-      start: rowStart,
-      end: rowEnd,
-    });
-
-    recursiveDivision(grid, rowStart, rowEnd, colStart, divisionPoint - 1);
-    recursiveDivision(grid, rowStart, rowEnd, divisionPoint + 1, colEnd);
-  }
 }
