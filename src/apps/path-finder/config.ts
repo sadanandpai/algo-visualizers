@@ -5,7 +5,7 @@ export const cellColors = {
   entry: 'aqua',
   exit: 'lawngreen',
   wall: 'darkred',
-  fill: 'gray',
+  fill: 'rgb(184 145 245)',
   path: 'yellow',
 };
 

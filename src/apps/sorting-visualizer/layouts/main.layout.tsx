@@ -9,7 +9,7 @@ function MainLayout({ children }: PropsWithChildren) {
   return (
     <div>
       <ThemeIcon bottom={10} right={20} />
-      <Navbar title="Sorting visualizer" menuItems={menuItems} />
+      <Navbar title="Sorting Visualizer" menuItems={menuItems} />
       <Controller />
       <main className={classes.main}>{children}</main>
     </div>

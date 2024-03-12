@@ -9,20 +9,24 @@
 
   .type1 {
     background-color: var(--pf-cell-entry);
+    border-color: var(--base);
   }
 
   .type2 {
     background-color: var(--pf-cell-exit);
+    border-color: var(--base);
   }
 
   .type3 {
     background-color: var(--pf-cell-wall);
     border-color: var(--pf-cell-wall);
+    animation: wallAnimation 0.5s;
   }
 
   .type4 {
     background-color: var(--pf-cell-fill);
     border-color: var(--pf-cell-fill);
+    animation: visitedAnimation 1s;
   }
 
   .type5 {
@@ -42,5 +46,40 @@
     button {
       border-color: rgb(20, 20, 20);
     }
+  }
+}
+
+@keyframes visitedAnimation {
+  0% {
+    transform: scale(0.3);
+    border-radius: 50%;
+  }
+
+  30% {
+    transform: scale(0.6);
+    border-radius: 65%;
+  }
+
+  60% {
+    transform: scale(1);
+    border-radius: 80%;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wallAnimation {
+  0% {
+    transform: scale(0.3);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }

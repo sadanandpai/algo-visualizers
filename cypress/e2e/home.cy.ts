@@ -8,7 +8,7 @@ describe('landing page', () => {
 
     cy.get('[data-testid="navbar"]').should(
       'contain.html',
-      'Sorting visualizer'
+      'Sorting Visualizer'
     );
   });
 });
