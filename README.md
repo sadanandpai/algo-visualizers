@@ -9,12 +9,12 @@
 
 [![built with Codeium](https://codeium.com/badges/main)](https://codeium.com)
 
-<a href="https://sadanandpai.github.io/algo-visualizers/dist/"><img src="./public/images/cell.png" alt="cover" /></a>
+<a href="https://sadanandpai.github.io/algo-visualizers/"><img src="./public/images/cell.png" alt="cover" /></a>
 <br/>
-<a href="https://sadanandpai.github.io/algo-visualizers/dist/"><img src="./public/images/bar.png" alt="cover" /></a>
+<a href="https://sadanandpai.github.io/algo-visualizers/"><img src="./public/images/bar.png" alt="cover" /></a>
 <br/>
-<a href="https://sadanandpai.github.io/algo-visualizers/dist/"><img src="./public/images/path.png" alt="cover" /></a>
-<a href="https://sadanandpai.github.io/algo-visualizers/dist/">Visualize the algorithms</a>
+<a href="https://sadanandpai.github.io/algo-visualizers/"><img src="./public/images/path.png" alt="cover" /></a>
+<a href="https://sadanandpai.github.io/algo-visualizers/">Visualize the algorithms</a>
 
 </div>
 
