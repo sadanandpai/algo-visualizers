@@ -10,5 +10,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  base: '/algo-visualizers/dist/',
+  base: '/algo-visualizers/',
+  build: {
+    outDir: 'docs',
+  },
 });

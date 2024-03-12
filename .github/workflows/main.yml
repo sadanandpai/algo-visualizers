@@ -34,7 +34,9 @@ jobs:
         run: |
           rm -rf dist
           npm run build
-          git add dist -f
+          git add docs -f
 
       - name: Commit & push
-        run: git diff --staged --quiet || (git commit -m "build files - github action" && git push)
+        run:
+          git diff --staged --quiet || (git commit -m "build files - github
+          action" && git push)
