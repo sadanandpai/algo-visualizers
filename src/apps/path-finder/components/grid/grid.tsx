@@ -1,40 +1,13 @@
 import { setCell } from '../../store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
-import { CellType, Status } from '../../models/interfaces';
+import { CellElement, CellType, Status } from '../../models/interfaces';
 import { cellSize } from '../../config';
 import classes from './grid.module.scss';
-import useMouseAction from '../../hooks/useMouseAction.hook';
-
-const getCellDetails = (element: HTMLElement | null) => {
-  if (!element) {
-    return { isValidCell: false };
-  }
-
-  if (element.tagName !== 'BUTTON') {
-    return { isValidCell: false };
-  }
-
-  const row = +(element.dataset.row ?? -1);
-  const col = +(element.dataset.col ?? -1);
-  const cellType = +(element.dataset.cellType ?? 0);
-
-  if (row === -1 || col === -1 || cellType === -1) {
-    return { isValidCell: false };
-  }
-
-  return {
-    isValidCell: true,
-    row,
-    col,
-    cellType,
-  };
-};
-
-function isTouchDevice() {
-  return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-}
+import { useTouch } from '../../hooks/use-touch.hook';
+import { useMouse } from '../../hooks/use-mouse.hook';
+import { isTouchDevice } from '../../helpers/action.helper';
 
 function Grid() {
   const dispatch = useAppDispatch();
@@ -43,117 +16,39 @@ function Grid() {
   const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
   const ref = useRef<HTMLDivElement>(null);
-  const cellTypeRef = useRef<CellType | null>(null);
-  const cellMoveRef = useRef<CellType | null>(null);
 
-  const { element, isMouseDown } = useMouseAction(ref);
-  const { isValidCell, row, col, cellType } = getCellDetails(element);
+  const touchCell = useTouch({ isMobile: isTouchDevice(), ref });
+  const moveCell = useMouse({ isMobile: isTouchDevice(), ref });
+
+  const setupCell = useCallback(
+    function setupCell(cell: CellElement | null) {
+      if (cell) {
+        const type = cell.cellType === CellType.entry ? entry : exit;
+        const isEntryOrExit = [CellType.entry, CellType.exit].includes(
+          cell.cellType
+        );
+        if (
+          isEntryOrExit &&
+          !(cell.row === type.row && cell.col === type.col)
+        ) {
+          dispatch(setCell({ ...type, cellType: CellType.clear }));
+        }
+
+        if (!(type.row === cell.row && type.col === cell.col)) {
+          dispatch(setCell(cell));
+        }
+      }
+    },
+    [dispatch, entry, exit]
+  );
 
   useEffect(() => {
-    if (!isTouchDevice()) {
-      if (
-        isMouseDown &&
-        isValidCell &&
-        [CellType.entry, CellType.exit].includes(cellType!)
-      ) {
-        cellTypeRef.current = cellType!;
-      }
-
-      if (!isMouseDown) {
-        cellTypeRef.current = null;
-      }
-    }
-  }, [isMouseDown, isValidCell, cellType]);
+    setupCell(touchCell);
+  }, [touchCell, setupCell]);
 
   useEffect(() => {
-    if (isTouchDevice() && isValidCell && isMouseDown) {
-      if (
-        [CellType.entry, CellType.exit].includes(cellType!) &&
-        !cellMoveRef.current
-      ) {
-        cellMoveRef.current = cellType!;
-      }
-    }
-  }, [isMouseDown, isValidCell, cellType]);
-
-  useEffect(() => {
-    if (!isValidCell || isTouchDevice()) {
-      return;
-    }
-
-    if (cellTypeRef.current) {
-      const cell = cellTypeRef.current === CellType.entry ? entry : exit;
-
-      if (
-        cell &&
-        (cell.row !== row || cell.col !== col) &&
-        cellType !== CellType.wall
-      ) {
-        dispatch(
-          setCell({
-            row: cell?.row,
-            col: cell?.col,
-            cellType: CellType.clear,
-          })
-        );
-
-        dispatch(
-          setCell({ row: row!, col: col!, cellType: cellTypeRef.current })
-        );
-      }
-    } else {
-      dispatch(
-        setCell({
-          row: row!,
-          col: col!,
-          cellType: cellType === CellType.wall ? CellType.clear : CellType.wall,
-        })
-      );
-    }
-  }, [cellType, col, dispatch, element, isValidCell, row, entry, exit]);
-
-  useEffect(() => {
-    if (!isValidCell || !isTouchDevice()) {
-      return;
-    }
-
-    if (cellMoveRef.current) {
-      const cell = cellMoveRef.current === CellType.entry ? entry : exit;
-
-      if (
-        cell &&
-        (cell.row !== row || cell.col !== col) &&
-        cellType !== CellType.wall
-      ) {
-        dispatch(
-          setCell({ row: row!, col: col!, cellType: cellMoveRef.current })
-        );
-
-        dispatch(
-          setCell({
-            row: cell?.row,
-            col: cell?.col,
-            cellType: CellType.clear,
-          })
-        );
-
-        cellMoveRef.current = null;
-      }
-    } else if (
-      !(
-        (row === entry.row && col === entry.col) ||
-        (row === exit.row && col === exit.col)
-      )
-    ) {
-      dispatch(
-        setCell({
-          row: row!,
-          col: col!,
-          cellType: cellType === CellType.wall ? CellType.clear : CellType.wall,
-        })
-      );
-    }
-  }, [cellType, col, dispatch, element, isValidCell, row, entry, exit]);
+    setupCell(moveCell);
+  }, [moveCell, setupCell]);
 
   const gridStyle: React.CSSProperties = {
     gridTemplateRows: `repeat(${grid.length}, ${cellSize}px)`,

@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 
-function useMouseAction(ref: React.RefObject<HTMLDivElement>) {
+function useMouseActions({
+  isMobile,
+  ref,
+}: {
+  isMobile: boolean;
+  ref: React.RefObject<HTMLDivElement>;
+}) {
   const [element, setElement] = useState<HTMLElement | null>(null);
   const isMouseDown = useRef(false);
 
   useEffect(() => {
+    if (isMobile) {
+      return;
+    }
+
     const referenceEl = ref.current;
     if (!referenceEl) {
       return;
@@ -21,7 +31,7 @@ function useMouseAction(ref: React.RefObject<HTMLDivElement>) {
       referenceEl.removeEventListener('mouseup', onMouseUp);
       referenceEl.removeEventListener('mouseleave', onMouseUp);
     };
-  }, [ref]);
+  }, [isMobile, ref]);
 
   const onMouseDown = (e: MouseEvent | TouchEvent) => {
     if (e.target) {
@@ -44,4 +54,4 @@ function useMouseAction(ref: React.RefObject<HTMLDivElement>) {
   return { element, isMouseDown: isMouseDown.current };
 }
 
-export default useMouseAction;
+export default useMouseActions;
