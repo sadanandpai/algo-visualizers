@@ -37,7 +37,6 @@
 
   button {
     border: 0.5px solid rgb(240, 240, 240);
-    transition: all 0.33s;
   }
 }
 
@@ -53,33 +52,39 @@
   0% {
     transform: scale(0.3);
     border-radius: 50%;
+    background-color: var(--pf-cell-fill-start);
   }
 
   30% {
     transform: scale(0.6);
     border-radius: 65%;
+    background-color: var(--pf-cell-fill-mid);
   }
 
   60% {
-    transform: scale(1);
+    transform: scale(1.05);
     border-radius: 80%;
   }
 
   100% {
     transform: scale(1);
+    background-color: var(--pf-cell-fill);
   }
 }
 
 @keyframes wallAnimation {
   0% {
     transform: scale(0.3);
+    opacity: 0.5;
   }
 
   50% {
     transform: scale(1.2);
+    opacity: 0.75;
   }
 
   100% {
     transform: scale(1);
+    opacity: 1;
   }
 }
