@@ -30,7 +30,7 @@ export async function depthFirstSearch({
     }
 
     if (parentCol !== -1 && parentRow !== -1) {
-      await updateCells(grid, { row, col }, CellType.fill);
+      await updateCells(grid, { row, col }, CellType.visited);
     }
 
     return (

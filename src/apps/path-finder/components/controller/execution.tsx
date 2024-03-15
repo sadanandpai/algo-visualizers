@@ -6,7 +6,7 @@ import { pathFinders } from '../../algorithms/path-finder';
 import classes from './controller.module.scss';
 
 import { useState } from 'react';
-import { useDebounce } from 'react-use';
+import { useDebounce, useWindowSize } from 'react-use';
 import { Status } from '../../models/interfaces';
 import { searchPath } from '../../store/search-thunk';
 
@@ -27,6 +27,7 @@ function Execution() {
   const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
   const pathFinderAlgo = pathFinders.get(pathFinder)!;
+  const { width } = useWindowSize();
 
   useDebounce(
     () => {
@@ -54,9 +55,9 @@ function Execution() {
         value={pathFinder}
         onChange={(e) => setPathFinder(e.target.value)}
       >
-        {[...pathFinders.entries()].map(([key, { name }]) => (
+        {[...pathFinders.entries()].map(([key, { name, fullName }]) => (
           <option key={key} value={key}>
-            {name}
+            {width > 1024 ? fullName : name}
           </option>
         ))}
       </select>

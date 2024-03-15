@@ -83,7 +83,7 @@ export async function breadthFirstSearch({
       }
 
       if (grid[value.row][value.col] === CellType.clear) {
-        await updateCells(grid, value, CellType.fill);
+        await updateCells(grid, value, CellType.visited);
       }
     }
   }

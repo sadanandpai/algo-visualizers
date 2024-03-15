@@ -91,7 +91,7 @@ export const pathFinderSlice = createSlice({
       for (let i = 0; i < state.rows; i++) {
         for (let j = 0; j < state.cols; j++) {
           if (
-            gridClone[i][j] === CellType.fill ||
+            gridClone[i][j] === CellType.visited ||
             gridClone[i][j] === CellType.path
           ) {
             gridClone[i][j] = CellType.clear;

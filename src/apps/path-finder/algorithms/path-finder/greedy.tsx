@@ -101,7 +101,7 @@ export async function greedy({
 
     open.splice(idx, 1);
     closed.add(minCostCell);
-    await updateCells(grid, minCostCell, CellType.fill);
+    await updateCells(grid, minCostCell, CellType.visited);
     exploreNeighbors(grid, costGrid, open, closed, parents, minCostCell, exit);
   }
 

@@ -3,7 +3,7 @@ export const enum CellType {
   entry,
   exit,
   wall,
-  fill,
+  visited,
   path,
 }
 

@@ -24,14 +24,14 @@
   }
 
   .type4 {
-    background-color: var(--pf-cell-fill);
-    border-color: var(--pf-cell-fill);
+    background-color: var(--pf-cell-visited);
+    border-color: var(--pf-cell-visited);
     animation: visitedAnimation 1s;
   }
 
   .type5 {
     background-color: var(--pf-cell-path);
-    border-color: var(--pf-cell-fill);
+    border-color: var(--pf-cell-path-border);
     border-width: 8px;
   }
 
@@ -52,13 +52,13 @@
   0% {
     transform: scale(0.3);
     border-radius: 50%;
-    background-color: var(--pf-cell-fill-start);
+    background-color: var(--pf-cell-visited-start);
   }
 
   30% {
     transform: scale(0.6);
     border-radius: 65%;
-    background-color: var(--pf-cell-fill-mid);
+    background-color: var(--pf-cell-visited-mid);
   }
 
   60% {
@@ -68,7 +68,7 @@
 
   100% {
     transform: scale(1);
-    background-color: var(--pf-cell-fill);
+    background-color: var(--pf-cell-visited);
   }
 }
 

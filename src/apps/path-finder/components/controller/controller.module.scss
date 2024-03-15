@@ -11,6 +11,42 @@
     gap: 10px;
   }
 
+  .info {
+    display: none;
+    gap: 20px;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .info__item {
+      height: 20px;
+      width: 20px;
+    }
+
+    .info__start {
+      background-color: var(--pf-cell-entry);
+    }
+
+    .info__end {
+      background-color: var(--pf-cell-exit);
+    }
+
+    .info__wall {
+      background-color: var(--pf-cell-wall);
+    }
+
+    .info__visited {
+      background-color: var(--pf-cell-visited);
+    }
+
+    .info__path {
+      background-color: var(--pf-cell-path);
+    }
+  }
+
   .execution {
     display: flex;
     gap: 10px;
@@ -30,8 +66,18 @@
 }
 
 @media (width >= 768px) {
-  .controller .speed {
-    display: block;
+  .controller {
+    .speed {
+      display: block;
+    }
+  }
+}
+
+@media (width >= 1024px) {
+  .controller {
+    .info {
+      display: flex;
+    }
   }
 }
 
