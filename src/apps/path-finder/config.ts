@@ -8,7 +8,7 @@ export const cellColors = {
   fillStart: 'blue',
   fillMid: 'deepskyblue',
   fill: 'rgb(225 208 254)',
-  path: 'deepskyblue',
+  path: 'blue',
 };
 
 const root = document.querySelector(':root') as HTMLElement;

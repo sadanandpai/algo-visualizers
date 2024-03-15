@@ -2,7 +2,7 @@ import { SearchAlgoProps, Cell, CellType } from '../../models/interfaces';
 import { generateGrid } from '../../helpers/grid';
 
 // The Depth First Search Algorithm
-export async function startDFSAlgo({
+export async function depthFirstSearch({
   grid: stateGrid,
   entry,
   exit,

@@ -24,7 +24,7 @@ function getAddToQueueIfAllowedFunction(
 }
 
 // The Breadth First Search Algorithm
-export async function startBFSAlgo({
+export async function breadthFirstSearch({
   grid: stateGrid,
   entry,
   exit,

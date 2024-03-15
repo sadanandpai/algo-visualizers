@@ -9,12 +9,14 @@ interface DrawWallConfig {
   end: number;
 }
 
-function getRandomEvenNumber(min: number, max: number) {
-  return Math.floor((Math.random() * (max - min + 1)) / 2) * 2 + min;
+export function getRandomEvenNumber(min: number, max: number) {
+  const random = Math.floor(Math.random() * (max - min)) + min;
+  return random % 2 === 0 ? random : random + 1;
 }
 
-function getRandomOddNumber(min: number, max: number) {
-  return Math.floor((Math.random() * (max - min)) / 2) * 2 + 1 + min;
+export function getRandomOddNumber(min: number, max: number) {
+  const random = Math.floor(Math.random() * (max - min)) + min;
+  return random % 2 === 1 ? random : random + 1;
 }
 
 async function drawHorizontalWall(
