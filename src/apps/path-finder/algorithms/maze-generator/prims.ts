@@ -1,5 +1,10 @@
 import { generateGrid } from '../../helpers/grid';
-import { Cell, CellType, MazeAlgoProps } from '../../models/interfaces';
+import {
+  Cell,
+  CellElement,
+  CellType,
+  MazeAlgoProps,
+} from '../../models/interfaces';
 
 const directions = [
   { row: -2, col: 0 },
@@ -8,7 +13,10 @@ const directions = [
   { row: 0, col: 2 },
 ];
 
-function getNonMazeNeighbors(grid: CellType[][], { row, col }: Cell) {
+export function getNeighbors(
+  grid: CellType[][],
+  { row, col, cellType }: CellElement
+) {
   const rows = grid.length;
   const cols = grid[0].length;
 
@@ -21,27 +29,11 @@ function getNonMazeNeighbors(grid: CellType[][], { row, col }: Cell) {
       (cell) =>
         cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols
     )
-    .filter((cell) => grid[cell.row][cell.col] !== CellType.clear);
+    .filter((cell) => grid[cell.row][cell.col] === cellType);
 }
 
-function getMazeCells(grid: CellType[][], { row, col }: Cell) {
-  const rows = grid.length;
-  const cols = grid[0].length;
-
-  return directions
-    .map((direction) => ({
-      row: row + direction.row,
-      col: col + direction.col,
-    }))
-    .filter(
-      (cell) =>
-        cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols
-    )
-    .filter((cell) => grid[cell.row][cell.col] === CellType.clear);
-}
-
-function createPassage(grid: CellType[][], cell: Cell) {
-  const mazeCells = getMazeCells(grid, cell);
+export function createPassage(grid: CellType[][], cell: Cell) {
+  const mazeCells = getNeighbors(grid, { ...cell, cellType: CellType.clear });
   const passageCell = mazeCells[Math.floor(Math.random() * mazeCells.length)];
   const middleCell = {
     row: cell.row + (passageCell.row - cell.row) / 2,
@@ -65,7 +57,9 @@ export async function generatePrimsMaze({
   const startCell = { row: 0, col: 0 };
   updateCells(grid, startCell);
 
-  neighbors.push(...getNonMazeNeighbors(grid, startCell));
+  neighbors.push(
+    ...getNeighbors(grid, { ...startCell, cellType: CellType.wall })
+  );
   while (neighbors.length) {
     const randomIndex = Math.floor(Math.random() * neighbors.length);
     const neighbor = neighbors[randomIndex];
@@ -74,7 +68,9 @@ export async function generatePrimsMaze({
     if (grid[neighbor.row][neighbor.col] !== CellType.clear) {
       const middleCell = createPassage(grid, neighbor);
       await updateCells(grid, [middleCell, neighbor]);
-      neighbors.push(...getNonMazeNeighbors(grid, neighbor));
+      neighbors.push(
+        ...getNeighbors(grid, { ...neighbor, cellType: CellType.wall })
+      );
     }
   }
 
