@@ -1,10 +1,7 @@
 import {
-  drawHorizontalWall,
-  drawVerticalWall,
-  generateRecursiveDivisionMaze,
-  getRandomEvenNumber,
-  getRandomOddNumber,
-} from '@/apps/path-finder/algorithms/maze-generator/recursive-division';
+  generatePrimsMaze,
+  getNeighbors,
+} from '@/apps/path-finder/algorithms/maze-generator/prims';
 import { Cell, CellType } from '@/apps/path-finder/models/interfaces';
 
 const updateCells = vi.fn(async (grid, cells, cellType = CellType.clear) => {
@@ -17,97 +14,64 @@ const updateCells = vi.fn(async (grid, cells, cellType = CellType.clear) => {
   });
 });
 
-describe('Recursive Division', () => {
+describe('Prims maze generator', () => {
   beforeEach(() => {
     updateCells.mockClear();
   });
 
-  it('getRandomEvenNumber', () => {
-    for (let i = 0; i < 100; i++) {
-      const min = Math.floor(Math.random() * 20);
-      const max = min + Math.floor(Math.random() * 20) + 1;
-      const number = getRandomEvenNumber(min, max);
-      expect(number).toBeGreaterThanOrEqual(min);
-      expect(number).toBeLessThanOrEqual(max);
-      expect(number % 2).toBe(0);
-    }
+  it('getNeighbors', () => {
+    const [clear, wall] = [CellType.clear, CellType.wall];
+    const grid = [
+      [clear, clear, wall, clear, clear],
+      [clear, clear, clear, clear, clear],
+      [clear, clear, clear, clear, wall],
+      [clear, clear, clear, clear, clear],
+      [clear, clear, clear, clear, clear],
+    ];
+
+    const neighborsWithWalls = getNeighbors(grid, {
+      row: 2,
+      col: 2,
+      cellType: wall,
+    });
+    expect(neighborsWithWalls).toMatchInlineSnapshot(`
+      [
+        {
+          "col": 2,
+          "row": 0,
+        },
+        {
+          "col": 4,
+          "row": 2,
+        },
+      ]
+    `);
+
+    const neighborsWithClear = getNeighbors(grid, {
+      row: 2,
+      col: 2,
+      cellType: clear,
+    });
+    expect(neighborsWithClear).toMatchInlineSnapshot(`
+      [
+        {
+          "col": 2,
+          "row": 4,
+        },
+        {
+          "col": 0,
+          "row": 2,
+        },
+      ]
+    `);
   });
 
-  it('getRadomOddNumber', () => {
-    for (let i = 0; i < 100; i++) {
-      const min = Math.floor(Math.random() * 20);
-      const max = min + Math.floor(Math.random() * 20) + 1;
-      const number = getRandomOddNumber(min, max);
-      expect(number).toBeGreaterThanOrEqual(min);
-      expect(number).toBeLessThanOrEqual(max);
-      expect(number % 2).toBe(1);
-    }
-  });
-
-  it('drawHorizontalWall', async () => {
-    const rows = 9;
-    const cols = 15;
-    const grid = Array.from({ length: rows }, () =>
-      Array(cols).fill(CellType.clear)
-    );
-    const divisionPoint = 5;
-    const passagePoint = 3;
-    const start = 0;
-    const end = 6;
-
-    await drawHorizontalWall(grid, {
-      updateCells,
-      divisionPoint,
-      passagePoint,
-      start,
-      end,
-    });
-
-    const calls = updateCells.mock.calls;
-    calls.slice(0, calls.length - 1).forEach((call) => {
-      const [_, __, cellType] = call;
-      expect(cellType).toBe(CellType.wall);
-    });
-
-    const [_, __, cellType] = calls.at(-1)!;
-    expect(cellType).toBeUndefined();
-  });
-
-  it('drawVerticalWall', async () => {
-    const rows = 9;
-    const cols = 15;
-    const grid = Array.from({ length: rows }, () =>
-      Array(cols).fill(CellType.clear)
-    );
-    const divisionPoint = 5;
-    const passagePoint = 3;
-    const start = 0;
-    const end = 6;
-
-    await drawVerticalWall(grid, {
-      updateCells,
-      divisionPoint,
-      passagePoint,
-      start,
-      end,
-    });
-
-    const calls = updateCells.mock.calls;
-    calls.slice(0, calls.length - 1).forEach((call) => {
-      const [_, __, cellType] = call;
-      expect(cellType).toBe(CellType.wall);
-    });
-
-    const [_, __, cellType] = calls.at(-1)!;
-    expect(cellType).toBeUndefined();
-  });
-
-  it('generateRecursiveDivisionMaze with entry & exit on clear slots', async () => {
+  it('generatePrimsMaze with entry & exit on clear slots', async () => {
     const rows = 9;
     const cols = 15;
     const updateGrid = vi.fn();
 
-    const grid = await generateRecursiveDivisionMaze({
+    const grid = await generatePrimsMaze({
       rows,
       cols,
       entry: { row: 0, col: 0 },
@@ -147,12 +111,12 @@ describe('Recursive Division', () => {
     expect(cells.get(CellType.clear)).toBe(clearCells);
   });
 
-  it('generateRecursiveDivisionMaze with entry & exit on walls slots', async () => {
+  it('generatePrimsMaze with entry & exit on walls slots', async () => {
     const rows = 7;
     const cols = 21;
     const updateGrid = vi.fn();
 
-    const grid = await generateRecursiveDivisionMaze({
+    const grid = await generatePrimsMaze({
       rows,
       cols,
       entry: { row: 3, col: 5 },
