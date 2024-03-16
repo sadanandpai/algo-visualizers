@@ -75,7 +75,7 @@ function Operations() {
         data-testid="generate-maze"
         onClick={() => mazeClickHandler()}
         data-tooltip="Play"
-        disabled={disabled || maze === ''}
+        disabled={disabled || !maze}
       >
         <Play size={20} />
       </button>
