@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 20px;
+  margin: 20px 20px 16px;
 
   .operation {
     display: flex;
@@ -22,8 +22,8 @@
     }
 
     .info__item {
-      height: 20px;
-      width: 20px;
+      height: 15px;
+      width: 15px;
     }
 
     .info__start {
@@ -52,28 +52,47 @@
     gap: 10px;
   }
 
-  button {
-    text-transform: capitalize;
-
-    &:disabled {
-      opacity: 0.5;
-    }
+  .mazeSelector,
+  .pathFinder {
+    width: 100px;
+    border: 1px solid theme.$base;
+    padding: 0 5px;
   }
 
-  .speed {
+  button:disabled {
+    opacity: 0.5;
+  }
+
+  .speed,
+  .play {
     display: none;
   }
 }
 
 @media (width >= 768px) {
   .controller {
-    .speed {
+    .speed,
+    .play {
       display: block;
+    }
+
+    .mazeSelector,
+    .pathFinder {
+      width: auto;
     }
   }
 }
 
 @media (width >= 1024px) {
+  .controller {
+    .speed,
+    .play {
+      display: block;
+    }
+  }
+}
+
+@media (width >= 1200px) {
   .controller {
     .info {
       display: flex;

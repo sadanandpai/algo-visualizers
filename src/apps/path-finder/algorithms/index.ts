@@ -15,16 +15,10 @@ import { depthFirstSearch } from './path-finder/dfs';
 import { greedy } from './path-finder/greedy';
 
 export const pathFinders = new Map([
-  [
-    'bfs',
-    { name: 'BFS', fullName: 'Breadth First Search', fn: breadthFirstSearch },
-  ],
-  [
-    'dfs',
-    { name: 'DFS', fullName: 'Depth First Search', fn: depthFirstSearch },
-  ],
-  ['a-star', { name: 'A*', fullName: 'A* Search', fn: aStar }],
-  ['greedy', { name: 'Greedy', fullName: 'Greedy Best First', fn: greedy }],
+  ['bfs', { name: 'Breadth First Search', fn: breadthFirstSearch }],
+  ['dfs', { name: 'Depth First Search', fn: depthFirstSearch }],
+  ['a-star', { name: 'A* Search', fn: aStar }],
+  ['greedy', { name: 'Greedy Best First', fn: greedy }],
 ]);
 
 export const mazeGenerators = new Map([
@@ -32,9 +26,12 @@ export const mazeGenerators = new Map([
   ['kruskal', { name: 'Kruskal', fn: generateKruskalMaze }],
   [
     'recursiveBacktracking',
-    { name: 'Rec Back', fn: generateRecursiveBacktrackingMaze },
+    { name: 'Recursive Backtracking', fn: generateRecursiveBacktrackingMaze },
   ],
-  ['recursiveDivision', { name: 'Rec Div', fn: generateRecursiveDivisionMaze }],
+  [
+    'recursiveDivision',
+    { name: 'Recursive Division', fn: generateRecursiveDivisionMaze },
+  ],
   ['wilson', { name: 'Wilson', fn: generateWilsonMaze }],
   ['binary', { name: 'Binary', fn: generateBinaryMaze }],
   ['sideWinder', { name: 'Side Winder', fn: generateSideWinderMaze }],

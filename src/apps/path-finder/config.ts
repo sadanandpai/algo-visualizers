@@ -1,5 +1,24 @@
 export const cellSize = 25;
 
+export const mazeSpeeds = new Map([
+  ['∞', 0],
+  ['4x', 1],
+  ['2x', 10],
+  ['1x', 25],
+  ['0.7x', 50],
+  ['0.5x', 100],
+  ['0.1x', 250],
+]);
+
+export const searchSpeeds = new Map([
+  ['∞', 0],
+  ['4x', 1],
+  ['2x', 20],
+  ['1x', 30],
+  ['0.5x', 50],
+  ['0.1x', 250],
+]);
+
 export const cellColors = {
   clear: 'transparent',
   entry: 'deepskyblue',

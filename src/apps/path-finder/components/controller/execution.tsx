@@ -1,37 +1,55 @@
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { clearGrid } from '../../store/path-finder.slice';
 
 import { Play, RefreshCcw } from 'lucide-react';
 import classes from './controller.module.scss';
 
-import { useState } from 'react';
-import { useDebounce, useWindowSize } from 'react-use';
+import { useDebounce } from 'react-use';
+import { pathFinders } from '../../algorithms';
+import { searchSpeeds } from '../../config';
 import { Status } from '../../models/interfaces';
 import { searchPath } from '../../store/search-thunk';
-import { pathFinders } from '../../algorithms';
-
-const speeds = new Map([
-  ['∞', 0],
-  ['4x', 1],
-  ['2x', 20],
-  ['1x', 30],
-  ['0.5x', 50],
-  ['0.1x', 250],
-]);
 
 function Execution() {
   const dispatch = useAppDispatch();
-  const [pathFinder, setPathFinder] = useState([...pathFinders.keys()][0]);
-  const [speed, setSpeed] = useState([...speeds.values()][1]);
+  const [pathFinder, setPathFinder] = useState<string>();
+  const [speed, setSpeed] = useState([...searchSpeeds.values()][1]);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
-  const pathFinderAlgo = pathFinders.get(pathFinder)!;
-  const { width } = useWindowSize();
+  const pathFinderAlgo = pathFinder ? pathFinders.get(pathFinder) : null;
+  const disabled = status === Status.Generating || status === Status.Searching;
+
+  function handlePlay(algo = pathFinderAlgo) {
+    if (status === Status.Complete) {
+      dispatch(clearGrid());
+    }
+
+    if (algo) {
+      dispatch(searchPath(algo.fn, speed));
+    }
+  }
+
+  function handleClear() {
+    dispatch(clearGrid());
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    if (status === Status.Searching) {
+      return;
+    }
+
+    const algo = e.target.value;
+    if (algo) {
+      setPathFinder(algo);
+      handlePlay(pathFinders.get(algo));
+    }
+  }
 
   useDebounce(
     () => {
-      if (status === Status.Complete) {
+      if (status === Status.Complete && pathFinderAlgo) {
         dispatch(clearGrid());
         dispatch(searchPath(pathFinderAlgo.fn, 0));
       }
@@ -40,24 +58,19 @@ function Execution() {
     [entry, exit]
   );
 
-  function handlePlay() {
-    if (status === Status.Complete) {
-      dispatch(clearGrid());
-    }
-    dispatch(searchPath(pathFinderAlgo.fn, speed));
-  }
-
   return (
     <div className={classes.execution}>
       <select
+        className={classes.pathFinder}
         name="path-finder"
         id="maze"
         value={pathFinder}
-        onChange={(e) => setPathFinder(e.target.value)}
+        onChange={handleChange}
+        disabled={disabled}
       >
-        {[...pathFinders.entries()].map(([key, { name, fullName }]) => (
+        {[...pathFinders.entries()].map(([key, { name }]) => (
           <option key={key} value={key}>
-            {width > 1024 ? fullName : name}
+            {name}
           </option>
         ))}
       </select>
@@ -68,8 +81,9 @@ function Execution() {
         id="speed"
         value={speed}
         onChange={(e) => setSpeed(+e.target.value)}
+        disabled={disabled}
       >
-        {[...speeds.entries()].map(([key, value]) => (
+        {[...searchSpeeds.entries()].map(([key, value]) => (
           <option key={key} value={value}>
             {key}
           </option>
@@ -77,21 +91,22 @@ function Execution() {
       </select>
 
       <button
+        className={classes.play}
         data-testid="player"
-        onClick={handlePlay}
-        disabled={status === Status.Generating || status === Status.Searching}
+        disabled={disabled}
         data-tooltip="Play"
+        onClick={() => handlePlay()}
       >
-        <Play size={24} />
+        <Play size={20} />
       </button>
 
       <button
         data-testid="clear"
-        onClick={() => dispatch(clearGrid())}
+        onClick={handleClear}
         disabled={status === Status.Generating}
         data-tooltip="clear"
       >
-        <RefreshCcw size={24} />
+        <RefreshCcw size={20} />
       </button>
     </div>
   );

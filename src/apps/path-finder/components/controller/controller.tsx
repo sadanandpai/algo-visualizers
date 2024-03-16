@@ -7,6 +7,7 @@ import Operations from './operations';
 import classes from './controller.module.scss';
 import { getDimensionsFromScreenSize } from '../../helpers/grid';
 import Info from './info';
+import Timer from './timer';
 
 function Controller() {
   const dispatch = useAppDispatch();
@@ -34,6 +35,7 @@ function Controller() {
     <section className={classes.controller}>
       <Operations />
       <Info />
+      <Timer />
       <Execution />
     </section>
   );

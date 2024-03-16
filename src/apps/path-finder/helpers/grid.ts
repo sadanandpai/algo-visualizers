@@ -47,7 +47,7 @@ export function getEntryAndExit(
 
 export function getDimensionsFromScreenSize() {
   let maxRows = Math.floor(
-    (window.innerHeight - 140 - 2 * cellSize) / cellSize
+    (window.innerHeight - 120 - 2 * cellSize) / cellSize
   );
   let maxCols = Math.floor((window.innerWidth - 3 * cellSize) / cellSize);
 

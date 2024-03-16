@@ -6,28 +6,26 @@ import { generateMaze } from '../../store/maze.thunk';
 import { Play, Trash } from 'lucide-react';
 import { resetGrid } from '../../store/path-finder.slice';
 import { mazeGenerators } from '../../algorithms';
-
-const speeds = new Map([
-  ['∞', 0],
-  ['4x', 1],
-  ['2x', 10],
-  ['1x', 25],
-  ['0.7x', 50],
-  ['0.5x', 100],
-  ['0.1x', 250],
-]);
+import { mazeSpeeds } from '../../config';
 
 function Operations() {
   const dispatch = useAppDispatch();
-  const [speed, setSpeed] = useState([...speeds.values()][1]);
+  const [speed, setSpeed] = useState([...mazeSpeeds.values()][1]);
   const [maze, setMaze] = useState([...mazeGenerators.keys()][0]);
   const status = useAppSelector((state) => state.pathFinder.status);
   const mazeAlgo = mazeGenerators.get(maze);
+  const disabled = status === Status.Generating || status === Status.Searching;
 
-  function mazeClickHandler() {
-    if (mazeAlgo) {
-      dispatch(generateMaze(mazeAlgo.fn, speed));
+  function mazeClickHandler(algo = mazeAlgo) {
+    if (algo) {
+      dispatch(generateMaze(algo.fn, speed));
     }
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const algo = e.target.value;
+    setMaze(algo);
+    mazeClickHandler(mazeGenerators.get(algo));
   }
 
   return (
@@ -36,7 +34,9 @@ function Operations() {
         name="maze"
         id="maze"
         value={maze}
-        onChange={(e) => setMaze(e.target.value)}
+        onChange={handleChange}
+        className={classes.mazeSelector}
+        disabled={disabled}
       >
         {[...mazeGenerators.entries()].map(([key, { name }]) => (
           <option key={key} value={key}>
@@ -51,8 +51,9 @@ function Operations() {
         id="speed"
         value={speed}
         onChange={(e) => setSpeed(+e.target.value)}
+        disabled={disabled}
       >
-        {[...speeds.entries()].map(([key, value]) => (
+        {[...mazeSpeeds.entries()].map(([key, value]) => (
           <option key={key} value={value}>
             {key}
           </option>
@@ -60,12 +61,13 @@ function Operations() {
       </select>
 
       <button
+        className={classes.play}
         data-testid="generate-maze"
-        onClick={mazeClickHandler}
+        onClick={() => mazeClickHandler()}
         data-tooltip="Play"
-        disabled={![Status.Ready, Status.Complete].includes(status)}
+        disabled={disabled}
       >
-        <Play size={24} />
+        <Play size={20} />
       </button>
 
       <button
@@ -73,7 +75,7 @@ function Operations() {
         onClick={() => dispatch(resetGrid())}
         data-tooltip="Reset"
       >
-        <Trash size={24} />
+        <Trash size={20} />
       </button>
     </div>
   );
