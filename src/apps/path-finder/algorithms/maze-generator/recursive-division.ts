@@ -19,24 +19,24 @@ export function getRandomOddNumber(min: number, max: number) {
   return random % 2 === 1 ? random : random + 1;
 }
 
-async function drawHorizontalWall(
+export async function drawHorizontalWall(
   grid: CellType[][],
   { updateCells, divisionPoint, passagePoint, start, end }: DrawWallConfig
 ) {
   for (let pos = start; pos <= end; pos++) {
-    await updateCells(grid, [{ row: divisionPoint, col: pos }], CellType.wall);
+    await updateCells(grid, { row: divisionPoint, col: pos }, CellType.wall);
   }
-  await updateCells(grid, [{ row: divisionPoint, col: passagePoint }]);
+  await updateCells(grid, { row: divisionPoint, col: passagePoint });
 }
 
-async function drawVerticalWall(
+export async function drawVerticalWall(
   grid: CellType[][],
   { updateCells, divisionPoint, passagePoint, start, end }: DrawWallConfig
 ) {
   for (let pos = start; pos <= end; pos++) {
-    await updateCells(grid, [{ row: pos, col: divisionPoint }], CellType.wall);
+    await updateCells(grid, { row: pos, col: divisionPoint }, CellType.wall);
   }
-  await updateCells(grid, [{ row: passagePoint, col: divisionPoint }]);
+  await updateCells(grid, { row: passagePoint, col: divisionPoint });
 }
 
 export async function generateRecursiveDivisionMaze({

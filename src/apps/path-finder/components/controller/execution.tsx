@@ -96,7 +96,7 @@ function Execution() {
       <button
         className={classes.play}
         data-testid="player"
-        disabled={disabled}
+        disabled={disabled || !pathFinder}
         data-tooltip="Play"
         onClick={() => handlePlay()}
       >
