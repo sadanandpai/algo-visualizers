@@ -10,10 +10,10 @@ import { mazeSpeeds } from '../../config';
 
 function Operations() {
   const dispatch = useAppDispatch();
+  const [maze, setMaze] = useState<string>('');
   const [speed, setSpeed] = useState([...mazeSpeeds.values()][1]);
-  const [maze, setMaze] = useState([...mazeGenerators.keys()][0]);
   const status = useAppSelector((state) => state.pathFinder.status);
-  const mazeAlgo = mazeGenerators.get(maze);
+  const mazeAlgo = maze ? mazeGenerators.get(maze) : null;
   const disabled = status === Status.Generating || status === Status.Searching;
 
   function mazeClickHandler(algo = mazeAlgo) {
@@ -24,6 +24,10 @@ function Operations() {
 
   function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const algo = e.target.value;
+    if (!algo) {
+      return;
+    }
+
     setMaze(algo);
     mazeClickHandler(mazeGenerators.get(algo));
   }
@@ -38,6 +42,9 @@ function Operations() {
         className={classes.mazeSelector}
         disabled={disabled}
       >
+        <option value="" disabled>
+          Select Maze Algo
+        </option>
         {[...mazeGenerators.entries()].map(([key, { name }]) => (
           <option key={key} value={key}>
             {name}
@@ -65,7 +72,7 @@ function Operations() {
         data-testid="generate-maze"
         onClick={() => mazeClickHandler()}
         data-tooltip="Play"
-        disabled={disabled}
+        disabled={disabled || maze === ''}
       >
         <Play size={20} />
       </button>

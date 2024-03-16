@@ -13,7 +13,7 @@ import { searchPath } from '../../store/search-thunk';
 
 function Execution() {
   const dispatch = useAppDispatch();
-  const [pathFinder, setPathFinder] = useState<string>();
+  const [pathFinder, setPathFinder] = useState('');
   const [speed, setSpeed] = useState([...searchSpeeds.values()][1]);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
@@ -68,6 +68,9 @@ function Execution() {
         onChange={handleChange}
         disabled={disabled}
       >
+        <option value="" disabled>
+          Select path finder
+        </option>
         {[...pathFinders.entries()].map(([key, { name }]) => (
           <option key={key} value={key}>
             {name}
