@@ -1,0 +1,3 @@
+[[redirects]]
+  from = "/algo-visualizers/*"
+  to = "/:splat"
