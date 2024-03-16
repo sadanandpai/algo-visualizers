@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useState } from 'react';
-import { mazeGenerators } from '../../algorithms/maze-generator';
 import { Status } from '../../models/interfaces';
 import classes from './controller.module.scss';
 import { generateMaze } from '../../store/maze.thunk';
 import { Play, Trash } from 'lucide-react';
 import { resetGrid } from '../../store/path-finder.slice';
+import { mazeGenerators } from '../../algorithms';
 
 const speeds = new Map([
   ['∞', 0],

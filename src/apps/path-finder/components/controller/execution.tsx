@@ -2,13 +2,13 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { clearGrid } from '../../store/path-finder.slice';
 
 import { Play, RefreshCcw } from 'lucide-react';
-import { pathFinders } from '../../algorithms/path-finder';
 import classes from './controller.module.scss';
 
 import { useState } from 'react';
 import { useDebounce, useWindowSize } from 'react-use';
 import { Status } from '../../models/interfaces';
 import { searchPath } from '../../store/search-thunk';
+import { pathFinders } from '../../algorithms';
 
 const speeds = new Map([
   ['∞', 0],
