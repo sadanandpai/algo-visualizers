@@ -1,18 +1,13 @@
-import { generateGrid } from '@pathFinder/helpers/grid';
+import { generateGrid } from '@/apps/path-finder/helpers/grid.helper';
 import { Cell, CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
+import {
+  Direction,
+  filterValidCells,
+  getNeighborsWithDirections,
+  getRandomIndexFromArray,
+} from '@pathFinder/helpers/maze.helper';
 
-enum Direction {
-  Up,
-  Down,
-  Left,
-  Right,
-}
-
-interface CellWithDirection extends Cell {
-  direction: Direction;
-}
-
-function getRandomNonMazeCell(
+export function getRandomNonMazeCell(
   grid: CellType[][],
   eligibleCellsCount: number,
   inMazeCellsCount: number
@@ -38,57 +33,26 @@ function getRandomNonMazeCell(
   return null;
 }
 
-function getRandomNeighbor(grid: CellType[][], currentCell: Cell) {
-  const rows = grid.length;
-  const cols = grid[0].length;
-  const neighbors: CellWithDirection[] = [];
-  if (currentCell.row > 1) {
-    neighbors.push({
-      row: currentCell.row - 2,
-      col: currentCell.col,
-      direction: Direction.Up,
-    });
-  }
-  if (currentCell.row < rows - 2) {
-    neighbors.push({
-      row: currentCell.row + 2,
-      col: currentCell.col,
-      direction: Direction.Down,
-    });
-  }
-  if (currentCell.col > 1) {
-    neighbors.push({
-      row: currentCell.row,
-      col: currentCell.col - 2,
-      direction: Direction.Left,
-    });
-  }
-  if (currentCell.col < cols - 2) {
-    neighbors.push({
-      row: currentCell.row,
-      col: currentCell.col + 2,
-      direction: Direction.Right,
-    });
-  }
-
-  return neighbors[Math.floor(Math.random() * neighbors.length)];
-}
-
-function startRandomWalk(
+export function startRandomWalk(
   grid: CellType[][],
   directions: Direction[][],
   startCell: Cell
 ) {
+  const rows = grid.length;
+  const cols = grid[0].length;
   let currentCell = startCell;
 
   while (grid[currentCell.row][currentCell.col] === CellType.wall) {
-    const randomNeighbor = getRandomNeighbor(grid, currentCell);
+    const neighbors = getNeighborsWithDirections(currentCell);
+    const validNeighbors = filterValidCells(neighbors, rows, cols);
+    const { value: randomNeighbor } = getRandomIndexFromArray(validNeighbors);
+
     directions[currentCell.row][currentCell.col] = randomNeighbor.direction;
     currentCell = randomNeighbor;
   }
 }
 
-function getTravelledPath(
+export function getTravelledPath(
   grid: CellType[][],
   directions: Direction[][],
   startCell: Cell

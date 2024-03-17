@@ -1,32 +1,6 @@
-import { generateGrid } from '@pathFinder/helpers/grid';
+import { generateGrid } from '@/apps/path-finder/helpers/grid.helper';
 import { Cell, CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
-
-const directions = [
-  { row: -2, col: 0 },
-  { row: 2, col: 0 },
-  { row: 0, col: -2 },
-  { row: 0, col: 2 },
-];
-
-function getNeighbors(
-  grid: CellType[][],
-  { row, col }: Cell,
-  cellType = CellType.clear
-) {
-  const rows = grid.length;
-  const cols = grid[0].length;
-
-  return directions
-    .map((direction) => ({
-      row: row + direction.row,
-      col: col + direction.col,
-    }))
-    .filter(
-      (cell) =>
-        cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols
-    )
-    .filter((cell) => grid[cell.row][cell.col] === cellType);
-}
+import { getValidTypeNeighbors } from '../../helpers/maze.helper';
 
 async function createPassage(
   grid: CellType[][],
@@ -55,7 +29,7 @@ export async function generateRecursiveBacktrackingMaze({
   updateCells(grid, { row: 0, col: 0 });
 
   async function recursiveBacktracking(cell: Cell) {
-    const neighbors = getNeighbors(grid, cell, CellType.wall);
+    const neighbors = getValidTypeNeighbors(grid, cell, CellType.wall);
     while (neighbors.length) {
       const randomIndex = Math.floor(Math.random() * neighbors.length);
       const neighbor = neighbors[randomIndex];

@@ -1,4 +1,4 @@
-import { generateGrid } from '@pathFinder/helpers/grid';
+import { generateGrid } from '@/apps/path-finder/helpers/grid.helper';
 import { SearchAlgoProps, Cell, CellType } from '@pathFinder/models/interfaces';
 
 interface CostCell extends Cell {

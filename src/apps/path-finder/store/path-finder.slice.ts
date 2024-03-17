@@ -11,7 +11,7 @@ import {
   generateGrid,
   getDimensionsFromScreenSize,
   initGrid,
-} from '@pathFinder/helpers/grid';
+} from '@/apps/path-finder/helpers/grid.helper';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';

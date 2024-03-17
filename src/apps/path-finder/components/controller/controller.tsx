@@ -3,7 +3,7 @@ import { resetGrid, setDimension } from '@pathFinder/store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import Execution from '@pathFinder/components/controller/execution';
 import Operations from '@pathFinder/components/controller/operations';
-import { getDimensionsFromScreenSize } from '@pathFinder/helpers/grid';
+import { getDimensionsFromScreenSize } from '@/apps/path-finder/helpers/grid.helper';
 import Info from '@pathFinder/components/controller/info';
 import Timer from '@pathFinder/components/controller/timer';
 import { defaultSpeeds } from '@pathFinder/config';
