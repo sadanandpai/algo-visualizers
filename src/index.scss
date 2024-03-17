@@ -60,6 +60,7 @@ button.primary-outline {
   border-radius: 4px;
 }
 
+select:disabled,
 button:disabled {
   cursor: not-allowed;
 }

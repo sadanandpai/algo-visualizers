@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 20px 20px 16px;
+  margin: 20px 10px 16px;
 
   .operation {
     display: flex;
@@ -66,6 +66,12 @@
   .speed,
   .play {
     display: none;
+  }
+
+  .time {
+    font-weight: 600;
+    min-width: 3ch;
+    display: inline-block;
   }
 }
 

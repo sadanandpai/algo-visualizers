@@ -1,23 +1,19 @@
 export const cellSize = 25;
 
-export const mazeSpeeds = new Map([
+export const speeds = new Map([
   ['∞', 0],
   ['4x', 1],
-  ['2x', 10],
-  ['1x', 25],
-  ['0.7x', 50],
-  ['0.5x', 100],
+  ['2x', 25],
+  ['1x', 50],
+  ['0.7x', 75],
+  ['0.5x', 120],
   ['0.1x', 250],
 ]);
 
-export const searchSpeeds = new Map([
-  ['∞', 0],
-  ['4x', 1],
-  ['2x', 20],
-  ['1x', 30],
-  ['0.5x', 50],
-  ['0.1x', 250],
-]);
+export const defaultSpeeds = {
+  mobile: '1x',
+  desktop: '4x',
+};
 
 export const cellColors = {
   clear: 'transparent',

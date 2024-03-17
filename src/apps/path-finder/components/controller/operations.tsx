@@ -6,12 +6,16 @@ import { generateMaze } from '../../store/maze.thunk';
 import { Play, Trash } from 'lucide-react';
 import { resetGrid, setVisitedCellCount } from '../../store/path-finder.slice';
 import { mazeGenerators } from '../../algorithms';
-import { mazeSpeeds } from '../../config';
+import { speeds } from '../../config';
 
-function Operations() {
+interface Props {
+  defaultSpeed: string;
+}
+
+function Operations({ defaultSpeed }: Props) {
   const dispatch = useAppDispatch();
   const [maze, setMaze] = useState<string>('');
-  const [speed, setSpeed] = useState([...mazeSpeeds.values()][1]);
+  const [speed, setSpeed] = useState(speeds.get(defaultSpeed)!);
   const status = useAppSelector((state) => state.pathFinder.status);
   const mazeAlgo = maze ? mazeGenerators.get(maze) : null;
   const disabled = status === Status.Generating || status === Status.Searching;
@@ -46,7 +50,7 @@ function Operations() {
         disabled={disabled}
       >
         <option value="" disabled>
-          Select Maze Algo
+          Select a Maze
         </option>
         {[...mazeGenerators.entries()].map(([key, { name }]) => (
           <option key={key} value={key}>
@@ -63,7 +67,7 @@ function Operations() {
         onChange={(e) => setSpeed(+e.target.value)}
         disabled={disabled}
       >
-        {[...mazeSpeeds.entries()].map(([key, value]) => (
+        {[...speeds.entries()].map(([key, value]) => (
           <option key={key} value={value}>
             {key}
           </option>

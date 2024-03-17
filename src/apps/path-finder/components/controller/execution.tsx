@@ -1,20 +1,24 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
-import { clearGrid, setVisitedCellCount } from '../../store/path-finder.slice';
+import { clearGrid, setVisitedCellCoun } from '../../store/path-finder.slice';
 
 import { Play, RefreshCcw } from 'lucide-react';
 import classes from './controller.module.scss';
 
 import { useDebounce } from 'react-use';
 import { pathFinders } from '../../algorithms';
-import { searchSpeeds } from '../../config';
+import { speeds } from '../../config';
 import { Status } from '../../models/interfaces';
 import { searchPath } from '../../store/search-thunk';
 
-function Execution() {
+interface Props {
+  defaultSpeed: string;
+}
+
+function Execution({ defaultSpeed }: Props) {
   const dispatch = useAppDispatch();
   const [pathFinder, setPathFinder] = useState('');
-  const [speed, setSpeed] = useState([...searchSpeeds.values()][1]);
+  const [speed, setSpeed] = useState(speeds.get(defaultSpeed)!);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
@@ -70,7 +74,7 @@ function Execution() {
         disabled={disabled}
       >
         <option value="" disabled>
-          Select path finder
+          Select a Path finder
         </option>
         {[...pathFinders.entries()].map(([key, { name }]) => (
           <option key={key} value={key}>
@@ -87,7 +91,7 @@ function Execution() {
         onChange={(e) => setSpeed(+e.target.value)}
         disabled={disabled}
       >
-        {[...searchSpeeds.entries()].map(([key, value]) => (
+        {[...speeds.entries()].map(([key, value]) => (
           <option key={key} value={value}>
             {key}
           </option>
