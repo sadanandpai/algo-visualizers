@@ -4,11 +4,16 @@ import {
   setCell as setStateCell,
   setGrid,
   setStatus,
-} from './path-finder.slice';
+} from '@pathFinder/store/path-finder.slice';
 
-import { SearchAlgoProps, Cell, CellType, Status } from '../models/interfaces';
+import {
+  SearchAlgoProps,
+  Cell,
+  CellType,
+  Status,
+} from '@pathFinder/models/interfaces';
 import { toast } from 'sonner';
-import { tracePath } from '../helpers/path.helper';
+import { tracePath } from '@pathFinder/helpers/path.helper';
 import { delay } from '@/lib/helpers/async';
 
 export function searchPath(

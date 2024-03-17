@@ -1,5 +1,5 @@
-import { getNeighbors } from '@/apps/path-finder/algorithms/maze-generator/prims';
-import { CellType } from '@/apps/path-finder/models/interfaces';
+import { getNeighbors } from '@pathFinder/algorithms/maze-generator/prims';
+import { CellType } from '@pathFinder/models/interfaces';
 
 describe('Prims maze helpers', () => {
   it('getNeighbors', () => {

@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useState } from 'react';
-import { Status } from '../../models/interfaces';
+import { Status } from '@pathFinder/models/interfaces';
 import classes from './controller.module.scss';
-import { generateMaze } from '../../store/maze.thunk';
+import { generateMaze } from '@pathFinder/store/maze.thunk';
 import { Play, Trash } from 'lucide-react';
-import { resetGrid } from '../../store/path-finder.slice';
-import { mazeGenerators } from '../../algorithms';
-import { speeds } from '../../config';
+import { resetGrid } from '@pathFinder/store/path-finder.slice';
+import { mazeGenerators } from '@pathFinder/algorithms';
+import { speeds } from '@pathFinder/config';
 
 interface Props {
   defaultSpeed: string;

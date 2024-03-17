@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { CellElement, CellType } from '../models/interfaces';
-import useMouseActions from './use-mouse-actions.hook';
-import { getCellDetails } from '../helpers/action.helper';
+import { CellElement, CellType } from '@pathFinder/models/interfaces';
+import useMouseActions from '@pathFinder/hooks/use-mouse-actions.hook';
+import { getCellDetails } from '@pathFinder/helpers/action.helper';
 
 export function useMouse({
   isMobile,

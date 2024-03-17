@@ -1,4 +1,4 @@
-import { Cell } from '../models/interfaces';
+import { Cell } from '@pathFinder/models/interfaces';
 import { delay } from '@/lib/helpers/async';
 
 export async function tracePath(

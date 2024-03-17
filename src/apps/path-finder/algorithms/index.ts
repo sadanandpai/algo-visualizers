@@ -1,18 +1,18 @@
 // Maze generators
-import { generateRandomMaze } from './maze-generator/random';
-import { generatePrimsMaze } from './maze-generator/prims';
-import { generateRecursiveDivisionMaze } from './maze-generator/recursive-division';
-import { generateRecursiveBacktrackingMaze } from './maze-generator/recursive-backtracking';
-import { generateBinaryMaze } from './maze-generator/binary';
-import { generateKruskalMaze } from './maze-generator/kruskal';
-import { generateSideWinderMaze } from './maze-generator/side-winder';
-import { generateWilsonMaze } from './maze-generator/wilson';
+import { generateRandomMaze } from '@pathFinder/algorithms/maze-generator/random';
+import { generatePrimsMaze } from '@pathFinder/algorithms/maze-generator/prims';
+import { generateRecursiveDivisionMaze } from '@pathFinder/algorithms/maze-generator/recursive-division';
+import { generateRecursiveBacktrackingMaze } from '@pathFinder/algorithms/maze-generator/recursive-backtracking';
+import { generateBinaryMaze } from '@pathFinder/algorithms/maze-generator/binary';
+import { generateKruskalMaze } from '@pathFinder/algorithms/maze-generator/kruskal';
+import { generateSideWinderMaze } from '@pathFinder/algorithms/maze-generator/side-winder';
+import { generateWilsonMaze } from '@pathFinder/algorithms/maze-generator/wilson';
 
 // Path finders
-import { aStar } from './path-finder/a-star';
-import { breadthFirstSearch } from './path-finder/bfs';
-import { depthFirstSearch } from './path-finder/dfs';
-import { greedy } from './path-finder/greedy';
+import { aStar } from '@pathFinder/algorithms/path-finder/a-star';
+import { breadthFirstSearch } from '@pathFinder/algorithms/path-finder/bfs';
+import { depthFirstSearch } from '@pathFinder/algorithms/path-finder/dfs';
+import { greedy } from '@pathFinder/algorithms/path-finder/greedy';
 
 export const pathFinders = new Map([
   ['bfs', { name: 'Breadth First Search', fn: breadthFirstSearch }],

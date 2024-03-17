@@ -8,6 +8,12 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@sortViz': fileURLToPath(
+        new URL('./src/apps/sorting-visualizer', import.meta.url)
+      ),
+      '@pathFinder': fileURLToPath(
+        new URL('./src/apps/path-finder', import.meta.url)
+      ),
     },
   },
   test: {

@@ -1,5 +1,5 @@
 import { Toaster } from 'sonner';
-import MainLayout from '../layouts/main.layout';
+import MainLayout from '@pathFinder/layouts/main.layout';
 
 function Home() {
   return (

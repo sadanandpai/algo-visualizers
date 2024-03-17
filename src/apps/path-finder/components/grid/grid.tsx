@@ -1,13 +1,13 @@
-import { setCell } from '../../store/path-finder.slice';
+import { setCell } from '@pathFinder/store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useCallback, useEffect, useRef } from 'react';
 
-import { CellElement, CellType, Status } from '../../models/interfaces';
-import { cellSize } from '../../config';
+import { CellElement, CellType, Status } from '@pathFinder/models/interfaces';
+import { cellSize } from '@pathFinder/config';
 import classes from './grid.module.scss';
-import { useTouch } from '../../hooks/use-touch.hook';
-import { useMouse } from '../../hooks/use-mouse.hook';
-import { isTouchDevice } from '../../helpers/action.helper';
+import { useTouch } from '@pathFinder/hooks/use-touch.hook';
+import { useMouse } from '@pathFinder/hooks/use-mouse.hook';
+import { isTouchDevice } from '@pathFinder/helpers/action.helper';
 
 function Grid() {
   const dispatch = useAppDispatch();

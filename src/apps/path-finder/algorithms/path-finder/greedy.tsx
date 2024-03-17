@@ -1,5 +1,5 @@
-import { generateGrid } from '../../helpers/grid';
-import { SearchAlgoProps, Cell, CellType } from '../../models/interfaces';
+import { generateGrid } from '@pathFinder/helpers/grid';
+import { SearchAlgoProps, Cell, CellType } from '@pathFinder/models/interfaces';
 
 interface CostCell extends Cell {
   h: number;

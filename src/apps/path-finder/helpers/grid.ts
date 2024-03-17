@@ -1,5 +1,5 @@
-import { cellSize } from '../config';
-import { CellType } from '../models/interfaces';
+import { cellSize } from '@pathFinder/config';
+import { CellType } from '@pathFinder/models/interfaces';
 
 function getRandom(max: number) {
   return Math.floor(Math.random() * max);

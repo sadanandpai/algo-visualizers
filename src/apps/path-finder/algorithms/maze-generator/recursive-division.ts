@@ -1,5 +1,5 @@
-import { generateGrid } from '../../helpers/grid';
-import { CellType, MazeAlgoProps } from '../../models/interfaces';
+import { generateGrid } from '@pathFinder/helpers/grid';
+import { CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
 
 interface DrawWallConfig {
   updateCells: MazeAlgoProps['updateCells'];

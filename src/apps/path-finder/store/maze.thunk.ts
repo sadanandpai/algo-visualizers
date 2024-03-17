@@ -3,8 +3,13 @@ import {
   setCells as setStateCells,
   setGrid,
   setStatus,
-} from './path-finder.slice';
-import { Cell, CellType, MazeAlgoProps, Status } from '../models/interfaces';
+} from '@pathFinder/store/path-finder.slice';
+import {
+  Cell,
+  CellType,
+  MazeAlgoProps,
+  Status,
+} from '@pathFinder/models/interfaces';
 import { delay } from '@/lib/helpers/async';
 
 export function generateMaze(

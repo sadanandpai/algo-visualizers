@@ -1,5 +1,5 @@
-import Controller from '../components/controller/controller';
-import Grid from '../components/grid/grid';
+import Controller from '@pathFinder/components/controller/controller';
+import Grid from '@pathFinder/components/grid/grid';
 import Navbar from '@/lib/components/navbar/navbar';
 import ThemeIcon from '@/lib/components/theme-icon/theme-icon';
 

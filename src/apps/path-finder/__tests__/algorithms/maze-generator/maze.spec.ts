@@ -1,5 +1,5 @@
-import { mazeGenerators } from '@/apps/path-finder/algorithms';
-import { Cell, CellType } from '@/apps/path-finder/models/interfaces';
+import { mazeGenerators } from '@pathFinder/algorithms';
+import { Cell, CellType } from '@pathFinder/models/interfaces';
 
 const mazeGeneratorsFns = [
   mazeGenerators.get('prims')!.fn,

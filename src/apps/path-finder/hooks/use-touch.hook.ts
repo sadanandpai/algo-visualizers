@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { CellElement, CellType } from '../models/interfaces';
-import { getCellDetails } from '../helpers/action.helper';
+import { CellElement, CellType } from '@pathFinder/models/interfaces';
+import { getCellDetails } from '@pathFinder/helpers/action.helper';
 
 export function useTouch({
   isMobile,
