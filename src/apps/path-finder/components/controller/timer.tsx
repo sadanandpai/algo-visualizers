@@ -2,6 +2,7 @@ import { useAppSelector } from '@/host/store/hooks';
 import useTimer from '../../hooks/use-timer.hook';
 import { useEffect } from 'react';
 import { Status } from '../../models/interfaces';
+import classes from './controller.module.scss';
 
 function Timer() {
   const status = useAppSelector((state) => state.pathFinder.status);
@@ -23,9 +24,9 @@ function Timer() {
   }, [status, startTimer, stopTimer, isRunning, resetTimer]);
 
   return (
-    <span>
-      Time: <strong>{time}</strong>
-    </span>
+    <p>
+      Time: <span className={classes.time}>{time}</span>
+    </p>
   );
 }
 

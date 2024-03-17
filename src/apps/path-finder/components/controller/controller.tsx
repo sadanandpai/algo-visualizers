@@ -8,12 +8,15 @@ import classes from './controller.module.scss';
 import { getDimensionsFromScreenSize } from '../../helpers/grid';
 import Info from './info';
 import Timer from './timer';
+import { defaultSpeeds } from '../../config';
 
 function Controller() {
   const dispatch = useAppDispatch();
   const rows = useAppSelector((state) => state.pathFinder.rows);
   const cols = useAppSelector((state) => state.pathFinder.cols);
   const { width, height } = useWindowSize();
+  const defaultSpeed =
+    width < 768 ? defaultSpeeds.mobile : defaultSpeeds.desktop;
 
   useDebounce(
     () => {
@@ -33,10 +36,10 @@ function Controller() {
 
   return (
     <section className={classes.controller}>
-      <Operations />
+      <Operations defaultSpeed={defaultSpeed} />
       <Info />
       <Timer />
-      <Execution />
+      <Execution defaultSpeed={defaultSpeed} />
     </section>
   );
 }
