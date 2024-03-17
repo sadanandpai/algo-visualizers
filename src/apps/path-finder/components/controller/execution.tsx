@@ -38,7 +38,6 @@ function Execution({ defaultSpeed }: Props) {
   function handleClear() {
     dispatch(clearGrid());
     dispatch(setVisitedCellCount(0));
-    dispatch(setVisitedCellCount(0));
   }
 
   function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {

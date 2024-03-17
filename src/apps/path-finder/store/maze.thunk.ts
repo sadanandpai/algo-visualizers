@@ -5,7 +5,12 @@ import {
   setStatus,
   setVisitedCellCount,
 } from '@pathFinder/store/path-finder.slice';
-import { Cell, CellType, MazeAlgoProps, Status } from '@pathFinder/models/interfaces';
+import {
+  Cell,
+  CellType,
+  MazeAlgoProps,
+  Status,
+} from '@pathFinder/models/interfaces';
 import { delay } from '@/lib/helpers/async';
 
 export function generateMaze(
@@ -14,7 +19,6 @@ export function generateMaze(
 ) {
   return async function (dispatch: AppDispatch, getState: () => RootState) {
     const state = getState().pathFinder;
-    dispatch(setVisitedCellCount(0));
     dispatch(setVisitedCellCount(0));
     dispatch(setStatus(Status.Generating));
 

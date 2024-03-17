@@ -8,7 +8,7 @@ const VisitedCellCount = () => {
   console.log(visitedCellCount);
   return (
     <div>
-      Visited Cell:<strong>{visitedCellCount}</strong>
+      Visited Cell: <strong>{visitedCellCount}</strong>
     </div>
   );
 };
