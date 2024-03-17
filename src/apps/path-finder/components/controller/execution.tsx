@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
-import { clearGrid, setVisitedCellCoun } from '@pathFinder/store/path-finder.slice';
+import { clearGrid,setVisitedCellCount } from '@pathFinder/store/path-finder.slice';
+
 import { Play, RefreshCcw } from 'lucide-react';
 import classes from './controller.module.scss';
 
@@ -36,6 +37,7 @@ function Execution({ defaultSpeed }: Props) {
 
   function handleClear() {
     dispatch(clearGrid());
+    dispatch(setVisitedCellCount(0));
     dispatch(setVisitedCellCount(0));
   }
 

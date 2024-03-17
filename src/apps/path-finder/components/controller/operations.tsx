@@ -4,7 +4,7 @@ import { Status } from '@pathFinder/models/interfaces';
 import classes from './controller.module.scss';
 import { generateMaze } from '@pathFinder/store/maze.thunk';
 import { Play, Trash } from 'lucide-react';
-import { resetGrid, setVisitedCellCount  } from '@pathFinder/store/path-finder.slice';
+import { resetGrid,setVisitedCellCount } from '@pathFinder/store/path-finder.slice';
 import { mazeGenerators } from '@pathFinder/algorithms';
 import { speeds } from '@pathFinder/config';
 
@@ -34,6 +34,10 @@ function Operations({ defaultSpeed }: Props) {
 
     setMaze(algo);
     mazeClickHandler(mazeGenerators.get(algo));
+  }
+  function handleReset() {
+    dispatch(resetGrid());
+    dispatch(setVisitedCellCount(0));
   }
   function handleReset() {
     dispatch(resetGrid());
@@ -84,6 +88,7 @@ function Operations({ defaultSpeed }: Props) {
         <Play size={20} />
       </button>
 
+      <button data-testid="reset" onClick={handleReset} data-tooltip="Reset">
       <button data-testid="reset" onClick={handleReset} data-tooltip="Reset">
         <Trash size={20} />
       </button>
