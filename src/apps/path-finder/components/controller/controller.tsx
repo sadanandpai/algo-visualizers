@@ -1,14 +1,13 @@
-import { resetGrid, setDimension } from '../../store/path-finder.slice';
-import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useDebounce, useWindowSize } from 'react-use';
-
-import Execution from './execution';
-import Operations from './operations';
+import { resetGrid, setDimension } from '@pathFinder/store/path-finder.slice';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
+import Execution from '@pathFinder/components/controller/execution';
+import Operations from '@pathFinder/components/controller/operations';
+import { getDimensionsFromScreenSize } from '@pathFinder/helpers/grid';
+import Info from '@pathFinder/components/controller/info';
+import Timer from '@pathFinder/components/controller/timer';
+import { defaultSpeeds } from '@pathFinder/config';
 import classes from './controller.module.scss';
-import { getDimensionsFromScreenSize } from '../../helpers/grid';
-import Info from './info';
-import Timer from './timer';
-import { defaultSpeeds } from '../../config';
 
 function Controller() {
   const dispatch = useAppDispatch();

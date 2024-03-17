@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/host/store/hooks';
-import useTimer from '../../hooks/use-timer.hook';
+import useTimer from '@pathFinder/hooks/use-timer.hook';
 import { useEffect } from 'react';
-import { Status } from '../../models/interfaces';
+import { Status } from '@pathFinder/models/interfaces';
 import classes from './controller.module.scss';
 
 function Timer() {

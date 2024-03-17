@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
-import { clearGrid, setVisitedCellCoun } from '../../store/path-finder.slice';
-
+import { clearGrid, setVisitedCellCoun } from '@pathFinder/store/path-finder.slice';
 import { Play, RefreshCcw } from 'lucide-react';
 import classes from './controller.module.scss';
 
 import { useDebounce } from 'react-use';
-import { pathFinders } from '../../algorithms';
-import { speeds } from '../../config';
-import { Status } from '../../models/interfaces';
-import { searchPath } from '../../store/search-thunk';
+import { pathFinders } from '@pathFinder/algorithms';
+import { speeds } from '@pathFinder/config';
+import { Status } from '@pathFinder/models/interfaces';
+import { searchPath } from '@pathFinder/store/search-thunk';
 
 interface Props {
   defaultSpeed: string;

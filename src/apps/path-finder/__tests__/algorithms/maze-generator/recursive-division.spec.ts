@@ -3,8 +3,8 @@ import {
   drawVerticalWall,
   getRandomEvenNumber,
   getRandomOddNumber,
-} from '@/apps/path-finder/algorithms/maze-generator/recursive-division';
-import { Cell, CellType } from '@/apps/path-finder/models/interfaces';
+} from '@pathFinder/algorithms/maze-generator/recursive-division';
+import { Cell, CellType } from '@pathFinder/models/interfaces';
 
 const updateCells = vi.fn(async (grid, cells, cellType = CellType.clear) => {
   if (!Array.isArray(cells)) {

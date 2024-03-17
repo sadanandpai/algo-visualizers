@@ -1,5 +1,5 @@
-import { generateGrid } from '../../helpers/grid';
-import { Cell, CellType, MazeAlgoProps } from '../../models/interfaces';
+import { generateGrid } from '@pathFinder/helpers/grid';
+import { Cell, CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
 
 enum Direction {
   Up,

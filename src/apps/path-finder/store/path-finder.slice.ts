@@ -1,4 +1,4 @@
-import '@/apps/path-finder/config';
+import '@pathFinder/config';
 
 import {
   AppState,
@@ -6,12 +6,12 @@ import {
   CellElement,
   CellType,
   Status,
-} from '../models/interfaces';
+} from '@pathFinder/models/interfaces';
 import {
   generateGrid,
   getDimensionsFromScreenSize,
   initGrid,
-} from '../helpers/grid';
+} from '@pathFinder/helpers/grid';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
