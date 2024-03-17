@@ -4,6 +4,7 @@ import {
   setCell as setStateCell,
   setGrid,
   setStatus,
+  setVisitedCellCount,
 } from './path-finder.slice';
 
 import { SearchAlgoProps, Cell, CellType, Status } from '../models/interfaces';
@@ -20,6 +21,8 @@ export function searchPath(
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().pathFinder;
     dispatch(setStatus(Status.Searching));
+
+    let visitedCellCount = 0;
 
     function isSearching() {
       return getState().pathFinder.status === Status.Searching;
@@ -40,11 +43,13 @@ export function searchPath(
 
       cells.forEach((cell) => {
         grid[cell.row][cell.col] = cellType;
+        visitedCellCount++;
       });
 
       if (delayDuration) {
         dispatch(setStateCells({ cells, cellType }));
         await delay(delayDuration);
+        dispatch(setVisitedCellCount(visitedCellCount));
       }
     }
 

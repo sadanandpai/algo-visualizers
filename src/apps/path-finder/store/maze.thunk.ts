@@ -3,6 +3,7 @@ import {
   setCells as setStateCells,
   setGrid,
   setStatus,
+  setVisitedCellCount,
 } from './path-finder.slice';
 import { Cell, CellType, MazeAlgoProps, Status } from '../models/interfaces';
 import { delay } from '@/lib/helpers/async';
@@ -13,6 +14,7 @@ export function generateMaze(
 ) {
   return async function (dispatch: AppDispatch, getState: () => RootState) {
     const state = getState().pathFinder;
+    dispatch(setVisitedCellCount(0));
     dispatch(setStatus(Status.Generating));
 
     function updateGrid(grid: CellType[][]) {

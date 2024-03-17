@@ -4,7 +4,7 @@ import { Status } from '../../models/interfaces';
 import classes from './controller.module.scss';
 import { generateMaze } from '../../store/maze.thunk';
 import { Play, Trash } from 'lucide-react';
-import { resetGrid } from '../../store/path-finder.slice';
+import { resetGrid, setVisitedCellCount } from '../../store/path-finder.slice';
 import { mazeGenerators } from '../../algorithms';
 import { mazeSpeeds } from '../../config';
 
@@ -31,7 +31,10 @@ function Operations() {
     setMaze(algo);
     mazeClickHandler(mazeGenerators.get(algo));
   }
-
+  function handleReset() {
+    dispatch(resetGrid());
+    dispatch(setVisitedCellCount(0));
+  }
   return (
     <div className={classes.operation}>
       <select
@@ -77,11 +80,7 @@ function Operations() {
         <Play size={20} />
       </button>
 
-      <button
-        data-testid="reset"
-        onClick={() => dispatch(resetGrid())}
-        data-tooltip="Reset"
-      >
+      <button data-testid="reset" onClick={handleReset} data-tooltip="Reset">
         <Trash size={20} />
       </button>
     </div>

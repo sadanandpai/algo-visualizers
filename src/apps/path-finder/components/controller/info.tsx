@@ -1,4 +1,5 @@
 import classes from './controller.module.scss';
+import VisitedCellCount from './visitedCellCount';
 
 function Info() {
   return (
@@ -23,7 +24,11 @@ function Info() {
         <div className={`${classes.info__item} ${classes.info__path}`}></div>
         <span>Path</span>
       </div>
+      <div>
+        <VisitedCellCount />
+      </div>
     </div>
+    
   );
 }
 
