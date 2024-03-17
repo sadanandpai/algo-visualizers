@@ -39,10 +39,6 @@ function Operations({ defaultSpeed }: Props) {
     dispatch(resetGrid());
     dispatch(setVisitedCellCount(0));
   }
-  function handleReset() {
-    dispatch(resetGrid());
-    dispatch(setVisitedCellCount(0));
-  }
   return (
     <div className={classes.operation}>
       <select
@@ -87,8 +83,6 @@ function Operations({ defaultSpeed }: Props) {
       >
         <Play size={20} />
       </button>
-
-      <button data-testid="reset" onClick={handleReset} data-tooltip="Reset">
       <button data-testid="reset" onClick={handleReset} data-tooltip="Reset">
         <Trash size={20} />
       </button>
