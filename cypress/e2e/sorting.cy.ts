@@ -1,6 +1,6 @@
-import { getRndmNumInRange } from '../../src/apps/sorting-visualizer/helpers/array-helpers';
-import { initialArray } from '../../src/apps/sorting-visualizer/config';
+import { getRndmNumInRange } from '@/apps/sorting-visualizer/helpers/array-helpers';
 
+const initialArray = [6, 8, 3, 5, 1, 9, 2, 7, 4];
 const algorithms = [
   'bubble',
   'selection',
