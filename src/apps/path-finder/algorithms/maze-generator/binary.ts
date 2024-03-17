@@ -7,7 +7,7 @@ const directions = [
   { row: 0, col: -1 },
 ];
 
-const getNeighbors = (grid: CellType[][], cell: Cell) => {
+export const getNeighbors = (grid: CellType[][], cell: Cell) => {
   const rows = grid.length;
   const cols = grid[0].length;
 

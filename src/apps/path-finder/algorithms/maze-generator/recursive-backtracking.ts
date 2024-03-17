@@ -8,7 +8,11 @@ const directions = [
   { row: 0, col: 2 },
 ];
 
-function getNonMazeNeighbors(grid: CellType[][], row: number, col: number) {
+function getNeighbors(
+  grid: CellType[][],
+  { row, col }: Cell,
+  cellType = CellType.clear
+) {
   const rows = grid.length;
   const cols = grid[0].length;
 
@@ -21,21 +25,21 @@ function getNonMazeNeighbors(grid: CellType[][], row: number, col: number) {
       (cell) =>
         cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols
     )
-    .filter((cell) => grid[cell.row][cell.col] !== CellType.clear);
+    .filter((cell) => grid[cell.row][cell.col] === cellType);
 }
 
 async function createPassage(
   grid: CellType[][],
   updateCells: MazeAlgoProps['updateCells'],
   cell: Cell,
-  neighbor: Cell
+  { row, col }: Cell
 ) {
   const middleCell = {
-    row: neighbor.row + (cell.row - neighbor.row) / 2,
-    col: neighbor.col + (cell.col - neighbor.col) / 2,
+    row: row + (cell.row - row) / 2,
+    col: col + (cell.col - col) / 2,
   };
 
-  await updateCells(grid, [middleCell, neighbor], CellType.clear);
+  await updateCells(grid, [middleCell, { row, col }]);
 }
 
 export async function generateRecursiveBacktrackingMaze({
@@ -50,21 +54,21 @@ export async function generateRecursiveBacktrackingMaze({
   updateGrid(grid);
   updateCells(grid, { row: 0, col: 0 });
 
-  async function recursiveBacktracking(row: number, col: number) {
-    const neighbors = getNonMazeNeighbors(grid, row, col);
+  async function recursiveBacktracking(cell: Cell) {
+    const neighbors = getNeighbors(grid, cell, CellType.wall);
     while (neighbors.length) {
       const randomIndex = Math.floor(Math.random() * neighbors.length);
       const neighbor = neighbors[randomIndex];
       neighbors.splice(randomIndex, 1);
 
       if (grid[neighbor.row][neighbor.col] !== CellType.clear) {
-        await createPassage(grid, updateCells, { row, col }, neighbor);
-        await recursiveBacktracking(neighbor.row, neighbor.col);
+        await createPassage(grid, updateCells, cell, neighbor);
+        await recursiveBacktracking(neighbor);
       }
     }
   }
 
-  await recursiveBacktracking(0, 0);
+  await recursiveBacktracking({ row: 0, col: 0 });
 
   updateCells(grid, entry, CellType.entry);
   updateCells(grid, exit, CellType.exit);
