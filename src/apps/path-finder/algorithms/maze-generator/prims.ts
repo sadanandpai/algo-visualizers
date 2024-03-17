@@ -1,10 +1,5 @@
 import { generateGrid } from '../../helpers/grid';
-import {
-  Cell,
-  CellElement,
-  CellType,
-  MazeAlgoProps,
-} from '../../models/interfaces';
+import { Cell, CellType, MazeAlgoProps } from '../../models/interfaces';
 
 const directions = [
   { row: -2, col: 0 },
@@ -15,7 +10,8 @@ const directions = [
 
 export function getNeighbors(
   grid: CellType[][],
-  { row, col, cellType }: CellElement
+  { row, col }: Cell,
+  cellType = CellType.clear
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -33,7 +29,7 @@ export function getNeighbors(
 }
 
 export function createPassage(grid: CellType[][], cell: Cell) {
-  const mazeCells = getNeighbors(grid, { ...cell, cellType: CellType.clear });
+  const mazeCells = getNeighbors(grid, cell);
   const passageCell = mazeCells[Math.floor(Math.random() * mazeCells.length)];
   const middleCell = {
     row: cell.row + (passageCell.row - cell.row) / 2,
@@ -57,9 +53,7 @@ export async function generatePrimsMaze({
   const startCell = { row: 0, col: 0 };
   updateCells(grid, startCell);
 
-  neighbors.push(
-    ...getNeighbors(grid, { ...startCell, cellType: CellType.wall })
-  );
+  neighbors.push(...getNeighbors(grid, startCell, CellType.wall));
   while (neighbors.length) {
     const randomIndex = Math.floor(Math.random() * neighbors.length);
     const neighbor = neighbors[randomIndex];
@@ -68,9 +62,7 @@ export async function generatePrimsMaze({
     if (grid[neighbor.row][neighbor.col] !== CellType.clear) {
       const middleCell = createPassage(grid, neighbor);
       await updateCells(grid, [middleCell, neighbor]);
-      neighbors.push(
-        ...getNeighbors(grid, { ...neighbor, cellType: CellType.wall })
-      );
+      neighbors.push(...getNeighbors(grid, neighbor, CellType.wall));
     }
   }
 
