@@ -20,7 +20,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@sortViz/*": ["./src/apps/sorting-visualizer/*"],
+      "@pathFinder/*": ["./src/apps/path-finder/*"]
     },
     "types": ["vitest/globals"]
   },

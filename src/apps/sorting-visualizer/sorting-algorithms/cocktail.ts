@@ -1,10 +1,6 @@
-import {
-  highlight,
-  sort,
-  swap,
-} from '@/apps/sorting-visualizer/helpers/algorithm-helpers';
+import { highlight, sort, swap } from '@sortViz/helpers/algorithm-helpers';
 
-import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
+import { SortAsyncGenerator } from '@sortViz/models/types';
 
 export async function* cocktailSort(array: number[]): SortAsyncGenerator {
   for (let i = 0; i < array.length; i++) {

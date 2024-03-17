@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {
   convertArrayStringToArray,
   convertInputToArrayString,
-} from '@/apps/sorting-visualizer/helpers/array-helpers';
+} from '@sortViz/helpers/array-helpers';
 import {
   setArray,
   setIsPlaying,
   setReset,
-} from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+} from '@sortViz/store/sorting-visualizer.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import NumberGenerator from './number-generator';

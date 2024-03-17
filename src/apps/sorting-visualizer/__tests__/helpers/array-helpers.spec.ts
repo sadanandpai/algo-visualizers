@@ -1,7 +1,7 @@
 import {
   convertInputToArrayString,
   getRndmNumInRange,
-} from '@/apps/sorting-visualizer/helpers/array-helpers';
+} from '@sortViz/helpers/array-helpers';
 
 describe('getRndmNumInRange', () => {
   it('should generates random number within range', () => {

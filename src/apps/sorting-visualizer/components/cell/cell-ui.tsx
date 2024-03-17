@@ -1,7 +1,7 @@
-import Cell from '@/apps/sorting-visualizer/components/cell/cell';
+import Cell from '@sortViz/components/cell/cell';
 import MovingCell from './moving-cell';
-import SwappingCell from '@/apps/sorting-visualizer/components/cell/swapping-cell';
-import { UIProps } from '@/apps/sorting-visualizer/models/interfaces';
+import SwappingCell from '@sortViz/components/cell/swapping-cell';
+import { UIProps } from '@sortViz/models/interfaces';
 import classes from './cell.module.scss';
 
 const CellUI = function CellUI({

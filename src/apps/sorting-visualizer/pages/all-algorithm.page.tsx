@@ -1,4 +1,4 @@
-import AllAlgorithmLayout from '@/apps/sorting-visualizer/layouts/all-algorithm.layout';
+import AllAlgorithmLayout from '@sortViz/layouts/all-algorithm.layout';
 import { Toaster } from 'sonner';
 
 function AllAlgorithmPage() {

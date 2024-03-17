@@ -3,7 +3,7 @@ import {
   setReset,
   setSpeed,
   startTimer,
-} from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+} from '@sortViz/store/sorting-visualizer.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import classes from './controls.module.scss';

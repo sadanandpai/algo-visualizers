@@ -1,4 +1,4 @@
-import { UIProps } from '@/apps/sorting-visualizer/models/interfaces';
+import { UIProps } from '@sortViz/models/interfaces';
 import classes from './bar.module.scss';
 import { useMemo } from 'react';
 

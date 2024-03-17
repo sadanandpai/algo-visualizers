@@ -1,4 +1,4 @@
-import { CellProps } from '@/apps/sorting-visualizer/models/interfaces';
+import { CellProps } from '@sortViz/models/interfaces';
 import classes from './cell.module.scss';
 
 function Cell({

@@ -1,7 +1,7 @@
 import {
   setIsPlaying,
   setReset,
-} from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+} from '@sortViz/store/sorting-visualizer.slice';
 
 import ArrayInput from './array-input';
 import Execution from './execution';

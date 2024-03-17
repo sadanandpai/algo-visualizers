@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { HeaderProps } from '@/apps/sorting-visualizer/models/interfaces';
+import { HeaderProps } from '@sortViz/models/interfaces';
 import { useAppSelector } from '@/host/store/hooks';
 
 function Header({ algoName, isCompleted }: HeaderProps) {

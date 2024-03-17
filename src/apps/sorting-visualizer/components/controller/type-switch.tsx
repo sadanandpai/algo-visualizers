@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import Switch from 'react-switch';
 import classes from './controls.module.scss';
-import { toggleVisualizerType } from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+import { toggleVisualizerType } from '@sortViz/store/sorting-visualizer.slice';
 
 function TypeSwitch() {
   const dispatch = useAppDispatch();

@@ -2,9 +2,9 @@ import { useEffect, useRef } from 'react';
 
 import Header from './header';
 import VisualizerDisplay from './visualizer-display';
-import { VisualizerProps } from '@/apps/sorting-visualizer/models/interfaces';
+import { VisualizerProps } from '@sortViz/models/interfaces';
 import classes from './visualizer.module.scss';
-import useAlgo from '@/apps/sorting-visualizer/hooks/use-algo.hook';
+import useAlgo from '@sortViz/hooks/use-algo.hook';
 
 const Visualizer = function Visualizer({
   array,

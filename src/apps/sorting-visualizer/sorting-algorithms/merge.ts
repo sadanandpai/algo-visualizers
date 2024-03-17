@@ -1,10 +1,6 @@
-import {
-  highlight,
-  move,
-  sort,
-} from '@/apps/sorting-visualizer/helpers/algorithm-helpers';
+import { highlight, move, sort } from '@sortViz/helpers/algorithm-helpers';
 
-import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
+import { SortAsyncGenerator } from '@sortViz/models/types';
 
 export async function* mergeSort(
   array: number[],
