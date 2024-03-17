@@ -2,9 +2,9 @@ import {
   highlightInterval,
   resolveWhenPlaying,
   swapInterval,
-} from '@/apps/sorting-visualizer/store/global.state';
+} from '@sortViz/store/global.state';
 
-import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
+import { SortAsyncGenerator } from '@sortViz/models/types';
 import { delay } from '@/lib/helpers/async';
 
 export async function* swap(

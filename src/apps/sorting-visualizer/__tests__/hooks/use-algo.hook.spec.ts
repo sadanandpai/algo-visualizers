@@ -2,13 +2,13 @@ import {
   playSimulation,
   setHighlightInterval,
   setSwapInterval,
-} from '@/apps/sorting-visualizer/store/global.state';
+} from '@sortViz/store/global.state';
 import { renderHook, waitFor } from '@testing-library/react';
 
-import { algoList } from '@/apps/sorting-visualizer/sorting-algorithms/algo-list';
-import { getRndmNumInRange } from '@/apps/sorting-visualizer/helpers/array-helpers';
-import { initialArray } from '@/apps/sorting-visualizer/config';
-import useAlgo from '@/apps/sorting-visualizer/hooks/use-algo.hook';
+import { algoList } from '@sortViz/sorting-algorithms/algo-list';
+import { getRndmNumInRange } from '@sortViz/helpers/array-helpers';
+import { initialArray } from '@sortViz/config';
+import useAlgo from '@sortViz/hooks/use-algo.hook';
 
 describe('useAlgo hook', () => {
   beforeAll(() => {

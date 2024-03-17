@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { SortAsyncGenerator } from '@/apps/sorting-visualizer/models/types';
-import { resolveWhenPlaying } from '@/apps/sorting-visualizer/store/global.state';
+import { SortAsyncGenerator } from '@sortViz/models/types';
+import { resolveWhenPlaying } from '@sortViz/store/global.state';
 
 function useAlgo(
   array: number[],

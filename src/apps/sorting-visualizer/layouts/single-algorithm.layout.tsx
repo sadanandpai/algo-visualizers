@@ -1,13 +1,13 @@
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
 import MainLayout from './main.layout';
-import NoInput from '@/apps/sorting-visualizer/components/visualizer/no-input';
-import Visualizer from '@/apps/sorting-visualizer/components/visualizer/visualizer';
-import { algoList } from '@/apps/sorting-visualizer/sorting-algorithms/algo-list';
-import { setIsPlaying } from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
-import { sortCompletionMessage } from '../config';
+import NoInput from '@sortViz/components/visualizer/no-input';
+import Visualizer from '@sortViz/components/visualizer/visualizer';
+import { algoList } from '@sortViz/sorting-algorithms/algo-list';
+import { setIsPlaying } from '@sortViz/store/sorting-visualizer.slice';
+import { sortCompletionMessage } from '@sortViz/config';
 import { toast } from 'sonner';
-import useCompletion from '@/apps/sorting-visualizer/hooks/use-completion.hook';
+import useCompletion from '@sortViz/hooks/use-completion.hook';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-import SingleAlgorithmLayout from '@/apps/sorting-visualizer/layouts/single-algorithm.layout';
-import { menuItems } from '@/apps/sorting-visualizer/config';
+import SingleAlgorithmLayout from '@sortViz/layouts/single-algorithm.layout';
+import { menuItems } from '@sortViz/config';
 import { useEffect } from 'react';
 import { Toaster } from 'sonner';
 

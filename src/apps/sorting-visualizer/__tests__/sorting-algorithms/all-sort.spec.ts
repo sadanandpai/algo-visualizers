@@ -2,11 +2,11 @@ import {
   playSimulation,
   setHighlightInterval,
   setSwapInterval,
-} from '@/apps/sorting-visualizer/store/global.state';
+} from '@sortViz/store/global.state';
 
-import { algoList } from '@/apps/sorting-visualizer/sorting-algorithms/algo-list';
-import { getRndmNumInRange } from '../../helpers/array-helpers';
-import { initialArray } from '@/apps/sorting-visualizer/config';
+import { algoList } from '@sortViz/sorting-algorithms/algo-list';
+import { initialArray } from '@sortViz/config';
+import { getRndmNumInRange } from '@sortViz/helpers/array-helpers';
 
 describe('bubble sort', () => {
   beforeAll(() => {

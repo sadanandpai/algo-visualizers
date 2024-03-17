@@ -1,16 +1,16 @@
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
-import AlgoSelection from '@/apps/sorting-visualizer/components/controller/algo-selection';
-import MainLayout from './main.layout';
-import NoInput from '@/apps/sorting-visualizer/components/visualizer/no-input';
-import Visualizer from '@/apps/sorting-visualizer/components/visualizer/visualizer';
-import { algoList } from '@/apps/sorting-visualizer/sorting-algorithms/algo-list';
-import classes from './layout.module.scss';
-import { setIsPlaying } from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
-import { sortCompletionMessage } from '../config';
-import { toast } from 'sonner';
-import useCompletion from '@/apps/sorting-visualizer/hooks/use-completion.hook';
+import AlgoSelection from '@sortViz/components/controller/algo-selection';
+import NoInput from '@sortViz/components/visualizer/no-input';
+import Visualizer from '@sortViz/components/visualizer/visualizer';
+import { sortCompletionMessage } from '@sortViz/config';
+import useCompletion from '@sortViz/hooks/use-completion.hook';
+import { algoList } from '@sortViz/sorting-algorithms/algo-list';
+import { setIsPlaying } from '@sortViz/store/sorting-visualizer.slice';
 import { useEffect } from 'react';
+import { toast } from 'sonner';
+import classes from './layout.module.scss';
+import MainLayout from './main.layout';
 
 function AllAlgorithmLayout() {
   const dispatch = useAppDispatch();

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import {
   configureArray,
   getRndmNumInRange,
-} from '@/apps/sorting-visualizer/helpers/array-helpers';
+} from '@sortViz/helpers/array-helpers';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 
-import { NumberGenProps } from '../../models/interfaces';
+import { NumberGenProps } from '@sortViz/models/interfaces';
 import classes from './controls.module.scss';
-import { numberGenerator as limits } from '@/apps/sorting-visualizer/config';
-import { setArray } from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+import { numberGenerator as limits } from '@sortViz/config';
+import { setArray } from '@sortViz/store/sorting-visualizer.slice';
 
 const options = ['random', 'ascending', 'descending'];
 

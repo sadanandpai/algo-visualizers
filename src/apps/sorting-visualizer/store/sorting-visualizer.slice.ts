@@ -1,7 +1,4 @@
-import {
-  initialArray,
-  selectedAlgosStatus,
-} from '@/apps/sorting-visualizer/config';
+import { initialArray, selectedAlgosStatus } from '@sortViz/config';
 import {
   maxInterval,
   pauseSimulation,
@@ -11,7 +8,7 @@ import {
 } from './global.state';
 
 import { AppDispatch } from '@/host/store/store';
-import { AppState } from '../models/interfaces';
+import { AppState } from '@sortViz/models/interfaces';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 

@@ -8,6 +8,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@sortViz': path.resolve(__dirname, './src/apps/sorting-visualizer'),
+      '@pathFinder': path.resolve(__dirname, './src/apps/path-finder'),
     },
   },
   base: '/algo-visualizers/',
