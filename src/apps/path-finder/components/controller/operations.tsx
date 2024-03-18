@@ -4,7 +4,7 @@ import { Status } from '@pathFinder/models/interfaces';
 import classes from './controller.module.scss';
 import { generateMaze } from '@pathFinder/store/maze.thunk';
 import { Play, Trash } from 'lucide-react';
-import { resetGrid } from '@pathFinder/store/path-finder.slice';
+import { resetGrid, setVisitedCellCount } from '@pathFinder/store/path-finder.slice';
 import { mazeGenerators } from '@pathFinder/algorithms';
 import { speeds } from '@pathFinder/config';
 
@@ -35,7 +35,10 @@ function Operations({ defaultSpeed }: Props) {
     setMaze(algo);
     mazeClickHandler(mazeGenerators.get(algo));
   }
-
+  function handleReset() {
+    dispatch(resetGrid());
+    dispatch(setVisitedCellCount(0));
+  }
   return (
     <div className={classes.operation}>
       <select
@@ -83,7 +86,7 @@ function Operations({ defaultSpeed }: Props) {
 
       <button
         data-testid="reset"
-        onClick={() => dispatch(resetGrid())}
+        onClick={handleReset}
         data-tooltip="Reset"
       >
         <Trash size={20} />
