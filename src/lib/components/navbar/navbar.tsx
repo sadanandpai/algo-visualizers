@@ -1,12 +1,16 @@
 import { Link, NavLink } from 'react-router-dom';
-
-import { NavbarProps } from '@/apps/sorting-visualizer/models/interfaces';
 import classes from './navbar.module.scss';
 import hamIcon from '/icons/ham.svg';
 import { useState } from 'react';
 import { Home } from 'lucide-react';
 
-function Navbar({ title, menuItems }: NavbarProps) {
+export interface Props {
+  title: string;
+  menuItems?: string[];
+  children?: React.ReactNode;
+}
+
+function Navbar({ title, menuItems, children }: Props) {
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -27,6 +31,8 @@ function Navbar({ title, menuItems }: NavbarProps) {
           />
         </a>
       </h1>
+
+      {children}
 
       {menuItems ? (
         <>

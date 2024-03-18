@@ -1,0 +1,42 @@
+.cellInfo {
+  display: none;
+  gap: 20px;
+  margin-right: 60px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .item {
+    height: 15px;
+    width: 15px;
+  }
+
+  .start {
+    background-color: var(--pf-cell-entry);
+  }
+
+  .end {
+    background-color: var(--pf-cell-exit);
+  }
+
+  .wall {
+    background-color: var(--pf-cell-wall);
+  }
+
+  .visited {
+    background-color: var(--pf-cell-visited);
+  }
+
+  .path {
+    background-color: var(--pf-cell-path);
+  }
+}
+
+@media (width >= 768px) {
+  .cellInfo {
+    display: flex;
+  }
+}

@@ -31,11 +31,6 @@ export interface HeaderProps {
   isCompleted: boolean;
 }
 
-export interface NavbarProps {
-  title: string;
-  menuItems?: string[];
-}
-
 export interface NumberGenProps {
   setInput: React.Dispatch<React.SetStateAction<string>>;
 }

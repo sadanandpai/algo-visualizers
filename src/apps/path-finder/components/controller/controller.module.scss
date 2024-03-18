@@ -11,42 +11,6 @@
     gap: 10px;
   }
 
-  .info {
-    display: none;
-    gap: 20px;
-
-    & > div {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .info__item {
-      height: 15px;
-      width: 15px;
-    }
-
-    .info__start {
-      background-color: var(--pf-cell-entry);
-    }
-
-    .info__end {
-      background-color: var(--pf-cell-exit);
-    }
-
-    .info__wall {
-      background-color: var(--pf-cell-wall);
-    }
-
-    .info__visited {
-      background-color: var(--pf-cell-visited);
-    }
-
-    .info__path {
-      background-color: var(--pf-cell-path);
-    }
-  }
-
   .execution {
     display: flex;
     gap: 10px;
@@ -54,7 +18,7 @@
 
   .mazeSelector,
   .pathFinder {
-    width: 100px;
+    width: 125px;
     border: 1px solid theme.$base;
     padding: 0 5px;
   }
@@ -68,14 +32,27 @@
     display: none;
   }
 
-  .time {
-    font-weight: 600;
-    min-width: 3ch;
-    display: inline-block;
+  .pathInfo {
+    display: none;
+    gap: 10px;
+
+    .highlight {
+      font-weight: 600;
+      min-width: 3ch;
+      display: inline-block;
+    }
   }
 }
 
-@media (width >= 768px) {
+@media (width >= 600px) {
+  .controller {
+    .pathInfo {
+      display: flex;
+    }
+  }
+}
+
+@media (width >= 910px) {
   .controller {
     .speed,
     .play {
@@ -94,14 +71,6 @@
     .speed,
     .play {
       display: block;
-    }
-  }
-}
-
-@media (width >= 1200px) {
-  .controller {
-    .info {
-      display: flex;
     }
   }
 }

@@ -4,8 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import Execution from '@pathFinder/components/controller/execution';
 import Operations from '@pathFinder/components/controller/operations';
 import { getDimensionsFromScreenSize } from '@/apps/path-finder/helpers/grid.helper';
-import Info from '@pathFinder/components/controller/info';
-import Timer from '@pathFinder/components/controller/timer';
+import PathInfo from '@/apps/path-finder/components/controller/path-info';
 import { defaultSpeeds } from '@pathFinder/config';
 import classes from './controller.module.scss';
 
@@ -36,8 +35,7 @@ function Controller() {
   return (
     <section className={classes.controller}>
       <Operations defaultSpeed={defaultSpeed} />
-      <Info />
-      <Timer />
+      <PathInfo />
       <Execution defaultSpeed={defaultSpeed} />
     </section>
   );

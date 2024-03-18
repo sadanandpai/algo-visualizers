@@ -4,8 +4,12 @@ import { useEffect } from 'react';
 import { Status } from '@pathFinder/models/interfaces';
 import classes from './controller.module.scss';
 
-function Timer() {
+function PathInfo() {
   const status = useAppSelector((state) => state.pathFinder.status);
+  const visitedCellCount = useAppSelector(
+    (state) => state.pathFinder.visitedCellCount
+  );
+
   const { time, isRunning, startTimer, stopTimer, resetTimer } = useTimer();
 
   useEffect(() => {
@@ -24,10 +28,17 @@ function Timer() {
   }, [status, startTimer, stopTimer, isRunning, resetTimer]);
 
   return (
-    <p>
-      Time: <span className={classes.time}>{time}</span>
-    </p>
+    <div className={classes.pathInfo}>
+      <p>
+        Visited Cell:{' '}
+        <span className={classes.highlight}>{visitedCellCount}</span>
+      </p>
+
+      <p>
+        Time: <span className={classes.highlight}>{time}</span>
+      </p>
+    </div>
   );
 }
 
-export default Timer;
+export default PathInfo;
