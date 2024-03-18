@@ -30,6 +30,7 @@ export interface AppState {
   entry: Cell;
   exit: Cell;
   status: Status;
+  visitedCellCount: number;
 }
 
 export interface SearchAlgoProps {

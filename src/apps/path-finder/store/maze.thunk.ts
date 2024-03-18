@@ -3,6 +3,7 @@ import {
   setCells as setStateCells,
   setGrid,
   setStatus,
+  setVisitedCellCount,
 } from '@pathFinder/store/path-finder.slice';
 import {
   Cell,
@@ -18,6 +19,8 @@ export function generateMaze(
 ) {
   return async function (dispatch: AppDispatch, getState: () => RootState) {
     const state = getState().pathFinder;
+    dispatch(setVisitedCellCount(0));
+
     dispatch(setStatus(Status.Generating));
 
     function updateGrid(grid: CellType[][]) {
