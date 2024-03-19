@@ -1,10 +1,12 @@
-import { useAppSelector } from '@/host/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import useTimer from '@pathFinder/hooks/use-timer.hook';
 import { useEffect } from 'react';
 import { Status } from '@pathFinder/models/interfaces';
 import classes from './controller.module.scss';
+import { setVisitedCellCount } from '@pathFinder/store/path-finder.slice';
 
 function PathInfo() {
+  const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.pathFinder.status);
   const visitedCellCount = useAppSelector(
     (state) => state.pathFinder.visitedCellCount
@@ -24,6 +26,7 @@ function PathInfo() {
 
     if ([Status.Ready, Status.Generating].includes(status)) {
       resetTimer();
+      dispatch(setVisitedCellCount(0));
     }
   }, [status, startTimer, stopTimer, isRunning, resetTimer]);
 
