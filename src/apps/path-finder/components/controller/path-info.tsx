@@ -28,7 +28,7 @@ function PathInfo() {
       resetTimer();
       dispatch(setVisitedCellCount(0));
     }
-  }, [status, startTimer, stopTimer, isRunning, resetTimer]);
+  }, [status, startTimer, stopTimer, isRunning, resetTimer,dispatch]);
 
   return (
     <div className={classes.pathInfo}>
