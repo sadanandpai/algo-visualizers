@@ -50,12 +50,12 @@ export function searchPath(
       cells.forEach((cell) => {
         grid[cell.row][cell.col] = cellType;
         visitedCellCount++;
+        dispatch(setVisitedCellCount(visitedCellCount));
       });
+      dispatch(setStateCells({ cells, cellType }));
 
       if (delayDuration) {
-        dispatch(setStateCells({ cells, cellType }));
         await delay(delayDuration);
-        dispatch(setVisitedCellCount(visitedCellCount));
       }
     }
 
