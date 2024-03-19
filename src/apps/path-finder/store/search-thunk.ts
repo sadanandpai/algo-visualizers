@@ -46,15 +46,15 @@ export function searchPath(
       if (!Array.isArray(cells)) {
         cells = [cells];
       }
-
       cells.forEach((cell) => {
         grid[cell.row][cell.col] = cellType;
-        visitedCellCount++;
-        dispatch(setVisitedCellCount(visitedCellCount));
       });
-      dispatch(setStateCells({ cells, cellType }));
 
+      visitedCellCount += cells.length;
+      dispatch(setVisitedCellCount(visitedCellCount));
+      
       if (delayDuration) {
+        dispatch(setStateCells({ cells, cellType }));
         await delay(delayDuration);
       }
     }
