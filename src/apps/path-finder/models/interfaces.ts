@@ -31,6 +31,7 @@ export interface AppState {
   exit: Cell;
   status: Status;
   visitedCellCount: number;
+  pathLength: number;
 }
 
 export interface SearchAlgoProps {

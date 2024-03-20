@@ -3,7 +3,7 @@ import useTimer from '@pathFinder/hooks/use-timer.hook';
 import { useEffect } from 'react';
 import { Status } from '@pathFinder/models/interfaces';
 import classes from './controller.module.scss';
-import { setVisitedCellCount } from '@pathFinder/store/path-finder.slice';
+import { setPathLength, setVisitedCellCount } from '@pathFinder/store/path-finder.slice';
 
 function PathInfo() {
   const dispatch = useAppDispatch();
@@ -11,6 +11,7 @@ function PathInfo() {
   const visitedCellCount = useAppSelector(
     (state) => state.pathFinder.visitedCellCount
   );
+  const pathLength = useAppSelector((state) => state.pathFinder.pathLength);
 
   const { time, isRunning, startTimer, stopTimer, resetTimer } = useTimer();
 
@@ -27,8 +28,9 @@ function PathInfo() {
     if ([Status.Ready, Status.Generating].includes(status)) {
       resetTimer();
       dispatch(setVisitedCellCount(0));
+      dispatch(setPathLength(0));
     }
-  }, [status, startTimer, stopTimer, isRunning, resetTimer,dispatch]);
+  }, [status, startTimer, stopTimer, isRunning, resetTimer, dispatch]);
 
   return (
     <div className={classes.pathInfo}>
@@ -36,7 +38,9 @@ function PathInfo() {
         Visited Cell:{' '}
         <span className={classes.highlight}>{visitedCellCount}</span>
       </p>
-
+      <p>
+        Path length: <span className={classes.highlight}>{pathLength}</span>
+      </p>
       <p>
         Time: <span className={classes.highlight}>{time}</span>
       </p>

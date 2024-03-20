@@ -4,7 +4,7 @@ import { Status } from '@pathFinder/models/interfaces';
 import classes from './controller.module.scss';
 import { generateMaze } from '@pathFinder/store/maze.thunk';
 import { Play, Trash } from 'lucide-react';
-import { resetGrid, setVisitedCellCount } from '@pathFinder/store/path-finder.slice';
+import { resetGrid, setPathLength, setVisitedCellCount } from '@pathFinder/store/path-finder.slice';
 import { mazeGenerators } from '@pathFinder/algorithms';
 import { speeds } from '@pathFinder/config';
 
@@ -38,6 +38,7 @@ function Operations({ defaultSpeed }: Props) {
   function handleReset() {
     dispatch(resetGrid());
     dispatch(setVisitedCellCount(0));
+    dispatch(setPathLength(0));
   }
   return (
     <div className={classes.operation}>

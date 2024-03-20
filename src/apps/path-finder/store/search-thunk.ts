@@ -5,6 +5,7 @@ import {
   setGrid,
   setStatus,
   setVisitedCellCount,
+  setPathLength,
 } from '@pathFinder/store/path-finder.slice';
 
 import {
@@ -83,6 +84,7 @@ export function searchPath(
         );
 
         toast('Path length is ' + (pathLength + 1));
+        dispatch(setPathLength(pathLength+1));
       } else {
         toast.error('No path found 😔');
       }
