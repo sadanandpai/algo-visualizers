@@ -26,6 +26,7 @@ const initialState: AppState = {
   grid: initGrid(maxRows, maxCols),
   status: Status.Ready,
   visitedCellCount: 0,
+  pathLength:0,
 };
 
 export const pathFinderSlice = createSlice({
@@ -119,6 +120,9 @@ export const pathFinderSlice = createSlice({
     setVisitedCellCount: (state, action: PayloadAction<number>) => {
       state.visitedCellCount = action.payload;
     },
+    setPathLength: (state, action: PayloadAction<number>) => {
+      state.pathLength = action.payload;
+    },
   },
 });
 
@@ -131,5 +135,6 @@ export const {
   clearGrid,
   setStatus,
   setVisitedCellCount,
+  setPathLength,
 } = pathFinderSlice.actions;
 export default pathFinderSlice.reducer;
