@@ -3,7 +3,10 @@ import useTimer from '@pathFinder/hooks/use-timer.hook';
 import { useEffect } from 'react';
 import { Status } from '@pathFinder/models/interfaces';
 import classes from './controller.module.scss';
-import { setPathLength, setVisitedCellCount } from '@pathFinder/store/path-finder.slice';
+import {
+  setPathLength,
+  setVisitedCellCount,
+} from '@pathFinder/store/path-finder.slice';
 
 function PathInfo() {
   const dispatch = useAppDispatch();
@@ -35,11 +38,10 @@ function PathInfo() {
   return (
     <div className={classes.pathInfo}>
       <p>
-        Visited Cell:{' '}
-        <span className={classes.highlight}>{visitedCellCount}</span>
+        Visits: <span className={classes.highlight}>{visitedCellCount}</span>
       </p>
       <p>
-        Path length: <span className={classes.highlight}>{pathLength}</span>
+        Path: <span className={classes.highlight}>{pathLength}</span>
       </p>
       <p>
         Time: <span className={classes.highlight}>{time}</span>

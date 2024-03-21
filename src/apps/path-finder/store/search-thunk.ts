@@ -53,9 +53,8 @@ export function searchPath(
       });
 
       visitedCellCount += cells.length;
-      dispatch(setVisitedCellCount(visitedCellCount));
-
       if (delayDuration) {
+        dispatch(setVisitedCellCount(visitedCellCount));
         dispatch(setStateCells({ cells, cellType }));
         await delay(delayDuration);
       }
@@ -70,6 +69,7 @@ export function searchPath(
       });
 
       dispatch(setGrid({ grid }));
+      dispatch(setVisitedCellCount(visitedCellCount));
 
       if (parents) {
         toast.success('Path found!!! 😃');

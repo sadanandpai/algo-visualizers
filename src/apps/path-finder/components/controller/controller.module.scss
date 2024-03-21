@@ -52,7 +52,7 @@
   }
 }
 
-@media (width >= 910px) {
+@media (width >= 1024px) {
   .controller {
     .speed,
     .play {
@@ -62,15 +62,6 @@
     .mazeSelector,
     .pathFinder {
       width: auto;
-    }
-  }
-}
-
-@media (width >= 1024px) {
-  .controller {
-    .speed,
-    .play {
-      display: block;
     }
   }
 }

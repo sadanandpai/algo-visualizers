@@ -26,7 +26,7 @@ const initialState: AppState = {
   grid: initGrid(maxRows, maxCols),
   status: Status.Ready,
   visitedCellCount: 0,
-  pathLength:0,
+  pathLength: 0,
 };
 
 export const pathFinderSlice = createSlice({
