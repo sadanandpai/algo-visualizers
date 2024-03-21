@@ -27,6 +27,7 @@ export function searchPath(
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     const state = getState().pathFinder;
     dispatch(setVisitedCellCount(0));
+    dispatch(setPathLength(0));
     dispatch(setStatus(Status.Searching));
 
     let visitedCellCount = 0;
@@ -53,7 +54,7 @@ export function searchPath(
 
       visitedCellCount += cells.length;
       dispatch(setVisitedCellCount(visitedCellCount));
-      
+
       if (delayDuration) {
         dispatch(setStateCells({ cells, cellType }));
         await delay(delayDuration);
@@ -82,9 +83,7 @@ export function searchPath(
           () => getState().pathFinder.status === Status.Searching,
           delayDuration * 2
         );
-
-        toast('Path length is ' + (pathLength + 1));
-        dispatch(setPathLength(pathLength+1));
+        dispatch(setPathLength(pathLength + 1));
       } else {
         toast.error('No path found 😔');
       }
