@@ -1,14 +1,11 @@
-import { Cell } from '@pathFinder/models/interfaces';
-import { delay } from '@/lib/helpers/async';
+import { PathAlgoProps } from '@pathFinder/models/interfaces';
 
-export async function tracePath(
-  parents: Cell[][],
-  entry: Cell,
-  exit: Cell,
-  updateCell: (value: Cell) => void,
-  isRunning: () => boolean,
-  delayDuration: number
-) {
+export async function tracePath({
+  parents,
+  entry,
+  exit,
+  updateCell,
+}: PathAlgoProps) {
   let row = exit.row;
   let col = exit.col;
   [row, col] = [parents[row][col].row, parents[row][col].col];
@@ -21,13 +18,10 @@ export async function tracePath(
 
   // Start marking the path with a small delay
   do {
-    updateCell({ row, col });
-    if (delayDuration > 0) {
-      await delay(delayDuration);
-    }
+    await updateCell({ row, col });
     [row, col] = [parents[row][col].row, parents[row][col].col]; // set parents for next iteration
     pathLength += 1;
-  } while (isRunning() && (entry.row !== row || entry.col !== col)); // check if entry is reached
+  } while (entry.row !== row || entry.col !== col); // check if entry is reached
 
   return pathLength;
 }

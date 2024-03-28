@@ -57,3 +57,10 @@ export interface MazeAlgoProps {
     cellType?: CellType
   ) => Promise<void>;
 }
+
+export interface PathAlgoProps {
+  parents: Cell[][];
+  entry: Cell;
+  exit: Cell;
+  updateCell: (value: Cell) => Promise<void>;
+}
