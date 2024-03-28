@@ -14,6 +14,7 @@ import { breadthFirstSearch } from '@pathFinder/algorithms/path-finder/bfs';
 import { depthFirstSearch } from '@pathFinder/algorithms/path-finder/dfs';
 import { greedy } from '@pathFinder/algorithms/path-finder/greedy';
 import { generateLabyrinth } from './maze-generator/labyrinth';
+import { generateEllersMaze } from './maze-generator/ellers';
 
 export const pathFinders = new Map([
   ['bfs', { name: 'Breadth First Search', fn: breadthFirstSearch }],
@@ -35,6 +36,7 @@ export const mazeGenerators = new Map([
   ],
   ['wilson', { name: 'Wilson', fn: generateWilsonMaze }],
   ['binary', { name: 'Binary', fn: generateBinaryMaze }],
+  ['ellers', { name: 'Ellers', fn: generateEllersMaze }],
   ['sideWinder', { name: 'Side Winder', fn: generateSideWinderMaze }],
   ['labyrinth', { name: 'Labyrinth', fn: generateLabyrinth }],
   ['random', { name: 'Random', fn: generateRandomMaze }],

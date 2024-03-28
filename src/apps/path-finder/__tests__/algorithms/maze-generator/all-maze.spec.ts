@@ -8,6 +8,7 @@ const mazeGeneratorsFns = [
   mazeGenerators.get('recursiveDivision')!.fn,
   mazeGenerators.get('wilson')!.fn,
   mazeGenerators.get('binary')!.fn,
+  mazeGenerators.get('ellers')!.fn,
   mazeGenerators.get('sideWinder')!.fn,
   mazeGenerators.get('labyrinth')!.fn,
 ];
