@@ -1,5 +1,4 @@
 import '@pathFinder/config';
-
 import {
   AppState,
   Cell,
@@ -56,18 +55,20 @@ export const pathFinderSlice = createSlice({
 
     setCell: (state, action: PayloadAction<CellElement>) => {
       const payload = action.payload;
-      state.grid[payload.row][payload.col] = payload.cellType;
 
       if (
         payload.cellType === CellType.entry ||
         payload.cellType === CellType.exit
       ) {
-        const cell = payload.cellType === CellType.entry ? 'entry' : 'exit';
-        state[cell] = {
+        const cellType = payload.cellType === CellType.entry ? 'entry' : 'exit';
+        const { row, col } = state[cellType];
+        state.grid[row][col] = CellType.clear;
+        state[cellType] = {
           row: payload.row,
           col: payload.col,
         };
       }
+      state.grid[payload.row][payload.col] = payload.cellType;
     },
 
     setCells: (
@@ -105,21 +106,30 @@ export const pathFinderSlice = createSlice({
     },
 
     resetGrid: (state) => {
-      state.grid = generateGrid(state.rows, state.cols, CellType.clear);
-      if (state.entry.row >= state.rows || state.entry.col >= state.cols) {
-        state.entry = { row: 0, col: 0 };
+      const grid = generateGrid(state.rows, state.cols, CellType.clear);
+      if (state.entry.row >= state.rows) {
+        state.entry.row = state.rows - 1;
       }
-      state.grid[state.entry.row][state.entry.col] = CellType.entry;
-      if (state.exit.row >= state.rows || state.exit.col >= state.cols) {
-        state.exit = { row: state.rows - 1, col: state.cols - 1 };
+      if (state.entry.col >= state.cols) {
+        state.entry.col = state.cols - 1;
       }
-      state.grid[state.exit.row][state.exit.col] = CellType.exit;
-      state.grid[state.exit.row][state.exit.col] = CellType.exit;
+      if (state.exit.row >= state.rows) {
+        state.exit.row = state.rows - 1;
+      }
+      if (state.exit.col >= state.cols) {
+        state.exit.col = state.cols - 1;
+      }
+      grid[state.entry.row][state.entry.col] = CellType.entry;
+      grid[state.exit.row][state.exit.col] = CellType.exit;
+
+      state.grid = grid;
       state.status = Status.Ready;
     },
+
     setVisitedCellCount: (state, action: PayloadAction<number>) => {
       state.visitedCellCount = action.payload;
     },
+
     setPathLength: (state, action: PayloadAction<number>) => {
       state.pathLength = action.payload;
     },

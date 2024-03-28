@@ -1,5 +1,6 @@
 import { generateGrid } from '@/apps/path-finder/helpers/grid.helper';
 import { CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
+import { getRandomOddNumber } from '../../helpers/maze.helper';
 
 interface Direction {
   top: number;
@@ -8,17 +9,7 @@ interface Direction {
   left: number;
 }
 
-export function getRandomEvenNumber(min: number, max: number) {
-  const random = Math.floor(Math.random() * (max - min)) + min;
-  return random % 2 === 0 ? random : random + 1;
-}
-
-export function getRandomOddNumber(min: number, max: number) {
-  const random = Math.floor(Math.random() * (max - min)) + min;
-  return random % 2 === 1 ? random : random + 1;
-}
-
-export async function addWalls(
+export async function addStages(
   grid: CellType[][],
   updateCells: MazeAlgoProps['updateCells']
 ) {
@@ -73,7 +64,7 @@ export async function addVerticalBlocks(
   return { top, bottom };
 }
 
-async function addHorizontalBlocks(
+export async function addHorizontalBlocks(
   grid: CellType[][],
   updateCells: MazeAlgoProps['updateCells'],
   stage: number
@@ -94,6 +85,107 @@ async function addHorizontalBlocks(
   return { left, right };
 }
 
+export function getTopRightCells({
+  cols,
+  stage,
+  top,
+  right,
+}: {
+  cols: number;
+  stage: number;
+  top: number;
+  right: number;
+}) {
+  const cells = [];
+  if (top !== 0) {
+    for (let i = top + 1; i < cols - stage - 1; i += 2) {
+      cells.push({ row: stage + 1, col: i });
+    }
+  }
+  if (right !== 0) {
+    for (let i = stage + 2; i < right; i += 2) {
+      cells.push({ row: i, col: cols - stage - 2 });
+    }
+  }
+
+  return cells;
+}
+
+export function getRightBottomCells({
+  rows,
+  cols,
+  stage,
+  right,
+  bottom,
+}: {
+  rows: number;
+  cols: number;
+  stage: number;
+  right: number;
+  bottom: number;
+}) {
+  const cells = [];
+  if (right !== 0) {
+    for (let i = right + 1; i < rows - stage - 1; i += 2) {
+      cells.push({ row: i, col: cols - stage - 2 });
+    }
+  }
+  if (bottom !== 0) {
+    for (let i = cols - stage - 3; i > bottom; i -= 2) {
+      cells.push({ row: rows - stage - 2, col: i });
+    }
+  }
+  return cells;
+}
+
+export function getBottomLeftCells({
+  rows,
+  stage,
+  bottom,
+  left,
+}: {
+  rows: number;
+  stage: number;
+  bottom: number;
+  left: number;
+}) {
+  const cells = [];
+  if (bottom !== 0) {
+    for (let i = bottom - 1; i > stage; i -= 2) {
+      cells.push({ row: rows - stage - 2, col: i });
+    }
+  }
+  if (left !== 0) {
+    for (let i = rows - stage - 3; i > left; i -= 2) {
+      cells.push({ row: i, col: stage + 1 });
+    }
+  }
+  return cells;
+}
+
+export function getLeftTopCells({
+  stage,
+  top,
+  left,
+}: {
+  stage: number;
+  top: number;
+  left: number;
+}) {
+  const cells = [];
+  if (left !== 0) {
+    for (let i = left - 1; i > stage + 1; i -= 2) {
+      cells.push({ row: i, col: stage + 1 });
+    }
+  }
+  if (top !== 0) {
+    for (let i = stage + 2; i < top; i += 2) {
+      cells.push({ row: stage + 1, col: i });
+    }
+  }
+  return cells;
+}
+
 export async function addGaps(
   grid: CellType[][],
   updateCells: MazeAlgoProps['updateCells'],
@@ -102,55 +194,36 @@ export async function addGaps(
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
-  let random;
 
-  // get cells between top and right
-  const cells = [];
-  for (let i = top + 1; i < cols - stage - 1; i += 2) {
-    cells.push({ row: stage + 1, col: i });
-  }
-  for (let i = stage + 2; i < right; i += 2) {
-    cells.push({ row: i, col: cols - stage - 2 });
-  }
+  const topRightCells = getTopRightCells({ cols, stage, top, right });
+  const rightBottomCells = getRightBottomCells({
+    rows,
+    cols,
+    stage,
+    right,
+    bottom,
+  });
+  const bottomLeftCells = getBottomLeftCells({ rows, stage, bottom, left });
+  const leftTopCells = getLeftTopCells({ stage, top, left });
 
-  random = Math.floor(Math.random() * cells.length);
-  await updateCells(grid, cells[random]);
+  const topRightRandom = Math.floor(Math.random() * topRightCells.length);
+  const rightBottomRandom = Math.floor(Math.random() * rightBottomCells.length);
+  const bottomLeftRandom = Math.floor(Math.random() * bottomLeftCells.length);
+  const leftTopRandom = Math.floor(Math.random() * leftTopCells.length);
 
-  // get cells between right and bottom
-  cells.length = 0;
-  for (let i = right + 1; i < rows - stage - 1; i += 2) {
-    cells.push({ row: i, col: cols - stage - 2 });
+  if (top === 0 || right === 0) {
+    await updateCells(grid, [
+      topRightCells[topRightRandom],
+      bottomLeftCells[bottomLeftRandom],
+    ]);
+  } else {
+    await updateCells(grid, [
+      topRightCells[topRightRandom],
+      rightBottomCells[rightBottomRandom],
+      bottomLeftCells[bottomLeftRandom],
+      leftTopCells[leftTopRandom],
+    ]);
   }
-  for (let i = cols - stage - 3; i > bottom; i -= 2) {
-    cells.push({ row: rows - stage - 2, col: i });
-  }
-
-  random = Math.floor(Math.random() * cells.length);
-  await updateCells(grid, cells[random]);
-
-  // get cells between bottom and left
-  cells.length = 0;
-  for (let i = bottom - 1; i > stage; i -= 2) {
-    cells.push({ row: rows - stage - 2, col: i });
-  }
-  for (let i = rows - stage - 3; i > left; i -= 2) {
-    cells.push({ row: i, col: stage + 1 });
-  }
-
-  random = Math.floor(Math.random() * cells.length);
-  await updateCells(grid, cells[random]);
-
-  // // get cells between left and top
-  cells.length = 0;
-  for (let i = left - 1; i > stage + 1; i -= 2) {
-    cells.push({ row: i, col: stage + 1 });
-  }
-  for (let i = stage + 2; i < top; i += 2) {
-    cells.push({ row: stage + 1, col: i });
-  }
-
-  random = Math.floor(Math.random() * cells.length);
-  await updateCells(grid, cells[random]);
 }
 
 export async function generateLabyrinth({
@@ -163,14 +236,14 @@ export async function generateLabyrinth({
 }: MazeAlgoProps) {
   const grid = generateGrid(rows, cols, CellType.clear);
   updateGrid(grid);
-  await addWalls(grid, updateCells);
+  await addStages(grid, updateCells);
 
   const maxStage = Math.min(rows, cols) / 2 - 2;
   for (let i = 0; i < maxStage; i += 2) {
-    let left = 1,
-      right = 1,
-      top = 1,
-      bottom = 1;
+    let left = 0,
+      right = 0,
+      top = 0,
+      bottom = 0;
     if (rows - 2 * i > 5) {
       ({ left, right } = await addHorizontalBlocks(grid, updateCells, i));
     }
@@ -182,7 +255,6 @@ export async function generateLabyrinth({
     if (rows - 2 * i > 5 || cols - 2 * i > 5) {
       await addGaps(grid, updateCells, i, { top, right, bottom, left });
     }
-    // await addGaps(grid, updateCells, i, { top, right, bottom, left });
   }
 
   const centerPos = Math.floor(rows / 2);

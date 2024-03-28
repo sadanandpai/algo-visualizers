@@ -88,3 +88,13 @@ export function spliceRandomIndexFromArray<T>(items: T[]) {
   const { idx } = getRandomIndexFromArray(items);
   return removeItemFromArray<T>(items, idx);
 }
+
+export function getRandomEvenNumber(min: number, max: number) {
+  const random = Math.floor(Math.random() * (max - min)) + min;
+  return random % 2 === 0 ? random : random + 1;
+}
+
+export function getRandomOddNumber(min: number, max: number) {
+  const random = Math.floor(Math.random() * (max - min)) + min;
+  return random % 2 === 1 ? random : random + 1;
+}

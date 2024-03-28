@@ -1,5 +1,9 @@
 import { generateGrid } from '@/apps/path-finder/helpers/grid.helper';
 import { CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
+import {
+  getRandomEvenNumber,
+  getRandomOddNumber,
+} from '../../helpers/maze.helper';
 
 interface DrawWallConfig {
   updateCells: MazeAlgoProps['updateCells'];
@@ -7,16 +11,6 @@ interface DrawWallConfig {
   passagePoint: number;
   start: number;
   end: number;
-}
-
-export function getRandomEvenNumber(min: number, max: number) {
-  const random = Math.floor(Math.random() * (max - min)) + min;
-  return random % 2 === 0 ? random : random + 1;
-}
-
-export function getRandomOddNumber(min: number, max: number) {
-  const random = Math.floor(Math.random() * (max - min)) + min;
-  return random % 2 === 1 ? random : random + 1;
 }
 
 export async function drawHorizontalWall(

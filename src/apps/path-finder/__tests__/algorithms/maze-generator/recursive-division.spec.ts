@@ -1,8 +1,6 @@
 import {
   drawHorizontalWall,
   drawVerticalWall,
-  getRandomEvenNumber,
-  getRandomOddNumber,
 } from '@pathFinder/algorithms/maze-generator/recursive-division';
 import { Cell, CellType } from '@pathFinder/models/interfaces';
 
@@ -19,28 +17,6 @@ const updateCells = vi.fn(async (grid, cells, cellType = CellType.clear) => {
 describe('Recursive Division maze helpers', () => {
   beforeEach(() => {
     updateCells.mockClear();
-  });
-
-  it('getRandomEvenNumber', () => {
-    for (let i = 0; i < 100; i++) {
-      const min = Math.floor(Math.random() * 20);
-      const max = min + Math.floor(Math.random() * 20) + 1;
-      const number = getRandomEvenNumber(min, max);
-      expect(number).toBeGreaterThanOrEqual(min);
-      expect(number).toBeLessThanOrEqual(max);
-      expect(number % 2).toBe(0);
-    }
-  });
-
-  it('getRadomOddNumber', () => {
-    for (let i = 0; i < 100; i++) {
-      const min = Math.floor(Math.random() * 20);
-      const max = min + Math.floor(Math.random() * 20) + 1;
-      const number = getRandomOddNumber(min, max);
-      expect(number).toBeGreaterThanOrEqual(min);
-      expect(number).toBeLessThanOrEqual(max);
-      expect(number % 2).toBe(1);
-    }
   });
 
   it('drawHorizontalWall', async () => {

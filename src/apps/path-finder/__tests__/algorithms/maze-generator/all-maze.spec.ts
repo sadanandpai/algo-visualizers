@@ -9,6 +9,7 @@ const mazeGeneratorsFns = [
   mazeGenerators.get('wilson')!.fn,
   mazeGenerators.get('binary')!.fn,
   mazeGenerators.get('sideWinder')!.fn,
+  mazeGenerators.get('labyrinth')!.fn,
 ];
 
 const updateCells = vi.fn(async (grid, cells, cellType = CellType.clear) => {
@@ -28,7 +29,7 @@ describe('Maze generator functions', () => {
 
   it('generate maze with entry & exit on clear slots', async () => {
     const rows = 9;
-    const cols = 15;
+    const cols = 17;
     const updateGrid = vi.fn();
 
     for await (const mazeFn of mazeGeneratorsFns) {
@@ -74,7 +75,7 @@ describe('Maze generator functions', () => {
   });
 
   it('generate maze with entry & exit on walls slots', async () => {
-    const rows = 7;
+    const rows = 9;
     const cols = 21;
     const updateGrid = vi.fn();
 

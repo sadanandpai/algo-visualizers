@@ -2,6 +2,8 @@ import {
   filterByCellType,
   filterValidCells,
   getNeighbors,
+  getRandomEvenNumber,
+  getRandomOddNumber,
 } from '@/apps/path-finder/helpers/maze.helper';
 import { CellType } from '@pathFinder/models/interfaces';
 
@@ -218,5 +220,27 @@ describe('Maze helpers', () => {
   it('filterByCellType with no cell', () => {
     const filteredWalls = filterByCellType([], grid, wall);
     expect(filteredWalls).toMatchInlineSnapshot(`[]`);
+  });
+
+  it('getRandomEvenNumber', () => {
+    for (let i = 0; i < 100; i++) {
+      const min = Math.floor(Math.random() * 20);
+      const max = min + Math.floor(Math.random() * 20) + 1;
+      const number = getRandomEvenNumber(min, max);
+      expect(number).toBeGreaterThanOrEqual(min);
+      expect(number).toBeLessThanOrEqual(max);
+      expect(number % 2).toBe(0);
+    }
+  });
+
+  it('getRadomOddNumber', () => {
+    for (let i = 0; i < 100; i++) {
+      const min = Math.floor(Math.random() * 20);
+      const max = min + Math.floor(Math.random() * 20) + 1;
+      const number = getRandomOddNumber(min, max);
+      expect(number).toBeGreaterThanOrEqual(min);
+      expect(number).toBeLessThanOrEqual(max);
+      expect(number % 2).toBe(1);
+    }
   });
 });

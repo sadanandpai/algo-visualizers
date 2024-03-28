@@ -15,7 +15,7 @@ import {
   Status,
 } from '@pathFinder/models/interfaces';
 import { toast } from 'sonner';
-import { tracePath } from '@pathFinder/helpers/path.helper';
+import { tracePath } from '@pathFinder/algorithms/path-finder/path-tracer';
 import { delay } from '@/lib/helpers/async';
 
 export function searchPath(

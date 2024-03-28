@@ -1,54 +1,19 @@
-import { setCell } from '@pathFinder/store/path-finder.slice';
-import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
-import { useCallback, useEffect, useRef } from 'react';
-
-import { CellElement, CellType, Status } from '@pathFinder/models/interfaces';
-import { cellSize } from '@pathFinder/config';
 import classes from './grid.module.scss';
+import { useAppSelector } from '@/host/store/hooks';
+import { useRef } from 'react';
+import { Status } from '@pathFinder/models/interfaces';
+import { cellSize } from '@pathFinder/config';
 import { useTouch } from '@pathFinder/hooks/use-touch.hook';
 import { useMouse } from '@pathFinder/hooks/use-mouse.hook';
 import { isTouchDevice } from '@pathFinder/helpers/action.helper';
 
 function Grid() {
-  const dispatch = useAppDispatch();
   const grid = useAppSelector((state) => state.pathFinder.grid);
-  const entry = useAppSelector((state) => state.pathFinder.entry);
-  const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
   const ref = useRef<HTMLDivElement>(null);
 
-  const touchCell = useTouch({ isMobile: isTouchDevice(), ref });
-  const moveCell = useMouse({ isMobile: isTouchDevice(), ref });
-
-  const setupCell = useCallback(
-    function setupCell(cell: CellElement | null) {
-      if (cell) {
-        const type = cell.cellType === CellType.entry ? entry : exit;
-        const isEntryOrExit = [CellType.entry, CellType.exit].includes(
-          cell.cellType
-        );
-        if (
-          isEntryOrExit &&
-          !(cell.row === type.row && cell.col === type.col)
-        ) {
-          dispatch(setCell({ ...type, cellType: CellType.clear }));
-        }
-
-        if (!(type.row === cell.row && type.col === cell.col)) {
-          dispatch(setCell(cell));
-        }
-      }
-    },
-    [dispatch, entry, exit]
-  );
-
-  useEffect(() => {
-    setupCell(touchCell);
-  }, [touchCell, setupCell]);
-
-  useEffect(() => {
-    setupCell(moveCell);
-  }, [moveCell, setupCell]);
+  useMouse({ isMobile: isTouchDevice(), ref });
+  useTouch({ isMobile: isTouchDevice(), ref });
 
   const gridStyle: React.CSSProperties = {
     gridTemplateRows: `repeat(${grid.length}, ${cellSize}px)`,
