@@ -5,7 +5,7 @@ export async function tracePath(
   parents: Cell[][],
   entry: Cell,
   exit: Cell,
-  setCell: (value: Cell) => void,
+  updateCell: (value: Cell) => void,
   isRunning: () => boolean,
   delayDuration: number
 ) {
@@ -21,7 +21,7 @@ export async function tracePath(
 
   // Start marking the path with a small delay
   do {
-    setCell({ row, col });
+    updateCell({ row, col });
     if (delayDuration > 0) {
       await delay(delayDuration);
     }
