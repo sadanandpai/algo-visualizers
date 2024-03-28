@@ -1,5 +1,6 @@
 import { pathFinders } from '@/apps/path-finder/algorithms';
 import { Cell, CellType } from '@/apps/path-finder/models/interfaces';
+import { highlightPath } from '@/apps/path-finder/store/path.thunk';
 
 const updateCells = vi.fn(async (grid, cells, cellType = CellType.clear) => {
   if (!Array.isArray(cells)) {
@@ -140,6 +141,7 @@ describe('BFS algorithm', () => {
         exit,
         updateCells,
       });
+      highlightPath(grid, parents, 0);
 
       expect(grid).toMatchSnapshot();
       expect(parents).toMatchSnapshot();

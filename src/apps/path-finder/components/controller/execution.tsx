@@ -45,7 +45,8 @@ function Execution({ defaultSpeed }: Props) {
       dispatch(setGrid({ grid, clone: false }));
       dispatch(setStatus(Status.Complete));
     } catch {
-      // do nothing
+      // search cancelled
+      // no action needed
     }
   }
 
