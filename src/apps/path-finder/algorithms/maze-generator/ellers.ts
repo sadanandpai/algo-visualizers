@@ -86,6 +86,7 @@ export async function generateEllersMaze({
   const parents = generateGrid(rows, cols, null);
   const map = new Map<string, Cell[]>();
 
+  // All the rows excluding the last row
   for (let row = 0; row < rows - 2; row += 2) {
     for (let col = 0; col < cols; col += 2) {
       await updateCells(grid, { row, col });
@@ -97,10 +98,8 @@ export async function generateEllersMaze({
 
       if (Math.random() > 0.5) {
         if (mergeSets(parents, { row, col }, { row, col: col - 2 })) {
-          await updateCells(grid, [
-            { row, col: col - 1 },
-            { row, col: col - 2 },
-          ]);
+          // Create a passage to the left
+          await updateCells(grid, [{ row, col: col - 1 }]);
         }
       }
 
@@ -111,6 +110,7 @@ export async function generateEllersMaze({
     map.clear();
   }
 
+  // Last row of the maze
   const row = rows - 1;
   for (let col = 0; col < cols; col += 2) {
     await updateCells(grid, { row, col });
@@ -120,10 +120,7 @@ export async function generateEllersMaze({
     }
 
     if (mergeSets(parents, { row, col }, { row, col: col - 2 })) {
-      await updateCells(grid, [
-        { row, col: col - 1 },
-        { row, col: col - 2 },
-      ]);
+      await updateCells(grid, [{ row, col: col - 1 }]);
     }
   }
 
