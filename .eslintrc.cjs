@@ -4,14 +4,25 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
     'prettier',
   ],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   plugins: ['react-refresh', 'unused-imports'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   rules: {
-    'react-refresh/only-export-components': 'warn',
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
@@ -22,6 +33,7 @@ module.exports = {
         argsIgnorePattern: '_*',
       },
     ],
-    'unused-imports/no-unused-imports': 'warn',
+    'react/prop-types': 'off',
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
 };
