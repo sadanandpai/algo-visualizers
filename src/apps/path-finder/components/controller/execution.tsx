@@ -87,7 +87,7 @@ function Execution({ defaultSpeed }: Props) {
       <select
         className={classes.pathFinder}
         name="path-finder"
-        id="maze"
+        id="path-finder"
         value={pathFinder}
         onChange={handleChange}
         disabled={disabled}

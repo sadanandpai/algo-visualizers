@@ -95,7 +95,7 @@ function exploreNeighbors(
   }
 }
 
-// A* algoirthm
+// A* algorithm
 export async function aStar({
   grid: stateGrid,
   entry,

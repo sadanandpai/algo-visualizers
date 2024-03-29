@@ -68,7 +68,7 @@ function exploreNeighbors(
   }
 }
 
-// A* algoirthm
+// Greedy best first search algorithm
 export async function greedy({
   grid: stateGrid,
   entry,
