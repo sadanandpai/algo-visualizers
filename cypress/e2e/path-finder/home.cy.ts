@@ -1,31 +1,16 @@
-const mazes = [
-  'Prims',
-  'Kruskal',
-  'Recursive Backtracking',
-  'Recursive Division',
-  'Wilson',
-  'Binary',
-  'Ellers',
-  'Side Winder',
-  'Labyrinth',
-];
-
-const pathFinders = [
-  'Breadth First Search',
-  'Depth First Search',
-  'A* Search',
-  'Greedy Best First',
-];
+import { mazes, pathFinders } from 'utils/path';
 
 describe('path finder', () => {
   beforeEach(() => {
     cy.visit('/#/path-finder');
-    cy.viewport(1440, 900);
+  });
+
+  it('should verify page header', () => {
+    cy.get('[data-testid="navbar"]').should('contain.html', 'Path Finder');
   });
 
   it('should verify the maze dropdowns', () => {
     cy.get('#maze').should('contain.text', 'Select a Maze');
-
     for (const maze of mazes) {
       cy.get('#maze').should('contain.text', maze);
     }
@@ -33,7 +18,6 @@ describe('path finder', () => {
 
   it('should verify the path finder dropdowns', () => {
     cy.get('#path-finder').should('contain.text', 'Select a Path finder');
-
     for (const pathFinder of pathFinders) {
       cy.get('#path-finder').should('contain.text', pathFinder);
     }
