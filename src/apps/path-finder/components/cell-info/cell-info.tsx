@@ -5,7 +5,7 @@ function CellInfo({ handleClickStart }: any) {
     <>
       <div className={classes.cellInfo}>
         <div>
-          <div className={`${classes.item} ${classes.start} starBurst`}></div>
+          <div className={`${classes.item} ${classes.start}`}></div>
           <span>Start</span>
         </div>
         <div>
