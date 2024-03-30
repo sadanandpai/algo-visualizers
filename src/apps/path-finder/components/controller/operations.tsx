@@ -89,12 +89,7 @@ function Operations({ defaultSpeed }: Props) {
         <Play size={20} />
       </button>
 
-      <button
-        data-testid="reset"
-        onClick={handleReset}
-        data-tooltip="Reset"
-        className="resetPattern"
-      >
+      <button data-testid="reset" onClick={handleReset} data-tooltip="Reset">
         <Trash size={20} />
       </button>
     </div>

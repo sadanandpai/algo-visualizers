@@ -21,7 +21,7 @@ function MainLayout() {
         target: 'body',
       },
       {
-        content: <h2>Select the alogrithm for pattern</h2>,
+        content: <h2>Select the alogrithm to make patterns</h2>,
         placement: 'right',
         target: '.selectMaze',
       },
@@ -34,34 +34,15 @@ function MainLayout() {
         target: '.buildPattern',
       },
       {
-        content: <h2>It will reset the Pattern</h2>,
-        target: '.resetPattern',
-      },
-      {
-        content: <h2>Choose the alogrithm for finding sortest path</h2>,
+        content: <h2>Choose the alogrithm for finding the path</h2>,
         target: '.selectAlgo',
-      },
-      {
-        content: <h2>Select speed</h2>,
-        target: '.selectAlgoSpeed',
-      },
-      {
-        content: <h2>Click to get shortest path</h2>,
-        placement: 'left',
-
-        target: '.startfindingPath',
-      },
-      {
-        content: <h2>Reset the Path</h2>,
-        placement: 'left',
-        target: '.resetPath',
       },
       {
         content: <h2>It will show visited cells</h2>,
         target: '.visitedCell',
       },
       {
-        content: <h2>It will show the shotest path length count</h2>,
+        content: <h2>It will show the path length count</h2>,
         target: '.pathLength',
       },
       {
