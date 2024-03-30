@@ -6,7 +6,8 @@ describe('path finder', () => {
   });
 
   it('should verify page header', () => {
-    cy.get('[data-testid="navbar"]').should('contain.html', 'Path Finder');
+    cy.get('[data-testid="title"]').should('be.visible');
+    cy.get('[data-testid="title"]').should('contain.html', 'Path Finder');
   });
 
   it('should verify the maze dropdowns', () => {

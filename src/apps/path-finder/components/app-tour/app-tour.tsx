@@ -1,5 +1,6 @@
-import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride';
 import { useSetState } from 'react-use';
+import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride';
+import classes from './app-tour.module.scss';
 import mazeVideo from '/assets/maze.mp4';
 import pathVideo from '/assets/path.mp4';
 
@@ -99,10 +100,7 @@ function AppTour() {
         />
       </div>
 
-      <button
-        onClick={handleClickStart}
-        className="border border-gray-400 rounded px-1 mx-2 hover:border-gray-500"
-      >
+      <button onClick={handleClickStart} className={classes.tour}>
         Take Tour
       </button>
     </>

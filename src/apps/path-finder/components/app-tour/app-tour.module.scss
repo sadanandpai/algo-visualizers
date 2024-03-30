@@ -1,0 +1,13 @@
+@use '/src/host/styles/theme';
+
+.tour {
+  border: 1px solid theme.$base;
+  padding: 2px 4px;
+  display: none;
+}
+
+@media (width >= 1024px) {
+  .tour {
+    display: block;
+  }
+}
