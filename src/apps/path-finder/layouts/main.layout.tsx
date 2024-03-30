@@ -15,7 +15,7 @@ function MainLayout() {
     run: false,
     steps: [
       {
-        content: <h2>Let's begin our journey!</h2>,
+        content: <h2>Let&apos;s begin our journey!</h2>,
         locale: { skip: <strong aria-label="skip">SKIP</strong> },
         placement: 'center',
         target: 'body',
