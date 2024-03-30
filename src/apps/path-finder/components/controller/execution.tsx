@@ -85,7 +85,7 @@ function Execution({ defaultSpeed }: Props) {
   return (
     <div className={classes.execution}>
       <select
-        className={classes.pathFinder}
+        className={`${classes.pathFinder} selectAlgo`}
         name="path-finder"
         id="path-finder"
         value={pathFinder}
@@ -103,7 +103,7 @@ function Execution({ defaultSpeed }: Props) {
       </select>
 
       <select
-        className={classes.speed}
+        className={`${classes.speed} selectAlgoSpeed`}
         name="speed"
         id="speed"
         value={speed}
@@ -118,7 +118,7 @@ function Execution({ defaultSpeed }: Props) {
       </select>
 
       <button
-        className={classes.play}
+        className={`${classes.play} startfindingPath`}
         data-testid="player"
         disabled={disabled || !pathFinder}
         data-tooltip="Play"
@@ -132,6 +132,7 @@ function Execution({ defaultSpeed }: Props) {
         onClick={handleClear}
         disabled={status === Status.Generating}
         data-tooltip="clear"
+        className='resetPath'
       >
         <RefreshCcw size={20} />
       </button>

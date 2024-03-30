@@ -1,3 +1,4 @@
+@use '/src/host/styles/theme';
 .cellInfo {
   display: none;
   gap: 20px;
@@ -34,9 +35,21 @@
     background-color: var(--pf-cell-path);
   }
 }
+.startTour {
+  display: none;
+  border: 1px solid theme.$base;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  border-radius: 0.4rem;
+}
 
 @media (width >= 768px) {
   .cellInfo {
+    display: flex;
+  }
+}
+@media (width>=960px) {
+  .startTour {
     display: flex;
   }
 }

@@ -37,13 +37,13 @@ function PathInfo() {
 
   return (
     <div className={classes.pathInfo}>
-      <p>
+      <p className="visitedCell">
         Visits: <span className={classes.highlight}>{visitedCellCount}</span>
       </p>
-      <p>
+      <p className="pathLength">
         Path: <span className={classes.highlight}>{pathLength}</span>
       </p>
-      <p>
+      <p className="timeTaken">
         Time: <span className={classes.highlight}>{time}</span>
       </p>
     </div>
