@@ -51,7 +51,7 @@ function Operations({ defaultSpeed }: Props) {
         id="maze"
         value={maze}
         onChange={handleChange}
-        className={classes.mazeSelector}
+        className={`${classes.mazeSelector} selectMaze`}
         disabled={disabled}
       >
         <option value="" disabled>
@@ -65,7 +65,7 @@ function Operations({ defaultSpeed }: Props) {
       </select>
 
       <select
-        className={classes.speed}
+        className={`${classes.speed} selectSpeed`}
         name="speed"
         id="speed"
         value={speed}
@@ -80,7 +80,7 @@ function Operations({ defaultSpeed }: Props) {
       </select>
 
       <button
-        className={classes.play}
+        className={`${classes.play} buildPattern`}
         data-testid="generate-maze"
         onClick={() => mazeClickHandler()}
         data-tooltip="Play"
