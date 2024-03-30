@@ -83,9 +83,9 @@ function Execution({ defaultSpeed }: Props) {
   );
 
   return (
-    <div className={classes.execution}>
+    <div className={classes.execution + ' execution'}>
       <select
-        className={`${classes.pathFinder} selectAlgo`}
+        className={classes.pathFinder}
         name="path-finder"
         id="path-finder"
         value={pathFinder}

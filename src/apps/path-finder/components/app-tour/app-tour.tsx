@@ -1,5 +1,7 @@
 import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride';
 import { useSetState } from 'react-use';
+import mazeVideo from '/assets/maze.mp4';
+import pathVideo from '/assets/path.mp4';
 
 interface State {
   run: boolean;
@@ -11,39 +13,51 @@ function AppTour() {
     run: false,
     steps: [
       {
-        content: <h2>Let`&apos;s begin our journey!</h2>,
+        content: (
+          <>
+            <h2>
+              You can click on the boxes or drag to add walls & clear them. Move
+              the start/end as per your wish
+            </h2>
+            <video autoPlay loop muted>
+              <source src={mazeVideo} type="video/mp4" />
+            </video>
+          </>
+        ),
         locale: { skip: <strong aria-label="skip">SKIP</strong> },
         placement: 'center',
         target: 'body',
       },
       {
-        content: <h2>Select the alogrithm to make patterns</h2>,
-        placement: 'right',
-        target: '.selectMaze',
-      },
-      {
-        content: <h2>Choose the speed</h2>,
-        target: '.selectSpeed',
-      },
-      {
-        content: <h2>It will Start making pattern</h2>,
-        target: '.buildPattern',
+        content: (
+          <h2>
+            Or you can select the alogrithm to generate mazes.
+            <br />
+            Customize the speed & play/reset as many times you wish.
+          </h2>
+        ),
+        placement: 'bottom',
+        target: '.select-maze',
       },
       {
         content: <h2>Choose the alogrithm for finding the path</h2>,
-        target: '.selectAlgo',
+        target: '.execution',
       },
       {
-        content: <h2>It will show visited cells</h2>,
-        target: '.visitedCell',
+        content: <h2>Analyse the path search details & compare</h2>,
+        target: '.path-info',
       },
       {
-        content: <h2>It will show the path length count</h2>,
-        target: '.pathLength',
-      },
-      {
-        content: <h2>It will show time taken by Algorithm</h2>,
-        target: '.timeTaken',
+        content: (
+          <>
+            <h2>You can move the start/end after search to see live results</h2>
+            <video autoPlay loop muted>
+              <source src={pathVideo} type="video/mp4" />
+            </video>
+          </>
+        ),
+        placement: 'center',
+        target: 'body',
       },
     ],
   });
@@ -67,25 +81,27 @@ function AppTour() {
 
   return (
     <>
-      <Joyride
-        callback={handleJoyrideCallback}
-        continuous
-        hideCloseButton
-        run={run}
-        showProgress
-        showSkipButton
-        steps={steps}
-        styles={{
-          options: {
-            zIndex: 100,
-            width: '300px',
-          },
-        }}
-      />
+      <div className="hidden">
+        <Joyride
+          callback={handleJoyrideCallback}
+          continuous
+          hideCloseButton
+          run={run}
+          showProgress
+          showSkipButton
+          steps={steps}
+          styles={{
+            options: {
+              zIndex: 100,
+              width: '300px',
+            },
+          }}
+        />
+      </div>
 
       <button
         onClick={handleClickStart}
-        className="border border-gray-400 rounded px-1 mx-2 hover:border-gray-500 hidden"
+        className="border border-gray-400 rounded px-1 mx-2 hover:border-gray-500"
       >
         Take Tour
       </button>

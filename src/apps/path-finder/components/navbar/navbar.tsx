@@ -1,7 +1,7 @@
-import classes from './navbar.module.scss';
-import CellInfo from '@pathFinder/components/cell-info/cell-info';
-import AppTour from '../app-tour/app-tour';
 import Title from '@/lib/components/title/title';
+import AppTour from '@pathFinder/components/app-tour/app-tour';
+import CellInfo from '@pathFinder/components/cell-info/cell-info';
+import classes from './navbar.module.scss';
 
 export interface Props {
   title: string;

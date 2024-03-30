@@ -45,13 +45,13 @@ function Operations({ defaultSpeed }: Props) {
     dispatch(setPathLength(0));
   }
   return (
-    <div className={classes.operation}>
+    <div className={classes.operation + ' select-maze'}>
       <select
         name="maze"
         id="maze"
         value={maze}
         onChange={handleChange}
-        className={`${classes.mazeSelector} selectMaze`}
+        className={classes.mazeSelector}
         disabled={disabled}
       >
         <option value="" disabled>
@@ -65,7 +65,7 @@ function Operations({ defaultSpeed }: Props) {
       </select>
 
       <select
-        className={`${classes.speed} selectSpeed`}
+        className={classes.speed}
         name="speed"
         id="speed"
         value={speed}
@@ -80,7 +80,7 @@ function Operations({ defaultSpeed }: Props) {
       </select>
 
       <button
-        className={`${classes.play} buildPattern`}
+        className={classes.play}
         data-testid="generate-maze"
         onClick={() => mazeClickHandler()}
         data-tooltip="Play"

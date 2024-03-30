@@ -36,20 +36,20 @@ function PathInfo() {
   }, [status, startTimer, stopTimer, isRunning, resetTimer, dispatch]);
 
   return (
-    <div className={classes.pathInfo}>
-      <p className="visitedCell">
+    <div className={classes.pathInfo + ' path-info'}>
+      <p>
         Visits:{' '}
         <span className={classes.highlight} data-testid="visits">
           {visitedCellCount}
         </span>
       </p>
-      <p className="pathLength">
+      <p>
         Path:{' '}
         <span className={classes.highlight} data-testid="path">
           {pathLength}
         </span>
       </p>
-      <p className="timeTaken">
+      <p>
         Time:{' '}
         <span className={classes.highlight} data-testid="time">
           {time}
