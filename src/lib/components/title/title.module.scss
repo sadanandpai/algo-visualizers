@@ -1,0 +1,21 @@
+@use '/src/host/styles/theme';
+
+.title {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+
+  .github {
+    margin-left: 4px;
+    width: 25px;
+    height: 25px;
+  }
+}
+
+[data-theme='dark'] {
+  .title img {
+    filter: invert(1);
+  }
+}
