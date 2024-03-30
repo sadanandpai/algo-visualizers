@@ -41,7 +41,7 @@ describe('path finder', () => {
     cy.get('[data-cell-type="2"]').should('have.length', 1);
   });
 
-  it('should verify the prims maze generation', () => {
+  it('should verify the mazes generation', () => {
     for (const maze of mazes) {
       cy.get('#maze').select(maze);
       verifyMaze();

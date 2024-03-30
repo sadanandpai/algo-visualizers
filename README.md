@@ -23,7 +23,7 @@ algorithms</a>
 
 ### Algorithms Visualizers
 
-This repo is an attempt to help in learning popular algorithms by visualization
+This repo helps in learning popular algorithms by visualization
 
 #### Sorting Visualizer
 
@@ -44,7 +44,18 @@ Features
 
 #### Path finder
 
-> Still in progress
+Helps to
+
+- understand working of different maze generation algorithms
+- understand working of different path finding algorithms
+- check the visits, path length and time taken
+
+Features
+
+- Build any kind of custom 2D maze
+- Alter the speed of execution
+- Generate infinite mazes
+- Move the targets in live to see the changes
 
 <br>
 
@@ -55,9 +66,10 @@ Production libraries
 - [React](https://react.dev/) (Frontend Library)
 - [Redux Toolkit](https://redux-toolkit.js.org/) (State management)
 - [React Router](https://reactrouter.com/en/main/) (Router)
-- [React Switch](https://react-switch.netlify.app/) (Switch)
 - [Lucide](https://lucide.dev/) (Icons pack)
 - [Sonner](https://sonner.emilkowal.ski/) (Toast)
+- [React Joyrid](https://react-joyride.com/)
+- [React Switch](https://react-switch.netlify.app/) (Switch)
 
 Build libraries
 
