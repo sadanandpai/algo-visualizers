@@ -5,7 +5,6 @@ import ThemeIcon from '@/lib/components/theme-icon/theme-icon';
 import CellInfo from '../components/cell-info/cell-info';
 import Joyride, { CallBackProps, STATUS, Step } from 'react-joyride';
 import { useSetState } from 'react-use';
-
 interface State {
   run: boolean;
   steps: Step[];
@@ -107,8 +106,15 @@ function MainLayout() {
         }}
       />
       <ThemeIcon top={10} right={20} />
+
       <Navbar title="Path Finder">
-        <CellInfo handleClickStart={handleClickStart} />
+        <button
+          onClick={handleClickStart}
+          className="border border-gray-400 rounded px-1 mx-2 hover:border-gray-500 hidden lg:flex"
+        >
+          Take Tour
+        </button>
+        <CellInfo />
       </Navbar>
       <Controller />
       <main className="text-center">

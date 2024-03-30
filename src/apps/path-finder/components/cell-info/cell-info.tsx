@@ -1,6 +1,6 @@
 import classes from './cell-info.module.scss';
 
-function CellInfo({ handleClickStart }: any) {
+function CellInfo() {
   return (
     <>
       <div className={classes.cellInfo}>
@@ -24,9 +24,6 @@ function CellInfo({ handleClickStart }: any) {
           <div className={`${classes.item} ${classes.path}`}></div>
           <span>Path</span>
         </div>
-        <button onClick={handleClickStart} className={`${classes.startTour}`}>
-          Take Tour
-        </button>
       </div>
     </>
   );

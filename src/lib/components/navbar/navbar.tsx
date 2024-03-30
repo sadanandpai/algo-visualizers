@@ -36,7 +36,10 @@ function Navbar({ title, menuItems, children }: Props) {
 
       {menuItems ? (
         <>
-          <button onClick={() => setToggle(!toggle)}>
+          <button
+            onClick={() => setToggle(!toggle)}
+            className={classes.hamButton}
+          >
             <img src={hamIcon} alt="hamburger" />
           </button>
           <ul data-toggle={toggle}>
