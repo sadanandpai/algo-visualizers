@@ -1,13 +1,19 @@
 @use '/src/host/styles/theme';
 
-.tour {
-  border: 1px solid theme.$base;
-  padding: 2px 4px;
+.tourWrapper {
   display: none;
+  justify-content: center;
+  flex-grow: 1;
+  flex-basis: 0;
+
+  .tour {
+    border: 1px solid theme.$base;
+    padding: 2px 4px;
+  }
 }
 
 @media (width >= 1024px) {
-  .tour {
-    display: block;
+  .tourWrapper {
+    display: flex;
   }
 }

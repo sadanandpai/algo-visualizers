@@ -20,6 +20,7 @@ function AppTour() {
               You can click on the boxes or drag to add walls & clear them. Move
               the start/end as per your wish
             </h2>
+            <br />
             <video autoPlay loop muted>
               <source src={mazeVideo} type="video/mp4" />
             </video>
@@ -52,6 +53,7 @@ function AppTour() {
         content: (
           <>
             <h2>You can move the start/end after search to see live results</h2>
+            <br />
             <video autoPlay loop muted>
               <source src={pathVideo} type="video/mp4" />
             </video>
@@ -100,9 +102,11 @@ function AppTour() {
         />
       </div>
 
-      <button onClick={handleClickStart} className={classes.tour}>
-        Take Tour
-      </button>
+      <div className={classes.tourWrapper}>
+        <button onClick={handleClickStart} className={classes.tour}>
+          Take Tour
+        </button>
+      </div>
     </>
   );
 }

@@ -66,8 +66,8 @@ function Operations({ defaultSpeed }: Props) {
 
       <select
         className={classes.speed}
-        name="speed"
-        id="speed"
+        name="maze-speed"
+        id="maze-speed"
         value={speed}
         onChange={(e) => setSpeed(+e.target.value)}
         disabled={disabled}

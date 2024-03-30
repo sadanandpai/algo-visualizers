@@ -12,7 +12,7 @@ function TypeSwitch() {
 
   return (
     <div className={classes.switchContainer}>
-      <label>Cell</label>
+      <span>Cell</span>
       <Switch
         id="visualizerType"
         onChange={() => dispatch(toggleVisualizerType())}
@@ -24,7 +24,7 @@ function TypeSwitch() {
         offColor="#2b4bfe"
         onColor="#2b4bfe"
       />
-      <label>Bar</label>
+      <span>Bar</span>
     </div>
   );
 }

@@ -2,7 +2,10 @@
 
 .cellInfo {
   display: none;
+  justify-content: flex-end;
   gap: 20px;
+  flex-basis: 0;
+  flex-grow: 1;
   margin-right: 60px;
 
   & > div {

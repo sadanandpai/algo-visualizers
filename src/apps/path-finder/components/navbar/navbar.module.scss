@@ -4,7 +4,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 10px 20px;
   margin-bottom: 20px;
   box-shadow: 0 4px 4px theme.$shadow1;
@@ -14,65 +13,17 @@
     height: 25px;
   }
 
-  ul {
-    position: absolute;
-    top: 65px;
-    left: 0;
-    z-index: 1;
-    gap: 10px;
-    width: 100%;
-    padding-bottom: 12px;
-    list-style: none;
-    background-color: theme.$background;
-    box-shadow: 0 4px 4px theme.$shadow1;
-
-    &[data-toggle='false'] {
-      display: none;
-    }
-
-    li {
-      width: 100%;
-      padding: 10px;
-
-      a {
-        display: block;
-        width: auto;
-        padding: 6px;
-        text-transform: capitalize;
-        border-radius: 8px;
-      }
-
-      a.active {
-        color: theme.$light;
-        background-color: theme.$primary;
-      }
-
-      a:hover {
-        outline: 1px solid theme.$primary;
-      }
-    }
+  h1 {
+    flex-grow: 1;
+    flex-basis: 0;
+    display: flex;
+    flex-basis: 60px;
   }
 }
 
 @media screen and (width >= 960px) {
   .navbar.navbar {
     padding: 10px 10px 10px 20px;
-
-    ul {
-      position: static;
-      display: flex;
-      width: auto;
-      padding-bottom: 0;
-      box-shadow: none;
-
-      li {
-        padding: 0;
-      }
-    }
-
-    .hamButton {
-      display: none;
-    }
   }
 }
 

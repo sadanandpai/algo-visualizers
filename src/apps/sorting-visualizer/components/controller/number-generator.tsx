@@ -46,7 +46,12 @@ function NumberGenerator({ setInput }: NumberGenProps) {
         Generate
       </button>
 
-      <select className={classes.select} onChange={onChange} value={inputMode}>
+      <select
+        className={classes.select}
+        onChange={onChange}
+        value={inputMode}
+        name="sequence-type"
+      >
         {options.map((option) => (
           <option key={option} value={option}>
             {option}

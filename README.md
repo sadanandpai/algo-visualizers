@@ -14,16 +14,19 @@
 <a href="https://sadanandpai.github.io/algo-visualizers/"><img src="./public/images/bar.png" alt="cover" /></a>
 <br/>
 <a href="https://sadanandpai.github.io/algo-visualizers/"><img src="./public/images/path.png" alt="cover" /></a>
-<a href="https://sadanandpai.github.io/algo-visualizers/">Visualize the algorithms</a>
+<a href="https://sadanandpai.github.io/algo-visualizers/">Visualize the
+algorithms</a>
 
 </div>
 
 ---
 
 ### Algorithms Visualizers
+
 This repo is an attempt to help in learning popular algorithms by visualization
 
 #### Sorting Visualizer
+
 Helps to
 
 - understand the working of sorting algorithm
