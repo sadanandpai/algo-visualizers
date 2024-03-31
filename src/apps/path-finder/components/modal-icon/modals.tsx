@@ -23,11 +23,7 @@ const Modals = ({ content }: { content: ModalItem[] }) => {
   return (
     <div className={classes.mainModal}>
       <dialog ref={dialogRef} className={classes.dialog}>
-        <button
-          autoFocus
-          onClick={handleCloseModal}
-          className={classes.closeButton}
-        >
+        <button onClick={handleCloseModal} className={classes.closeButton}>
           <X />
         </button>
         {content.map((item: ModalItem) => (
