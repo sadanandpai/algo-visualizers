@@ -1,4 +1,4 @@
-import { CellElement } from '@pathFinder/models/interfaces';
+import { CellElement } from '@pathFinder/models';
 
 type CellDetails =
   | {

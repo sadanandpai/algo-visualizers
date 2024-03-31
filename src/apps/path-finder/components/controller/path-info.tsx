@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import useTimer from '@pathFinder/hooks/use-timer.hook';
 import { useEffect } from 'react';
-import { Status } from '@pathFinder/models/interfaces';
+import { Status } from '@pathFinder/models';
 import classes from './controller.module.scss';
 import {
   setPathLength,

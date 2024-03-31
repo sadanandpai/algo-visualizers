@@ -1,11 +1,13 @@
-import { useDebounce, useWindowSize } from 'react-use';
-import { resetGrid, setDimension } from '@pathFinder/store/path-finder.slice';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
-import Execution from '@pathFinder/components/controller/execution';
-import Operations from '@pathFinder/components/controller/operations';
-import { getDimensionsFromScreenSize } from '@/apps/path-finder/helpers/grid.helper';
-import PathInfo from '@/apps/path-finder/components/controller/path-info';
+import MazeControls from '@pathFinder/components/controller/maze-controls';
+import PathControls from '@pathFinder/components/controller/path-controls';
+import PathInfo from '@pathFinder/components/controller/path-info';
 import { defaultSpeeds } from '@pathFinder/config';
+import { getDimensionsFromScreenSize } from '@pathFinder/helpers/grid.helper';
+import { Speed } from '@pathFinder/models';
+import { resetGrid, setDimension } from '@pathFinder/store/path-finder.slice';
+import { useDebounce, useWindowSize } from 'react-use';
+
 import classes from './controller.module.scss';
 
 function Controller() {
@@ -13,7 +15,7 @@ function Controller() {
   const rows = useAppSelector((state) => state.pathFinder.rows);
   const cols = useAppSelector((state) => state.pathFinder.cols);
   const { width, height } = useWindowSize();
-  const defaultSpeed =
+  const defaultSpeed: Speed =
     width < 768 ? defaultSpeeds.mobile : defaultSpeeds.desktop;
 
   useDebounce(
@@ -34,9 +36,9 @@ function Controller() {
 
   return (
     <section className={classes.controller}>
-      <Operations defaultSpeed={defaultSpeed} />
+      <MazeControls defaultSpeed={defaultSpeed} />
       <PathInfo />
-      <Execution defaultSpeed={defaultSpeed} />
+      <PathControls defaultSpeed={defaultSpeed} />
     </section>
   );
 }

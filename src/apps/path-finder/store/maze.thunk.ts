@@ -5,12 +5,7 @@ import {
   setStatus,
   setVisitedCellCount,
 } from '@pathFinder/store/path-finder.slice';
-import {
-  Cell,
-  CellType,
-  MazeAlgoProps,
-  Status,
-} from '@pathFinder/models/interfaces';
+import { Cell, CellType, MazeAlgoProps, Status } from '@pathFinder/models';
 import { delay } from '@/lib/helpers/async';
 
 export function generateMaze(

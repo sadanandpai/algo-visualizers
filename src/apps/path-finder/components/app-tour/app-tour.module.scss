@@ -9,6 +9,10 @@
   .tour {
     border: 1px solid theme.$base;
     padding: 2px 4px;
+
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 }
 

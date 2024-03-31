@@ -1,6 +1,7 @@
-import { pathFinders } from '@/apps/path-finder/algorithms';
-import { Cell, CellType } from '@/apps/path-finder/models/interfaces';
-import { highlightPath } from '@/apps/path-finder/store/path.thunk';
+import { pathFinders } from '@pathFinder/algorithms';
+import { CellType } from '@pathFinder/models/enum';
+import { Cell } from '@pathFinder/models';
+import { highlightPath } from '@pathFinder/store/path.thunk';
 
 const updateCells = vi.fn(async (grid, cells, cellType = CellType.clear) => {
   if (!Array.isArray(cells)) {

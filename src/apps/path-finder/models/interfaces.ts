@@ -1,11 +1,4 @@
-export const enum CellType {
-  clear,
-  entry,
-  exit,
-  wall,
-  visited,
-  path,
-}
+import { CellType, Status } from './enum';
 
 export interface Cell {
   row: number;
@@ -14,13 +7,6 @@ export interface Cell {
 
 export interface CellElement extends Cell {
   cellType: CellType;
-}
-
-export enum Status {
-  Generating,
-  Ready,
-  Searching,
-  Complete,
 }
 
 export interface AppState {

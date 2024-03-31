@@ -1,6 +1,6 @@
-import { generateGrid } from '@/apps/path-finder/helpers/grid.helper';
-import { Cell, CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
-import { getValidTypeNeighbors } from '../../helpers/maze.helper';
+import { generateGrid } from '@pathFinder/helpers/grid.helper';
+import { Cell, CellType, MazeAlgoProps } from '@pathFinder/models';
+import { getValidTypeNeighbors } from '@pathFinder/helpers/maze.helper';
 
 async function createPassage(
   grid: CellType[][],

@@ -1,6 +1,7 @@
-import { generateGrid } from '@/apps/path-finder/helpers/grid.helper';
-import { Cell, CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
-import { spliceRandomIndexFromArray } from '../../helpers/maze.helper';
+import { generateGrid } from '@pathFinder/helpers/grid.helper';
+import { spliceRandomIndexFromArray } from '@pathFinder/helpers/maze.helper';
+import { CellType } from '@pathFinder/models/enum';
+import { Cell, MazeAlgoProps } from '@pathFinder/models';
 
 export function findSet(
   parents: (string | null)[][],

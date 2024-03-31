@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { CellElement, CellType } from '@pathFinder/models/interfaces';
+import { CellElement, CellType } from '@pathFinder/models';
 import useMouseActions from '@pathFinder/hooks/use-mouse-actions.hook';
 import { getCellDetails } from '@pathFinder/helpers/action.helper';
 import { useAppDispatch } from '@/host/store/hooks';

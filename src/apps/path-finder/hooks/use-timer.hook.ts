@@ -14,11 +14,15 @@ function useTimer() {
 
   function stopTimer() {
     setIsRunning(false);
-    clearInterval(timer.current!);
+    if (timer.current) {
+      clearInterval(timer.current);
+    }
   }
 
   function resetTimer() {
-    clearInterval(timer.current!);
+    if (timer.current) {
+      clearInterval(timer.current);
+    }
     setTime(0);
     setIsRunning(false);
   }

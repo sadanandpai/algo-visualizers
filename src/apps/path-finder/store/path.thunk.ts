@@ -4,7 +4,7 @@ import {
   setPathLength,
 } from '@pathFinder/store/path-finder.slice';
 
-import { Cell, CellType, Status } from '@pathFinder/models/interfaces';
+import { Cell, CellType, Status } from '@pathFinder/models';
 import { toast } from 'sonner';
 import { tracePath } from '@pathFinder/algorithms/path-finder/path-tracer';
 import { delay } from '@/lib/helpers/async';
@@ -40,8 +40,8 @@ export function highlightPath(
       toast.success('Path found!!! 😃');
       const pathLength = await tracePath({
         parents,
-        entry: state.entry!,
-        exit: state.exit!,
+        entry: state.entry,
+        exit: state.exit,
         updateCell,
       });
 

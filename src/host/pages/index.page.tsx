@@ -1,4 +1,4 @@
-import Challenges from '../components/challenges/challenges';
+import Challenges from '@/host/components/challenges/challenges';
 import Navbar from '@/lib/components/navbar/navbar';
 import ThemeIcon from '@/lib/components/theme-icon/theme-icon';
 

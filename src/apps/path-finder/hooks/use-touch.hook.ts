@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { CellElement, CellType } from '@pathFinder/models/interfaces';
+import { CellElement, CellType } from '@pathFinder/models';
 import { getCellDetails } from '@pathFinder/helpers/action.helper';
 import { useAppDispatch } from '@/host/store/hooks';
 import { setCell } from '@pathFinder/store/path-finder.slice';

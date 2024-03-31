@@ -1,11 +1,6 @@
 import { AppDispatch, RootState } from '@/host/store/store';
 import { delay } from '@/lib/helpers/async';
-import {
-  Cell,
-  CellType,
-  SearchAlgoProps,
-  Status,
-} from '@pathFinder/models/interfaces';
+import { Cell, CellType, SearchAlgoProps, Status } from '@pathFinder/models';
 import {
   setCells as setStateCells,
   setVisitedCellCount,

@@ -1,5 +1,6 @@
+import { CellType } from '@pathFinder/models/enum';
 import { mazeGenerators } from '@pathFinder/algorithms';
-import { Cell, CellType } from '@pathFinder/models/interfaces';
+import { Cell } from '@pathFinder/models';
 
 const mazeGeneratorsFns = [
   mazeGenerators.get('prims')!.fn,

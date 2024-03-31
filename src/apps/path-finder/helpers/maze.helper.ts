@@ -1,4 +1,4 @@
-import { Cell, CellType } from '../models/interfaces';
+import { Cell, CellType } from '@pathFinder/models';
 
 export enum Direction {
   Up,
@@ -76,11 +76,11 @@ export function removeItemFromArray<T>(items: T[], index: number) {
   }
 
   if (index === items.length - 1) {
-    return items.pop()!;
+    return items.pop() as T;
   }
 
   const value = items[index];
-  items[index] = items.pop()!;
+  items[index] = items.pop() as T;
   return value;
 }
 

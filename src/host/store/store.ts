@@ -11,7 +11,7 @@ import {
 
 import appReducer from './app.slice';
 import { configureStore } from '@reduxjs/toolkit';
-import pathFinderReducer from '@/apps/path-finder/store/path-finder.slice';
+import pathFinderReducer from '@pathFinder/store/path-finder.slice';
 import sortingVisualizerReducer from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
 import storage from 'redux-persist/lib/storage';
 

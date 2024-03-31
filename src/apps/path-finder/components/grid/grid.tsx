@@ -1,7 +1,7 @@
 import classes from './grid.module.scss';
 import { useAppSelector } from '@/host/store/hooks';
 import { useRef } from 'react';
-import { Status } from '@pathFinder/models/interfaces';
+import { Status } from '@pathFinder/models';
 import { cellSize } from '@pathFinder/config';
 import { useTouch } from '@pathFinder/hooks/use-touch.hook';
 import { useMouse } from '@pathFinder/hooks/use-mouse.hook';

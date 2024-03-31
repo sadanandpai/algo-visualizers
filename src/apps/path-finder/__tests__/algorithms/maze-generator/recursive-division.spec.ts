@@ -2,7 +2,7 @@ import {
   drawHorizontalWall,
   drawVerticalWall,
 } from '@pathFinder/algorithms/maze-generator/recursive-division';
-import { Cell, CellType } from '@pathFinder/models/interfaces';
+import { Cell, CellType } from '@pathFinder/models';
 
 const updateCells = vi.fn(async (grid, cells, cellType = CellType.clear) => {
   if (!Array.isArray(cells)) {

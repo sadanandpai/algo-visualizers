@@ -1,5 +1,5 @@
-import { generateGrid } from '@/apps/path-finder/helpers/grid.helper';
-import { Cell, CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
+import { generateGrid } from '@pathFinder/helpers/grid.helper';
+import { Cell, CellType, MazeAlgoProps } from '@pathFinder/models';
 import {
   Direction,
   filterValidCells,

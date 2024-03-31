@@ -25,7 +25,10 @@ algorithms</a>
 
 This repo helps in learning popular algorithms by visualization
 
-#### Sorting Visualizer
+<details>
+  <summary>Sorting Visualizer</summary>
+
+<br>
 
 Helps to
 
@@ -42,7 +45,23 @@ Features
 - Start, pause and reset the execution
 - Generate random array of numbers of sorting
 
-#### Path finder
+Concepts
+
+- Animations are done using pure CSS and uses
+  [FLIP principle](https://aerotwist.com/blog/flip-your-animations/)
+- Flex is used for array display and manipulation of positions (flex order
+  property)
+- JavaScript async generators are used heavily for the controlled execution of
+  algorithms
+
+</details>
+
+<br>
+
+<details>
+  <summary>Path finder</summary>
+
+<br>
 
 Helps to
 
@@ -57,6 +76,8 @@ Features
 - Generate infinite mazes
 - Move the targets in live to see the changes
 
+</details>
+
 <br>
 
 ### Technologies
@@ -68,7 +89,8 @@ Production libraries
 - [React Router](https://reactrouter.com/en/main/) (Router)
 - [Lucide](https://lucide.dev/) (Icons pack)
 - [Sonner](https://sonner.emilkowal.ski/) (Toast)
-- [React Joyrid](https://react-joyride.com/)
+- [React-use](https://github.com/streamich/react-use) (Custom hooks)
+- [React Joyride](https://react-joyride.com/) (App tour)
 - [React Switch](https://react-switch.netlify.app/) (Switch)
 
 Build libraries
@@ -77,17 +99,6 @@ Build libraries
 - [Vite](https://vitejs.dev/) (Bundler)
 - [Vitest](https://vitest.dev/) (Unit test)
 - [Cypress](https://www.cypress.io/) (E2E test)
-
-<br>
-
-### Features built using
-
-- Animations are done using pure CSS and uses
-  [FLIP principle](https://aerotwist.com/blog/flip-your-animations/)
-- Flex is used for array display and manipulation of positions (flex order
-  property)
-- JavaScript async generators are used heavily for the controlled execution of
-  algorithms
 
 <br>
 

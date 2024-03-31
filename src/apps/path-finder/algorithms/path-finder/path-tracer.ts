@@ -1,4 +1,4 @@
-import { PathAlgoProps } from '@pathFinder/models/interfaces';
+import { PathAlgoProps } from '@pathFinder/models';
 
 export async function tracePath({
   parents,

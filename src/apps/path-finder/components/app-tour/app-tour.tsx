@@ -103,7 +103,11 @@ function AppTour() {
       </div>
 
       <div className={classes.tourWrapper}>
-        <button onClick={handleClickStart} className={classes.tour}>
+        <button
+          onClick={handleClickStart}
+          className={classes.tour}
+          disabled={run}
+        >
           Take Tour
         </button>
       </div>

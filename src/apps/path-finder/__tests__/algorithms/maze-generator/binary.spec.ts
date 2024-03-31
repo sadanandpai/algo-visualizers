@@ -1,5 +1,5 @@
+import { CellType } from '@pathFinder/models/enum';
 import { getNeighbors } from '@pathFinder/algorithms/maze-generator/binary';
-import { CellType } from '@pathFinder/models/interfaces';
 
 describe('Binary maze helpers', () => {
   it('getNeighbors', () => {

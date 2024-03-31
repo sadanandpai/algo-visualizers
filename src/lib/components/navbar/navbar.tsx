@@ -1,5 +1,5 @@
+import Title from '@/lib/components/title/title';
 import classes from './navbar.module.scss';
-import Title from '../title/title';
 
 export interface Props {
   title: string;

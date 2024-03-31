@@ -1,5 +1,6 @@
-import { generateGrid } from '@/apps/path-finder/helpers/grid.helper';
-import { CellType, MazeAlgoProps } from '@pathFinder/models/interfaces';
+import { generateGrid } from '@pathFinder/helpers/grid.helper';
+import { MazeAlgoProps } from '@pathFinder/models';
+import { CellType } from '@pathFinder/models/enum';
 
 enum EdgeType {
   horizontal,

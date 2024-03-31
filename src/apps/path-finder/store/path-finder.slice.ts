@@ -5,12 +5,12 @@ import {
   CellElement,
   CellType,
   Status,
-} from '@pathFinder/models/interfaces';
+} from '@pathFinder/models';
 import {
   generateGrid,
   getDimensionsFromScreenSize,
   initGrid,
-} from '@/apps/path-finder/helpers/grid.helper';
+} from '@pathFinder/helpers/grid.helper';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';

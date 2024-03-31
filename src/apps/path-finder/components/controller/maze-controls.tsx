@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useState } from 'react';
-import { Status } from '@pathFinder/models/interfaces';
+import { Speed, Status } from '@pathFinder/models';
 import classes from './controller.module.scss';
 import { generateMaze } from '@pathFinder/store/maze.thunk';
 import { Play, Trash } from 'lucide-react';
@@ -13,13 +13,13 @@ import { mazeGenerators } from '@pathFinder/algorithms';
 import { speeds } from '@pathFinder/config';
 
 interface Props {
-  defaultSpeed: string;
+  defaultSpeed: Speed;
 }
 
-function Operations({ defaultSpeed }: Props) {
+function MazeControls({ defaultSpeed }: Props) {
   const dispatch = useAppDispatch();
   const [maze, setMaze] = useState<string>('');
-  const [speed, setSpeed] = useState(speeds.get(defaultSpeed)!);
+  const [speed, setSpeed] = useState(speeds.get(defaultSpeed) as number);
   const status = useAppSelector((state) => state.pathFinder.status);
   const mazeAlgo = maze ? mazeGenerators.get(maze) : null;
   const disabled = status === Status.Generating || status === Status.Searching;
@@ -96,4 +96,4 @@ function Operations({ defaultSpeed }: Props) {
   );
 }
 
-export default Operations;
+export default MazeControls;

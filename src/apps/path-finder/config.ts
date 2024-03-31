@@ -1,18 +1,20 @@
+import { Speed } from '@pathFinder/models/enum';
+
 export const cellSize = 25;
 
-export const speeds = new Map([
-  ['∞', 0],
-  ['4x', 1],
-  ['2x', 25],
-  ['1x', 50],
-  ['0.7x', 75],
-  ['0.5x', 120],
-  ['0.1x', 250],
+export const speeds: Map<Speed, number> = new Map([
+  [Speed.Infinity, 0],
+  [Speed['4x'], 1],
+  [Speed['2x'], 25],
+  [Speed['1x'], 50],
+  [Speed['0.7x'], 75],
+  [Speed['0.5x'], 120],
+  [Speed['0.1x'], 250],
 ]);
 
 export const defaultSpeeds = {
-  mobile: '1x',
-  desktop: '4x',
+  mobile: Speed['1x'],
+  desktop: Speed['4x'],
 };
 
 export const cellColors = {

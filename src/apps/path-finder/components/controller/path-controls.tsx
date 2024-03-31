@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import {
   clearGrid,
@@ -8,23 +7,24 @@ import {
   setVisitedCellCount,
 } from '@pathFinder/store/path-finder.slice';
 import { Play, RefreshCcw } from 'lucide-react';
+import { useState } from 'react';
 import classes from './controller.module.scss';
 
-import { useDebounce } from 'react-use';
 import { pathFinders } from '@pathFinder/algorithms';
 import { speeds } from '@pathFinder/config';
-import { Status } from '@pathFinder/models/interfaces';
-import { searchPath } from '@/apps/path-finder/store/search.thunk';
-import { highlightPath } from '../../store/path.thunk';
+import { Speed, Status } from '@pathFinder/models';
+import { highlightPath } from '@pathFinder/store/path.thunk';
+import { searchPath } from '@pathFinder/store/search.thunk';
+import { useDebounce } from 'react-use';
 
 interface Props {
-  defaultSpeed: string;
+  defaultSpeed: Speed;
 }
 
-function Execution({ defaultSpeed }: Props) {
+function PathControls({ defaultSpeed }: Props) {
   const dispatch = useAppDispatch();
   const [pathFinder, setPathFinder] = useState('');
-  const [speed, setSpeed] = useState(speeds.get(defaultSpeed)!);
+  const [speed, setSpeed] = useState(speeds.get(defaultSpeed) as number);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
@@ -63,7 +63,7 @@ function Execution({ defaultSpeed }: Props) {
       return;
     }
 
-    executeSearch(algo, speed);
+    await executeSearch(algo, speed);
   }
 
   function handleClear() {
@@ -139,4 +139,4 @@ function Execution({ defaultSpeed }: Props) {
   );
 }
 
-export default Execution;
+export default PathControls;

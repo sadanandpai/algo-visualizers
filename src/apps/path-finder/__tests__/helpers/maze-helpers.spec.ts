@@ -4,8 +4,8 @@ import {
   getNeighbors,
   getRandomEvenNumber,
   getRandomOddNumber,
-} from '@/apps/path-finder/helpers/maze.helper';
-import { CellType } from '@pathFinder/models/interfaces';
+} from '@pathFinder/helpers/maze.helper';
+import { CellType } from '@pathFinder/models/enum';
 
 const [clear, wall] = [CellType.clear, CellType.wall];
 const grid = [
