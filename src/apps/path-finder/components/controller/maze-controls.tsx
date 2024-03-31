@@ -11,6 +11,8 @@ import {
 } from '@pathFinder/store/path-finder.slice';
 import { mazeGenerators } from '@pathFinder/algorithms';
 import { speeds } from '@pathFinder/config';
+import Modals from '../modal-icon/modals';
+import { modelContent1 } from '../modal-icon/modal-content';
 
 interface Props {
   defaultSpeed: Speed;
@@ -46,6 +48,7 @@ function MazeControls({ defaultSpeed }: Props) {
   }
   return (
     <div className={classes.operation + ' select-maze'}>
+      <Modals content={modelContent1} />
       <select
         name="maze"
         id="maze"
