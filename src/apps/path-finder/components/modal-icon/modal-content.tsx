@@ -1,5 +1,6 @@
 export const modelContent1 = [
   {
+    id: 1,
     heading: "Prim's Algorithm",
     content: `
     Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph.
@@ -8,6 +9,7 @@ export const modelContent1 = [
   `,
   },
   {
+    id: 2,
     heading: "Kruskal's Algorithm",
     content: `
           Kruskal's algorithm is another greedy algorithm for finding a minimum spanning tree in a connected weighted graph.
@@ -16,30 +18,35 @@ export const modelContent1 = [
         `,
   },
   {
+    id: 3,
     heading: 'Recursive backtracking',
     content: `        
 Recursive backtracking is a powerful algorithmic technique commonly used to solve problems involving exploring all possible combinations or configurations of a problem space. It is particularly well-suited for solving problems such as maze generation, Sudoku puzzles, N-queens problems, and more.
         `,
   },
   {
+    id: 4,
     heading: 'Wilson algorithm',
     content: `
     Wilson's algorithm typically refers to a maze generation algorithm named after David Wilson, a mathematician known for his work in probability theory and combinatorics. Wilson's algorithm is a randomized algorithm used to generate a maze, and it's particularly interesting because it doesn't rely on recursive techniques like the recursive division method.
         `,
   },
   {
+    id: 5,
     heading: 'Recursive division',
     content: `       
 Recursive division is a technique commonly used to generate mazes. It works by recursively dividing a region into smaller subregions until certain criteria are met. This technique often results in mazes with long, winding corridors and a single path from the start to the finish.
         `,
   },
   {
+    id: 6,
     heading: ' Eller',
     content: `      
     Eller's algorithm, also known as Eller's maze generation algorithm, is a method for generating mazes, named after its creator, J.A. Eller. Unlike some other maze generation algorithms such as recursive division or Prim's algorithm, Eller's algorithm works by iteratively generating one row of the maze at a time, which makes it particularly efficient in terms of memory usage. It's also notable for its ability to generate mazes with horizontal passages that span the entire width of the maze
         `,
   },
   {
+    id: 7,
     heading: 'Sidewindern',
     content: `
     The Sidewinder algorithm is another method for generating mazes, which is relatively simple and efficient. It is named after the sidewinder snake due to the pattern it creates in the maze. The algorithm primarily works by carving passages either horizontally or vertically, resulting in a maze with a strong bias towards corridors that are mostly horizontal or mostly vertic
@@ -49,6 +56,7 @@ Recursive division is a technique commonly used to generate mazes. It works by r
 
 export const modelContent2 = [
   {
+    id: 1,
     heading: 'Breadth-First Search (BFS)',
     content: `
         Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures.
@@ -57,6 +65,7 @@ export const modelContent2 = [
       `,
   },
   {
+    id: 2,
     heading: 'Depth-First Search (DFS)',
     content: `
         Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures.
@@ -65,6 +74,7 @@ export const modelContent2 = [
       `,
   },
   {
+    id: 3,
     heading: 'A* Search',
     content: `
         A* search is an informed search algorithm that finds the shortest path between nodes in a graph.
@@ -73,6 +83,7 @@ export const modelContent2 = [
       `,
   },
   {
+    id: 4,
     heading: 'Greedy Best-First Search',
     content: `
         Greedy best-first search is an informed search algorithm that selects the node to expand based on an evaluation function.
