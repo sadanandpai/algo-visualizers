@@ -8,6 +8,12 @@ export async function depthFirstSearch({
   exit,
   updateCells,
 }: SearchAlgoProps) {
+  const grid = stateGrid.map((row) => row.slice());
+  const rows = grid.length;
+  const cols = grid[0].length;
+  const visited = generateGrid(rows, cols, false); // initalize visited arrays
+  const parents = generateGrid<Cell>(rows, cols, null); // initalize parents arrays
+
   async function explorePath(
     row: number,
     col: number,
@@ -41,12 +47,6 @@ export async function depthFirstSearch({
     );
   }
 
-  const grid = stateGrid.map((row) => row.slice());
-  const rows = grid.length;
-  const cols = grid[0].length;
-  const visited = generateGrid(rows, cols, false); // initalize visited arrays
-  const parents = generateGrid<Cell>(rows, cols, null); // initalize parents arrays
   const hasPath = await explorePath(entry.row, entry.col);
-
   return hasPath ? { grid, parents } : { grid, parents: null };
 }

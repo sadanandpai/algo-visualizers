@@ -53,7 +53,7 @@ export async function breadthFirstSearch({
 
     const loopQueue = []; // loopQueue is used for marking the coordinates after each inner iteration
     for (let k = 0; k < length; k++) {
-      const value = queue.shift()!;
+      const value = queue.shift() as Cell;
 
       if (value.row === exit.row && value.col === exit.col) {
         // if exit is found, stop searching
@@ -71,8 +71,7 @@ export async function breadthFirstSearch({
     }
 
     // mark all the cells which are covered
-    for (let i = 0; i < loopQueue.length; i++) {
-      const value = loopQueue[i];
+    for (const value of loopQueue) {
       if (
         !visited[value.row][value.col] &&
         grid[value.row][value.col] !== CellType.wall

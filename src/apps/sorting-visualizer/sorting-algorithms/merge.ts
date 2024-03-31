@@ -24,6 +24,12 @@ export async function* mergeSort(
   }
 }
 
+function shiftRight(array: number[], start: number, end: number) {
+  for (let i = end; i > start; i--) {
+    array[i] = array[i - 1];
+  }
+}
+
 async function* merge(
   array: number[],
   i: number,
@@ -79,11 +85,5 @@ async function* merge(
     if (isFinal) {
       yield* sort(k);
     }
-  }
-}
-
-function shiftRight(array: number[], start: number, end: number) {
-  for (let i = end; i > start; i--) {
-    array[i] = array[i - 1];
   }
 }

@@ -36,11 +36,15 @@ function PathControls({ defaultSpeed }: Props) {
       dispatch(clearGrid());
     }
 
+    if (!algo) {
+      return;
+    }
+
     try {
       dispatch(setVisitedCellCount(0));
       dispatch(setPathLength(0));
       dispatch(setStatus(Status.Searching));
-      const { grid, parents } = await dispatch(searchPath(algo!.fn, speed));
+      const { grid, parents } = await dispatch(searchPath(algo.fn, speed));
       await dispatch(highlightPath(grid, parents, speed));
       dispatch(setGrid({ grid, clone: false }));
       dispatch(setStatus(Status.Complete));
@@ -50,20 +54,14 @@ function PathControls({ defaultSpeed }: Props) {
     }
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const algo = e.target.value;
-    if (algo) {
-      setPathFinder(algo);
-      handlePlay(pathFinders.get(algo));
-    }
+  async function handlePlay(algo = pathFinderAlgo) {
+    await executeSearch(algo, speed);
   }
 
-  async function handlePlay(algo = pathFinderAlgo) {
-    if (!algo) {
-      return;
-    }
-
-    await executeSearch(algo, speed);
+  async function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const algo = e.target.value;
+    setPathFinder(algo);
+    await executeSearch(pathFinders.get(algo), speed);
   }
 
   function handleClear() {
@@ -74,7 +72,7 @@ function PathControls({ defaultSpeed }: Props) {
 
   useDebounce(
     async () => {
-      if (status === Status.Complete && pathFinderAlgo) {
+      if (status === Status.Complete) {
         await executeSearch(pathFinderAlgo, 0);
       }
     },
@@ -107,7 +105,7 @@ function PathControls({ defaultSpeed }: Props) {
         name="path-finder-speed"
         id="path-finder-speed"
         value={speed}
-        onChange={(e) => setSpeed(+e.target.value)}
+        onChange={(e) => setSpeed(Number(e.target.value))}
         disabled={disabled}
       >
         {[...speeds.entries()].map(([key, value]) => (

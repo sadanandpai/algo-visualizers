@@ -15,6 +15,8 @@ export function highlightPath(
   delayDuration: number
 ) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
+    let pathLength = 0;
+
     function isSearching() {
       return getState().pathFinder.status === Status.Searching;
     }
@@ -34,7 +36,6 @@ export function highlightPath(
       }
     }
 
-    let pathLength = 0;
     const state = getState().pathFinder;
     if (parents) {
       toast.success('Path found!!! 😃');

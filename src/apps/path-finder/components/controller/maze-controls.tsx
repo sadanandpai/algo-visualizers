@@ -69,7 +69,7 @@ function MazeControls({ defaultSpeed }: Props) {
         name="maze-speed"
         id="maze-speed"
         value={speed}
-        onChange={(e) => setSpeed(+e.target.value)}
+        onChange={(e) => setSpeed(Number(e.target.value))}
         disabled={disabled}
       >
         {[...speeds.entries()].map(([key, value]) => (

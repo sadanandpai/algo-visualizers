@@ -14,6 +14,12 @@ export const playSimulation = () => {
   resolver();
 };
 
+export const setResolver = () => {
+  resolveWhenPlaying = new Promise<void>((resolve) => {
+    resolver = resolve;
+  });
+};
+
 export const pauseSimulation = () => {
   if (!isPlaying) {
     return;
@@ -21,12 +27,6 @@ export const pauseSimulation = () => {
 
   isPlaying = false;
   setResolver();
-};
-
-export const setResolver = () => {
-  resolveWhenPlaying = new Promise<void>((resolve) => {
-    resolver = resolve;
-  });
 };
 
 export const setSwapInterval = (interval: number) => {

@@ -10,6 +10,24 @@ function useMouseActions({
   const [element, setElement] = useState<HTMLElement | null>(null);
   const isMouseDown = useRef(false);
 
+  const onMouseDown = (e: MouseEvent | TouchEvent) => {
+    if (e.target) {
+      isMouseDown.current = true;
+      setElement(e.target as HTMLElement);
+    }
+  };
+
+  const onmouseMove = (e: MouseEvent | TouchEvent) => {
+    if (isMouseDown.current) {
+      setElement(e.target as HTMLElement);
+    }
+  };
+
+  const onMouseUp = () => {
+    isMouseDown.current = false;
+    setElement(null);
+  };
+
   useEffect(() => {
     if (isMobile) {
       return;
@@ -32,24 +50,6 @@ function useMouseActions({
       referenceEl.removeEventListener('mouseleave', onMouseUp);
     };
   }, [isMobile, ref]);
-
-  const onMouseDown = (e: MouseEvent | TouchEvent) => {
-    if (e.target) {
-      isMouseDown.current = true;
-      setElement(e.target as HTMLElement);
-    }
-  };
-
-  const onmouseMove = (e: MouseEvent | TouchEvent) => {
-    if (isMouseDown.current) {
-      setElement(e.target as HTMLElement);
-    }
-  };
-
-  const onMouseUp = () => {
-    isMouseDown.current = false;
-    setElement(null);
-  };
 
   return { element, isMouseDown: isMouseDown.current };
 }

@@ -7,20 +7,6 @@ import {
 
 import { SortAsyncGenerator } from '@sortViz/models/types';
 
-export async function* quickSort(
-  array: number[],
-  low = 0,
-  high = array.length - 1
-): SortAsyncGenerator {
-  if (low <= high) {
-    const pivot = yield* partition(array, low, high);
-    if (typeof pivot === 'number') {
-      yield* quickSort(array, low, pivot - 1);
-      yield* quickSort(array, pivot + 1, high);
-    }
-  }
-}
-
 async function* partition(
   array: number[],
   low: number,
@@ -59,4 +45,18 @@ async function* partition(
 
   yield* sort(j);
   return j;
+}
+
+export async function* quickSort(
+  array: number[],
+  low = 0,
+  high = array.length - 1
+): SortAsyncGenerator {
+  if (low <= high) {
+    const pivot = yield* partition(array, low, high);
+    if (typeof pivot === 'number') {
+      yield* quickSort(array, low, pivot - 1);
+      yield* quickSort(array, pivot + 1, high);
+    }
+  }
 }

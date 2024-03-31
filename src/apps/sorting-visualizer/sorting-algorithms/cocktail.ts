@@ -16,7 +16,7 @@ export async function* cocktailSort(array: number[]): SortAsyncGenerator {
       }
     }
 
-    if (sorted == 1) {
+    if (sorted === 1) {
       for (let index = 0; index < array.length; index++) {
         yield* sort(index);
       }
@@ -37,7 +37,7 @@ export async function* cocktailSort(array: number[]): SortAsyncGenerator {
       }
     }
 
-    if (sorted == 1) {
+    if (sorted === 1) {
       for (let index = 0; index < array.length; index++) {
         yield* sort(index);
       }

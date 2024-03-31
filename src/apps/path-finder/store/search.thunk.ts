@@ -13,6 +13,8 @@ export function searchPath(
   delayDuration: number
 ) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
+    let visitedCellCount = 0;
+
     function isSearching() {
       return getState().pathFinder.status === Status.Searching;
     }
@@ -41,7 +43,6 @@ export function searchPath(
       }
     }
 
-    let visitedCellCount = 0;
     const state = getState().pathFinder;
     const { grid, parents } = await pathFinderAlgo({
       grid: state.grid,

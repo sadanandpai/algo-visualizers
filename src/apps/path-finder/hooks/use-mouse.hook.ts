@@ -51,7 +51,7 @@ export function useMouse({ isMobile, ref }: Props) {
     }
 
     const sameAsPrevCell =
-      prevCellRef.current?.row == selectedCell.row &&
+      prevCellRef.current?.row === selectedCell.row &&
       prevCellRef.current?.col === selectedCell.col;
     if (!sameAsPrevCell) {
       dispatch(

@@ -23,6 +23,15 @@ const initialState: AppState = {
   selectedAlgosStatus,
 };
 
+function setIntervals(state: AppState) {
+  if (state.visualizerType === 'cell') {
+    setSwapInterval(maxInterval / state.speed);
+  } else {
+    setSwapInterval(maxInterval / (state.speed * 4));
+  }
+  setHighlightInterval(maxInterval / (state.speed * 4));
+}
+
 export const sortingVisualizerSlice = createSlice({
   name: 'sortViz',
   initialState,
@@ -71,15 +80,6 @@ export const sortingVisualizerSlice = createSlice({
     },
   },
 });
-
-function setIntervals(state: AppState) {
-  if (state.visualizerType === 'cell') {
-    setSwapInterval(maxInterval / state.speed);
-  } else {
-    setSwapInterval(maxInterval / (state.speed * 4));
-  }
-  setHighlightInterval(maxInterval / (state.speed * 4));
-}
 
 export const {
   setArray,

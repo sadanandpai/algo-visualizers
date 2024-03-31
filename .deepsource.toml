@@ -1,6 +1,6 @@
 version = 1
 
-exclude_patterns = ["docs/**", "cypress/**"]
+exclude_patterns = ["docs/**", "cypress/**", "__tests__/**"]
 
 [[analyzers]]
 name = "javascript"

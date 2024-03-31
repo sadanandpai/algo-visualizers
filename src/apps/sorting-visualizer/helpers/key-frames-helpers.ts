@@ -5,6 +5,17 @@ const animationEl = document.querySelector(
   '[data-id="animation-element"]'
 ) as HTMLStyleElement;
 
+function addAnimationRule(rule: string) {
+  const animationIdx = animationEl?.sheet?.insertRule(rule);
+
+  // clean up the animation after execution
+  setTimeout(() => {
+    if (animationIdx) {
+      animationEl?.sheet?.deleteRule(animationIdx);
+    }
+  }, swapInterval);
+}
+
 export function getSwapAnimation(gap: number, time = 1000) {
   const animationName = `anime-${Math.random().toString(36).substring(2, 9)}`;
   const animation = `${time}ms linear forwards ${animationName}`;
@@ -16,8 +27,8 @@ export function getSwapAnimation(gap: number, time = 1000) {
     }
     75% {
         transform: translate(${gap * shiftSize}px, ${
-          Math.sign(gap) * (cellCSS.size + 5)
-        }px);
+    Math.sign(gap) * (cellCSS.size + 5)
+  }px);
     }
     100% {
         transform: translate(${gap * shiftSize}px, 0);
@@ -41,15 +52,4 @@ export function getMovingAnimation(gap: number, time = 1000) {
 
   addAnimationRule(rule);
   return animation;
-}
-
-function addAnimationRule(rule: string) {
-  const animationIdx = animationEl?.sheet?.insertRule(rule);
-
-  // clean up the animation after execution
-  setTimeout(() => {
-    if (animationIdx) {
-      animationEl?.sheet?.deleteRule(animationIdx);
-    }
-  }, swapInterval);
 }

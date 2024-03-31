@@ -10,7 +10,7 @@ export function findSet(
   let currentCell: Cell = cell;
 
   while (parents[currentCell.row][currentCell.col]) {
-    const parent = parents[currentCell.row][currentCell.col]!;
+    const parent = parents[currentCell.row][currentCell.col] as string;
     currentCell = {
       row: parseInt(parent.split(':')[0]),
       col: parseInt(parent.split(':')[1]),

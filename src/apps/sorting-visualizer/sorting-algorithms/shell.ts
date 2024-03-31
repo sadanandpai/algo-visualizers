@@ -25,7 +25,7 @@ export async function* shellSort(array: number[]): SortAsyncGenerator {
         j -= gap;
       }
       array[j] = temp;
-      if (gap == 1) {
+      if (gap === 1) {
         yield* sort(0);
         yield* sort(i);
       }

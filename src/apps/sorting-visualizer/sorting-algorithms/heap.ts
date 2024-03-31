@@ -7,22 +7,6 @@ import {
 
 import { SortAsyncGenerator } from '@sortViz/models/types';
 
-export async function* heapSort(array: number[]): SortAsyncGenerator {
-  let length = array.length;
-  for (let i = Math.floor(length / 2) - 1; i >= 0; i--) {
-    yield* maxHeap(array, i, length);
-  }
-
-  for (let i = array.length - 1; i > 0; i--) {
-    length--;
-    yield* sort(length);
-    yield* swap(array, 0, i);
-    yield* maxHeap(array, 0, length);
-  }
-
-  yield* sort(0);
-}
-
 async function* maxHeap(
   array: number[],
   i: number,
@@ -58,4 +42,20 @@ async function* maxHeap(
     yield* showPivot(-1);
     yield* maxHeap(array, max, length);
   }
+}
+
+export async function* heapSort(array: number[]): SortAsyncGenerator {
+  let length = array.length;
+  for (let i = Math.floor(length / 2) - 1; i >= 0; i--) {
+    yield* maxHeap(array, i, length);
+  }
+
+  for (let i = array.length - 1; i > 0; i--) {
+    length--;
+    yield* sort(length);
+    yield* swap(array, 0, i);
+    yield* maxHeap(array, 0, length);
+  }
+
+  yield* sort(0);
 }
