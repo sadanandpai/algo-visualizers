@@ -1,0 +1,12 @@
+version = 1
+
+exclude_patterns = ["docs/**", "cypress/**"]
+
+[[analyzers]]
+name = "javascript"
+
+  [analyzers.meta]
+  plugins = [
+    "react"
+  ]
+  environment = ["browser"]
