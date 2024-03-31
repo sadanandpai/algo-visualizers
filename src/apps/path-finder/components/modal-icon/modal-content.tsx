@@ -43,7 +43,7 @@ export const mazeAlgoInfo = [
         `,
   },
   {
-    id: 5,
+    id: 6,
     heading: 'Binary tree algorithm',
     content: `
           The binary tree algorithm is a simple method for generating mazes. 
@@ -52,7 +52,7 @@ export const mazeAlgoInfo = [
         `,
   },
   {
-    id: 6,
+    id: 7,
     heading: ' Ellers Algorithm',
     content: `      
           Eller's algorithm works by iteratively generating one row of the maze at a time, which makes it particularly efficient in terms of memory usage. 
@@ -60,7 +60,7 @@ export const mazeAlgoInfo = [
         `,
   },
   {
-    id: 7,
+    id: 8,
     heading: 'Sidewinder Algorithm',
     content: `
           The Sidewinder algorithm is a relatively simple and efficient for generating mazes.
@@ -68,7 +68,7 @@ export const mazeAlgoInfo = [
           The algorithm primarily works by carving passages either horizontally or vertically, resulting in a maze with a strong bias towards corridors that are mostly horizontal or mostly vertic`,
   },
   {
-    id: 8,
+    id: 9,
     heading: 'Labyrinth Algorithm',
     content: `
           The Labyrinth algorithm is a maze generation algorithm that works by creating a grid of cells and carving passages between them.
@@ -76,7 +76,7 @@ export const mazeAlgoInfo = [
         `,
   },
   {
-    id: 9,
+    id: 10,
     heading: 'Random Algorithm',
     content: `
           The Random algorithm is a simple maze generation algorithm that works by randomly placing the walls in the grid.

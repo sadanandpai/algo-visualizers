@@ -1,6 +1,6 @@
 @use '/src/host/styles/theme';
 
-.mainModal {
+.infoButton {
   display: none;
 }
 
@@ -81,8 +81,8 @@
 }
 
 @media (width >= 1200px) {
-  .mainModal {
-    display: block;
+  .infoButton {
+    display: inline-block;
   }
 }
 

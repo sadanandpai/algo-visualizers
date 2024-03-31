@@ -18,7 +18,11 @@ const Modals = ({ content }: Props) => {
   };
 
   return (
-    <div className={classes.mainModal}>
+    <>
+      <button onClick={handleShowModal} className={classes.infoButton}>
+        <Info size={20} />
+      </button>
+
       <dialog ref={dialogRef} className={classes.dialog}>
         <button onClick={handleCloseModal} className={classes.closeButton}>
           <X />
@@ -33,11 +37,7 @@ const Modals = ({ content }: Props) => {
           ))}
         </div>
       </dialog>
-
-      <button onClick={handleShowModal} className={classes.infoButton}>
-        <Info />
-      </button>
-    </div>
+    </>
   );
 };
 
