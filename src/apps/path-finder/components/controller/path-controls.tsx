@@ -16,6 +16,8 @@ import { Speed, Status } from '@pathFinder/models';
 import { highlightPath } from '@pathFinder/store/path.thunk';
 import { searchPath } from '@pathFinder/store/search.thunk';
 import { useDebounce } from 'react-use';
+import Modals from '../modal-icon/modals';
+import { modelContent2 } from '../modal-icon/modal-content';
 
 interface Props {
   defaultSpeed: Speed;
@@ -82,6 +84,7 @@ function PathControls({ defaultSpeed }: Props) {
 
   return (
     <div className={classes.execution + ' execution'}>
+      <Modals content={modelContent2} />
       <select
         className={classes.pathFinder}
         name="path-finder"
