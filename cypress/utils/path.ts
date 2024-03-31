@@ -4,9 +4,9 @@ export const mazes = [
   'Recursive Backtracking',
   'Recursive Division',
   'Wilson',
-  'Binary',
   'Ellers',
   'Side Winder',
+  'Binary Tree',
   'Labyrinth',
 ];
 

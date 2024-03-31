@@ -35,9 +35,9 @@ export const mazeGenerators = new Map([
     { name: 'Recursive Division', fn: generateRecursiveDivisionMaze },
   ],
   ['wilson', { name: 'Wilson', fn: generateWilsonMaze }],
-  ['binary', { name: 'Binary', fn: generateBinaryMaze }],
   ['ellers', { name: 'Ellers', fn: generateEllersMaze }],
   ['sideWinder', { name: 'Side Winder', fn: generateSideWinderMaze }],
+  ['binary', { name: 'Binary Tree', fn: generateBinaryMaze }],
   ['labyrinth', { name: 'Labyrinth', fn: generateLabyrinth }],
   ['random', { name: 'Random', fn: generateRandomMaze }],
 ]);

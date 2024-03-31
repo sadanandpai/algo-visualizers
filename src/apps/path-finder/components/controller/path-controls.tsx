@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
+import { useDebounce } from 'react-use';
 import {
   clearGrid,
   setGrid,
@@ -11,13 +12,12 @@ import { useState } from 'react';
 import classes from './controller.module.scss';
 
 import { pathFinders } from '@pathFinder/algorithms';
+import { pathSearchAlgoInfo } from '@pathFinder/components/modal-icon/modal-content';
 import { speeds } from '@pathFinder/config';
 import { Speed, Status } from '@pathFinder/models';
 import { highlightPath } from '@pathFinder/store/path.thunk';
 import { searchPath } from '@pathFinder/store/search.thunk';
-import { useDebounce } from 'react-use';
-import Modals from '../modal-icon/modals';
-import { modelContent2 } from '../modal-icon/modal-content';
+import Modals from '@pathFinder/components/modal-icon/modals';
 
 interface Props {
   defaultSpeed: Speed;
@@ -84,7 +84,7 @@ function PathControls({ defaultSpeed }: Props) {
 
   return (
     <div className={classes.execution + ' execution'}>
-      <Modals content={modelContent2} />
+      <Modals content={pathSearchAlgoInfo} />
       <select
         className={classes.pathFinder}
         name="path-finder"

@@ -1,18 +1,18 @@
-import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useState } from 'react';
-import { Speed, Status } from '@pathFinder/models';
-import classes from './controller.module.scss';
-import { generateMaze } from '@pathFinder/store/maze.thunk';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { Play, Trash } from 'lucide-react';
+import { mazeGenerators } from '@pathFinder/algorithms';
+import { mazeAlgoInfo } from '@pathFinder/components/modal-icon/modal-content';
+import Modals from '@pathFinder/components/modal-icon/modals';
+import { speeds } from '@pathFinder/config';
+import { Speed, Status } from '@pathFinder/models';
+import { generateMaze } from '@pathFinder/store/maze.thunk';
 import {
   resetGrid,
   setPathLength,
   setVisitedCellCount,
 } from '@pathFinder/store/path-finder.slice';
-import { mazeGenerators } from '@pathFinder/algorithms';
-import { speeds } from '@pathFinder/config';
-import Modals from '../modal-icon/modals';
-import { modelContent1 } from '../modal-icon/modal-content';
+import classes from './controller.module.scss';
 
 interface Props {
   defaultSpeed: Speed;
@@ -48,7 +48,8 @@ function MazeControls({ defaultSpeed }: Props) {
   }
   return (
     <div className={classes.operation + ' select-maze'}>
-      <Modals content={modelContent1} />
+      <Modals content={mazeAlgoInfo} />
+
       <select
         name="maze"
         id="maze"
