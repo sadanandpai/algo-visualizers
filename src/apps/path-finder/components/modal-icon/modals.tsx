@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import classes from './modals.module.scss';
 import { Info, X } from 'lucide-react';
 
@@ -8,34 +8,38 @@ interface ModalItem {
   content: string;
 }
 const Modals = ({ content }: { content: ModalItem[] }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const openModal = useCallback(() => {
-    setIsOpen(true);
+  const handleShowModal = useCallback(() => {
+    if (dialogRef.current) {
+      dialogRef.current.showModal();
+    }
   }, []);
-  const closeModal = useCallback(() => {
-    setIsOpen(false);
+  const handleCloseModal = useCallback(() => {
+    if (dialogRef.current) {
+      dialogRef.current.close();
+    }
   }, []);
   return (
     <div className={classes.mainModal}>
-      <button onClick={openModal} className={classes.infoButton}>
+      <dialog ref={dialogRef} className={classes.dialog}>
+        <button
+          autoFocus
+          onClick={handleCloseModal}
+          className={classes.closeButton}
+        >
+          <X />
+        </button>
+        {content.map((item: ModalItem) => (
+          <div key={item.id} className={classes.contentDiv}>
+            <h1 className={classes.contentHeading}>{item.heading}</h1>
+            <p className={classes.contentPara}>{item.content}</p>
+          </div>
+        ))}
+      </dialog>
+      <button onClick={handleShowModal} className={classes.infoButton}>
         <Info />
       </button>
-      {isOpen && (
-        <div className={classes.backdrop}>
-          <div className={classes.dialog}>
-            <button className={classes.closeButton} onClick={closeModal}>
-              <X />
-            </button>
-            {content.map((item: ModalItem) => (
-              <div key={item.id} className={classes.contentDiv}>
-                <h1 className={classes.contentHeading}>{item.heading}</h1>
-                <p className={classes.contentPara}>{item.content}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
