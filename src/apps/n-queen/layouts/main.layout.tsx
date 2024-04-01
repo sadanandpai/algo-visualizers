@@ -5,9 +5,8 @@ import Board from '../components/board/board';
 function MainLayout() {
   return (
     <>
-      <Navbar title="N Queens Visualizer">
-        <ThemeIcon bottom={10} right={20} />
-      </Navbar>
+      <ThemeIcon top={10} right={20} />
+      <Navbar title="N Queens Visualizer" />
       {/* <Controller /> */}
       <main className="text-center">
         <Board />
