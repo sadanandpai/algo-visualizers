@@ -1,8 +1,8 @@
-import Home from '@nQueens/pages/home.page';
+import Home from '@nQueen/pages/home.page';
 
 export const nQueenRoutes = [
   {
-    path: '/n-queens/',
+    path: '/n-queen/',
     element: <Home />,
   },
 ];

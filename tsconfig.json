@@ -31,7 +31,7 @@
       "@pathFinder/*": [
         "./src/apps/path-finder/*"
       ],
-      "@nQueens/*": [
+      "@nQueen/*": [
         "./src/apps/n-queen/*"
       ]
     },
