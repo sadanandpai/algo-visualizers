@@ -78,6 +78,12 @@ Features
 
 </details>
 
+<be>
+
+<details>
+  <summary>N Queenr</summary>
+</details>
+
 <br>
 
 ### Technologies
