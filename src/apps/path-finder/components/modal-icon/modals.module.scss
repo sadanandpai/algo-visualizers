@@ -40,9 +40,9 @@
 }
 
 .closeButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: sticky;
+  top: 0;
+  left: 97%;
   background: none;
   border: none;
   cursor: pointer;
