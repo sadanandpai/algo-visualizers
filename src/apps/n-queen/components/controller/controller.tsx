@@ -1,4 +1,4 @@
-import { initChessBoard, nQueen } from '@nQueen/algorithms/n-queen';
+import { initChessBoard } from '@nQueen/algorithms/n-queen';
 import { defaultSpeeds, speeds } from '@nQueen/config';
 import { ChessBoard } from '@nQueen/models/types';
 import { Play, RefreshCcw } from 'lucide-react';
@@ -7,7 +7,7 @@ import styles from './controller.module.scss';
 
 function Controller() {
   const defaultSpeed = defaultSpeeds.desktop;
-  const [board, setBoard] = useState<ChessBoard>([[]]);
+  const [_, setBoard] = useState<ChessBoard>([[]]);
   const [queen, setQueen] = useState<number>(0);
   const [speed, setSpeed] = useState<string | number>(
     speeds.get(defaultSpeed) as number
@@ -23,10 +23,10 @@ function Controller() {
     setBoard(initChessBoard(parseInt(totalQueens)));
   }
 
-  function handleQueenPlacement() {
-    setBoard(initChessBoard(queen));
-    nQueen(board, 0);
-  }
+  // function handleQueenPlacement() {
+  //   setBoard(initChessBoard(queen));
+  //   nQueen(board, 0);
+  // }
 
   return (
     <section className={styles.controller}>
