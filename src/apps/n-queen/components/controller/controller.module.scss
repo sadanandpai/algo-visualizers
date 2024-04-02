@@ -1,0 +1,17 @@
+@import '/src/host/styles/_colors';
+
+.controller {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 1rem;
+
+  .queenRange {
+    width: 300px;
+  }
+  .speed {
+    width: 150px;
+    border: 1px solid $black;
+  }
+}
