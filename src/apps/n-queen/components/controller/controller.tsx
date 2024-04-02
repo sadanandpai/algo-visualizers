@@ -1,14 +1,17 @@
 import { initChessBoard } from '@nQueen/algorithms/n-queen';
 import { defaultSpeeds, speeds } from '@nQueen/config';
-import { ChessBoard } from '@nQueen/models/types';
 import { Play, RefreshCcw } from 'lucide-react';
 import { useState } from 'react';
 import styles from './controller.module.scss';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
+import { ChessBoard } from '../../models/types';
+import { setSize } from '../../store/n-queen.slice';
 
 function Controller() {
+  const dispatch = useAppDispatch();
+  const size = useAppSelector((state) => state.nQueen.size);
   const defaultSpeed = defaultSpeeds.desktop;
   const [_, setBoard] = useState<ChessBoard>([[]]);
-  const [queen, setQueen] = useState<number>(0);
   const [speed, setSpeed] = useState<string | number>(
     speeds.get(defaultSpeed) as number
   );
@@ -19,7 +22,7 @@ function Controller() {
 
   function handleSetQueen(e: React.ChangeEvent<HTMLInputElement>) {
     const totalQueens = e.target.value;
-    setQueen(parseInt(totalQueens));
+    dispatch(setSize(parseInt(totalQueens)));
     setBoard(initChessBoard(parseInt(totalQueens)));
   }
 
@@ -33,9 +36,9 @@ function Controller() {
       <input
         className={styles.queenRange}
         type="range"
-        min="1"
+        min="4"
         max="8"
-        value={queen}
+        value={size}
         onChange={handleSetQueen}
       />
       <select

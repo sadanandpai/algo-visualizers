@@ -9,11 +9,12 @@ import {
   persistStore,
 } from 'redux-persist';
 
-import appReducer from './app.slice';
-import { configureStore } from '@reduxjs/toolkit';
-import pathFinderReducer from '@pathFinder/store/path-finder.slice';
+import nQueenReducer from '@/apps/n-queen/store/n-queen.slice';
 import sortingVisualizerReducer from '@/apps/sorting-visualizer/store/sorting-visualizer.slice';
+import pathFinderReducer from '@pathFinder/store/path-finder.slice';
+import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
+import appReducer from './app.slice';
 
 export const store = configureStore({
   reducer: {
@@ -32,6 +33,7 @@ export const store = configureStore({
       sortingVisualizerReducer
     ),
     pathFinder: pathFinderReducer,
+    nQueen: nQueenReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

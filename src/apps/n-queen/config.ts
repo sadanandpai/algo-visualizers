@@ -13,3 +13,5 @@ export const defaultSpeeds = {
   mobile: Speed['1x'],
   desktop: Speed['4x'],
 };
+
+export const size = 4;
