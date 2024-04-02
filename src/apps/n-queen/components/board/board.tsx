@@ -3,20 +3,21 @@ import styles from './board.module.scss';
 import { useAppSelector } from '@/host/store/hooks';
 
 function Board() {
-  const size = useAppSelector((state) => state.nQueen.size);
+  const board = useAppSelector((state) => state.nQueen.board);
 
   return (
     <div>
       <Controller />
 
       <div className={styles.board}>
-        {Array.from(Array(size)).map((_, rowIndex) => (
+        {board.map((row, rowIndex) => (
           <div key={`${rowIndex}`} className="flex text-center">
-            {Array.from(Array(size)).map((_, colIndex) => (
-              <div
+            {row.map((value, colIndex) => (
+              <button
                 className="p-5 text-center w-16 h-16 border border-1-black"
+                data-value={value}
                 key={`${rowIndex}-${colIndex}`}
-              ></div>
+              ></button>
             ))}
           </div>
         ))}

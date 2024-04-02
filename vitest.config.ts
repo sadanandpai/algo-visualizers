@@ -14,6 +14,7 @@ export default defineConfig({
       '@pathFinder': fileURLToPath(
         new URL('./src/apps/path-finder', import.meta.url)
       ),
+      '@nQueen': fileURLToPath(new URL('./src/apps/n-queen', import.meta.url)),
     },
   },
   test: {

@@ -1,1 +1,1 @@
-export type ChessBoard = number[][];
+export type ChessBoard = boolean[][];

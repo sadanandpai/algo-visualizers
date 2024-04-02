@@ -1,21 +1,14 @@
 import { ChessBoard } from '../models/types';
 
-const queen = 1;
 export function initChessBoard(queens: number): ChessBoard {
-  const board: ChessBoard = [];
-  for (let i = 0; i < queens; i++) {
-    const row = [];
-    for (let j = 0; j < queens; j++) {
-      row.push(0);
-    }
-    board.push(row);
-  }
-  return board;
+  return Array.from({ length: queens }, () => Array(queens).fill(false));
 }
 
 function checkColumn(board: ChessBoard, row: number, col: number): boolean {
-  for (let i = row; i >= 0; i--) {
-    if (board[i][col] === queen) return false;
+  for (let i = row - 1; i >= 0; i--) {
+    if (board[i][col]) {
+      return false;
+    }
   }
   return true;
 }
@@ -26,7 +19,9 @@ function checkLeftDiagonal(
   col: number
 ): boolean {
   for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
-    if (board[i][j] === queen) return false;
+    if (board[i][j]) {
+      return false;
+    }
   }
   return true;
 }
@@ -38,7 +33,9 @@ function checkRightDiagonal(
 ): boolean {
   const size = board.length;
   for (let i = row - 1, j = col + 1; i >= 0 && j < size; i--, j++) {
-    if (board[i][j] === queen) return false;
+    if (board[i][j]) {
+      return false;
+    }
   }
   return true;
 }
@@ -51,19 +48,18 @@ function isValidQueen(board: ChessBoard, row: number, col: number): boolean {
   );
 }
 
-export async function nQueen(board: ChessBoard, row: number) {
-  const size = board.length;
+export function nQueen(board: ChessBoard, row: number) {
+  if (row >= board.length) {
+    return true;
+  }
 
-  if (row >= size) return true;
-
-  for (let col = 0; col < size; col++) {
-    if (isValidQueen(board, row, col)) {
-      board[row][col] = queen;
-
-      if (!nQueen(board, row + 1)) board[row][col] = 0;
-
+  for (let col = 0; col < board.length; col++) {
+    board[row][col] = true;
+    if (isValidQueen(board, row, col) && nQueen(board, row + 1)) {
       return true;
     }
+    board[row][col] = false;
   }
+
   return false;
 }

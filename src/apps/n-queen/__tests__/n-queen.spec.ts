@@ -1,0 +1,127 @@
+import { nQueen } from '@nQueen/algorithms/n-queen';
+
+describe('N-Queen', () => {
+  it('should return a valid solution for 4x4 board', () => {
+    const board = Array.from(Array(4)).map(() => Array(4).fill(false));
+    const result = nQueen(board, 0);
+    expect(result).toBe(true);
+    expect(board).toMatchInlineSnapshot(`
+      [
+        [
+          false,
+          true,
+          false,
+          false,
+        ],
+        [
+          false,
+          false,
+          false,
+          true,
+        ],
+        [
+          true,
+          false,
+          false,
+          false,
+        ],
+        [
+          false,
+          false,
+          true,
+          false,
+        ],
+      ]
+    `);
+  });
+
+  it('should return a valid solution for 8x8 board', () => {
+    const board = Array.from(Array(8)).map(() => Array(8).fill(false));
+    const result = nQueen(board, 0);
+    expect(result).toBe(true);
+    expect(board).toMatchInlineSnapshot(`
+      [
+        [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+        ],
+        [
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+        ],
+        [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+        ],
+        [
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+        ],
+        [
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+        ],
+      ]
+    `);
+  });
+});
