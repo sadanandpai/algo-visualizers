@@ -1,6 +1,6 @@
 import Navbar from '@/lib/components/navbar/navbar';
 import ThemeIcon from '@/lib/components/theme-icon/theme-icon';
-import Board from '../components/board/board';
+import Board from '@nQueen/components/board/board';
 
 function MainLayout() {
   return (

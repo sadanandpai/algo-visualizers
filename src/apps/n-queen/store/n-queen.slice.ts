@@ -1,9 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
 import { AppState } from '@nQueen/models/interfaces';
+import { createSlice } from '@reduxjs/toolkit';
 import { size } from '@nQueen/config';
-import { initChessBoard } from '../algorithms/n-queen';
-import { ChessBoard } from '../models/types';
+import { ChessBoard } from '@nQueen/models/types';
+import { initChessBoard } from '@nQueen/helpers/board.helper';
 
 const initialState: AppState = {
   size: size,

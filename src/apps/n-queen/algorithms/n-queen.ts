@@ -1,63 +1,76 @@
-import { ChessBoard } from '../models/types';
+import { ChessBoard } from '@nQueen/models/types';
 
-export function initChessBoard(queens: number): ChessBoard {
-  return Array.from({ length: queens }, () => Array(queens).fill(false));
-}
-
-function checkColumn(board: ChessBoard, row: number, col: number): boolean {
-  for (let i = row - 1; i >= 0; i--) {
-    if (board[i][col]) {
-      return false;
-    }
-  }
-  return true;
-}
-
-function checkLeftDiagonal(
+export function hasQueenInLeftDiagonal(
   board: ChessBoard,
   row: number,
   col: number
-): boolean {
+) {
   for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
     if (board[i][j]) {
-      return false;
+      return true;
     }
   }
-  return true;
+  return false;
 }
 
-function checkRightDiagonal(
+export function hasQueenInRightDiagonal(
   board: ChessBoard,
   row: number,
   col: number
-): boolean {
+) {
   const size = board.length;
   for (let i = row - 1, j = col + 1; i >= 0 && j < size; i--, j++) {
     if (board[i][j]) {
-      return false;
+      return true;
     }
   }
-  return true;
+  return false;
 }
 
-function isValidQueen(board: ChessBoard, row: number, col: number): boolean {
+export function isValidQueenPosition(
+  board: ChessBoard,
+  row: number,
+  col: number
+) {
   return (
-    checkColumn(board, row, col) &&
-    checkLeftDiagonal(board, row, col) &&
-    checkRightDiagonal(board, row, col)
+    !hasQueenInLeftDiagonal(board, row, col) &&
+    !hasQueenInRightDiagonal(board, row, col)
   );
 }
 
-export function nQueen(board: ChessBoard, row: number) {
+export function getCandidates(array: boolean[]) {
+  const candidates = [];
+  for (let i = 0; i < array.length; i++) {
+    if (!array[i]) {
+      candidates.push(i);
+    }
+  }
+
+  return candidates;
+}
+
+export function nQueen(
+  board: ChessBoard,
+  row: number,
+  filledColumns = Array(board.length).fill(false)
+) {
   if (row >= board.length) {
     return true;
   }
 
-  for (let col = 0; col < board.length; col++) {
+  const candidates = getCandidates(filledColumns);
+  for (const col of candidates) {
     board[row][col] = true;
-    if (isValidQueen(board, row, col) && nQueen(board, row + 1)) {
+    filledColumns[col] = true;
+
+    if (
+      isValidQueenPosition(board, row, col) &&
+      nQueen(board, row + 1, filledColumns)
+    ) {
       return true;
     }
+
+    filledColumns[col] = false;
     board[row][col] = false;
   }
 
