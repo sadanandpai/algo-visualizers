@@ -1,10 +1,10 @@
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { nQueen } from '@nQueen/algorithms/n-queen';
 import { defaultSpeeds, speeds } from '@nQueen/config';
-import { Play, RefreshCcw } from 'lucide-react';
-import { useState } from 'react';
-import styles from './controller.module.scss';
-import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { setBoard, setSize } from '@nQueen/store/n-queen.slice';
+import { Play, RefreshCcw } from 'lucide-react';
+import styles from './controller.module.scss';
 
 const defaultSpeed = defaultSpeeds.desktop;
 
