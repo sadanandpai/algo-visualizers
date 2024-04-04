@@ -30,7 +30,9 @@ function Grid() {
             data-col={colIndex}
             data-cell-type={cellType}
             className={classes['type' + cellType]}
-            disabled={status === Status.Searching}
+            disabled={
+              status === Status.Searching || status === Status.Generating
+            }
           ></button>
         ))
       )}
