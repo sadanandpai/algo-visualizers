@@ -31,11 +31,20 @@ export function hasQueenInLeftDiagonal(
   row: number,
   col: number
 ) {
+  // left top
   for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
     if (board[i][j]) {
       return true;
     }
   }
+
+  // left bottom
+  for (let i = row + 1, j = col - 1; i < board.length && j >= 0; i++, j--) {
+    if (board[i][j]) {
+      return true;
+    }
+  }
+
   return false;
 }
 
@@ -45,11 +54,21 @@ export function hasQueenInRightDiagonal(
   col: number
 ) {
   const size = board.length;
+
+  // right top
   for (let i = row - 1, j = col + 1; i >= 0 && j < size; i--, j++) {
     if (board[i][j]) {
       return true;
     }
   }
+
+  // right bottom
+  for (let i = row + 1, j = col + 1; i < size && j < size; i++, j++) {
+    if (board[i][j]) {
+      return true;
+    }
+  }
+
   return false;
 }
 
@@ -65,18 +84,11 @@ export function hasQueenInDiagonals(
 }
 
 export function getEligibleRows(board: ChessBoard) {
-  const rows: number[] = [];
-  board.forEach((row, index) => {
-    if (row.every((col) => !col)) {
-      rows.push(index);
-    }
-  });
-
-  return rows;
+  return board.map((row) => !row.every((cell) => !cell));
 }
 
 export function getEligibleColumns(board: ChessBoard) {
-  const columns = [];
+  const columns: boolean[] = [];
   const size = board.length;
   for (let col = 0; col < size; col++) {
     let count = 0;
@@ -86,9 +98,7 @@ export function getEligibleColumns(board: ChessBoard) {
       }
     }
 
-    if (count === size) {
-      columns.push(col);
-    }
+    columns.push(count !== size);
   }
 
   return columns;

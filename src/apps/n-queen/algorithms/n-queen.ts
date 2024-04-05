@@ -14,21 +14,23 @@ export function getCandidates(array: boolean[]) {
 
 export function nQueen(
   board: ChessBoard,
-  row: number,
+  filledRows = Array(board.length).fill(false),
   filledColumns = Array(board.length).fill(false)
 ) {
-  if (row >= board.length) {
+  if (filledRows.every((row) => row)) {
     return true;
   }
 
-  const candidates = getCandidates(filledColumns);
-  for (const col of candidates) {
+  const row = getCandidates(filledRows)[0];
+  filledRows[row] = true;
+  const colCandidates = getCandidates(filledColumns);
+  for (const col of colCandidates) {
     board[row][col] = true;
     filledColumns[col] = true;
 
     if (
       !hasQueenInDiagonals(board, row, col) &&
-      nQueen(board, row + 1, filledColumns)
+      nQueen(board, filledRows, filledColumns)
     ) {
       return true;
     }
@@ -37,5 +39,6 @@ export function nQueen(
     board[row][col] = false;
   }
 
+  filledRows[row] = false;
   return false;
 }

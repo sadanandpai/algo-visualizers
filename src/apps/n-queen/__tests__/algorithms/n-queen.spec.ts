@@ -2,8 +2,13 @@ import { getCandidates, nQueen } from '@nQueen/algorithms/n-queen';
 
 describe('N-Queen', () => {
   it('should return a valid solution for 4x4 board', () => {
-    const board = Array.from(Array(4)).map(() => Array(4).fill(false));
-    const result = nQueen(board, 0);
+    const n = 4;
+    const board = Array.from(Array(n)).map(() => Array(n).fill(false));
+    const result = nQueen(
+      board,
+      new Array(n).fill(false),
+      new Array(n).fill(false)
+    );
     expect(result).toBe(true);
     expect(board).toMatchInlineSnapshot(`
       [
@@ -36,8 +41,13 @@ describe('N-Queen', () => {
   });
 
   it('should return a valid solution for 8x8 board', () => {
-    const board = Array.from(Array(8)).map(() => Array(8).fill(false));
-    const result = nQueen(board, 0);
+    const n = 8;
+    const board = Array.from(Array(n)).map(() => Array(n).fill(false));
+    const result = nQueen(
+      board,
+      new Array(n).fill(false),
+      new Array(n).fill(false)
+    );
     expect(result).toBe(true);
     expect(board).toMatchInlineSnapshot(`
       [
