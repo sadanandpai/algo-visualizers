@@ -21,7 +21,7 @@ function Grid() {
   };
 
   return (
-    <div className={classes.grid} style={gridStyle} ref={ref}>
+    <div className={classes.grid} style={gridStyle} id="grid" ref={ref}>
       {grid.map((row, rowIndex) =>
         row.map((cellType, colIndex) => (
           <button
