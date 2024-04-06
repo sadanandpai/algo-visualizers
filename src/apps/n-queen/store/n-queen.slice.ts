@@ -22,8 +22,16 @@ export const nQueenSlice = createSlice({
     setBoard: (state, action: PayloadAction<ChessBoard>) => {
       state.board = action.payload;
     },
+
+    updateBoard: (
+      state,
+      action: PayloadAction<{ row: number; col: number }>
+    ) => {
+      const { row, col } = action.payload;
+      state.board[row][col] = !state.board[row][col];
+    },
   },
 });
 
-export const { setSize, setBoard } = nQueenSlice.actions;
+export const { setSize, setBoard, updateBoard } = nQueenSlice.actions;
 export default nQueenSlice.reducer;

@@ -1,42 +1,5 @@
 import { ChessBoard } from '@nQueen/models/types';
-
-export function hasQueenInLeftDiagonal(
-  board: ChessBoard,
-  row: number,
-  col: number
-) {
-  for (let i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
-    if (board[i][j]) {
-      return true;
-    }
-  }
-  return false;
-}
-
-export function hasQueenInRightDiagonal(
-  board: ChessBoard,
-  row: number,
-  col: number
-) {
-  const size = board.length;
-  for (let i = row - 1, j = col + 1; i >= 0 && j < size; i--, j++) {
-    if (board[i][j]) {
-      return true;
-    }
-  }
-  return false;
-}
-
-export function isValidQueenPosition(
-  board: ChessBoard,
-  row: number,
-  col: number
-) {
-  return (
-    !hasQueenInLeftDiagonal(board, row, col) &&
-    !hasQueenInRightDiagonal(board, row, col)
-  );
-}
+import { hasQueenInDiagonals } from '@nQueen/helpers/board.helper';
 
 export function getCandidates(array: boolean[]) {
   const candidates = [];
@@ -51,21 +14,23 @@ export function getCandidates(array: boolean[]) {
 
 export function nQueen(
   board: ChessBoard,
-  row: number,
+  filledRows = Array(board.length).fill(false),
   filledColumns = Array(board.length).fill(false)
 ) {
-  if (row >= board.length) {
+  if (filledRows.every((row) => row)) {
     return true;
   }
 
-  const candidates = getCandidates(filledColumns);
-  for (const col of candidates) {
+  const row = getCandidates(filledRows)[0];
+  filledRows[row] = true;
+  const colCandidates = getCandidates(filledColumns);
+  for (const col of colCandidates) {
     board[row][col] = true;
     filledColumns[col] = true;
 
     if (
-      isValidQueenPosition(board, row, col) &&
-      nQueen(board, row + 1, filledColumns)
+      !hasQueenInDiagonals(board, row, col) &&
+      nQueen(board, filledRows, filledColumns)
     ) {
       return true;
     }
@@ -74,5 +39,6 @@ export function nQueen(
     board[row][col] = false;
   }
 
+  filledRows[row] = false;
   return false;
 }

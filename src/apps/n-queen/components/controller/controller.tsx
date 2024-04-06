@@ -1,10 +1,15 @@
+import { useState } from 'react';
+import { Play, RefreshCcw } from 'lucide-react';
+import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { nQueen } from '@nQueen/algorithms/n-queen';
 import { defaultSpeeds, speeds } from '@nQueen/config';
-import { Play, RefreshCcw } from 'lucide-react';
-import { useState } from 'react';
-import styles from './controller.module.scss';
-import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
+import {
+  getBoardValidity,
+  getEligibleColumns,
+  getEligibleRows,
+} from '@nQueen/helpers/board.helper';
 import { setBoard, setSize } from '@nQueen/store/n-queen.slice';
+import styles from './controller.module.scss';
 
 const defaultSpeed = defaultSpeeds.desktop;
 
@@ -26,9 +31,23 @@ function Controller() {
   }
 
   function handlePlay() {
+    const isValidBoard = getBoardValidity(board);
+    if (!isValidBoard) {
+      alert('Invalid board');
+      return;
+    }
+
     const newBoard = board.map((row) => row.slice());
-    nQueen(newBoard, 0);
+    const hasSolution = nQueen(
+      newBoard,
+      getEligibleRows(board),
+      getEligibleColumns(board)
+    );
     dispatch(setBoard(newBoard));
+
+    if (!hasSolution) {
+      alert('No solution found');
+    }
   }
 
   return (
