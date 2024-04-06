@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { Play, RefreshCcw } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { nQueen } from '@nQueen/algorithms/n-queen';
 import { defaultSpeeds, speeds } from '@nQueen/config';
@@ -9,6 +7,8 @@ import {
   getEligibleRows,
 } from '@nQueen/helpers/board.helper';
 import { setBoard, setSize } from '@nQueen/store/n-queen.slice';
+import { Play, RefreshCcw } from 'lucide-react';
+import { useState } from 'react';
 import styles from './controller.module.scss';
 
 const defaultSpeed = defaultSpeeds.desktop;
@@ -28,6 +28,10 @@ function Controller() {
   function handleSetQueen(e: React.ChangeEvent<HTMLInputElement>) {
     const totalQueens = e.target.value;
     dispatch(setSize(parseInt(totalQueens)));
+  }
+
+  function handleClear() {
+    dispatch(setSize(size));
   }
 
   function handlePlay() {
@@ -81,11 +85,7 @@ function Controller() {
       >
         <Play size={20} />
       </button>
-      <button
-        data-testid="clear"
-        // onClick={handleClear}
-        data-tooltip="clear"
-      >
+      <button data-testid="clear" onClick={handleClear} data-tooltip="clear">
         <RefreshCcw size={20} />
       </button>
     </section>
