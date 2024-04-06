@@ -1,24 +1,28 @@
+@use '../../../../host/styles/_colors.scss' as col;
+$queenPath: '/public/icons/queen.svg';
+
 .board {
   margin: auto;
   width: max-content;
   border: 1px solid black;
-  & .cell {
-    width: 15px;
-    height: 15px;
-    border: 1px solid black;
-    background-color: rgb(255, 159, 28);
-  }
-}
-
-.header {
-  // &input[type='number'] {
-  //   width: 500px;
-  // }
-  &.input-queen {
-    width: 500px;
+  .row {
+    display: flex;
+    text-align: center;
+    .cell {
+      width: 75px;
+      height: 75px;
+      border: 1px solid col.$black;
+      &.evenCell {
+        background-color: col.$white2;
+      }
+      &.oddCell {
+        background-color: col.$boardGreen1;
+      }
+    }
   }
 }
 
 [data-value='true'] {
-  background-color: rgb(255, 159, 28);
+  background: url('#{$queenPath}') no-repeat center center;
+  background-size: 40px 40px;
 }
