@@ -17,10 +17,14 @@ function Board() {
   return (
     <div className={styles.board}>
       {board.map((row, rowIndex) => (
-        <div key={`${rowIndex}`} className="flex text-center">
+        <div key={`${rowIndex}`} className={styles.row}>
           {row.map((value, colIndex) => (
             <button
-              className="p-5 text-center w-16 h-16 border border-1-black"
+              className={`${styles.cell} ${
+                (rowIndex + colIndex) % 2 === 0
+                  ? styles.evenCell
+                  : styles.oddCell
+              }`}
               data-value={value}
               data-row={rowIndex}
               data-col={colIndex}
