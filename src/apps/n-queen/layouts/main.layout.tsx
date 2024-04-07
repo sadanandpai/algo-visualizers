@@ -6,7 +6,7 @@ import Controller from '@nQueen/components/controller/controller';
 function MainLayout() {
   return (
     <>
-      <ThemeIcon bottom={10} right={20} />
+      <ThemeIcon top={10} right={20} />
       <Navbar title="N Queen Visualizer"></Navbar>
       <Controller />
       <main className="text-center">
