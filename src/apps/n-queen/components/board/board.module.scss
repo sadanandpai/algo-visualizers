@@ -1,5 +1,5 @@
-@use '../../../../host/styles/_colors.scss' as col;
-$queenPath: '/public/icons/queen.svg';
+@import '/src/host/styles/_colors';
+$queenPath: '/icons/queen.svg';
 
 .board {
   margin: auto;
@@ -11,12 +11,12 @@ $queenPath: '/public/icons/queen.svg';
     .cell {
       width: 75px;
       height: 75px;
-      border: 1px solid col.$black;
+      border: 1px solid $black;
       &.evenCell {
-        background-color: col.$white2;
+        background-color: $white2;
       }
       &.oddCell {
-        background-color: col.$boardGreen1;
+        background-color: $boardGreen1;
       }
     }
   }
