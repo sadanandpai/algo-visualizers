@@ -1,0 +1,21 @@
+@use '/src/host/styles/theme';
+$queenPath: '/icons/queen.svg';
+
+.cell {
+  width: 75px;
+  height: 75px;
+  outline: 1px solid var(--nq-cell-border);
+
+  &.evenCell {
+    background-color: var(--nq-even-cell);
+  }
+
+  &.oddCell {
+    background-color: var(--nq-odd-cell);
+  }
+}
+
+[data-value='true'] {
+  background: url('#{$queenPath}') no-repeat center center;
+  background-size: 40px 40px;
+}
