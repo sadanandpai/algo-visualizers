@@ -1,7 +1,3 @@
-@use '/src/host/styles/theme';
-
-$queenPath: '/icons/queen.svg';
-
 .board {
   margin: auto;
   width: max-content;
@@ -9,24 +5,5 @@ $queenPath: '/icons/queen.svg';
   .row {
     display: flex;
     text-align: center;
-
-    .cell {
-      width: 75px;
-      height: 75px;
-      outline: 1px solid var(--nq-cell-border);
-
-      &.evenCell {
-        background-color: var(--nq-even-cell);
-      }
-
-      &.oddCell {
-        background-color: var(--nq-odd-cell);
-      }
-    }
   }
-}
-
-[data-value='true'] {
-  background: url('#{$queenPath}') no-repeat center center;
-  background-size: 40px 40px;
 }
