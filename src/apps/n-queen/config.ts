@@ -15,3 +15,14 @@ export const defaultSpeeds = {
 };
 
 export const size = 4;
+
+export const colors = {
+  oddCell: '#50c878',
+  evenCell: 'white',
+  border: 'black',
+};
+
+const root = document.querySelector(':root') as HTMLElement;
+root.style.setProperty('--nq-odd-cell', colors.oddCell);
+root.style.setProperty('--nq-even-cell', colors.evenCell);
+root.style.setProperty('--nq-cell-border', colors.border);

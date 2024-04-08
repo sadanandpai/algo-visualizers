@@ -1,4 +1,4 @@
-@import '/src/host/styles/_colors';
+@use '/src/host/styles/theme';
 
 .controller {
   display: flex;
@@ -10,8 +10,9 @@
   .queenRange {
     width: 300px;
   }
+
   .speed {
     width: 150px;
-    border: 1px solid $black;
+    border: 1px solid theme.$base;
   }
 }

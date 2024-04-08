@@ -1,22 +1,26 @@
-@import '/src/host/styles/_colors';
+@use '/src/host/styles/theme';
+
 $queenPath: '/icons/queen.svg';
 
 .board {
   margin: auto;
   width: max-content;
-  border: 1px solid black;
+
   .row {
     display: flex;
     text-align: center;
+
     .cell {
       width: 75px;
       height: 75px;
-      border: 1px solid $black;
+      outline: 1px solid var(--nq-cell-border);
+
       &.evenCell {
-        background-color: $white2;
+        background-color: var(--nq-even-cell);
       }
+
       &.oddCell {
-        background-color: $boardGreen1;
+        background-color: var(--nq-odd-cell);
       }
     }
   }
