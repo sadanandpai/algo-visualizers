@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { SortAsyncGenerator } from '@sortViz/models/types';
-import { resolveWhenPlaying } from '@sortViz/store/global.state';
+import { simulator } from '@sortViz/store/global.state';
 
 function useAlgo(
   array: number[],
@@ -19,7 +19,7 @@ function useAlgo(
   const compareCount = useRef(0);
 
   const fn = async () => {
-    await resolveWhenPlaying;
+    await simulator.isPlayingPromise;
 
     for await (const data of it.current) {
       setSwaps([-1, -1]);

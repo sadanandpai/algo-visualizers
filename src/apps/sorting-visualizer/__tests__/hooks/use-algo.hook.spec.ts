@@ -1,5 +1,5 @@
 import {
-  playSimulation,
+  simulator,
   setHighlightInterval,
   setSwapInterval,
 } from '@sortViz/store/global.state';
@@ -14,7 +14,7 @@ describe('useAlgo hook', () => {
   beforeAll(() => {
     setSwapInterval(0);
     setHighlightInterval(0);
-    playSimulation();
+    simulator.start();
   });
 
   it('should sort initial array', async () => {

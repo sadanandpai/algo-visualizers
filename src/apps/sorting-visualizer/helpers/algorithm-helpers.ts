@@ -1,6 +1,6 @@
 import {
   highlightInterval,
-  resolveWhenPlaying,
+  simulator,
   swapInterval,
 } from '@sortViz/store/global.state';
 
@@ -12,7 +12,7 @@ export async function* swap(
   i: number,
   j: number
 ): SortAsyncGenerator {
-  await resolveWhenPlaying;
+  await simulator.isPlayingPromise;
 
   const temp = array[i];
   array[i] = array[j];
@@ -21,18 +21,18 @@ export async function* swap(
   yield { type: 'swap', positions: [i, j] };
   await delay(swapInterval);
 
-  await resolveWhenPlaying;
+  await simulator.isPlayingPromise;
 }
 
 export async function* highlight(...positions: number[]): SortAsyncGenerator {
   yield { type: 'highlight', positions: [-1, -1] };
   await delay(highlightInterval);
-  await resolveWhenPlaying;
+  await simulator.isPlayingPromise;
 
   yield { type: 'highlight', positions };
   await delay(highlightInterval);
 
-  await resolveWhenPlaying;
+  await simulator.isPlayingPromise;
 }
 
 export async function* showPivot(position: number): SortAsyncGenerator {
@@ -44,7 +44,7 @@ export async function* sort(position: number): SortAsyncGenerator {
 }
 
 export async function* move(...positions: number[]): SortAsyncGenerator {
-  await resolveWhenPlaying;
+  await simulator.isPlayingPromise;
   yield { type: 'move', positions };
   await delay(swapInterval);
 }

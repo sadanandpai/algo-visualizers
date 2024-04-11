@@ -1,8 +1,7 @@
 import { initialArray, selectedAlgosStatus } from '@sortViz/config';
 import {
   maxInterval,
-  pauseSimulation,
-  playSimulation,
+  simulator,
   setHighlightInterval,
   setSwapInterval,
 } from './global.state';
@@ -42,7 +41,7 @@ export const sortingVisualizerSlice = createSlice({
 
     setIsPlaying: (state, action: PayloadAction<boolean | null>) => {
       state.isPlaying = action.payload;
-      action.payload ? playSimulation() : pauseSimulation();
+      action.payload ? simulator.start() : simulator.pause();
 
       if (!state.isPlaying && state.timeIntervalId) {
         clearInterval(state.timeIntervalId);
@@ -60,7 +59,7 @@ export const sortingVisualizerSlice = createSlice({
 
     setReset: (state) => {
       state.reset = !state.reset;
-      pauseSimulation();
+      simulator.pause();
       state.time = 0;
     },
 

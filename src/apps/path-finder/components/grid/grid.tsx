@@ -21,7 +21,7 @@ function Grid() {
   };
 
   return (
-    <div className={classes.grid} style={gridStyle} ref={ref}>
+    <div className={classes.grid} style={gridStyle} id="grid" ref={ref}>
       {grid.map((row, rowIndex) =>
         row.map((cellType, colIndex) => (
           <button
@@ -30,7 +30,9 @@ function Grid() {
             data-col={colIndex}
             data-cell-type={cellType}
             className={classes['type' + cellType]}
-            disabled={status === Status.Searching}
+            disabled={
+              status === Status.Searching || status === Status.Generating
+            }
           ></button>
         ))
       )}
