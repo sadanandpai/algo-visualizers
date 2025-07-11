@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20.11.1
+          node-version: 22.17.0
 
       - name: Setup git config
         run: |
@@ -23,7 +23,7 @@ jobs:
           git config user.email "sadypai@gmail.com"
 
       - name: NPM installation
-        run: npm install
+        run: npm ci
 
       - name: Lint check
         run: npm run lint

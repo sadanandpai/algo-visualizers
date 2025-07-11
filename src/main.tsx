@@ -1,3 +1,4 @@
+import './index.css';
 import './index.scss';
 
 import { persistor, store } from './host/store/store';

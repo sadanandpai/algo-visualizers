@@ -1,19 +1,25 @@
-import classes from './grid.module.scss';
-import { useAppSelector } from '@/host/store/hooks';
-import { useRef } from 'react';
 import { Status } from '@pathFinder/models';
 import { cellSize } from '@pathFinder/config';
-import { useTouch } from '@pathFinder/hooks/use-touch.hook';
-import { useMouse } from '@pathFinder/hooks/use-mouse.hook';
+import classes from './grid.module.scss';
 import { isTouchDevice } from '@pathFinder/helpers/action.helper';
+import { useAppSelector } from '@/host/store/hooks';
+import { useMouse } from '@pathFinder/hooks/use-mouse.hook';
+import { useRef } from 'react';
+import { useTouch } from '@pathFinder/hooks/use-touch.hook';
 
 function Grid() {
   const grid = useAppSelector((state) => state.pathFinder.grid);
   const status = useAppSelector((state) => state.pathFinder.status);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
-  useMouse({ isMobile: isTouchDevice(), ref });
-  useTouch({ isMobile: isTouchDevice(), ref });
+  useMouse({
+    isMobile: isTouchDevice(),
+    ref: ref as React.RefObject<HTMLDivElement>,
+  });
+  useTouch({
+    isMobile: isTouchDevice(),
+    ref: ref as React.RefObject<HTMLDivElement>,
+  });
 
   const gridStyle: React.CSSProperties = {
     gridTemplateRows: `repeat(${grid.length}, ${cellSize}px)`,

@@ -1,7 +1,7 @@
 {
   "name": "algo-visualizers",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "license": "MIT",
   "author": {
@@ -20,53 +20,54 @@
     "e2e:test": "start-server-and-test dev http://localhost:5173 cypress:run"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.2",
-    "lucide-react": "^0.350.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-joyride": "^2.8.0",
-    "react-redux": "^9.1.0",
-    "react-router-dom": "^6.22.3",
-    "react-switch": "^7.0.0",
-    "react-use": "^17.5.0",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@tailwindcss/vite": "^4.1.11",
+    "lucide-react": "^0.525.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-joyride": "^3.0.0-7",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.6.3",
+    "react-switch": "^7.1.0",
+    "react-use": "^17.6.0",
     "redux-persist": "^6.0.0",
-    "sonner": "^1.4.41"
+    "sonner": "^2.0.6"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^14.2.2",
-    "@types/node": "^20.11.30",
-    "@types/react": "^18.2.67",
-    "@types/react-dom": "^18.2.22",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^24.0.13",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
-    "autoprefixer": "^10.4.19",
-    "cypress": "^13.7.1",
-    "eslint": "^8.57.0",
+    "autoprefixer": "^10.4.21",
+    "cypress": "^14.5.1",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "eslint-plugin-unused-imports": "^3.1.0",
-    "jsdom": "^23.2.0",
-    "postcss": "^8.4.38",
-    "sass": "^1.72.0",
-    "start-server-and-test": "^2.0.3",
-    "stylelint": "^16.2.1",
-    "stylelint-config-recess-order": "^4.6.0",
-    "stylelint-config-standard": "^36.0.0",
-    "stylelint-config-standard-scss": "^12.0.0",
-    "tailwindcss": "^3.4.3",
-    "typescript": "^5.4.3",
-    "vite": "^5.2.7",
-    "vitest": "^1.4.0"
+    "jsdom": "^26.1.0",
+    "postcss": "^8.5.6",
+    "sass": "^1.89.2",
+    "start-server-and-test": "^2.0.12",
+    "stylelint": "^16.21.1",
+    "stylelint-config-recess-order": "^7.1.0",
+    "stylelint-config-standard": "^38.0.0",
+    "stylelint-config-standard-scss": "^15.0.1",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
   },
   "engines": {
-    "node": ">=20.11.1"
+    "node": ">=22.17.0"
   },
   "volta": {
-    "node": "20.11.1"
+    "node": "22.17.0"
   },
   "homepage": "https://github.com/sadanandpai/algo-visualizers"
 }
