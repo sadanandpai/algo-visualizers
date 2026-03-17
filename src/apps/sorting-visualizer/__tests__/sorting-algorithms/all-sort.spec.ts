@@ -1,12 +1,12 @@
 import {
-  simulator,
   setHighlightInterval,
   setSwapInterval,
+  simulator,
 } from '@sortViz/store/global.state';
 
 import { algoList } from '@sortViz/sorting-algorithms/algo-list';
-import { initialArray } from '@sortViz/config';
 import { getRndmNumInRange } from '@sortViz/helpers/array-helpers';
+import { initialArray } from '@sortViz/config';
 
 describe('bubble sort', () => {
   beforeAll(() => {
@@ -29,7 +29,7 @@ describe('bubble sort', () => {
   });
 
   it('should sort random array of small length', async () => {
-    const smallArray = Array.from(new Array(10), () => getRndmNumInRange());
+    const smallArray = Array.from({ length: 10 }, () => getRndmNumInRange());
 
     for (const algo of algoList) {
       const array = [...smallArray];
@@ -45,7 +45,7 @@ describe('bubble sort', () => {
   });
 
   it('should sort random array of large length', async () => {
-    const largeArray = Array.from(new Array(30), () => getRndmNumInRange());
+    const largeArray = Array.from({ length: 30 }, () => getRndmNumInRange());
 
     for (const algo of algoList) {
       const array = [...largeArray];

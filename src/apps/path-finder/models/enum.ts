@@ -15,7 +15,7 @@ export enum Status {
 }
 
 export enum Speed {
-  Infinity = '∞',
+  Unlimited = '∞',
   '4x' = '4x',
   '2x' = '2x',
   '1x' = '1x',

@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 function useTimer() {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const timer = useRef<NodeJS.Timeout | null>(null);
+  const timer = useRef<number | null>(null);
 
   function startTimer() {
     setIsRunning(true);

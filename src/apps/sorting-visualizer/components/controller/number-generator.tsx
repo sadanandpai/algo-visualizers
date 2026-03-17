@@ -19,7 +19,7 @@ function NumberGenerator({ setInput }: NumberGenProps) {
 
   const onGenerate = () => {
     let newInput = Array.from(
-      new Array(getRndmNumInRange(limits.min, limits.max)),
+      { length: getRndmNumInRange(limits.min, limits.max) },
       () => getRndmNumInRange()
     );
 

@@ -1,5 +1,5 @@
-import { cellSize } from '@pathFinder/config';
 import { CellType } from '@pathFinder/models';
+import { cellSize } from '@pathFinder/config';
 
 function getRandom(max: number) {
   return Math.floor(Math.random() * max);
@@ -10,7 +10,9 @@ export function generateGrid<T>(
   cols: number,
   value: T | null = null
 ): T[][] {
-  return Array.from(new Array(rows), () => new Array(cols).fill(value));
+  return Array.from({ length: rows }, () =>
+    Array.from({ length: cols }, () => value as T)
+  );
 }
 
 export function initGrid(rows: number, cols: number) {

@@ -1,0 +1,10 @@
+{
+  "ignorePatterns": [
+    "*.config.ts",
+    "*.config.js",
+    "dist/**",
+    "node_modules/**",
+    "docs/**"
+  ],
+  "plugins": ["react", "react-hooks", "typescript"]
+}

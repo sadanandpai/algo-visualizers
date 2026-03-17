@@ -3,7 +3,7 @@ import { Speed } from '@pathFinder/models/enum';
 export const cellSize = 25;
 
 export const speeds: Map<Speed, number> = new Map([
-  [Speed.Infinity, 0],
+  [Speed.Unlimited, 0],
   [Speed['4x'], 1],
   [Speed['2x'], 25],
   [Speed['1x'], 50],

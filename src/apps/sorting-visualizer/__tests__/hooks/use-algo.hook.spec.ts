@@ -1,9 +1,9 @@
+import { renderHook, waitFor } from '@testing-library/react';
 import {
-  simulator,
   setHighlightInterval,
   setSwapInterval,
+  simulator,
 } from '@sortViz/store/global.state';
-import { renderHook, waitFor } from '@testing-library/react';
 
 import { algoList } from '@sortViz/sorting-algorithms/algo-list';
 import { getRndmNumInRange } from '@sortViz/helpers/array-helpers';
@@ -29,7 +29,7 @@ describe('useAlgo hook', () => {
   });
 
   it('should sort random array of small length', async () => {
-    const smallArray = Array.from(new Array(10), () => getRndmNumInRange());
+    const smallArray = Array.from({ length: 10 }, () => getRndmNumInRange());
 
     for (const algo of algoList) {
       const array = [...smallArray];
@@ -43,7 +43,7 @@ describe('useAlgo hook', () => {
   });
 
   it('should sort random array of large length', async () => {
-    const largeArray = Array.from(new Array(25), () => getRndmNumInRange());
+    const largeArray = Array.from({ length: 25 }, () => getRndmNumInRange());
 
     for (const algo of algoList) {
       const array = [...largeArray];

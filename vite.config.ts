@@ -1,5 +1,6 @@
+import { URL, fileURLToPath } from 'node:url';
+
 import { defineConfig } from 'vite';
-import path from 'path';
 import react from '@vitejs/plugin-react-swc';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -8,9 +9,13 @@ export default defineConfig({
   plugins: [tailwindcss(), react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@sortViz': path.resolve(__dirname, './src/apps/sorting-visualizer'),
-      '@pathFinder': path.resolve(__dirname, './src/apps/path-finder'),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@sortViz': fileURLToPath(
+        new URL('./src/apps/sorting-visualizer', import.meta.url)
+      ),
+      '@pathFinder': fileURLToPath(
+        new URL('./src/apps/path-finder', import.meta.url)
+      ),
     },
   },
   base: '/algo-visualizers/',

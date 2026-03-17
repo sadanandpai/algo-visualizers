@@ -49,6 +49,6 @@ export interface AppState {
   reset: boolean;
   time: number;
   speed: number;
-  timeIntervalId: NodeJS.Timeout | null;
+  timeIntervalId: number | null;
   selectedAlgosStatus: boolean[];
 }

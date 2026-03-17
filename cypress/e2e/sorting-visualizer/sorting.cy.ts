@@ -62,9 +62,8 @@ describe('sorting', () => {
   });
 
   it('should verify sorting for random small array', () => {
-    const { inputArrayText, inputArrayTextSorted } = setTheInput(
-      Array.from(new Array(10), () => getRndmNumInRange())
-    );
+    const smallArray = Array.from({ length: 10 }, () => getRndmNumInRange());
+    const { inputArrayText, inputArrayTextSorted } = setTheInput(smallArray);
 
     for (const algo of algorithms) {
       cy.get('a').contains(algo).click();
@@ -73,9 +72,8 @@ describe('sorting', () => {
   });
 
   it('should verify sorting for random large array', () => {
-    const { inputArrayText, inputArrayTextSorted } = setTheInput(
-      Array.from(new Array(25), () => getRndmNumInRange())
-    );
+    const largeArray = Array.from({ length: 25 }, () => getRndmNumInRange());
+    const { inputArrayText, inputArrayTextSorted } = setTheInput(largeArray);
 
     for (const algo of algorithms) {
       cy.get('a').contains(algo).click();
