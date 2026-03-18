@@ -7,7 +7,7 @@ const initialState: AppState = {
   theme: null,
 };
 
-export const appSlice = createSlice({
+const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {

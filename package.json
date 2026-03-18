@@ -17,7 +17,8 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "e2e:open": "start-server-and-test dev http://localhost:5173 cypress:open",
-    "e2e:test": "start-server-and-test dev http://localhost:5173 cypress:run"
+    "e2e:test": "start-server-and-test dev http://localhost:5173 cypress:run",
+    "knip": "knip"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
@@ -36,15 +37,14 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
-    "@types/node": "^24.0.13",
+    "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.3.0",
-    "autoprefixer": "^10.4.27",
     "cypress": "^15.12.0",
     "jsdom": "^29.0.0",
+    "knip": "^5.87.0",
     "oxlint": "^1.56.0",
-    "postcss": "^8.5.8",
     "sass": "^1.98.0",
     "start-server-and-test": "^2.1.5",
     "stylelint": "^16.21.1",
@@ -52,7 +52,7 @@
     "stylelint-config-standard": "^38.0.0",
     "stylelint-config-standard-scss": "^15.0.1",
     "tailwindcss": "^4.1.11",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.3",
     "vite": "^6.3.5",
     "vitest": "^4.1.0"
   },

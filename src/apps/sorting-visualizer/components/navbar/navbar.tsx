@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
+import Title from '@/lib/components/title/title';
 import classes from './navbar.module.scss';
 import hamIcon from '/icons/ham.svg';
 import { useState } from 'react';
-import Title from '@/lib/components/title/title';
 
-export interface Props {
+interface Props {
   title: string;
   menuItems: string[];
 }

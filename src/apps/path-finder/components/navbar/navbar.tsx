@@ -1,9 +1,9 @@
-import Title from '@/lib/components/title/title';
 import AppTour from '@pathFinder/components/app-tour/app-tour';
 import CellInfo from '@pathFinder/components/cell-info/cell-info';
+import Title from '@/lib/components/title/title';
 import classes from './navbar.module.scss';
 
-export interface Props {
+interface Props {
   title: string;
   children?: React.ReactNode;
 }
