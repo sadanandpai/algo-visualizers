@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "oxlint",
+    "lint": "oxlint && stylelint 'src/**/*.scss'",
     "preview": "vite preview",
     "test": "vitest",
     "cypress:open": "cypress open",

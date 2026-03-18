@@ -20,13 +20,13 @@
   .type3 {
     background-color: var(--pf-cell-wall);
     border-color: var(--pf-cell-wall);
-    animation: wallAnimation 0.5s;
+    animation: wall-animation 0.5s;
   }
 
   .type4 {
     background-color: var(--pf-cell-visited);
     border-color: var(--pf-cell-visited);
-    animation: visitedAnimation 1s;
+    animation: visited-animation 1s;
   }
 
   .type5 {
@@ -36,55 +36,55 @@
   }
 
   button {
-    border: 0.5px solid rgb(240, 240, 240);
+    border: 0.5px solid rgb(240 240 240);
   }
 }
 
 [data-theme='dark'] {
   .grid {
     button {
-      border-color: rgb(20, 20, 20);
+      border-color: rgb(20 20 20);
     }
   }
 }
 
-@keyframes visitedAnimation {
+@keyframes visited-animation {
   0% {
-    transform: scale(0.3);
-    border-radius: 50%;
     background-color: var(--pf-cell-visited-start);
+    border-radius: 50%;
+    transform: scale(0.3);
   }
 
   30% {
-    transform: scale(0.6);
-    border-radius: 65%;
     background-color: var(--pf-cell-visited-mid);
+    border-radius: 65%;
+    transform: scale(0.6);
   }
 
   60% {
-    transform: scale(1.05);
     border-radius: 80%;
+    transform: scale(1.05);
   }
 
   100% {
-    transform: scale(1);
     background-color: var(--pf-cell-visited);
+    transform: scale(1);
   }
 }
 
-@keyframes wallAnimation {
+@keyframes wall-animation {
   0% {
-    transform: scale(0.3);
     opacity: 0.75;
+    transform: scale(0.3);
   }
 
   50% {
-    transform: scale(1.2);
     opacity: 0.9;
+    transform: scale(1.2);
   }
 
   100% {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
 }

@@ -1,6 +1,6 @@
 import { URL, fileURLToPath } from 'node:url';
 
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react-swc';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -21,5 +21,11 @@ export default defineConfig({
   base: '/algo-visualizers/',
   build: {
     outDir: 'docs',
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './setup.js',
+    watch: false,
   },
 });

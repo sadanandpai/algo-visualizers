@@ -2,13 +2,13 @@
 
 .tourWrapper {
   display: none;
-  justify-content: center;
   flex-grow: 1;
   flex-basis: 0;
+  justify-content: center;
 
   .tour {
-    border: 1px solid theme.$base;
     padding: 2px 4px;
+    border: 1px solid theme.$base;
 
     &:disabled {
       opacity: 0.5;

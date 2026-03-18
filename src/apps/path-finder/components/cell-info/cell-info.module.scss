@@ -2,21 +2,21 @@
 
 .cellInfo {
   display: none;
-  justify-content: flex-end;
-  gap: 20px;
-  flex-basis: 0;
   flex-grow: 1;
+  flex-basis: 0;
+  gap: 20px;
+  justify-content: flex-end;
   margin-right: 60px;
 
   & > div {
     display: flex;
-    align-items: center;
     gap: 5px;
+    align-items: center;
   }
 
   .item {
-    height: 15px;
     width: 15px;
+    height: 15px;
   }
 
   .entry {

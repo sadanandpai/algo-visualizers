@@ -15,8 +15,8 @@
     content: attr(data-tooltip);
     background-color: #333;
     border-radius: 4px;
-    transition: opacity 0.3s ease-in-out;
     transform: translate(-50%, 100%);
+    transition: opacity 0.3s ease-in-out;
   }
 
   [data-tooltip]:hover::before {
