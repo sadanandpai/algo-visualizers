@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "ES2015",
-    "lib": ["ES2015", "dom"],
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["esnext", "dom"],
     "types": ["cypress", "node"],
     "strict": true,
+    "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
+      "utils/*": ["utils/*"],
       "@/*": ["../src/*"]
     }
   },
