@@ -12,7 +12,7 @@ export interface CellElement extends Cell {
 export interface AppState {
   rows: number;
   cols: number;
-  grid: number[][];
+  grid: CellType[][];
   entry: Cell;
   exit: Cell;
   status: Status;
@@ -21,11 +21,11 @@ export interface AppState {
 }
 
 export interface SearchAlgoProps {
-  grid: number[][];
+  grid: CellType[][];
   entry: Cell;
   exit: Cell;
   updateCells: (
-    grid: number[][],
+    grid: CellType[][],
     cells: Cell | Cell[],
     cellType?: CellType
   ) => Promise<void>;
@@ -36,9 +36,9 @@ export interface MazeAlgoProps {
   cols: number;
   entry: Cell;
   exit: Cell;
-  updateGrid: (grid: number[][]) => void;
+  updateGrid: (grid: CellType[][]) => void;
   updateCells: (
-    grid: number[][],
+    grid: CellType[][],
     cells: Cell | Cell[],
     cellType?: CellType
   ) => Promise<void>;

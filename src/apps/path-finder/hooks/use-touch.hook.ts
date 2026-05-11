@@ -71,7 +71,7 @@ export function useTouch({ isMobile, ref }: Props) {
 
     referenceEl.addEventListener('click', onClick);
     return () => {
-      referenceEl.removeEventListener('mousedown', onClick);
+      referenceEl.removeEventListener('click', onClick);
     };
   }, [isMobile, onClick, ref]);
 }
