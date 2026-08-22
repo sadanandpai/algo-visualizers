@@ -20,9 +20,6 @@ export default defineConfig({
     },
   },
   base: '/algo-visualizers/',
-  build: {
-    outDir: 'docs',
-  },
   test: {
     globals: true,
     environment: 'jsdom',

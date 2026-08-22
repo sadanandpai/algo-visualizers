@@ -1,28 +1,36 @@
-name: CI
+name: Deploy GitHub Pages
 
 on:
   push:
     branches: [main]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
         with:
           node-version: 24.14.0
+          cache: npm
 
-      - name: Setup git config
-        run: |
-          git config user.name "Sadanand Pai"
-          git config user.email "sadypai@gmail.com"
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      - name: NPM installation
+      - name: Install
         run: npm ci
 
       - name: Lint check
@@ -33,13 +41,21 @@ jobs:
           npm test
           npm run e2e:test
 
-      - name: Build setup
-        run: |
-          rm -rf dist
-          npm run build
-          git add docs -f
+      - name: Build
+        run: npm run build
 
-      - name: Commit & push
-        run:
-          git diff --staged --quiet || (git commit -m "build files - github
-          action" && git push)
+      - name: Upload dist
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
