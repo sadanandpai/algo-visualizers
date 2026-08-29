@@ -10,7 +10,7 @@ import { delay } from '@/lib/helpers/async';
 
 export function generateMaze(
   mazeAlgo: (props: MazeAlgoProps) => Promise<CellType[][]>,
-  delayDuration: number
+  delayDuration: number,
 ) {
   return async function (dispatch: AppDispatch, getState: () => RootState) {
     const state = getState().pathFinder;
@@ -31,7 +31,7 @@ export function generateMaze(
     async function updateCells(
       grid: CellType[][],
       cells: Cell | Cell[],
-      cellType = CellType.clear
+      cellType = CellType.clear,
     ) {
       if (!isGenerating()) {
         throw new Error('Maze generation cancelled');

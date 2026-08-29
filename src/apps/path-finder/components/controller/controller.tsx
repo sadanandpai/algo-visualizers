@@ -26,12 +26,15 @@ function Controller() {
       }
 
       dispatch(
-        setDimension({ rows: maxDimension.maxRows, cols: maxDimension.maxCols })
+        setDimension({
+          rows: maxDimension.maxRows,
+          cols: maxDimension.maxCols,
+        }),
       );
       dispatch(resetGrid());
     },
     333,
-    [width, height]
+    [width, height],
   );
 
   return (

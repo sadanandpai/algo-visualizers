@@ -17,7 +17,7 @@ function AllAlgorithmLayout() {
   const array = useAppSelector((state) => state.sortViz.array);
   const reset = useAppSelector((state) => state.sortViz.reset);
   const selectedAlgosStatus = useAppSelector(
-    (state) => state.sortViz.selectedAlgosStatus
+    (state) => state.sortViz.selectedAlgosStatus,
   );
 
   let selectedAlgos = algoList.filter((_, idx) => selectedAlgosStatus[idx]);

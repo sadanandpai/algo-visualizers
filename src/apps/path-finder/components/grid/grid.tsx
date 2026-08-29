@@ -40,7 +40,7 @@ function Grid() {
               status === Status.Searching || status === Status.Generating
             }
           ></button>
-        ))
+        )),
       )}
     </div>
   );

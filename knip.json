@@ -1,6 +1,7 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
-  "tags": [
-    "-lintignore"
-  ]
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "tags": ["-lintignore"],
+  "ignoreExportsUsedInFile": true,
+  "ignore": ["src/**/*.scss"],
+  "ignoreUnresolved": ["/assets/*"]
 }

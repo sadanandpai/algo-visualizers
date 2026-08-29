@@ -10,7 +10,7 @@ import classes from './controls.module.scss';
 function AlgoSelection() {
   const dispatch = useAppDispatch();
   const selectedAlgosStatus = useAppSelector(
-    (state) => state.sortViz.selectedAlgosStatus
+    (state) => state.sortViz.selectedAlgosStatus,
   );
 
   const handleOnChange = (position: number) => {

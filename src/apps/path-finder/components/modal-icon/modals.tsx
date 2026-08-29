@@ -37,7 +37,7 @@ const Modals = ({ content }: Props) => {
             ))}
           </div>
         </dialog>,
-        document.getElementById('modal')!
+        document.getElementById('modal')!,
       )}
     </>
   );

@@ -24,33 +24,30 @@ function ThemeIcon({
     ? Theme.DARK
     : Theme.LIGHT;
   const currentTheme = storeTheme ?? prefTheme;
+  const portalRoot = document.getElementById('screen-layout');
 
   useEffect(() => {
-    if (!storeTheme) {
-      document.documentElement.setAttribute('data-theme', prefTheme);
-    } else {
-      dispatch(setTheme(storeTheme));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const theme = storeTheme ?? prefTheme;
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [prefTheme, storeTheme]);
 
-  return (
-    <>
-      {createPortal(
-        <button
-          className={classes.iconBtn}
-          style={{ top, left, bottom, right }}
-          onClick={() =>
-            dispatch(
-              setTheme(currentTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT)
-            )
-          }
-        >
-          {currentTheme === Theme.LIGHT ? <Moon /> : <Sun color="black" />}
-        </button>,
-        document.getElementById('screen-layout')!
-      )}
-    </>
+  if (!portalRoot) {
+    return null;
+  }
+
+  return createPortal(
+    <button
+      className={classes.iconBtn}
+      style={{ top, left, bottom, right }}
+      onClick={() =>
+        dispatch(
+          setTheme(currentTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT),
+        )
+      }
+    >
+      {currentTheme === Theme.LIGHT ? <Moon /> : <Sun color="black" />}
+    </button>,
+    portalRoot,
   );
 }
 

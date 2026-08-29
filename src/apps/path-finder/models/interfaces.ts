@@ -27,7 +27,7 @@ export interface SearchAlgoProps {
   updateCells: (
     grid: CellType[][],
     cells: Cell | Cell[],
-    cellType?: CellType
+    cellType?: CellType,
   ) => Promise<void>;
 }
 
@@ -40,7 +40,7 @@ export interface MazeAlgoProps {
   updateCells: (
     grid: CellType[][],
     cells: Cell | Cell[],
-    cellType?: CellType
+    cellType?: CellType,
   ) => Promise<void>;
 }
 

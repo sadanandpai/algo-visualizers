@@ -12,7 +12,7 @@ function PathInfo() {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.pathFinder.status);
   const visitedCellCount = useAppSelector(
-    (state) => state.pathFinder.visitedCellCount
+    (state) => state.pathFinder.visitedCellCount,
   );
   const pathLength = useAppSelector((state) => state.pathFinder.pathLength);
 

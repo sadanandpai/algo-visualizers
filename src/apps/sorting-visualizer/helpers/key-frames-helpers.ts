@@ -2,7 +2,7 @@ import { cellCSS } from '@sortViz/config';
 import { swapInterval } from '@sortViz/store/global.state';
 
 const animationEl = document.querySelector(
-  '[data-id="animation-element"]'
+  '[data-id="animation-element"]',
 ) as HTMLStyleElement;
 
 function addAnimationRule(rule: string) {
@@ -27,8 +27,8 @@ export function getSwapAnimation(gap: number, time = 1000) {
     }
     75% {
         transform: translate(${gap * shiftSize}px, ${
-    Math.sign(gap) * (cellCSS.size + 5)
-  }px);
+          Math.sign(gap) * (cellCSS.size + 5)
+        }px);
     }
     100% {
         transform: translate(${gap * shiftSize}px, 0);

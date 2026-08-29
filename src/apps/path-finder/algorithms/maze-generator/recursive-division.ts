@@ -15,7 +15,7 @@ interface DrawWallConfig {
 
 export async function drawHorizontalWall(
   grid: CellType[][],
-  { updateCells, divisionPoint, passagePoint, start, end }: DrawWallConfig
+  { updateCells, divisionPoint, passagePoint, start, end }: DrawWallConfig,
 ) {
   for (let pos = start; pos <= end; pos++) {
     await updateCells(grid, { row: divisionPoint, col: pos }, CellType.wall);
@@ -25,7 +25,7 @@ export async function drawHorizontalWall(
 
 export async function drawVerticalWall(
   grid: CellType[][],
-  { updateCells, divisionPoint, passagePoint, start, end }: DrawWallConfig
+  { updateCells, divisionPoint, passagePoint, start, end }: DrawWallConfig,
 ) {
   for (let pos = start; pos <= end; pos++) {
     await updateCells(grid, { row: pos, col: divisionPoint }, CellType.wall);
@@ -46,7 +46,7 @@ export async function recursiveDivision(
     rowEnd: number;
     colStart: number;
     colEnd: number;
-  }
+  },
 ) {
   if (rowEnd - rowStart < 2 || colEnd - colStart < 2) {
     return;

@@ -5,7 +5,7 @@ function getAddToQueueIfAllowedFunction(
   grid: number[][],
   parents: Cell[][],
   visited: boolean[][],
-  queue: Cell[]
+  queue: Cell[],
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -44,7 +44,7 @@ export async function breadthFirstSearch({
     grid,
     parents,
     visited,
-    queue
+    queue,
   );
 
   while (queue.length) {

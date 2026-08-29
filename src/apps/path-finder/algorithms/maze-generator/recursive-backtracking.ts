@@ -6,7 +6,7 @@ async function createPassage(
   grid: CellType[][],
   updateCells: MazeAlgoProps['updateCells'],
   cell: Cell,
-  { row, col }: Cell
+  { row, col }: Cell,
 ) {
   const middleCell = {
     row: row + (cell.row - row) / 2,

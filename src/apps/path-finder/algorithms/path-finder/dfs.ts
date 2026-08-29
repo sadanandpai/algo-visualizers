@@ -18,7 +18,7 @@ export async function depthFirstSearch({
     row: number,
     col: number,
     parentRow = -1,
-    parentCol = -1
+    parentCol = -1,
   ): Promise<boolean> {
     if (row < 0 || col < 0 || row >= rows || col >= cols) {
       return false;

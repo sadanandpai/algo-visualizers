@@ -131,7 +131,7 @@ const pathFindersFns = [
   pathFinders.get('greedy')!.fn,
 ];
 
-describe('BFS algorithm', () => {
+describe('path finder algorithms', () => {
   it('should solve the maze', async () => {
     for (const pathFinderFn of pathFindersFns) {
       const entry = { row: 0, col: 0 };

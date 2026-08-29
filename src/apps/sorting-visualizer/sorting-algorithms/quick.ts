@@ -10,7 +10,7 @@ import { SortAsyncGenerator } from '@sortViz/models/types';
 async function* partition(
   array: number[],
   low: number,
-  high: number
+  high: number,
 ): SortAsyncGenerator {
   const pivot = low;
   let i = low;
@@ -50,7 +50,7 @@ async function* partition(
 export async function* quickSort(
   array: number[],
   low = 0,
-  high = array.length - 1
+  high = array.length - 1,
 ): SortAsyncGenerator {
   if (low <= high) {
     const pivot = yield* partition(array, low, high);

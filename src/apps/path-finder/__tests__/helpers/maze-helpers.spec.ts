@@ -4,6 +4,7 @@ import {
   getNeighbors,
   getRandomEvenNumber,
   getRandomOddNumber,
+  removeItemFromArray,
 } from '@pathFinder/helpers/maze.helper';
 import { CellType } from '@pathFinder/models/enum';
 
@@ -178,7 +179,7 @@ describe('Maze helpers', () => {
         { row: 2, col: 0 },
       ],
       grid,
-      wall
+      wall,
     );
     expect(filteredWalls).toMatchInlineSnapshot(`
       [
@@ -201,7 +202,7 @@ describe('Maze helpers', () => {
         { row: 2, col: 0 },
       ],
       grid,
-      wall
+      wall,
     );
     expect(filteredClears).toMatchInlineSnapshot(`
       [
@@ -231,6 +232,21 @@ describe('Maze helpers', () => {
       expect(number).toBeLessThanOrEqual(max);
       expect(number % 2).toBe(0);
     }
+  });
+
+  it('removeItemFromArray throws on empty array', () => {
+    expect(() => removeItemFromArray([], 0)).toThrow('Invalid index');
+  });
+
+  it('removeItemFromArray throws on out-of-range index', () => {
+    expect(() => removeItemFromArray([1, 2], -1)).toThrow('Invalid index');
+    expect(() => removeItemFromArray([1, 2], 2)).toThrow('Invalid index');
+  });
+
+  it('removeItemFromArray swaps last into a mid index', () => {
+    const items = [10, 20, 30];
+    expect(removeItemFromArray(items, 0)).toBe(10);
+    expect(items).toEqual([30, 20]);
   });
 
   it('getRadomOddNumber', () => {

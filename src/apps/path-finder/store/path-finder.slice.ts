@@ -34,7 +34,7 @@ export const pathFinderSlice = createSlice({
   reducers: {
     setDimension: (
       state,
-      action: PayloadAction<{ rows?: number; cols?: number }>
+      action: PayloadAction<{ rows?: number; cols?: number }>,
     ) => {
       state.rows = action.payload.rows ?? state.rows;
       state.cols = action.payload.cols ?? state.cols;
@@ -42,7 +42,7 @@ export const pathFinderSlice = createSlice({
 
     setGrid: (
       state,
-      action: PayloadAction<{ grid: CellType[][]; clone?: boolean }>
+      action: PayloadAction<{ grid: CellType[][]; clone?: boolean }>,
     ) => {
       if (!action.payload.clone) {
         state.grid = action.payload.grid;
@@ -73,7 +73,7 @@ export const pathFinderSlice = createSlice({
 
     setCells: (
       state,
-      action: PayloadAction<{ cells: Cell[]; cellType: CellType }>
+      action: PayloadAction<{ cells: Cell[]; cellType: CellType }>,
     ) => {
       const { cells, cellType } = action.payload;
 

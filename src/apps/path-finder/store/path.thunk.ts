@@ -12,7 +12,7 @@ import { delay } from '@/lib/helpers/async';
 export function highlightPath(
   grid: CellType[][],
   parents: Cell[][] | null,
-  delayDuration: number
+  delayDuration: number,
 ) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     let pathLength = 0;

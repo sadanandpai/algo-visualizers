@@ -8,9 +8,9 @@ import {
 
 export function searchPath(
   pathFinderAlgo: (
-    props: SearchAlgoProps
+    props: SearchAlgoProps,
   ) => Promise<{ grid: CellType[][]; parents: Cell[][] | null }>,
-  delayDuration: number
+  delayDuration: number,
 ) {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     let visitedCellCount = 0;
@@ -22,7 +22,7 @@ export function searchPath(
     async function updateCells(
       grid: CellType[][],
       cells: Cell | Cell[],
-      cellType = CellType.clear
+      cellType = CellType.clear,
     ) {
       if (!isSearching()) {
         throw new Error('Path search cancelled');

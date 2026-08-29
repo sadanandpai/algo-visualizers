@@ -18,13 +18,9 @@ function AppTour() {
       {Tour}
 
       <div className={classes.tourWrapper}>
-        <button
-          onClick={() => controls.start()}
-          className={classes.tour}
-        >
+        <button onClick={() => controls.start()} className={classes.tour}>
           Take Tour
         </button>
-
       </div>
     </>
   );

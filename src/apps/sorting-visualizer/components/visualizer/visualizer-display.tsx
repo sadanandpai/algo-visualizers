@@ -5,7 +5,7 @@ import { UIProps } from '@sortViz/models/interfaces';
 
 function VisualizerDisplay(props: UIProps) {
   const visualizerType = useAppSelector(
-    (state) => state.sortViz.visualizerType
+    (state) => state.sortViz.visualizerType,
   );
 
   if (visualizerType === 'cell') {

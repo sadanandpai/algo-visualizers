@@ -5,7 +5,7 @@ import { Cell, MazeAlgoProps } from '@pathFinder/models';
 
 export function findSet(
   parents: (string | null)[][],
-  cell: { row: number; col: number }
+  cell: { row: number; col: number },
 ) {
   let currentCell: Cell = cell;
 
@@ -23,7 +23,7 @@ export function findSet(
 export function updateMap(
   map: Map<string, Cell[]>,
   parents: (string | null)[][],
-  cell: Cell
+  cell: Cell,
 ) {
   const parent = findSet(parents, cell);
   const key = `${parent.row}:${parent.col}`;
@@ -39,7 +39,7 @@ export function updateMap(
 export function mergeSets(
   parents: (string | null)[][],
   cellA: Cell,
-  cellB: Cell
+  cellB: Cell,
 ) {
   const parentA = findSet(parents, cellA);
   const parentB = findSet(parents, cellB);
@@ -58,7 +58,7 @@ export async function extendVerticals(
   grid: CellType[][],
   parents: (string | null)[][],
   map: Map<string, Cell[]>,
-  updateCells: MazeAlgoProps['updateCells']
+  updateCells: MazeAlgoProps['updateCells'],
 ) {
   for (const cells of map.values()) {
     const verticalsCount = 1 + Math.floor(Math.random() * (cells.length - 1));

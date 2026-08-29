@@ -23,7 +23,7 @@ describe('Recursive Division maze helpers', () => {
     const rows = 9;
     const cols = 15;
     const grid = Array.from({ length: rows }, () =>
-      Array(cols).fill(CellType.clear)
+      Array(cols).fill(CellType.clear),
     );
     const divisionPoint = 5;
     const passagePoint = 3;
@@ -52,7 +52,7 @@ describe('Recursive Division maze helpers', () => {
     const rows = 9;
     const cols = 15;
     const grid = Array.from({ length: rows }, () =>
-      Array(cols).fill(CellType.clear)
+      Array(cols).fill(CellType.clear),
     );
     const divisionPoint = 5;
     const passagePoint = 3;

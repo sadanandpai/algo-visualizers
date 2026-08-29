@@ -9,7 +9,7 @@ interface CostCell extends Cell {
 
 function getCostGrid(rows: number, cols: number): CostCell[][] {
   return Array.from({ length: rows }, (_, row) =>
-    Array.from({ length: cols }, (_, col) => ({ row, col, f: 0, g: 0, h: 0 }))
+    Array.from({ length: cols }, (_, col) => ({ row, col, f: 0, g: 0, h: 0 })),
   );
 }
 
@@ -33,10 +33,11 @@ function getMinimumCostCell(costCells: CostCell[]) {
   return { minCostCell, idx };
 }
 
-function updateCostCell( // update cost cell
+function updateCostCell(
+  // update cost cell
   costCell: CostCell,
   newCostCell: CostCell,
-  open: CostCell[]
+  open: CostCell[],
 ) {
   if (open.includes(costCell)) {
     if (newCostCell.g >= costCell.g) {
@@ -57,7 +58,7 @@ function exploreNeighbors(
   closed: Set<CostCell>,
   parents: Cell[][],
   current: CostCell,
-  exit: Cell
+  exit: Cell,
 ) {
   const rows = costGrid.length;
   const cols = costGrid[0].length;
@@ -117,7 +118,7 @@ export async function aStar({
     closed,
     parents,
     costGrid[entry.row][entry.col],
-    exit
+    exit,
   );
 
   while (open.length > 0) {

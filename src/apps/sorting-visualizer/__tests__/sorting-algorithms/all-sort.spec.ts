@@ -8,7 +8,7 @@ import { algoList } from '@sortViz/sorting-algorithms/algo-list';
 import { getRndmNumInRange } from '@sortViz/helpers/array-helpers';
 import { initialArray } from '@sortViz/config';
 
-describe('bubble sort', () => {
+describe('sorting algorithms', () => {
   beforeAll(() => {
     setSwapInterval(0);
     setHighlightInterval(0);
@@ -17,7 +17,7 @@ describe('bubble sort', () => {
 
   it('should sort initial array', async () => {
     for (const algo of algoList) {
-      const array = initialArray;
+      const array = [...initialArray];
       const it = algo.fn(array);
       for await (const _ of it) {
         /* empty */

@@ -7,7 +7,7 @@ import { toggleVisualizerType } from '@sortViz/store/sorting-visualizer.slice';
 function TypeSwitch() {
   const dispatch = useAppDispatch();
   const visualizerType = useAppSelector(
-    (state) => state.sortViz.visualizerType
+    (state) => state.sortViz.visualizerType,
   );
 
   return (

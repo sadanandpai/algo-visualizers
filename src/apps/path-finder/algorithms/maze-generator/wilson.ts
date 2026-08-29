@@ -10,10 +10,10 @@ import {
 export function getRandomNonMazeCell(
   grid: CellType[][],
   eligibleCellsCount: number,
-  inMazeCellsCount: number
+  inMazeCellsCount: number,
 ) {
   const randomCount = Math.floor(
-    Math.random() * (eligibleCellsCount - inMazeCellsCount)
+    Math.random() * (eligibleCellsCount - inMazeCellsCount),
   );
 
   const rows = grid.length;
@@ -36,7 +36,7 @@ export function getRandomNonMazeCell(
 export function startRandomWalk(
   grid: CellType[][],
   directions: Direction[][],
-  startCell: Cell
+  startCell: Cell,
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -55,7 +55,7 @@ export function startRandomWalk(
 export function getTravelledPath(
   grid: CellType[][],
   directions: Direction[][],
-  startCell: Cell
+  startCell: Cell,
 ) {
   const travelledPath: Cell[] = [];
   let currentCell = startCell;
@@ -110,7 +110,7 @@ export async function generateWilsonMaze({
   const randomMazeCell = getRandomNonMazeCell(
     grid,
     eligibleCellsCount,
-    inMazeCellsCount
+    inMazeCellsCount,
   );
   if (!randomMazeCell) {
     return grid;
@@ -121,7 +121,7 @@ export async function generateWilsonMaze({
   let randomStartCell = getRandomNonMazeCell(
     grid,
     eligibleCellsCount,
-    inMazeCellsCount
+    inMazeCellsCount,
   );
 
   while (randomStartCell) {
@@ -129,7 +129,7 @@ export async function generateWilsonMaze({
     const { travelledPath, visitedCount } = getTravelledPath(
       grid,
       directions,
-      randomStartCell
+      randomStartCell,
     );
 
     for (const cell of travelledPath) {
@@ -140,7 +140,7 @@ export async function generateWilsonMaze({
     randomStartCell = getRandomNonMazeCell(
       grid,
       eligibleCellsCount,
-      inMazeCellsCount
+      inMazeCellsCount,
     );
   }
 

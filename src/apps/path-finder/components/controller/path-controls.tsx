@@ -79,7 +79,7 @@ function PathControls({ defaultSpeed }: Props) {
       }
     },
     333,
-    [entry, exit]
+    [entry, exit],
   );
 
   return (

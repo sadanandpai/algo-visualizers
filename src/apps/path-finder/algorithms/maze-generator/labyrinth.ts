@@ -11,7 +11,7 @@ interface Direction {
 
 export async function addStages(
   grid: CellType[][],
-  updateCells: MazeAlgoProps['updateCells']
+  updateCells: MazeAlgoProps['updateCells'],
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -24,7 +24,7 @@ export async function addStages(
           { row, col },
           { row: rows - row - 1, col },
         ],
-        CellType.wall
+        CellType.wall,
       );
     }
   }
@@ -37,7 +37,7 @@ export async function addStages(
           { row, col },
           { row, col: cols - col - 1 },
         ],
-        CellType.wall
+        CellType.wall,
       );
     }
   }
@@ -46,7 +46,7 @@ export async function addStages(
 export async function addVerticalBlocks(
   grid: CellType[][],
   updateCells: MazeAlgoProps['updateCells'],
-  stage: number
+  stage: number,
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -59,7 +59,7 @@ export async function addVerticalBlocks(
       { row: stage, col: top },
       { row: rows - stage - 1, col: bottom },
     ],
-    CellType.wall
+    CellType.wall,
   );
   return { top, bottom };
 }
@@ -67,7 +67,7 @@ export async function addVerticalBlocks(
 export async function addHorizontalBlocks(
   grid: CellType[][],
   updateCells: MazeAlgoProps['updateCells'],
-  stage: number
+  stage: number,
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -80,7 +80,7 @@ export async function addHorizontalBlocks(
       { row: right, col: cols - stage - 1 },
       { row: left, col: stage },
     ],
-    CellType.wall
+    CellType.wall,
   );
   return { left, right };
 }
@@ -190,7 +190,7 @@ export async function addGaps(
   grid: CellType[][],
   updateCells: MazeAlgoProps['updateCells'],
   stage: number,
-  { top, right, bottom, left }: Direction
+  { top, right, bottom, left }: Direction,
 ) {
   const rows = grid.length;
   const cols = grid[0].length;

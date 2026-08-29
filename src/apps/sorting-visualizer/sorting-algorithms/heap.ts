@@ -10,7 +10,7 @@ import { SortAsyncGenerator } from '@sortViz/models/types';
 async function* maxHeap(
   array: number[],
   i: number,
-  length: number
+  length: number,
 ): SortAsyncGenerator {
   const left = 2 * i + 1;
   const right = 2 * i + 2;

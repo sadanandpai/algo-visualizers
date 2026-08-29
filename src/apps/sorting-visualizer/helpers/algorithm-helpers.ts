@@ -10,7 +10,7 @@ import { delay } from '@/lib/helpers/async';
 export async function* swap(
   array: number[],
   i: number,
-  j: number
+  j: number,
 ): SortAsyncGenerator {
   await simulator.isPlayingPromise;
 

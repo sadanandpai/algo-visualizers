@@ -19,7 +19,7 @@ export const getNeighbors = (grid: CellType[][], cell: Cell) => {
     }))
     .filter(
       (cell) =>
-        cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols
+        cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols,
     );
 };
 

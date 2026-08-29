@@ -32,18 +32,18 @@ export function getNeighborsWithDirections({ row, col }: Cell) {
 export function filterValidCells<T extends Cell>(
   cells: T[],
   rows: number,
-  cols: number
+  cols: number,
 ) {
   return cells.filter(
     (cell) =>
-      cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols
+      cell.row >= 0 && cell.row < rows && cell.col >= 0 && cell.col < cols,
   );
 }
 
 export function filterByCellType(
   cells: Cell[],
   grid: CellType[][],
-  cellType: CellType
+  cellType: CellType,
 ) {
   return cells.filter((cell) => grid[cell.row][cell.col] === cellType);
 }
@@ -51,7 +51,7 @@ export function filterByCellType(
 export function getValidTypeNeighbors(
   grid: CellType[][],
   cell: Cell,
-  cellType = CellType.clear
+  cellType = CellType.clear,
 ) {
   const rows = grid.length;
   const cols = grid[0].length;
@@ -71,16 +71,24 @@ export function getRandomIndexFromArray<T>(items: T[]) {
 }
 
 export function removeItemFromArray<T>(items: T[], index: number) {
-  if (items.length === 0 && index < 0 && index >= items.length) {
+  if (items.length === 0 || index < 0 || index >= items.length) {
     throw new Error('Invalid index');
   }
 
   if (index === items.length - 1) {
-    return items.pop() as T;
+    const last = items.pop();
+    if (last === undefined) {
+      throw new Error('Invalid index');
+    }
+    return last;
   }
 
   const value = items[index];
-  items[index] = items.pop() as T;
+  const last = items.pop();
+  if (last === undefined) {
+    throw new Error('Invalid index');
+  }
+  items[index] = last;
   return value;
 }
 

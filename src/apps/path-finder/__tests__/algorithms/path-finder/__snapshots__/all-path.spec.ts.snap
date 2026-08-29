@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`BFS algorithm > should solve the maze 1`] = `
+exports[`path finder algorithms > should solve the maze 1`] = `
 [
   [
     1,
@@ -896,7 +896,7 @@ exports[`BFS algorithm > should solve the maze 1`] = `
 ]
 `;
 
-exports[`BFS algorithm > should solve the maze 2`] = `
+exports[`path finder algorithms > should solve the maze 2`] = `
 [
   [
     null,
@@ -3118,7 +3118,7 @@ exports[`BFS algorithm > should solve the maze 2`] = `
 ]
 `;
 
-exports[`BFS algorithm > should solve the maze 3`] = `
+exports[`path finder algorithms > should solve the maze 3`] = `
 [
   [
     1,
@@ -4014,7 +4014,7 @@ exports[`BFS algorithm > should solve the maze 3`] = `
 ]
 `;
 
-exports[`BFS algorithm > should solve the maze 4`] = `
+exports[`path finder algorithms > should solve the maze 4`] = `
 [
   [
     {
@@ -5813,7 +5813,7 @@ exports[`BFS algorithm > should solve the maze 4`] = `
 ]
 `;
 
-exports[`BFS algorithm > should solve the maze 5`] = `
+exports[`path finder algorithms > should solve the maze 5`] = `
 [
   [
     1,
@@ -6709,7 +6709,7 @@ exports[`BFS algorithm > should solve the maze 5`] = `
 ]
 `;
 
-exports[`BFS algorithm > should solve the maze 6`] = `
+exports[`path finder algorithms > should solve the maze 6`] = `
 [
   [
     null,
@@ -7998,7 +7998,7 @@ exports[`BFS algorithm > should solve the maze 6`] = `
 ]
 `;
 
-exports[`BFS algorithm > should solve the maze 7`] = `
+exports[`path finder algorithms > should solve the maze 7`] = `
 [
   [
     1,
@@ -8894,7 +8894,7 @@ exports[`BFS algorithm > should solve the maze 7`] = `
 ]
 `;
 
-exports[`BFS algorithm > should solve the maze 8`] = `
+exports[`path finder algorithms > should solve the maze 8`] = `
 [
   [
     null,

@@ -22,14 +22,14 @@ export const store = configureStore({
         key: 'app',
         storage,
       },
-      appReducer
+      appReducer,
     ),
     sortViz: persistReducer<ReturnType<typeof sortingVisualizerReducer>>(
       {
         key: 'sorting-viz',
         storage,
       },
-      sortingVisualizerReducer
+      sortingVisualizerReducer,
     ),
     pathFinder: pathFinderReducer,
   },

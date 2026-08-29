@@ -32,14 +32,14 @@ export function useMouse({ isMobile, ref }: Props) {
     if (targetCellRef.current) {
       if (
         ![CellType.entry, CellType.exit, CellType.wall].includes(
-          selectedCell.cellType
+          selectedCell.cellType,
         )
       ) {
         dispatch(
           setCell({
             ...selectedCell,
             cellType: targetCellRef.current.cellType,
-          })
+          }),
         );
       }
       return;
@@ -62,7 +62,7 @@ export function useMouse({ isMobile, ref }: Props) {
             selectedCell.cellType === CellType.wall
               ? CellType.clear
               : CellType.wall,
-        })
+        }),
       );
       prevCellRef.current = selectedCell;
     }

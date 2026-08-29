@@ -16,7 +16,7 @@ export function useTouch({ isMobile, ref }: Props) {
   const onClick = useCallback(
     (e: MouseEvent | TouchEvent) => {
       const { isValidCell, selectedCell } = getCellDetails(
-        e.target as HTMLElement
+        e.target as HTMLElement,
       );
 
       if (!isValidCell) {
@@ -26,14 +26,14 @@ export function useTouch({ isMobile, ref }: Props) {
       if (targetCellRef.current) {
         if (
           ![CellType.entry, CellType.exit, CellType.wall].includes(
-            selectedCell.cellType
+            selectedCell.cellType,
           )
         ) {
           dispatch(
             setCell({
               ...selectedCell,
               cellType: targetCellRef.current.cellType,
-            })
+            }),
           );
         }
         targetCellRef.current = null;
@@ -53,10 +53,10 @@ export function useTouch({ isMobile, ref }: Props) {
             selectedCell.cellType === CellType.wall
               ? CellType.clear
               : CellType.wall,
-        })
+        }),
       );
     },
-    [dispatch]
+    [dispatch],
   );
 
   useEffect(() => {

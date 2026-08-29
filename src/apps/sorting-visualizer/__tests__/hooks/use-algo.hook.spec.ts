@@ -19,7 +19,7 @@ describe('useAlgo hook', () => {
 
   it('should sort initial array', async () => {
     for (const algo of algoList) {
-      const array = initialArray;
+      const array = [...initialArray];
       const { result } = renderHook(() => useAlgo(array, algo.fn));
       await waitFor(() => expect(result.current.isCompleted).toBe(true));
 

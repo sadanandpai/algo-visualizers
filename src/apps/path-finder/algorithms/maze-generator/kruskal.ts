@@ -75,10 +75,10 @@ export async function generateKruskalMaze({
     const [cell1, cell2] = getConnections(randomEdge);
 
     const set1 = sets.find((set) =>
-      set.has(`${cell1.row}-${cell1.col}`)
+      set.has(`${cell1.row}-${cell1.col}`),
     ) as Set<string>;
     const set2 = sets.find((set) =>
-      set.has(`${cell2.row}-${cell2.col}`)
+      set.has(`${cell2.row}-${cell2.col}`),
     ) as Set<string>;
 
     if (set1 !== set2) {

@@ -14,7 +14,7 @@ const algorithms = [
 
 const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
   window.HTMLInputElement.prototype,
-  'value'
+  'value',
 )?.set;
 
 function setTheInput(inputArray: number[]) {
@@ -23,7 +23,7 @@ function setTheInput(inputArray: number[]) {
 
   return {
     inputArrayText: inputArray.join(''),
-    inputArrayTextSorted: inputArray.sort((a, b) => a - b).join(''),
+    inputArrayTextSorted: [...inputArray].sort((a, b) => a - b).join(''),
   };
 }
 
@@ -33,7 +33,7 @@ function verifySorting(inputArrayText: string, inputArrayTextSorted: string) {
     const range = $range[0];
     nativeInputValueSetter?.call(range, 20);
     range.dispatchEvent(
-      new Event('change', { value: 20, bubbles: true } as EventInit)
+      new Event('change', { value: 20, bubbles: true } as EventInit),
     );
   });
 
@@ -43,7 +43,7 @@ function verifySorting(inputArrayText: string, inputArrayTextSorted: string) {
   player.should('be.disabled');
   cy.get('[data-testid="cell-values"]').should(
     'contain.text',
-    inputArrayTextSorted
+    inputArrayTextSorted,
   );
 }
 

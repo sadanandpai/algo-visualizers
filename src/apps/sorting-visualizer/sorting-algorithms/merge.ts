@@ -6,7 +6,7 @@ export async function* mergeSort(
   array: number[],
   i = 0,
   j = array.length - 1,
-  isFinal = true
+  isFinal = true,
 ): SortAsyncGenerator {
   if (i === j) {
     if (isFinal && array.length === 1) {
@@ -36,7 +36,7 @@ async function* merge(
   j: number,
   size1: number,
   size2: number,
-  isFinal: boolean
+  isFinal: boolean,
 ): SortAsyncGenerator {
   let iMove = 0;
   let jMove = 0;

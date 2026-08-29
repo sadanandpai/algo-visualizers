@@ -7,7 +7,7 @@ interface CostCell extends Cell {
 
 function getCostGrid(rows: number, cols: number): CostCell[][] {
   return Array.from({ length: rows }, (_, row) =>
-    Array.from({ length: cols }, (_, col) => ({ row, col, h: 0 }))
+    Array.from({ length: cols }, (_, col) => ({ row, col, h: 0 })),
   );
 }
 
@@ -35,7 +35,7 @@ function exploreNeighbors(
   closed: Set<CostCell>,
   parents: Cell[][],
   current: CostCell,
-  exit: Cell
+  exit: Cell,
 ) {
   const rows = costGrid.length;
   const cols = costGrid[0].length;
@@ -90,7 +90,7 @@ export async function greedy({
     closed,
     parents,
     costGrid[entry.row][entry.col],
-    exit
+    exit,
   );
 
   while (open.length > 0) {
