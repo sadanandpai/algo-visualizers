@@ -121,4 +121,30 @@ export const pathSearchAlgoInfo = [
         It prioritizes cells based solely on the estimated cost to reach the goal from the current cell.
       `,
   },
+  {
+    id: 5,
+    heading: 'Bidirectional BFS',
+    content: `
+        Bidirectional breadth-first search runs two breadth-first searches at the same time, one from the entry and one from the exit.
+        The search stops as soon as the two frontiers meet, which usually explores far fewer cells than a single breadth-first search.
+        It finds the shortest path between the cells.
+      `,
+  },
+  {
+    id: 6,
+    heading: 'Iterative Deepening DFS',
+    content: `
+        Iterative deepening depth-first search repeatedly runs a depth-first search with a growing depth limit.
+        It finds the shortest path like breadth-first search while only keeping the current path in memory.
+      `,
+  },
+  {
+    id: 7,
+    heading: 'IDA* Search',
+    content: `
+        IDA* combines iterative deepening with the A* cost estimate.
+        Each round is a depth-first search bounded by the estimated total cost, and the bound grows to the smallest estimate that was cut off.
+        It finds the shortest path while using very little memory.
+      `,
+  },
 ];

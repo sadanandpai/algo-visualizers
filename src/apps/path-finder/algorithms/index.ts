@@ -13,6 +13,9 @@ import { aStar } from '@pathFinder/algorithms/path-finder/a-star';
 import { breadthFirstSearch } from '@pathFinder/algorithms/path-finder/bfs';
 import { depthFirstSearch } from '@pathFinder/algorithms/path-finder/dfs';
 import { greedy } from '@pathFinder/algorithms/path-finder/greedy';
+import { bidirectionalSearch } from '@pathFinder/algorithms/path-finder/bidirectional-bfs';
+import { iterativeDeepeningSearch } from '@pathFinder/algorithms/path-finder/iddfs';
+import { idaStar } from '@pathFinder/algorithms/path-finder/ida-star';
 import { generateLabyrinth } from './maze-generator/labyrinth';
 import { generateEllersMaze } from './maze-generator/ellers';
 
@@ -21,6 +24,9 @@ export const pathFinders = new Map([
   ['dfs', { name: 'Depth First Search', fn: depthFirstSearch }],
   ['a-star', { name: 'A* Search', fn: aStar }],
   ['greedy', { name: 'Greedy Best First', fn: greedy }],
+  ['bidirectional-bfs', { name: 'Bidirectional BFS', fn: bidirectionalSearch }],
+  ['iddfs', { name: 'Iterative Deepening DFS', fn: iterativeDeepeningSearch }],
+  ['ida-star', { name: 'IDA* Search', fn: idaStar }],
 ]);
 
 export const mazeGenerators = new Map([
