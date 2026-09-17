@@ -129,6 +129,9 @@ const pathFindersFns = [
   pathFinders.get('dfs')!.fn,
   pathFinders.get('a-star')!.fn,
   pathFinders.get('greedy')!.fn,
+  pathFinders.get('bidirectional-bfs')!.fn,
+  pathFinders.get('iddfs')!.fn,
+  pathFinders.get('ida-star')!.fn,
 ];
 
 describe('path finder algorithms', () => {
