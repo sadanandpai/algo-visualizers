@@ -1,0 +1,28 @@
+.raceBoard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 0 10px 20px;
+
+  .lane {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .stats {
+    display: flex;
+    gap: 10px;
+    font-size: 0.85rem;
+  }
+
+  .laneGrid.laneGrid {
+    border-width: 5px;
+
+    div {
+      border: 0.5px solid rgb(240 240 240);
+    }
+  }
+}

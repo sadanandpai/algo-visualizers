@@ -18,6 +18,25 @@ export interface AppState {
   status: Status;
   visitedCellCount: number;
   pathLength: number;
+  race: RaceState | null;
+}
+
+export interface RaceLane {
+  algorithm: string;
+  grid: CellType[][];
+  steps: number;
+  visitedCellCount: number;
+  pathLength: number;
+  finishTick: number | null;
+  rank: number | null;
+}
+
+export interface RaceState {
+  id: number;
+  tick: number;
+  paused: boolean;
+  stepRequests: number;
+  lanes: RaceLane[];
 }
 
 export interface SearchAlgoProps {
