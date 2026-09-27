@@ -2,12 +2,16 @@ import { useAppDispatch, useAppSelector } from '@/host/store/hooks';
 import { useDebounce } from 'react-use';
 import {
   clearGrid,
+  pauseRace,
+  resumeRace,
   setGrid,
   setPathLength,
+  setRace,
+  stepRace,
   setStatus,
   setVisitedCellCount,
 } from '@pathFinder/store/path-finder.slice';
-import { Play, RefreshCcw } from 'lucide-react';
+import { Columns2, Pause, Play, RefreshCcw, StepForward } from 'lucide-react';
 import { useState } from 'react';
 import classes from './controller.module.scss';
 
@@ -16,20 +20,33 @@ import { pathSearchAlgoInfo } from '@pathFinder/components/modal-icon/modal-cont
 import { speeds } from '@pathFinder/config';
 import { Speed, Status } from '@pathFinder/models';
 import { highlightPath } from '@pathFinder/store/path.thunk';
-import { searchPath } from '@pathFinder/store/search.thunk';
+import { raceSearch, searchPath } from '@pathFinder/store/search.thunk';
 import Modals from '@pathFinder/components/modal-icon/modals';
 
 interface Props {
   defaultSpeed: Speed;
 }
 
+const maxRaceLanes = 4;
+
 function PathControls({ defaultSpeed }: Props) {
   const dispatch = useAppDispatch();
   const [pathFinder, setPathFinder] = useState('');
   const [speed, setSpeed] = useState(speeds.get(defaultSpeed) as number);
+  const [compare, setCompare] = useState(false);
+  const [racers, setRacers] = useState<string[]>([]);
+  const [stopAtFirst, setStopAtFirst] = useState(false);
   const entry = useAppSelector((state) => state.pathFinder.entry);
   const exit = useAppSelector((state) => state.pathFinder.exit);
   const status = useAppSelector((state) => state.pathFinder.status);
+  const racePaused = useAppSelector(
+    (state) => state.pathFinder.race?.paused ?? false,
+  );
+  const isRacing = useAppSelector(
+    (state) =>
+      state.pathFinder.race !== null &&
+      state.pathFinder.status === Status.Searching,
+  );
   const pathFinderAlgo = pathFinder ? pathFinders.get(pathFinder) : null;
   const disabled = status === Status.Generating || status === Status.Searching;
 
@@ -43,6 +60,7 @@ function PathControls({ defaultSpeed }: Props) {
     }
 
     try {
+      dispatch(setRace(null));
       dispatch(setVisitedCellCount(0));
       dispatch(setPathLength(0));
       dispatch(setStatus(Status.Searching));
@@ -56,8 +74,39 @@ function PathControls({ defaultSpeed }: Props) {
     }
   }
 
+  async function executeRace() {
+    if (status === Status.Complete) {
+      dispatch(clearGrid());
+    }
+
+    const algorithms = [...pathFinders.keys()].filter((key) =>
+      racers.includes(key),
+    );
+    await dispatch(raceSearch(algorithms, speed, { stopAtFirst }));
+  }
+
   async function handlePlay(algo = pathFinderAlgo) {
+    if (compare) {
+      await executeRace();
+      return;
+    }
+
     await executeSearch(algo, speed);
+  }
+
+  function handleCompareToggle() {
+    dispatch(clearGrid());
+    dispatch(setVisitedCellCount(0));
+    dispatch(setPathLength(0));
+    setCompare(!compare);
+  }
+
+  function handleRacerToggle(key: string) {
+    setRacers(
+      racers.includes(key)
+        ? racers.filter((racer) => racer !== key)
+        : [...racers, key],
+    );
   }
 
   async function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -74,7 +123,7 @@ function PathControls({ defaultSpeed }: Props) {
 
   useDebounce(
     async () => {
-      if (status === Status.Complete) {
+      if (status === Status.Complete && !compare) {
         await executeSearch(pathFinderAlgo, 0);
       }
     },
@@ -83,25 +132,64 @@ function PathControls({ defaultSpeed }: Props) {
   );
 
   return (
-    <div className={classes.execution + ' execution'}>
+    <div
+      className={`${classes.execution} ${compare ? classes.compare : ''} execution`}
+    >
       <Modals content={pathSearchAlgoInfo} />
-      <select
-        className={classes.pathFinder}
-        name="path-finder"
-        id="path-finder"
-        value={pathFinder}
-        onChange={handleChange}
-        disabled={disabled}
+      <button
+        data-testid="compare"
+        aria-pressed={compare}
+        onClick={handleCompareToggle}
+        disabled={status === Status.Generating}
+        data-tooltip="Compare"
       >
-        <option value="" disabled>
-          Select a Path finder
-        </option>
-        {[...pathFinders.entries()].map(([key, { name }]) => (
-          <option key={key} value={key}>
-            {name}
+        <Columns2 size={20} />
+      </button>
+
+      {compare ? (
+        <fieldset className={classes.racers} disabled={disabled}>
+          {[...pathFinders.entries()].map(([key, { name }]) => (
+            <label key={key}>
+              <input
+                type="checkbox"
+                checked={racers.includes(key)}
+                disabled={
+                  !racers.includes(key) && racers.length >= maxRaceLanes
+                }
+                onChange={() => handleRacerToggle(key)}
+              />
+              {name}
+            </label>
+          ))}
+          <label className={classes.stopAtFirst}>
+            <input
+              type="checkbox"
+              data-testid="race-stop-first"
+              checked={stopAtFirst}
+              onChange={() => setStopAtFirst(!stopAtFirst)}
+            />
+            Stop at first finish
+          </label>
+        </fieldset>
+      ) : (
+        <select
+          className={classes.pathFinder}
+          name="path-finder"
+          id="path-finder"
+          value={pathFinder}
+          onChange={handleChange}
+          disabled={disabled}
+        >
+          <option value="" disabled>
+            Select a Path finder
           </option>
-        ))}
-      </select>
+          {[...pathFinders.entries()].map(([key, { name }]) => (
+            <option key={key} value={key}>
+              {name}
+            </option>
+          ))}
+        </select>
+      )}
 
       <select
         className={`${classes.speed}`}
@@ -121,12 +209,34 @@ function PathControls({ defaultSpeed }: Props) {
       <button
         className={`${classes.play}`}
         data-testid="player"
-        disabled={disabled || !pathFinder}
+        disabled={disabled || (compare ? racers.length < 2 : !pathFinder)}
         data-tooltip="Play"
         onClick={() => handlePlay()}
       >
         <Play size={20} />
       </button>
+
+      {isRacing && (
+        <>
+          <button
+            data-testid="race-pause"
+            aria-pressed={racePaused}
+            onClick={() => dispatch(racePaused ? resumeRace() : pauseRace())}
+            data-tooltip={racePaused ? 'Resume' : 'Pause'}
+          >
+            {racePaused ? <Play size={20} /> : <Pause size={20} />}
+          </button>
+
+          <button
+            data-testid="race-step"
+            onClick={() => dispatch(stepRace())}
+            disabled={!racePaused}
+            data-tooltip="Step"
+          >
+            <StepForward size={20} />
+          </button>
+        </>
+      )}
 
       <button
         data-testid="clear"

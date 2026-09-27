@@ -4,6 +4,7 @@ import {
   Cell,
   CellElement,
   CellType,
+  RaceState,
   Status,
 } from '@pathFinder/models';
 import {
@@ -26,6 +27,7 @@ const initialState: AppState = {
   status: Status.Ready,
   visitedCellCount: 0,
   pathLength: 0,
+  race: null,
 };
 
 export const pathFinderSlice = createSlice({
@@ -87,6 +89,41 @@ export const pathFinderSlice = createSlice({
 
     setStatus: (state, action: PayloadAction<Status>) => {
       state.status = action.payload;
+      if (action.payload === Status.Generating) {
+        state.race = null;
+      }
+    },
+
+    setRace: (state, action: PayloadAction<RaceState | null>) => {
+      state.race = action.payload;
+    },
+
+    startRace: (state, action: PayloadAction<RaceState>) => {
+      state.race = action.payload;
+      state.status = Status.Searching;
+    },
+
+    finishRace: (state, action: PayloadAction<RaceState>) => {
+      state.race = action.payload;
+      state.status = Status.Complete;
+    },
+
+    pauseRace: (state) => {
+      if (state.race) {
+        state.race.paused = true;
+      }
+    },
+
+    resumeRace: (state) => {
+      if (state.race) {
+        state.race.paused = false;
+      }
+    },
+
+    stepRace: (state) => {
+      if (state.race?.paused) {
+        state.race.stepRequests += 1;
+      }
     },
 
     clearGrid: (state) => {
@@ -103,6 +140,7 @@ export const pathFinderSlice = createSlice({
       }
       state.grid = gridClone;
       state.status = Status.Ready;
+      state.race = null;
     },
 
     resetGrid: (state) => {
@@ -124,6 +162,7 @@ export const pathFinderSlice = createSlice({
 
       state.grid = grid;
       state.status = Status.Ready;
+      state.race = null;
     },
 
     setVisitedCellCount: (state, action: PayloadAction<number>) => {
@@ -144,6 +183,12 @@ export const {
   resetGrid,
   clearGrid,
   setStatus,
+  setRace,
+  startRace,
+  finishRace,
+  pauseRace,
+  resumeRace,
+  stepRace,
   setVisitedCellCount,
   setPathLength,
 } = pathFinderSlice.actions;

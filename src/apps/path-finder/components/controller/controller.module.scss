@@ -25,6 +25,24 @@
     border: 1px solid theme.$base;
   }
 
+  .racers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    max-width: 480px;
+    font-size: 0.8rem;
+
+    label {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .stopAtFirst {
+      font-style: italic;
+    }
+  }
+
   button:disabled {
     opacity: 0.5;
   }
@@ -32,6 +50,17 @@
   .speed,
   .play {
     display: none;
+  }
+
+  // compare mode can only be started from the play button, so it and the
+  // speed select stay visible at every width
+  .compare {
+    flex-wrap: wrap;
+
+    .speed,
+    .play {
+      display: block;
+    }
   }
 
   .pathInfo {
